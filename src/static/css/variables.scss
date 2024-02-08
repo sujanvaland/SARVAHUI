@@ -1,0 +1,139 @@
+@font-face {
+    font-family: "MonaSans-ExtraBold";
+    src:   
+      url("fonts/MonaSans-ExtraBold.otf") format("opentype") tech(color-COLRv1),
+      url("fonts/MonaSans-ExtraBold.woff2") format("woff2"), 
+      url("fonts/MonaSans-ExtraBold.ttf") format("ttf"), 
+  }
+
+  @font-face {
+    font-family: "MonaSans-ExtraLight";
+    src:   
+      url("fonts/MonaSans-ExtraLight.otf") format("opentype") tech(color-COLRv1),
+      url("fonts/MonaSans-ExtraLight.woff2") format("woff2"), 
+      url("fonts/MonaSans-ExtraLight.ttf") format("ttf"), 
+  }
+
+  @font-face {
+    font-family: "MonaSans-Light";
+    src:   
+      url("fonts/MonaSans-Light.otf") format("opentype") tech(color-COLRv1),
+      url("fonts/MonaSans-Light.woff2") format("woff2"), 
+      url("fonts/MonaSans-Light.ttf") format("ttf"), 
+  }
+
+  @font-face {
+    font-family: "MonaSans-Medium";
+    src:   
+      url("fonts/MonaSans-Medium.otf") format("opentype") tech(color-COLRv1),
+      url("fonts/MonaSans-Medium.woff2") format("woff2"), 
+      url("fonts/MonaSans-Medium.ttf") format("ttf"), 
+  }
+
+  @font-face {
+    font-family: "MonaSans-Regular";
+    src:   
+      url("fonts/MonaSans-Regular.otf") format("opentype") tech(color-COLRv1),
+      url("fonts/MonaSans-Regular.woff2") format("woff2"), 
+      url("fonts/MonaSans-Regular.ttf") format("ttf"), 
+  }
+
+  @font-face {
+    font-family: "MonaSans-SemiBold";
+    src:   
+      url("fonts/MonaSans-SemiBold.otf") format("opentype") tech(color-COLRv1),
+      url("fonts/MonaSans-SemiBold.woff2") format("woff2"), 
+      url("fonts/MonaSans-SemiBold.ttf") format("ttf"), 
+  }
+
+  @font-face {
+    font-family: "MonaSans-Bold";
+    src:   
+      url("fonts/MonaSans-Bold.otf") format("opentype") tech(color-COLRv1),
+      url("fonts/MonaSans-Bold.woff2") format("woff2"), 
+      url("fonts/MonaSans-Bold.ttf") format("ttf"), 
+  }
+
+
+  @font-face { 
+    font-family: 'MonaSansExpanded-Bold';
+    src:
+      url('fonts/MonaSansExpanded-Bold.woff2') format("opentype") tech(color-COLRv1),
+      url('fonts/MonaSansExpanded-Bold.woff2') format('woff2'),
+      url('fonts/MonaSansExpanded-Bold.ttf') format('ttf');  
+  }
+  @font-face { 
+    font-family: 'MonaSansExpanded-Light';
+    src:
+      url('fonts/MonaSansExpanded-Light.woff2') format("opentype") tech(color-COLRv1),
+      url('fonts/MonaSansExpanded-Light.woff2') format('woff2'),
+      url('fonts/MonaSansExpanded-Light.ttf') format('ttf');  
+  }
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;700;800&display=swap');
+
+  @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+
+
+  @font-face {
+    font-family: "segoe_ui_bold";
+    src:   
+      url("fonts/segoe_ui_bold-webfont.woff") format("woff") tech(color-COLRv1),
+      url("fonts/segoe_ui_bold-webfont.woff2") format("woff2"), 
+      url("fonts/Segoe UI Bold.ttf") format("ttf"), 
+  }
+
+  @font-face {
+    font-family: "segoe_ui";
+    src:   
+      url("fonts/segoe_ui-webfont.woff") format("woff") tech(color-COLRv1),
+      url("fonts/segoe_ui-webfont.woff2") format("woff2"), 
+      url("fonts/Segoe UI.ttf") format("ttf"),  
+  }
+
+
+  $fntMonoRegular:'MonaSans-Regular',sans-sarif;
+  $fntMonoExtraBold:'MonaSans-ExtraBold',sans-sarif;
+  $fntMonoSemiBold:'MonaSans-SemiBold',sans-sarif;
+  $fntMonoMedium:'MonaSans-Medium',sans-sarif;
+  $fntMonoBold:'MonaSans-Bold',sans-sarif; 
+  $fntMonos:'MonaSansExpanded-Bold',sans-sarif;
+  $fntMonosLight:'MonaSans-Light',sans-sarif;
+  $fntMonosExpandedLight:'MonaSansExpanded-Light',sans-sarif;
+  $fntInter:'Inter', sans-serif;
+  $fntRaleway:'Raleway', sans-serif;
+
+  $fntSegoe:'segoe_ui', sans-serif;
+  $fntSegoeBold:'segoe_ui_bold', sans-serif;
+  
+
+
+  /**** colors ****/
+  $white:#ffffff;
+  $black:#000000; 
+  $lightDark:#333333;
+  $titlecolor:#3e3434;
+  $subtitle:#6a737d;
+  $gray:#cccccc;
+  $gray2:#d3d3d3;
+  $btngray:#919496;
+  $red:#ff0000;
+  $grayback:#f8f9fb; 
+  $footerback:#24292e; 
+  $brdrcolor:#d4d4d4;
+  $greenback:#33691e;
+  $brdrcolor2:#e1e4e8;
+  $gray3:#faf8f6;
+  $twitter:#1da1f2;
+  $linkdin:#0072b1 ;
+  $lightgreen:#00aa45;
+  $gray4:#fafbfc;
+  $gray5:#8e8e8e;
+  $google:#4284f4;
+  $gray6:#f6f8fa;
+  $lightgreen2:#e2f5ea;
+  $gray7:#545454;
+  
+
+  
+

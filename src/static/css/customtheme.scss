@@ -1,0 +1,3213 @@
+@import "variables.scss";
+@import "mixins.scss"; 
+@import url('https://cdn-uicons.flaticon.com/2.1.0/uicons-solid-rounded/css/uicons-solid-rounded.css');
+@import url('https://cdn-uicons.flaticon.com/2.1.0/uicons-regular-straight/css/uicons-regular-straight.css');
+@import url('https://cdn-uicons.flaticon.com/2.1.0/uicons-regular-straight/css/uicons-regular-straight.css');
+@import url('https://cdn-uicons.flaticon.com/2.1.0/uicons-regular-rounded/css/uicons-regular-rounded.css');
+
+body{
+    font-family: $fntSegoe;
+    font-size: 18px; color:$black;
+} 
+/***************** common css **********/
+.ant-select-selection-placeholder {font-size: 13px;}
+.mt-3{margin-top: 30px;} 
+.mt-2{margin-top: 20px;} 
+.mt-1{margin-top: 10px!important;}  
+.mt-0{margin-top: 0px!important;}  
+.container{
+    max-width:1200px; display: block; margin: 0px auto; padding:0px 15px;
+}
+
+body::-webkit-scrollbar {
+    width:5px;
+  } 
+   
+  body::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+   
+  body::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
+  }
+
+/************** header *******************/
+.topheader{
+    border-bottom:1px solid $gray; background: $white;  
+    h1{
+        font-size: 25px; color:$black; font-family: $fntSegoe; margin-top:5px;
+    }
+    .container{
+        @include dispflex(flex,row,space-between,center);
+    }
+    .btnblack{
+        background: $black; color:$white!important; font-size: 15px; padding:6px 15px; border-radius: 5px;
+      
+    }
+}
+/******************** hero area ***********/  
+.herosection{margin-top: 75px; @include dispflex(flex,column,center,center);
+    .taglinelist{ 
+        border-radius: 18px; border:1px solid $gray2; padding:4px 8px; max-width: 480px; display: inline-block;
+          font-size: 11px;
+          @include big-desktop{
+            font-size:12px; 
+        }
+          @include phone{
+            text-align: center; border-radius:40px;
+          }
+    }
+    .heroText{
+        @include dispflex(flex,column,center, center);
+        h1{
+            font-size: 60px; font-family: $fntMonos; margin:20px 0px 0px; padding:0px; overflow: hidden; 
+            @include big-desktop{
+                font-size:80px;  margin-top: 5px;
+            }
+            @include phone{
+                text-align: center; font-size: 45px; line-height:50px
+            }
+            @include  phone-xs{
+                text-align: center; font-size: 40px; line-height:50px
+            }
+            @include  phone-360{
+                text-align: center; font-size: 30px; line-height:50px
+            }
+           
+        }
+        .bannerSubText{ height: 70px; overflow: hidden; padding-top: 10px;
+            span{
+                font-family: $fntMonosExpandedLight; width: 100%; display: block; color:$subtitle; text-align: center;
+                line-height: 40px; animation:spin_words 10s infinite;font-size: 60px; height: 70px;
+                @include phone{
+                    text-align: center;  font-size: 25px;
+                  }
+                  @include big-desktop{
+                    font-size:50px; 
+                }
+            }
+        }
+    }
+   
+    
+}
+.mt100{margin-top:100px;}
+.enternamebox{
+    margin-top:40px;
+    &.mrtop20{margin-top: 20px;} 
+    span{
+        &.smltitle{
+            font-size: 16px; font-family: $lightDark; text-align:center; width: 100%; display: block;
+            margin-bottom: 10px; line-height: 22px;
+        }
+    }
+    .textboxmain{
+        @include dispflex(flex,row,center,center); border:1px solid $lightDark; border-radius: 10px; padding:10px;
+        width: 100%; max-width: 500px;  margin: 0px auto;  min-width:500px;
+        span.logoimg{ background:$black; width: 20px; height:20px;border-radius:40px; overflow: hidden;
+            @include dispflex(flex,row,center,center); min-width: 20px;  margin-right: 5px;
+            img{max-width: 80%;}
+        }
+        span{font-size: 20px;}
+         @include phone{
+            min-width: 300px;
+         }
+        form{ @include dispflex(flex,row,center,center); width: 100%;
+            input{
+                border:0px; padding:2px; font-size:20px;
+                &:focus{
+                    border:0px; box-shadow: none;
+                }                    
+            }
+            button{
+                &.btnsubmit{
+                    width: 40px;  height: 40px; border-radius: 50px; @include dispflex(flex,column,center,center); padding: 0px; min-width: 40px;
+                    background: $black; 
+                    svg{color:$white;}
+                    &:hover{
+                        background: $black; 
+                    }
+                }
+                span{margin:0px; padding:0px;}
+            }
+        }
+        &:focus-within{
+            outline: 5px solid rgba(0,0,0,0.1);
+        }
+        @include tab{background: $white;}
+    }
+    .errorbox{
+        font-size: 11px; color:$red; text-align: center; margin-top:5px;
+    }
+
+   
+}
+.teammainbox{
+    display: flex; flex-direction: column; justify-content: center; align-items: center; margin-top: 60px;
+    img{max-width: 100%;}
+    ul{
+        @include dispflex(flex,row,flex-start,center);
+        li{ position: relative; z-index: 1;
+            .picbox{
+                position: relative; width: 80px; height: 80px; border-radius: 80px; z-index: 1; overflow: hidden;     
+                filter: blur(4px);   
+                @include phone{
+                    width: 45px; height: 45px;
+                }   
+            }
+            .hovertext{background: $footerback;transition: ease all 0.5s;width: 0px; opacity: 0;display: flex;
+                flex-direction: column; justify-content:center; align-items: flex-start;     
+                position: absolute; left: -3px; top:-3px; height:85px; border-radius: 100px; 
+                padding-left: 90px;
+                span{ display: none;  align-items: flex-start;
+                    font-size: 0px; color:$footerback;  transition: ease all 0.5s; overflow: hidden;
+                    i{font-size: 0px; display: none; }
+                    }
+
+                @include phone{
+                    height:55px;
+                    }
+            }
+         
+            &:hover{ z-index: 2;
+                .hovertext{ width:250px; opacity: 1;transition: ease all 0.5s;
+                span{
+                    opacity: 1;transition: ease all 0.5s;font-size: 13px;  color:$white; display: flex;
+                    flex-direction: column; justify-content:center; align-items: flex-start;
+                    i{font-size: 11px; display: block; }
+                }
+                
+            }
+            .picbox{
+                filter: blur(0px);   
+            }
+            }
+            &.active{
+                .picbox{
+                    filter: blur(0px);   
+                } 
+            }
+            &.rightelement{
+                .hovertext{background: $footerback;transition: ease all 0.5s;width:0px; opacity: 0;display: flex;
+                    flex-direction: column; justify-content:center; align-items: flex-start;     
+                    position: absolute; left:inherit; right: -3px; top:-3px; height:85px; border-radius: 100px; 
+                    padding-right: 90px; padding-left: 25px;
+                    span{ display: none;  align-items: flex-end;
+                        font-size: 0px; color:$footerback;  transition: ease all 0.5s; overflow: hidden;
+                        i{font-size: 0px; display: none; }
+                        }
+    
+                    @include phone{
+                        height:55px;
+                        }
+                }
+                &:hover{ z-index: 2;
+                    .hovertext{ width:250px; opacity: 1;transition: ease all 0.5s;
+                    span{
+                        opacity: 1;transition: ease all 0.5s;font-size: 13px;  color:$white; display: flex;
+                        flex-direction: column; justify-content:center; align-items: flex-start;
+                        i{font-size: 11px; display: block; }
+                    }
+                    
+                }
+                .picbox{
+                    filter: blur(0px);   
+                }
+                }
+            }
+        }
+    }
+}
+
+.homecntarea{
+    
+    background: $grayback; padding:80px 0px; margin-top: 80px;
+    h4{font-family: $fntMonoMedium; font-size: 16px; text-transform: uppercase; color:$lightDark; margin-bottom: 30px;}
+    h1{font-family: $fntMonosExpandedLight; font-size: 50px; line-height: 70px;
+        @include phone{
+            font-size: 40px; line-height: 45px;
+        }
+    }
+    .columnarea{ margin-top: 70px;      
+        .columnbox{
+            background: $white; border:1px solid  rgba(0,0,0,0.1); border-radius: 15px; padding:25px;
+            margin-bottom: 30px;   
+            &.flexcolumn{
+                @include dispflex(flex,row,space-between, center); padding-right: 0px;
+                .Maintitle{
+                    span{
+                        display: block;
+                    }
+                }
+                .columnimgbox{
+                    max-width: 600px;
+                } 
+                @include phone{
+                    @include dispflex(flex,column,center, center);
+                }
+            }
+            
+            img{max-width: 100%;}
+            .title2{
+                font-family: $fntMonoMedium; font-size: 18px; color: $black;
+            }
+            .Maintitle{
+                font-family: $fntMonoExtraBold; font-size:48px; color: $black; line-height: 50px;
+                @include phone{
+                    font-size:35px;line-height:45px;
+                }
+               
+                span{
+                     background: $lightgreen; padding:0px 5px 0px 3px;
+                     margin: 0px 0px; display: inline-block;
+                     font-family: "MonaSansExpanded-Bold", sans-sarif;
+                    &.jomo{
+                        padding:0px 5px 0px 5px;
+                    }
+                    }
+            }
+            p{
+                font-family: $fntMonoMedium; font-size: 16px; color:#000000; margin-top:10px;
+            }
+
+            
+        }
+    }
+}
+.disabled{
+    cursor: not-allowed !important;
+}
+p{
+    font-family: $fntMonoMedium; font-size: 16px; color:#000000; margin-top:10px;
+}
+.backtransparent{background: transparent!important; padding:0px!important;}
+.loginformarea{
+    padding:0px 0px;
+    .container{padding:0px;}
+    &.rignupform{padding:0px 0px;}
+    .loginleftcnt{
+        max-width:800px; height:100%; @include dispflex(flex,column,center,center);
+        h1{font-family: $fntMonosExpandedLight; font-size: 40px; font-weight: 600; line-height: 50px; text-align: left; width: 100%;
+            @include tab{
+                font-size: 33px; line-height: 40px;
+            }
+        } 
+        p{text-align: left;}
+        @include tab{
+            margin:0px auto; 
+        }
+        &.registerpage{
+            margin: 0px auto;
+            h1,p{text-align: center;}
+        }
+    }
+    .backtransparent{
+        min-height: auto!important;
+    }
+
+    &.loginpage{
+        .container{
+            @include phone{
+                padding:0px;
+            }
+          }
+
+    }
+ 
+}
+.loginform{
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+   .return-text{ text-align: center;
+    a{background: transparent; border:0px; padding:0px; padding-left:10px;}
+   }
+    .ttlsignup{
+        color: rgba(0,0,0,0.6); font-size: 16px; font-family: $fntMonoMedium;
+    }
+    h3{
+        font-family: $fntMonosExpandedLight; font-weight: bold; margin-bottom: 20px;
+    }
+    a{
+        border:1px solid rgba(0,0,0,0.2); padding:5px 25px; width: 100%; max-width: 400px;
+        border-radius:5px; text-align: center;
+        &.forgot-pass-link{
+            width: auto; border:0px; font-size: 13px; color:$lightDark;
+            padding-right:0px;
+            @include phone{padding:0px;}  
+        }
+    }
+    .enditem{
+        .ant-row{
+            border-bottom: 0px!important; 
+        }
+    }
+    .socialloginbox{
+        padding:10px 0px; @include dispflex(flex,column,center,center);
+        ul{
+            width: 100%;  display: flex; flex-direction: row; flex-wrap: wrap;
+            li{ width: 100%;  padding:0px!important; justify-content: center;
+                .google-signup{padding:0px 50px!important; min-width: 100%;
+                @include tab{
+                    padding:0px 20px!important;
+                }
+
+                }
+                &:first-child{
+                   @include phone{
+                     width: 100%!important;
+                   }
+                }
+                p{ text-align: center;
+                    a{
+                        display: inline-flex!important; border:0px; background: none!important;
+                        height: auto!important; width: auto;
+                    }
+                }
+            }
+        }
+    }
+    .dividerbox{ margin-top:20px; margin-bottom: 20px; position: relative; width: 100%; display: flex; flex-direction: row; justify-content: center;
+        align-items: center;
+        span{
+            font-size: 11px; color: rgba(0,0,0,0.5); background: $white; display: block; padding:0px 15px; z-index: 3;
+        }
+        &:before{
+            content:''; width: 100%; height: 1px; background: rgba(0,0,0,0.5); position: absolute; left: 0px; top:9px;
+        }
+    }
+    .loginelements{
+       width: 100%;
+       form{margin-bottom: 15px;}
+        .formbox{
+            width: 100%; border-radius: 5px; border:0px solid rgba(206,206,206,0.5); padding:5px 0px 0px;
+            margin-bottom: 20px;
+            @include mini-desktop{
+                width: 100%; margin:0px auto 20px 0px; 
+            }
+            @include tab{
+                width: 90%; margin:0px auto 20px;
+            }
+            @include phone{
+                width: 100%; margin: 0px auto 15px;
+            }
+           
+        }
+        .ant-form-item-explain-error{font-size: 11px!important;}
+        label{
+            &:before{
+                display: none!important;
+            }
+        }
+        .auth-form-action{padding:5px; 
+        label{ font-size: 14px; color: rgba(0,0,0,0.7); background: $white; display: block; padding:0px 15px; display: flex;
+            .ant-checkbox{
+                top:5px!important; 
+            }
+        }
+        }
+        input{
+            background: transparent; background-color: $white; padding:0px; border:0px;
+        }
+        .ant-form-item-control-input{min-height: auto;}
+        .ant-form-item-label{padding-bottom: 2px; 
+            label{font-size: 12px; color:rgba(0,0,0,0.5);}
+        }
+        .ant-input-password{padding:0px;}
+        .ant-input-affix-wrapper{border:0px;}
+        .ant-form-item-row{
+            border-bottom:0px solid rgba(206,206,206,0.5); padding:5px 0px 5px;
+            .ant-form-item-control-input-content{
+                border:1px solid $black; font-size: 18px;
+                border-radius: 5px; padding-right:10px;
+                input{padding:10px 10px;font-size: 18px;}
+            }
+            .ant-input[disabled]{color:$black;}
+            
+        }
+        .enditem{
+            .ant-form-item-row{
+                .ant-form-item-control-input-content{padding-right: 0px; border:0px;}
+            }    
+        }
+        .ant-form-item{margin-bottom: 0px;}
+        #login{
+            
+           @include phone{
+            width: 100%!important;
+           }
+        }
+    }
+    input:-webkit-autofill {
+        box-shadow: 0 0 0 9999px #fff inset;
+    }
+    .btn-joinus{
+        background:$footerback; height:50px; text-align: center; color: $white;
+        border:0px; width: 100%; font-size: 18px;
+    }
+    &.registerform{
+        max-width: 600px; margin:0px auto;
+        &.hide{
+            display: none;
+        }
+        .formbox{
+            .auth-form-action{
+                label{padding:0px;}
+            }
+        }
+        .blockbtn{width: 100%; height:50px; display: flex; font-size: 18px; flex-direction: row; justify-content: center; align-items: center;}
+    }
+}
+.questionBox{
+    border:1px solid rgba(0,0,0,0.06); padding:25px; max-width: 600px; margin:30px auto; display: none; border-radius: 5px;
+    .question{margin-bottom: 10px;}
+    ul{ display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start; margin-bottom: 15px;
+        li{display: flex; flex-direction: row; justify-content: flex-start; align-items: flex-start;
+
+        }
+    }
+&.show{ display: block;}
+&.showpayment{display: block;}
+&.showfinished{display: block;}
+.buttonareabox{
+      .btn-joinus{
+        background:$footerback; height:35px; text-align: center; color: $white;
+        border:1px solid $gray2; margin-right:5px;  
+    }
+}
+}
+.logo{padding:10px 0px;
+    img{width: 150px;}
+}
+@keyframes spin_words {
+    0%{
+        transform: translateY(0);
+    } 
+    10%{
+        transform: translateY(-112%);
+    } 
+    15%{
+        transform: translateY(-100%);
+    }
+    35%{
+        transform: translateY(-212%);
+    }
+    50%{
+        transform: translateY(-200%);
+    }
+    60%{
+        transform: translateY(-312%);
+    }
+    75%{
+        transform: translateY(-300%);
+    }
+    85%{
+        transform: translateY(-412%);
+    }
+    100%{
+        transform: translateY(-400%);
+    }
+}
+
+.footersection{ background: $footerback; padding:80px 0px; @include dispflex(flex,row,center,center);
+    .footerlogo{
+        img{
+            max-width:500px;
+            @include phone{
+                max-width:80%; display: block; margin: 0px auto;
+            }
+        }    
+    }
+    .footerlinks{
+        ul{
+            margin-top:20px; @include dispflex(flex,row,center,center);
+            li{
+                a{color: $white; opacity: 0.8; font-size: 15px; padding:0px 10px;
+                    &:hover{
+                        opacity: 1;
+                    }
+                    
+                }
+                
+            }
+            &.termslink{ margin-top:5px;
+                li{
+                    a{font-size: 12px;  opacity: 0.5; }
+                }
+            }
+            @include phone-360{
+                @include dispflex(flex,column, center, center);
+            }
+        }
+        .copyright{ margin-top: 20px; text-align: center;
+            p{margin:0px; padding:0px; font-size: 11px; color:$white; opacity: 0.5; text-align: center;}
+        }
+    }
+}
+.auth-notice{
+    a{
+        background: $lightDark; color: $white; padding: 8px 15px; border-radius: 5px;
+        font-size: 14px; white-space:nowrap;
+    }
+}
+.hidesection{
+    display: none;
+}
+/************************** Dashboard **********************/
+.reportdropdown {padding:0px 0px!important; border:1px solid $brdrcolor2; overflow: hidden;
+    
+    .ant-dropdown-menu{min-width: auto; 
+    .ant-dropdown-menu-title-content{font-size: 14px;}
+    .ant-dropdown-menu-item{ padding:10px 15px; background: $white;
+        svg{width: 20px; height:20px; margin-right: 5px;}
+        .ant-dropdown-menu-title-content{
+            @include dispflex(flex,row,flex-start,center); font-weight: bold; font-size: 15px;
+            padding:0px; 
+        }
+        &:hover{
+            background: #f7f7f7;
+        }
+    }
+    }
+
+}
+.reportDropdown{padding:0px!important;}
+.btnblack{background: $black; 
+    span{color:$white!important;}
+    &.btnsaveprofile{
+        border-radius: 40px;
+    }
+}
+.btn{padding:4px 10px; border-radius: 5px;} 
+input{ font-family: $fntSegoe;}
+#root{min-height: 100%; height: 100%}
+h5{font-family: $fntMonoMedium; font-size: 14px; color:$black;}
+.ant-dropdown-menu-item{
+    span{font-size: 12px; color:$black; font-weight:500;
+    img{width: 24px;}
+    }
+    &.danger{
+    .ant-dropdown-menu-title-content{ 
+        color:$red!important;
+        svg{fill:$red;}
+    }
+    }
+   }
+   .ant-btn:active,.ant-btn:hover,.ant-btn:focus {
+    color:$lightDark!important;
+    border-color: $btngray!important;
+    background: $white!important;
+}
+
+.usernamebox{ margin-left: 0px; width:80px; height:80px; border-radius:100px;
+    @include dispflex(flex,row,center,center); margin-top: 20px;
+    img{max-width:100%;}
+    @include phone{
+        // width: 60px;
+         height: auto; 
+    }
+}
+
+.mainLayout{
+    @include dispflex(flex,row,space-between,stretch); max-width: 1240px; margin:0px auto;
+    padding-top:0px; background: $white; min-height: 100%; flex:1; flex-grow: 1; font-family: $fntSegoe;
+    border-right:0px solid $brdrcolor; position: relative;
+    @media screen and (max-width:1100px){
+        max-width: 1000px;
+    }
+    @media screen and (max-width:992px){
+        max-width: 900px; margin:0px 0px;
+    }
+ 
+  
+
+    .leftsidebar{
+        @include dispflex(flex,column,flex-start,flex-start);  
+        position: -webkit-sticky; /* For Safari */
+        position: sticky; min-height: 100%;
+        top: 0; /* Stick at the top of the container */ 
+        flex:0 0 18%; width: 100%; max-width: 245px;  border-right:1px solid $brdrcolor2;
+        max-height: 100%;  
+       
+        .innerlogo{ height:45px; padding-top:10px; margin-left: 15px;
+            @media screen and (min-width:1200px){
+                height: 70px;
+            }
+            img{
+                max-width:125px; 
+                @include mini-desktop{
+                    max-width: 100%;
+                } 
+            }          
+        }
+        .sidemenu{ margin-top:14px; font-family: $fntSegoe; width: 100%; font-weight: 400;
+              overflow-y: auto;       
+              &::-webkit-scrollbar {
+                width: 5px;
+              }
+              
+              /* Track */
+              &::-webkit-scrollbar-track {
+                background: #f1f1f1;
+              }
+              
+              /* Handle */
+              &::-webkit-scrollbar-thumb {
+                background: #888;
+              }
+              
+              /* Handle on hover */
+              &::-webkit-scrollbar-thumb:hover {
+                background: #555;
+              }        
+            ul{width: 100%; margin-left: -14px;
+                li{width: 100%; padding-left: 15px;
+                    a{ 
+                        color:$black; font-size:21px; padding:7px 25px 7px 15px; display: inline-flex;
+                        flex-direction: row; justify-content: flex-start; align-items: center;
+                        svg{width: 20px; height: 20px; margin-right: 25px;}
+                        img{width: 20px; height: 20px; margin-right:22px; } 
+                        span{margin-right:0px; margin-left: 2px;
+                            svg{width:23px; height: 23px;} 
+                            @include phone{
+                                margin-right: 2px;
+                            }
+                        }
+                        .iconMenu{width: 22px; height: 22px; margin-right: 24px; margin-left: 2px;
+                            &.lineicon{ display: block;}
+                            &.fillicon{ display: none;}
+                        }
+                        .iconsvg{width: 26px;  margin-right: 22px;
+                            &.lineicon{ display: block;}
+                            &.fillicon{ display: none;}
+                        }
+                        &:hover{background: #e7e7e8; border-radius: 100px; }
+                        &.active{font-weight: bold;border-radius: 100px;
+                            .iconMenu{
+                                &.lineicon{ display: none;}
+                                &.fillicon{ display: block;}
+                            }
+                            .iconsvg{ 
+                                &.lineicon{ display: none;}
+                                &.fillicon{ display: block;}
+                            } 
+                        }
+                        &.btnPost{ margin-top:10px;
+                            background: $black; color:$white; width: 100%; height: 52px;
+                            border-radius: 100px; @include dispflex(flex,row,center,center);
+                            &:hover{
+                                background: #1a8cd8!important;
+                            }
+                            svg{display: none;}
+                           @include mini-desktop{
+                            width: 40px; height: 40px; display: block; margin:5px auto;
+                            border-radius: 60px;
+                            svg{
+                                fill: $white; width: 24px; height: 24px; display: block;
+                            }
+                           }
+                        }
+                        @include mini-desktop{
+                            font-size: 0px;
+                        }
+                       position: relative;
+                       .dotbox{
+                        width: 15px; height: 15px; display: block;
+                        border-radius: 80px;  background: #00b0fa; color:$white;
+                        position: absolute; top: 5px; left:15px; font-size:10px; display: flex; flex-direction: row;
+                        justify-content: center; align-items: center;
+                       }
+                    }
+                    &.addpostbtn{
+                        padding-left: 15px!important;
+                    }
+                }
+                @include tab{margin-left: 0px;}
+            }
+
+            @include phone{
+                overflow: visible;
+            }
+        }
+        @include mini-desktop{
+           //display:none;
+           max-width: 88px;
+           .sidemenu{
+            ul{
+                width: auto;
+                li{
+                    a{padding-left:0px; padding-right:0px; display: flex; text-align: center;
+                        flex-direction: row; justify-content: center; align-items: center;
+                        .iconMenu{
+                            margin:0px auto!important;
+                        }
+                        svg{margin:0px!important;}
+                        
+                    }
+                    &.addpostbtn{
+                        @include phone{
+                            display: none;
+                        }
+                    }
+                }
+            }
+           }
+        }
+
+        @media screen and (min-width:1100px){
+            position: fixed;
+        }
+
+        .usernamebox{
+            @include dispflex(flex,row,space-between,center);
+             width: 97%; border-radius: 100px; padding: 10px;  margin-left: -10px;
+            .flexboxrow{
+                @include dispflex(flex,row,flex-start,center);
+            }
+            span{background: none; border-radius:0px; width: auto; height: auto;
+                &.userimg{
+                    width: 40px; height: 40px; border:0px solid #000; border-radius: 50px; display: block; overflow: hidden;
+                    img{max-width: 100%;}
+                }
+            }
+            h2{font-size: 16px; text-align: left; line-height: 18px; margin-left: 10px; margin-bottom: 0px; padding:0px;
+                span{color:$black; font-size: 12px; padding:0px; margin:0px; display: block;}
+            }
+            .menudots{width: 13px;}
+            &:hover{
+                background: #e7e7e8; 
+                @include phone{
+                    background: transparent;
+                }
+            }
+            &.devicebox{
+                display: none;
+            }
+
+            @include mini-desktop{
+                justify-content: center; margin-left: -14px; width: 113%;
+                h2{display: none;}
+                svg{display:none}
+            }
+            @include tab{
+                margin-left: 0px; width: 100%;
+            }
+            @include phone{
+                display: none;
+                
+                &.devicebox{
+                    display: flex;  margin-top: 10px; justify-content: flex-start; margin-left: 10px; flex-direction: column;
+                        align-items: flex-start;
+                    h2{display: block; margin-left: 0px; margin-top: 10px; font-weight:bold; font-size: 18px;
+                    span{font-weight: normal; font-size: 14px;}
+                    }
+                    svg{display:block; width: 30px; height: 30px; }
+                    .flexboxrow{
+                        display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start;
+                    }
+                    .btnAddprofile{
+                        position: absolute; top: 15px; right: 15px; width: 30px; height: 30px; border-radius: 80px;
+                        padding: 0px; text-align: center; display: flex; justify-content: center;align-items: center;
+                        svg{width: 20px; height: 20px;}
+                    }
+                    .followrsbox{
+                        @include dispflex(flex,row,flex-start,center); width: 90%; margin-top: 10px; 
+                        .subbox{ @include dispflex(flex,row,flex-start,center); margin-right: 20px;
+                            color:$black; font-size: 15px; font-weight: bold;
+                            span{color:$black; margin-left:5px; display: inline-flex; font-weight: normal; color:#8e8e8e;}
+                        }
+
+                       
+                    }
+                }
+            }
+        }
+        
+        @include tab{
+            position: fixed; left:0px; top:0px; background: $white;           
+         }
+         @include phone{
+            max-width: 0%; z-index: 999;  top:0px; overflow: hidden;
+            transition: ease all 0.3s;
+            &.show{
+                max-width: 80%; overflow: auto; z-index: 9999;
+                transition: ease all 0.3s;
+            }
+          .innerlogo{  display: none;}           
+            .sidemenu{
+            ul{
+                li{ padding-left: 15px;
+                    a{font-size: 20px; justify-content: flex-start; font-weight: bold;
+                        padding-left: 20px;
+                        .iconMenu{
+                            margin:0px 15px 0px 0px!important;
+                        }
+                        svg, img{margin-right: 11px!important;}
+                    }
+                }
+            }
+            }
+
+            
+         }
+    }
+ .blackTransparent{
+    background: rgba(0, 0, 0, 0.5); width: 100vw; height: 100vh; position: fixed; z-index: 999; display: none;
+    &.show{
+        display: block
+    }
+ }
+    .rightmainbar{
+        @include dispflex(flex,column,flex-start,flex-start);
+        width: 100%; flex:0 0 82.4%;
+        @media screen and (min-width:1100px){
+            margin-left: 245px;
+           
+        }
+        @include mini-desktop{
+            width: 100%; flex:0 0 92.0%;
+        }
+        @include tab{
+            margin-left: 87px;
+        }
+        @include phone{
+            margin-left: 0px;
+        }
+        
+        .righheader{ z-index: 99; position: sticky; background: $white; top:0px;
+            @include dispflex(flex,row,flex-start,flex-start);width: 100%; 
+            .centersidebar{border-right: 1px solid $brdrcolor2;
+                @include dispflex(flex,row,center,flex-start);
+                 width: 100%; flex:0 0 60%; 
+                 .innerheader{padding:10px 20px 10px;}
+                 @include tab{
+                    flex:0 0 100%; 
+                }
+            }
+            .rightsidebar{
+                @include tab{
+                    display:none;
+                }
+                
+                margin-left:23px; position: sticky;top:0px;
+                @include dispflex(flex,column,flex-start,flex-start);border-left: 0px solid $brdrcolor2;
+                flex:0 0 35%; width: 100%; max-width: 35%;border-right: 0px solid $brdrcolor2;
+               
+                .innerheader{ @include dispflex(flex,row,space-between,center); padding:10px 8px 10px;
+                    position: sticky;top:0px;
+                    .rightsearch{ @include dispflex(flex,row,flex-start,center);
+                        border-radius:80px; width: 100%;
+                        font-size: 15px; color:$subtitle;  
+                        height:43px; padding:2px 5px;  width: 100%; @include dispflex(flex,row,flex-start,center);
+                        border-radius: 80px; background: #eff3f4;
+                        &.focuseffect{
+                            background: $white; border:1px solid #50b1f3;
+                            svg{
+                                fill:#50b1f3;
+                            }
+                        }  
+                        .form-control{
+                            border:0px;font-size: 13px; width: 98%; height: 40px; background: none;
+                            outline: none; box-shadow: none; padding-left: 0px;
+                        }
+                        svg{fill: #a9a9a9; width: 34px;
+                            height: 20px;
+                            margin-right: 14px;
+                            margin-left: 8px;}
+        
+                        .searchtext{ border:0px;
+                            cursor: pointer; font-size: 15px; color:$subtitle;  
+                            height:43px; padding:2px 5px;  width: 100%; @include dispflex(flex,row,flex-start,center);
+                            border-radius: 80px; background: #eff3f4;
+                            span{margin-right:5px;}
+                            &:hover{
+                                border-color: $lightDark;
+                            }
+                        }
+                        .btnClose{
+                            margin-right: 15px; border:0px; padding:0px; background: transparent; display: none;
+                            background: #1d9bf0; width: 30px; height: 30px; border-radius: 50px;
+                            svg{fill:$white; width: 15px; margin-top:4px;}
+                            &:hover{
+                                background:#1d9bf0!important;
+                            }
+                            &.show{
+                                display: block;  
+                            }
+                        } 
+        
+                     @media screen and (max-width:1024px){
+                        min-width: 120px;
+                     }
+                }
+                }
+              
+                .notificationBox{ position: relative;
+                    @include dispflex(flex,row,center,center);
+                    .usernamebox{margin-top: 0px; border:0px; padding: 0px;}
+                    a{width: 32px; height: 32px; border:1px solid $brdrcolor2; border-radius: 40px;
+                    @include dispflex(flex,row,center,center); margin:0px 2px;
+                    
+                    svg{fill:#333333;}
+                    } 
+                    .accountMenu{position: absolute; top:44px; left: -20px; background: $white; border-radius: 5px; border:1px solid $brdrcolor;
+                        -webkit-box-shadow: 6px 6px 106px 0px rgba(0,0,0,0.2);   
+                        -moz-box-shadow: 6px 6px 106px 0px rgba(0,0,0,0.2); z-index: 4; display: none;
+                        box-shadow: 6px 6px 106px 0px rgba(0,0,0,0.2);padding:15px 0px 5px; min-width: 160px;   
+                        &.show{
+                            display: block;
+                        }
+                        ul{
+                            li{
+                                white-space: nowrap; width: 100%; @include dispflex(flex,row, flex-start, center);
+                                margin-bottom:5px;
+                                a{ 
+                                    font-size: 14px; width: auto; height: auto; border: 0px; padding:6px 15px;
+                                    font-family: $fntMonoMedium; color:$lightDark;
+                                    span{border:0px; margin-right: 6px;}
+                                }
+                                &:last-child{
+                                    border-top:1px solid $brdrcolor;
+                                    a{
+                                        color:$red;
+                                        svg{fill:red}
+                                    }
+                                }
+                            }
+                        }
+                    }
+                   
+                }
+
+                .rightsidebarcntbox{   display: none;
+                    &.show{
+                        display: block;
+                    }
+                    .rightsidecntbox{
+                        &.searchlist{
+                            padding:0px; max-width: 344px; position: absolute; z-index: 99; background: $white;
+                           max-height: 400px; overflow: auto; width: 100%; border:1px solid #ccc; border-radius: 15px;
+                            .analyticsBox{margin-top: 0px!important; padding:0px 0px;}
+                            .listItemsbox{ margin-top: 20px;
+                                li{ margin-bottom: 20px; position: relative;
+                                    .headbpx{ position: relative;
+                                        @include dispflex(flex,row, space-between,center);
+                                        .imgmaindiv{ position: relative; width: 80%;
+                                            .imgDesc{ width: 100%;
+                                                @include dispflex(flex,row,flex-start,center);
+                                            }
+                                            .imgdiv{ position: relative;
+                                                width: 70px; height: 40px; border-radius: 60px; overflow: hidden;    
+                                                margin-right: 15px; display: flex;                              
+                                            }
+                                           
+
+                                            
+                                        }
+                                        
+                                        .namedetails{ margin-top: 0px;  
+                                            .profilename{
+                                                color:$lightDark; font-size: 15px; font-family:$fntInter; font-weight: 600!important; line-height: 20px;
+                                                 span{font-size: 14px; font-weight:500; display: block;}    
+                                                 
+                                                 .greentickicon{
+                                                    width: 15px; height: 15px; background:$lightgreen; border-radius: 40px; border:3px solid $white;
+                                                    position: relative;   z-index: 2;   display: inline-flex; justify-content: center; align-items: center;
+                                                    flex-direction: row;
+                                                    img{width: 10px;}
+                                                }
+                                             }
+                                        }
+
+                                        .btnfollow{
+                                            color:$white; font-size: 12px; padding:4px 15px; font-family: $fntInter; font-weight: 600;
+                                        }
+                                    }   
+                                    
+                                     .userinfoBox{
+                                        position: absolute; top:50px; left:-10px; width: 100%; background: $white;z-index: 9;
+                                        border:1px solid $brdrcolor; padding:15px; max-width: 320px; border-radius: 10px;
+                                        -webkit-box-shadow: 16px 30px 33px -29px rgba(0,0,0,0.12); display: none;
+                                        -moz-box-shadow: 16px 30px 33px -29px rgba(0,0,0,0.12);
+                                        box-shadow: 16px 30px 33px -29px rgba(0,0,0,0.12);  
+                                        .headbpx{
+                                            align-items: flex-start;
+                                            .imgmaindiv{ position: relative;
+                                                .imgdiv{ position: relative; display: flex;
+                                                    width:60px; height: 60px;                            
+                                                }
+                                                .greentickicon{
+                                                    width: 20px; height:20px;
+                                                    img{width: 15px;}
+                                                } 
+                                            }
+                                            .rightbtns{ @include dispflex(flex,row,center,center);  margin-top:0px!important;
+                                                .ant-btn{
+                                                    transform: rotate(90deg);
+                                                }
+                                                a{ margin-left: 5px;
+                                                    &.btncircle{
+                                                        width: 27px; height: 27px; border:1px solid $brdrcolor; border-radius: 40px;
+                                                        @include dispflex(flex,row,center,center); 
+                                                        svg{fill: $lightDark; width: 15px;}
+                                                    }
+                                                }
+                                            }
+                                        } 
+                                        p{margin-top: 10px!important;}
+                                     }    
+                                     &:hover{
+                                        .userinfoBox{display: block;}
+                                     }               
+                                }
+                                &.rolebox{
+                                    li{
+                                        .headbpx{  align-items: flex-start;
+                                            .imgmaindiv{ position: relative;
+                                                .imgdiv{ position: relative;
+                                                    width:25px; height:25px; border-radius: 60px; overflow: hidden;                                   
+                                                }
+                                            } 
+                                            .rolesdetails{
+                                                margin-left: 10px; margin-top: 0px!important; width: 90%;
+                                                h6{
+                                                    span{
+                                                        line-height: 13px;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            .listItemsbox {
+                                li{ padding:10px 20px; margin-bottom:0px;
+                                    .namedetails{
+                                        .profilename{
+                                            font-weight: 400!important; width: 100%;
+                                            span{ width:96%;
+                                                white-space: nowrap;  overflow: hidden; text-overflow:ellipsis;
+                                            }
+                                        }
+                                    } 
+                                   &:hover{
+                                    background: $gray3;
+                                   }
+                                }
+                            }
+                            .searchabletext{  padding:10px 20px; font-family: $fntInter; font-weight: 300; color:$lightDark; font-size: 14px;}
+                        }
+                    }
+                   
+                } 
+               
+            }
+
+            @include phone{
+                display: none;
+            }
+           
+        }
+        
+        .cntpagecomponent{
+            @include dispflex(flex,row,flex-start,flex-start); width: 100%;
+            flex-wrap: wrap; position: relative; 
+            min-height:100%;
+             .mt56{margin-top: -56px;
+            @include phone{
+                margin-top: 0px;
+            }
+            } 
+            &.userprofilepage{
+                min-height:inherit;
+            }
+            
+            .tabbox{
+                @include dispflex(flex,row,space-between,center); width: 100%; height: 50px; background: $white;
+                margin-bottom: 15px; border-bottom: 1px solid #f9f9f9; position: sticky; top:0px; z-index: 99;
+                a{ margin-left: 10px;
+                    img{width:25px;}  
+                }
+                .btntab{ 
+                    width: 47%; border:0px; height: 50px; font-size: 15px; font-weight: bold;
+                    border-radius: 0px; line-height: 35px;
+                    span{
+                        color:rgb(83, 100, 113); height: 46px; padding-top:6px;
+                    }
+                    &:hover{
+                        background: #e7e7e8!important;
+                    }
+                    &.active{
+                       color:$black;
+                        span{
+                            color:rgb(0, 0, 0); height: 46px; border-bottom:4px solid $black;
+                        }
+                    }
+                }
+                .btntabsetting{ border:0px; padding:0px; margin-right:0px; width: 57px;
+                    margin-top: 8px;
+                    svg{width: 20px;}
+                }
+            }
+           .centersidebarcontent{ min-height: 100%; z-index: 99;
+            .postTopheader{padding:10px 15px;
+                button{border:0px; padding:0px;
+                    img{width: 25px;}
+                }
+            }
+            @include dispflex(flex,row,center,flex-start);
+            .uploadbox{width: 100%;}
+             width: 100%; flex:0 0 60%; max-width: 60%;  border-right: 1px solid $brdrcolor2;
+             border-left: 1px solid $brdrcolor2;  
+             &.messageBoxDiv{
+                width: 100%; flex:0 0 45%; max-width:45%;
+                @include tab{
+                    flex:0 0 100%; max-width:87%;
+                    &.hideBox{
+                        display: none;
+                    }
+                }
+                @include phone{
+                    flex:0 0 100%; max-width:100%;
+                }
+                .msgUser{ cursor: pointer;
+                    .rightbtnsbox{display: none;}
+                    &:hover{
+                        background:#f5f5f5;
+                        .rightbtnsbox{display: block;}
+                    }
+                    .userPic{
+                        min-width: 40px; flex-direction: row; justify-content: center; 
+                        img{max-width: inherit; width: 60px;}
+                    }
+                }
+                .userDataBox .userPic {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 100px;
+                    overflow: hidden;
+                    display: flex;
+                    margin-right: 8px;
+                    position: relative;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                    img{
+                        width: 60px; max-width:inherit;
+                    }
+                }
+             }
+             .innerheader{padding:10px 20px 10px;}
+             @include tab{
+                 width:100%; flex:0 0 89%;  max-width: 89%; 
+            }
+            @include phone{
+                width:100%; flex:0 0 100%;  max-width: 100%;
+           }
+            &.flexcolumn{
+                @include dispflex(flex,column,flex-start,flex-start); 
+            }
+
+             
+
+            
+        }
+
+        .analyticsBox{
+            margin-top: 10px; background:#f7f9f9; border-radius: 15px; padding:15px; margin-bottom: 15px;
+            &.mt-4{margin-top: 50px;}
+            h3{font-family: $fntSegoeBold; margin-bottom: 5px;} 
+            h5{
+                a{
+                    color:$black;
+                }
+                @include dispflex(flex,row,space-between,center);
+                span.smalltextbox{font-family: $fntMonosLight; font-size: 13px; color:$btngray; margin-left: 5px}
+            }
+            p{  font-family: $fntSegoe; margin-top:18px!important; font-size: 15px; font-weight:300; color:$lightDark; line-height:20px;
+            padding-top:0px; margin-top:0px!important;
+            }
+            &.subscribe{
+               a{
+                background: $black; font-family: $fntSegoeBold; color:$white; padding:8px 16px; border-radius: 50px; font-size: 16px;
+               }
+            }
+            &.whappning{  padding-bottom: 0px;
+               ul{ margin: 0px -15px;
+                li{cursor: pointer; padding:10px 15px;
+                    p{font-size: 13px; color:#696969; margin-bottom: 0px;}
+                    .tagsbo{
+                        font-family: $fntSegoeBold; font-size: 16px;
+                    }
+                    &:hover{
+                        background: #eff1f1;
+                    }
+                }
+               }
+               .btnshowmore{
+                font-size: 15px; display: block;padding: 15px 15px; margin-left: -13px;
+                margin-right: -14px; border-radius: 0px 0px 10px 10px;
+                &:hover{
+                    background: #eff1f1;
+                }
+               }
+            }
+            .socialiconbox{  @include dispflex(flex,row,flex-start,center);
+                a{
+                    width: 25px; height:25px; border:1px solid $brdrcolor; border-radius: 40px;
+                    @include dispflex(flex,row,center,center); margin: 0px 10px 0px 0px;
+                    span{
+                        svg{ width: 16px; fill: $lightDark;
+
+                        }
+                        &.anticon-twitter{
+                            svg{fill: $twitter;
+
+                            }
+                        }
+                        &.anticon-linkedin{
+                            svg{fill: $linkdin;
+
+                            }
+                        }
+                         
+                    }
+                } 
+                span.logoimg{ background:$black; width: 20px; height:20px;border-radius:40px; overflow: hidden; 
+                    margin-right:0px;
+                    @include dispflex(flex,row,center,center); min-width: 20px;  
+                    img{max-width: 80%;}
+                }
+            }
+            .listItemsbox{ margin-top: 10px;
+                li{ margin-bottom: 20px; position: relative;
+                    .headbpx{ position: relative;
+                        @include dispflex(flex,row, space-between,center);
+                        .imgmaindiv{ position: relative; width: 70%;
+                            .imgDesc{ width: 100%;
+                                @include dispflex(flex,row,flex-start,center);
+                            }
+                            .imgdiv{ position: relative;
+                                width: 40px; height: 40px; border-radius: 60px; overflow: hidden;    
+                                margin-right: 15px; display: flex;                          
+                            }
+                            .greentickicon{
+                                width: 15px; height: 15px; background:$lightgreen; border-radius: 40px; border:3px solid $white;
+                                position: relative;   z-index: 2;   display: inline-flex; justify-content: center; align-items: center;
+                                flex-direction: row;
+                                img{width: 10px;}
+                            }
+                        }
+                        
+                        .btnfollow{
+                            color:$white; font-size: 13px; padding:6px 19px; font-family: $fntInter; font-weight: 600;
+                            border-radius: 50px;
+                        }
+                    }   
+                    .namedetails{ margin-top: 10px;
+                        .profilename{
+                           color:$lightDark; font-size: 15px; font-family:$fntInter; font-weight: 600; line-height: 20px;
+                            span{font-size: 14px; font-weight:500; display: block;}                               
+                        }
+                         .greentickicon{
+                            width: 20px; height:20px; background:$lightgreen; border-radius: 40px; border:3px solid $white;
+                            position: relative; bottom:0px; right:0px; z-index: 2; @include dispflex(inline-flex,row,center,center);
+                            img{width: 10px;}
+                        }
+                        .followers{
+                            @include dispflex(flex,row,space-between,center); font-size:14px;
+                            a{
+                                width: 50%; color:#6c6c6c;
+                                &:hover{
+                                    text-decoration: underline;
+                                }
+                            }
+                            span{
+                                font-weight: bold; color:$black
+                            }
+                        }
+                    }
+                     .userinfoBox{
+                        position: absolute; top:50px; left:-10px; width: 100%; background: $white;z-index: 9;
+                        border:1px solid $brdrcolor; padding:15px; max-width: 320px; border-radius: 10px;
+                        -webkit-box-shadow: 16px 30px 33px -29px rgba(0,0,0,0.12); display: none;
+                        -moz-box-shadow: 16px 30px 33px -29px rgba(0,0,0,0.12);
+                        box-shadow: 16px 30px 33px -29px rgba(0,0,0,0.12);  
+                        .headbpx{
+                            align-items: flex-start;
+                            .imgmaindiv{ position: relative;
+                                .imgdiv{ position: relative;
+                                    width:60px; height: 60px; display: flex;                            
+                                }
+                               
+                            }
+                            .rightbtns{ @include dispflex(flex,row,center,center); margin-top: -15px!important;
+                                a{ margin-left: 5px;
+                                    &.btncircle{
+                                        width: 27px; height: 27px; border:1px solid $brdrcolor; border-radius: 40px;
+                                        @include dispflex(flex,row,center,center); 
+                                        svg{fill: $lightDark; width: 15px;}
+                                    }
+                                }
+                            }
+                        }
+                        p{margin-top: 10px!important;}
+                     }    
+                     &:hover{
+                        .userinfoBox{display: block;}
+                     }               
+                }
+           
+            }
+            &.networkpage{
+                .listItemsbox{ width: 100%;
+                    @include dispflex(flex,row,flex-start,center); flex-wrap: wrap;
+                    li{
+                        flex:0 0 32.2%; margin:5px;
+                    }
+                }
+            }
+            &.peoplepage{
+                width: 100%; margin:0px; padding:0px 20px;
+                .listItemsbox{ @include dispflex(flex,row, space-between,center);
+                    li{
+                        flex:0 0 48.5%; max-width: 48.5%;
+                        
+                    }
+                }
+            }
+        }
+
+        .rightsidebarcntbox{ margin-left: 23px; position: sticky; top:0px;
+            @include tab{
+                display:none;
+                
+            }
+            min-height:100%;
+         
+            @include dispflex(flex,column,flex-start,flex-start);border-left: 0px solid $brdrcolor2;
+            flex:0 0 35%; width: 100%; max-width: 35%;border-right: 0px solid $brdrcolor2;
+
+            &.searchuserBox{
+                flex:0 0 90%; width: 100%; max-width: 90%;
+            }
+ 
+            &.messageChat{
+                flex:0 0 50%; width: 100%; max-width:50%; position:relative;
+                @include tab{
+                    display: flex; flex:0 0 85%; width: 100%; max-width:85%;
+                }
+                @include phone{
+                    display: flex; flex:0 0 100%; width: 100%; max-width:100%;
+                    margin-left: 0px;
+                }
+                .buttonDownScroll{
+                    position: absolute; right:0px; bottom:50px; width: 53px; height: 35px;
+                    border-radius: 30px; box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.06);
+                }
+            }
+            
+            .rightsidecntbox{ 
+                padding:0px 7px 0px;  width: 100%;   
+                scrollbar-width: thin; 
+                scrollbar-color: $white;  position: sticky; top:-200px; 
+    
+               
+                // &.scrollbox{ display:block;}
+                 
+                &::-webkit-scrollbar {
+                    width:5px;
+                }
+                &::-webkit-scrollbar-track {
+                    -webkit-box-shadow:inset 0 0 6px rgba(0,0,0,0.1); 
+                    border-radius:5px;
+                }
+                &::-webkit-scrollbar-thumb { 
+                    border-radius:5px;
+                    -webkit-box-shadow: inset 0 0 6px $lightDark; 
+                }
+
+                &.eventDetailsbox{ padding:0px;
+                    .header{ border-bottom:1px solid rgba(0, 0, 0, 0.08); margin:0px -22px;
+                        padding: 0px 22px;
+                        @include dispflex(flex,row,space-between,center);
+                        h2{ font-size:15px; font-weight:bold; color:$black; 
+                            @include dispflex(flex,row,flex-start,center); flex-wrap: wrap;
+                            span{font-size: 11px; display: block; margin-top:2px; font-weight:normal; width: 100%;}
+                            img{width: 15px;}
+                        }
+                        .ant-btn{border:0px; box-shadow: none; text-transform: capitalize;  border-radius: 80px;}
+
+                    } 
+                    h3{font-size: 16px; font-weight: bold; color:#000; margin-top:10px;}
+                    .analyticsBox{
+                         .boxOne{
+                            @include dispflex(flex,row,flex-start,flex-start); 
+                            .iconBox{
+                                svg{fill:#7f7f7f; width: 20px; width:24px;}
+                            }
+                            
+                            p{margin-left: 10px;}
+                            a{background: transparent; padding:0px; width: 100%; color:#7f7f7f; font-weight: normal;
+                            font-size:12px; font-family: $fntSegoe; display: block}
+                         }
+                    }
+                    .detailsBox{ margin-top:10px;
+                        h4{font-size: 17px; font-weight: 100; font-family: $fntSegoeBold;
+                            @include dispflex(flex,row,space-between,flex-start); 
+                            a{font-weight: normal; font-family: $fntSegoe; font-size: 13px;}
+                        }
+                        p{font-size: 13px; line-height: 18px;}
+                    }
+                    .attendeesMainBox{
+                        ul{
+                            @include dispflex(flex,row,flex-start,flex-start); 
+                            flex-wrap: wrap;
+                            li{
+                                width:18%; border:0px solid #000; min-width: 60px;  position: relative;
+                                margin-bottom:8px;
+                                @include dispflex(flex,column,center,center); 
+                                .imgBluetick{position: relative;
+                                    .bluetick{
+                                        width: 15px; position: absolute; right: 0px; bottom:6px;
+                                    }
+                                    .imgdiv{  
+                                        width:45px; height: 45px; border-radius: 80px;
+                                        overflow: hidden; margin-bottom: 4px;
+                                        img{max-width: 100%}
+                                    }
+                                }
+                                
+                                .profilename{
+                                    font-size: 11px; line-height: 12px; text-align: center;
+                                }
+                            }
+                        }
+                    }
+                    .commentBox{
+                        @include dispflex(flex,row,flex-start,center); 
+                        border:1px solid rgba(0, 0, 0, 0.08); padding-left:6px; border-radius: 5px;
+                        .userpibbox{ width: 30px; height: 30px; border-radius: 100px; overflow: hidden;
+                            img{max-width: 100%}
+                        }
+                        input{
+                            border:0px;
+                        }
+                        button{
+                            font-size: 12px; border-radius: 80px;
+                        }
+                    }
+                }
+    
+    
+                .btnHecathon{@include btnwithBrdr(1px,$brdrcolor,$lightDark);  @include dispflex(flex,row,flex-start,center); font-size: 15px;
+                   font-family:$fntMonoMedium; width: 100%;
+                    span.logoimg{ background:$black; width: 20px; height:20px;border-radius:40px; overflow: hidden; 
+                        margin-right:7px;
+                        @include dispflex(flex,row,center,center); min-width: 20px;  margin-right: 5px;
+                        img{max-width: 80%;}
+                    }
+                    span.anticon{
+                        margin-left: 8px;
+                    }
+                }
+                
+                &.notificationlist{ 
+                    ul.msglist{
+                        li{ padding:5px 0px;
+                            .ant-form-item{margin-bottom: 0px;}
+                            .ant-form-item-control-input{min-height: auto;}
+                        }
+                    }
+                }
+                &.invittess{
+                    .analyticsBox{margin-top: 10px!important; 
+                    &.mt-4{margin-top:40px!important;}
+                    }
+                    .maincountbox{
+                        ul{@include dispflex(flex,row,space-between,center); margin-top: 30px;
+                            li{@include dispflex(flex,column,center,center); width: 33%;
+                                font-size: 10px; font-family: $fntInter; color:$lightDark; font-weight: 400;
+                                span{
+                                    display: block; font-size:17px; font-family: $fntInter; color:$black; font-weight: 400;
+                                }
+                            }
+                        }
+                    }
+                    .workslits{
+                        ul.rolebox{
+                            li{
+                                .profilename{
+                                    font-size: 13px; font-family:$fntInter; font-weight: 400;
+                                }
+                            }
+                        }
+                    
+                    }
+                    .btncircle{
+                        width: 27px; height: 27px; border:1px solid $brdrcolor; border-radius: 40px;
+                        @include dispflex(flex,row,center,center); 
+                        svg{fill: $lightDark; width: 15px;}
+                    }
+                }
+                &.searchlist{
+                    padding:0px;
+                    .analyticsBox{margin-top: 0px!important; padding:0px 0px;}
+                    .listItemsbox { border:0px solid #000;
+                        li{ padding:10px 20px; margin-bottom:0px;
+                            .imgmaindiv{ position: relative; width: 70%;
+                                .imgDesc{ width: 100%;
+                                    @include dispflex(flex,row,flex-start,center);
+                                }
+                                .imgdiv{ position: relative;
+                                    width: 40px; height: 40px; border-radius: 60px; overflow: hidden;    
+                                    margin-right: 15px;                               
+                                }
+                                .greentickicon{
+                                    width: 15px; height: 15px; background:$lightgreen; border-radius: 40px; border:3px solid $white;
+                                    position: relative;   z-index: 2;   display: inline-flex; justify-content: center; align-items: center;
+                                    flex-direction: row;
+                                    img{width: 10px;}
+                                }
+                            }
+                        }
+                    }
+                    .searchabletext{  padding:10px 20px; font-family: $fntInter; font-weight: 300; color:$lightDark; font-size: 14px;}
+                }
+           
+            }
+            .footerLinks{
+                font-size:13px; line-height: 16px; max-width: 240px;
+                a{color:#5a5a5a; } 
+                p{
+                    font-size:11px; color:#5a5a5a;
+                }
+            }
+        }
+
+
+        /******************* profile page ******************/
+        .btn{padding:4px 10px; font-size: 13px; color:$black; font-weight: 300;
+            &.btn-default{
+                border:1px solid $brdrcolor; border-radius: 5px;
+                &.mr-3{margin-left: 40px;}
+            }
+            &.btn-green{
+                background: #04B720; color:$white;
+            }
+        }
+        .userNamedetails{
+            @include dispflex(flex,row,space-between,center); width:100%; padding:5px 25px;
+            border-bottom:1px solid #e4e4e4; font-family: $fntMonoMedium; line-height: 20px;
+            position: sticky; top:0px; background: $white; z-index: 99; 
+            &.headerBox{padding:15px 15px!important;
+                &.msgheader{ display: flex; flex-direction: row; border:0px!important; justify-content: space-between; align-items: center;
+                    .hdRight{border:0px;}
+                    .ant-btn{ border:0px; padding:0px; margin:0px 4px;
+                        svg{width:25px; height:20px;}
+                        &.btnSettings{
+                            svg{width:20px; height:24px;}
+                        }
+                    }
+                } 
+                a{
+                    color:$black; margin-right:12px;
+                }    
+                .ant-btn{border:0px; padding:0px;
+                    img{width:25px;}
+                }          
+            }
+            h2{
+                font-size:20px; color:$black; margin-bottom:0px; font-family: $fntSegoeBold;
+                span{display: block; font-size: 13px; color:#817E7E;} 
+                .blueTick{width:20px; height:20px;}
+                .btnBacklink{ margin-right: 10px;
+                    img{width:25px;}
+                }
+            }
+        }
+        .coverPic{
+            background: #cacdcd;height: 150px; width: 100%; overflow: hidden;
+            @include dispflex(flex,row,center,center); position: relative;
+            &.grayback{
+                background: #cccccc; 
+                img{max-width: 100%;}
+            }
+            img{
+                width: 100%;
+            }
+            .uploadProfilePic{position:absolute; width: 40px; height: 40px; background: $white; border-radius: 80px;
+                z-index: 99;@include dispflex(flex,row,center,center); cursor: pointer;
+                input{opacity: 0; position: absolute;}
+                img{
+                    width: 25px; 
+                }
+            }
+        } 
+        .userpersondetails{
+            @include dispflex(flex,row,space-between,center); z-index: 2;
+            padding:0px 25px 30px; width: 100%;  
+            border-bottom:1px solid $brdrcolor;
+            .leftcol{
+                @include dispflex(flex,row,center,center);
+                flex: 0 0 100%; max-width: 100%; width: 100%;
+                .personaldetails{@include dispflex(flex,column,center,center);                    
+                    h2{
+                        font-size: 22px;     color:#536471;     font-family:$fntSegoeBold;                   
+                    }
+                    p{font-size: 16px; font-weight: 400; color:#536471;  font-family:$fntSegoe;  text-align: center; margin-top: 0px}
+                    .tagsbox{  @include dispflex(flex,row,center,center); width: 100%;
+                        margin:15px 0px;
+                        ul{
+                            display: flex; flex-direction: row;
+                            li{
+                                font-size: 16px; margin:0px 10px;
+                            }
+                        }
+                                a{
+                                    border:1px solid $brdrcolor; padding:3px 15px; border-radius: 40px;
+                                    font-size: 12px; color:$lightDark; margin-right:10px; background: #e0e0e0;
+                                    border:1px solid #b9b9b9;
+                                }
+                           
+                    }
+                    .locaitonbox{@include dispflex(flex,row,flex-start,center);
+                        ul{@include dispflex(flex,row,flex-start,center);
+                            li{font-family:$fntSegoe;   color:#536471; 
+                                @include dispflex(flex,row,flex-start,center);
+                                font-size: 15px; margin-right:30px;
+                                span{margin-right: 5px;}
+                                a{font-family:$fntSegoe; color:#536471; 
+                                    font-size: 13px;  
+                                }
+                            }
+                        }
+                        &.followers{
+                            ul{font-family:$fntSegoe; 
+                                li{     color:#536471;                             
+                                    span{font-weight: bold;}
+                                }
+                            }
+                        }
+                    }
+
+                    &.editprofile{@include dispflex(flex,column,flex-start,flex-start); 
+                        .editprofileForm{
+                            margin-top:40px!important;
+                             .btnboxmain{border:0px!important;}
+                            .ant-form-item{
+                                border:1px solid #CAC8C8; border-radius: 10px; overflow: hidden;
+                                .ant-form-item-label{
+                                    padding-left: 10px; padding-top: 5px; padding-bottom: 0px; 
+                                    label{font-family: $fntSegoe; font-size: 18px; color:$black;}
+                                }
+                                .ant-input,.ant-picker{border:0px; font-size: 18px; padding-left: 10px; padding-top: 0px; padding-bottom: 0pxs;}
+                                .ant-form-item-control-input{min-height: 35px!important; font-size: 18px; }
+                                .ant-select-selector{border:0px; font-size: 18px; }
+                            }
+                        }
+                        .profilePicBox{
+                            width:132px; height:132px; border-radius: 100%; border:1px solid #000000;
+                            background: $gray; margin-top: -45px; overflow: hidden; z-index: 99;
+                            @include dispflex(flex,column,center,center);
+                            img{
+                                width: 100%;
+                            }
+                            .uploadProfilePic{position:absolute; width: 40px; height: 40px; background: $white; border-radius: 80px;
+                                z-index: 99;@include dispflex(flex,row,center,center); cursor: pointer;
+                                input{opacity: 0; position: absolute;}
+                                img{
+                                    width: 25px; 
+                                }
+                            }
+                           }
+                    }
+                }
+            }
+            .usercol{
+                @include dispflex(flex,column,center,center);
+                flex: 0 0 100%; max-width: 100%; width: 100%;
+                
+                 
+                .usernameMainbox{position: relative; margin-bottom: 5px;
+                    @include dispflex(flex,column,center,center);
+                    .usernamebox{margin-top:-50px;  border:2px solid $white; position: relative;box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3);
+                        overflow: hidden;
+                        img{
+                            width:100px;  max-width:inherit;
+                        }
+                    }
+                    span.blueTickbox{
+                        position: absolute; bottom:0; right:0;
+                        img{width:25px; height: 25px;}
+                    }
+                }
+               
+                }
+            }
+        .ant-tabs-nav-list{
+            display: flex; flex-direction: row; justify-content: space-between; width: 100%;
+        }
+        .tabspanel{
+            width: 100%; 
+          .tabcntbox{
+            .tabhead{
+                @include dispflex(flex,row,space-between,center);
+                .rightsearch{
+                    width: 48%;  display: flex;
+                    flex-direction: row;
+                    input{font-size: 18px; height: 40px;}
+                    .ant-btn{height: 40px; display: flex; flex-direction: row; justify-content: center; align-items: center;
+                        svg{width: 18px; height: 18px;}
+                    }
+                }
+
+                @include phone{
+                    @include dispflex(flex,column,space-between,center);
+                    .rightsearch{
+                        width: 100%;
+                    }
+                }
+            }
+            h3{
+                font-family: $fntSegoeBold; font-size:18px; margin-top: 15px;  margin-bottom: 0px; line-height: 20px;
+            }
+            h4{color:#817E7E; font-size: 13px!important; font-family: $fntSegoe;}
+          }
+            .ant-tabs-tab.ant-tabs-tab-active {border-bottom-color: $black;
+                .ant-tabs-tab-btn{color:$black;  }
+            }
+            .ant-tabs-tab-btn{color:#536471; font-weight: 600; font-family:$fntSegoeBold; }
+            .ant-tabs-tab:hover {
+                color: $lightDark!important;
+            }
+            .custom-active-tab{border-bottom-color: $black;
+                &:hover{
+                    color:$lightDark;
+                }
+            }
+            .ant-tabs-ink-bar {
+                background-color:$black; /* Replace with the desired background color */
+              }
+              .ant-tabs-nav-wrap{ padding:0px 25px;}
+              .ant-tabs-content-holder{
+                padding:0px 20px;
+
+                
+                h4{font-size: 18px;}
+                .projectlist{ margin-bottom: 25px; margin:15px -5px 0px; position: relative;
+                    ul{ @include dispflex(flex,row,flex-start,stretch); flex-wrap: wrap;                   
+                        li{ margin:5px; flex:0 0 31.5%; max-width: 32.3%;
+                            display: flex;
+                            flex-direction: row;
+                            align-items: stretch;
+                            .projectbox{
+                                border:1px solid $brdrcolor; padding:10px; border-radius: 10px;
+                                display: flex;position:relative; width: 100%;
+                                flex-direction: row;
+                                align-items: stretch; 
+                               > img{max-width: 100%; height: 180px;}
+                                
+                                @include dispflex(flex,column,flex-start,center);
+                                .cntbox{ margin-left: 10px; width:100%; text-align: center;margin-top:15px;
+                                    h5{font-size: 15px; color:$black; margin-bottom: 10px; line-height: 18px;}
+                                    p{font-size: 12px; font-weight: 300; margin:0px; padding:0px;}
+                                }
+                                .deletebox{
+                                    @include dispflex(flex,row,flex-end,center); width: 100%;
+                                }
+                                .chkbox{
+                                    position: absolute; right: 7px; top:5px; z-index: 99;
+                                }
+                                .addbtn{
+                                    width:24px; height:24px; border-radius: 40px; background: $lightgreen;
+                                    @include dispflex(flex,row,center,center);
+                                    span{
+                                        svg{fill:$white; width: 16px;}
+                                    }
+                                }
+                               
+                            }
+
+                            @include phone{
+                                flex:0 0 46.5%; max-width: 46.5%;
+                            }
+                        }
+                    }
+                    .centersidebarcontent{
+                        flex: 0 0 100%; max-width: 100%; z-index: 2; margin-top: 0px;
+                        .postDetails{
+                            ul{
+                                li{
+                                    max-width: 20%;
+                                }
+                            }
+                        }
+                    }
+                }
+                .tabheaderbox{
+                    @include dispflex(flex,row,flex-end,center); margin-bottom: 10px;
+                    &.spacebetween{
+                        @include dispflex(flex,row,space-between,center);
+                        .notebox{
+                            font-size: 11px; color:$gray5; 
+                        }
+                    }
+                    .ant-dropdown-link{font-size: 13px;} 
+                }
+              }
+        }
+        
+        }
+        
+    }
+ .badgeText{
+    background:$grayback; border-radius: 20px; font-size: 11px; font-weight: normal; padding:3px 8px;
+    margin-left: 20px;
+ }
+    .innerheader{
+        height: 56px; border-bottom: 0px solid $brdrcolor2; width: 100%; display: block;  position: relative;
+    }
+}
+
+
+/******************** responsive css **********************/
+.tabheader, .sidemenudevice,.tabfooter{display: none;}
+@include phone{
+    .tabheader{ 
+        @include dispflex(flex,row,space-between,center); padding:10px 15px;
+        position: relative; top:0px; left:0px; width: 100%; background: $white; z-index: 999;
+        border-bottom: 1px solid $brdrcolor2; width: 100%;
+        .usernamebox{margin-top: 0px;}
+        .logotab{ 
+            .logoimg{background: $black; width:30px; height: 30px; border-radius: 70px; display: block;
+                text-align: center;
+                img{width:80%;}
+            }            
+        } 
+        .righticons{
+            .btncircle{
+                border:1px solid $brdrcolor2; width: 32px; height: 32px; border-radius: 70px;   
+                display: flex; flex-direction: row; justify-content: center; align-items: center;
+                svg{fill: $black;}
+            } 
+        }            
+    }
+}
+@include tab{
+    .mainLayout{flex-direction: column; justify-content: flex-start; align-items: flex-start;
+        overflow: hidden
+    }
+    
+    .sidemenudevice{ display: block;
+        width:100%; max-width: 300px; height: 90vh; border:1px solid $brdrcolor2;
+        position: fixed; left: -100%; top:53px; background: $white; z-index: 2; padding:10px 15px;
+        transition: ease all 0.5s;
+        &.show{
+            left: 0px; transition: ease all 0.5s;
+        }
+        .userprofilebox{
+            .usernamebox{
+                span{font-family: $fntInter; font-size: 22px; width: 48px; height:48px;;}
+            }
+            .username{ margin-top: 10px;
+                font-size: 16px; line-height: 17px;
+                span{font-weight: 300; font-size: 14px; color: $lightDark; width: 100%; display: block;}
+            }
+        }
+        ul{ margin-top: 30px;
+            li{
+                a{
+                    @include dispflex(flex,row,space-between,center); padding:10px 15px;
+                    color:$black; font-size:14px;
+                    svg{fill:$black; width:12px;}
+                }
+            }
+        }
+        .btnlogout{
+            a{
+                color:red; padding: 0px 15px; font-size: 16px;
+            }
+        }
+        .btnarea{@include dispflex(flex,row,flex-end,center);
+            .sidemenuclose{
+                border:1px solid $brdrcolor2; width: 30px; height: 30px; border-radius: 40px;
+                @include dispflex(flex,row,center,center);
+                svg{fill: $black; width: 14px;}
+            }
+        }
+    }
+    .tabfooter{
+        position: fixed; bottom:0px; width: 100%; min-height:80px; border-top:1px solid $brdrcolor2;
+        z-index: 3;@include dispflex(flex,row,center,center); background: $white;
+        ul{
+            @include dispflex(flex,row,space-between,center); flex:1; flex-grow: 1;
+            height: 100%;
+            li{
+                flex-grow:1;  
+                a{color:$black; @include dispflex(flex,column,center,center); 
+                    span{
+                        svg{fill: $black;}
+                    }
+                }
+            }
+        }
+    }
+}
+
+.confirmmodal{
+    .ant-modal-footer{
+        @include dispflex(flex,row,space-between,center); 
+        .ant-btn{
+            font-size: 12px; height: 28px;
+            &.ant-btn-primary{
+                background:$lightDark; border-color:$lightDark ;
+            }
+        }  
+    }
+     
+        .addlistbox{
+            @include dispflex(flex,row,center,center); position: relative;
+            margin:30px 0px 40px;
+            .otheruserbox{ 
+                width: 60px; height: 60px; border-radius: 100px; border:4px solid $white;
+                box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+                @include dispflex(flex,row,center,center); overflow: hidden;
+                img{max-width: 100%;}
+            }
+            .faviconbox{
+                position: absolute; top:15px; left: auto; right:auto;
+                @include dispflex(flex,row,center,center); overflow: hidden;
+                width: 30px; height:30px; border-radius: 80px; background: $black;
+                img{max-width: 60%;}
+            }
+            .usernamebox{
+               
+                margin-top: 0px; margin-right: 10px;
+                span{ font-family: $fntInter; font-size: 30px;
+                    width: 60px; height: 60px; border-radius: 100px; border:4px solid $white;box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+                }
+            }
+            &.activepic{
+                .otheruserbox{
+                    box-shadow: 0px 0px 10px rgba(20,127,2,0.8);
+                }
+                .usernamebox{
+                    span{
+                        box-shadow: 0px 0px 10px rgba(20,127,2,0.8);
+                    }
+                    
+                }
+            }
+        }  
+       
+.btnFriends{ border-radius: 50px; @include dispflex(flex,row,center,center); padding:0px 10px; height: 30px;
+    &.activebtn{
+        background: $black!important; color:$white!important;
+        span{
+            svg{fill:$white;width: 12px; height: 12px;}
+        }
+        &:hover{
+            background: $black!important; color:$white!important;
+            span{
+                svg{fill:$white; width: 12px; height: 12px;}
+            } 
+        }
+    }
+    span{
+        svg{width:15px; height:15px;} 
+    }
+}
+  &.flexend{
+    .ant-modal-footer{
+        @include dispflex(flex,row,flex-end,center);  
+    }
+  }      
+     
+}
+.flexend{display: flex; flex-direction: row; justify-content: flex-end;}
+.posttextbox{
+    .ant-input{border:0px;
+        &::placeholder{
+            font-size: 20px;
+            color: rgb(83, 100, 113);
+        }
+    }
+
+    .ant-input:hover,.ant-input:focus, .ant-input-focused{border:0px solid #E3E6EF; box-shadow: none;}
+    .editorStyles_editor__FJpM+{border:0px!important; box-shadow: none!important; padding-top:0px!important; padding-bottom: 0px!important;
+    word-break: break-all!important; position: relative;
+    
+    }  
+}
+.btnareabox{ margin-top: 20px;
+    @include dispflex(flex,row,center,center);     
+}
+.innerSearchbox{ padding-left: 20px;
+    @include dispflex(flex,row,flex-start,flex-start); width: 100%;
+    .imgpreviewbox{
+        position: relative; 
+        .btnimgclose{position: absolute; top:5px; right:5px; z-index: 9;}
+        video{width: 100%; border-radius:20px;}
+    }
+    @include phone{ display:none;}
+
+    .posttextbox{
+       h6{
+        a{color:rgba(0, 0, 0, 0.5); font-family: $fntSegoe; text-transform: capitalize;
+            svg{fill:rgba(0, 0, 0, 0.5);}
+        }
+       }
+        textarea{
+            &:focus{
+                outline:none;
+            }
+        }
+        & > ul {
+          list-style: none;
+          padding: 10px 1px 0px;
+          overflow: hidden; display:flex; flex-direction:row; justify-content:center;
+          align-items:center; flex-wrap:wrap; 
+          li {
+            
+            outline: 0spx solid gray;
+            text-align: center;
+            line-height: 2;
+            img{width:100%}
+            button{background: rgba(255, 255, 255, 0.5);
+                border: 0px;
+                padding: 0px 5px;
+                height: 22px;
+            }
+            
+          }
+        }
+          
+        @for $i from 1 through 8 {
+          li:first-child:nth-last-child(#{$i}),
+          li:first-child:nth-last-child(#{$i}) ~ li {
+            width: 100% / $i;
+          }
+        }
+  
+        /**
+        * The non-sassy way
+        */
+        /* one item */
+        li:first-child:nth-last-child(1) {
+            width: 100%;
+        }
+  
+        /* two items */
+        li:first-child:nth-last-child(2),
+        li:first-child:nth-last-child(2) ~ li {
+            width: 50%;
+        }
+  
+        /* three items */
+        li:first-child:nth-last-child(3),
+        li:first-child:nth-last-child(1) ~ li {
+          width: 100%;
+        }
+        li:first-child:nth-last-child(3) ~ li {
+            width: 50%;
+        }
+  
+        /* four items */
+        li:first-child:nth-last-child(4),
+        li:first-child:nth-last-child(4) ~ li {
+            width: 50%;
+        }
+         /* five items */
+         li:first-child:nth-last-child(5),
+         li:first-child:nth-last-child(1) ~ li {
+             width: 50%;
+         }
+
+         /* five items */
+         li:first-child:nth-last-child(5),
+         li:first-child:nth-last-child(5) ~ li {
+             width: 30%;
+         }
+
+          /* five items */
+          li:first-child:nth-last-child(6),
+          li:first-child:nth-last-child(6) ~ li {
+              width: 30%;
+          }
+           /* five items */
+           li:first-child:nth-last-child(7),
+           li:first-child:nth-last-child(7) ~ li {
+               width: 30%;
+           }
+            /* five items */
+          li:first-child:nth-last-child(8),
+          li:first-child:nth-last-child(8) ~ li {
+              width: 25%;
+          }
+  
+            }
+          }
+        
+    .avtarbox{
+        img{width: 40px; height: 40px; border-radius: 80px;}
+    }
+    .posttextbox{
+        width: 100%;
+        input{border:0px; box-shadow: none; margin-bottom: 10px;
+            &::-ms-input-placeholder { /* Edge 12-18 */
+                color: #5e6e7a; font-size: 25px;
+              }              
+            &::placeholder {
+                color:#5e6e7a;font-size: 20px;
+              }
+        }
+        .btnreplyBox{
+            border-bottom:1px solid #e1e4e8; padding-bottom: 5px;
+        }
+        .btnreply{ 
+            color:$black; font-size: 14px; font-weight: bold; @include dispflex(flex,row,flex-start,center);
+            padding: 2px 15px; height: 25px; border-radius: 50px; border:0px!important; box-shadow: none;
+            svg{
+                fill:$black; width: 16px; height: 16px; margin-right:3px;
+            }
+            &:hover{
+                background: #e8f5fd!important; color:$black!important;
+            }
+        }
+
+        &.commentsbox{
+            @include dispflex(flex,row,flex-start,center); padding: 5px 25px;
+            input{border:1px solid #c6c6c6; margin:0px;
+                &::-ms-input-placeholder { /* Edge 12-18 */
+                    color: #5e6e7a; font-size:17px;
+                  }              
+                &::placeholder {
+                    color:#5e6e7a;font-size:17px;
+                  }
+            }
+            button{margin:0px; padding:8px 10px!important; border-width:1px;
+                img{max-width:30px;}
+            }
+        }
+    }
+    .commentnested{
+
+    }
+    .show140post{ width:100%;
+        display: flex; flex-direction: row; justify-content: center; align-items: center;
+        padding:15px 0px; border-top:1px solid rgb(232, 232, 232); background: #f6fbff;
+        a{font-size: 15px; color:$black;}
+     }
+     .emojiBox{
+        position: absolute; top:50px; left: 0px; z-index: 999;
+        .epr-search-container{
+            height: 37px!important;
+        }
+        .epr-category-nav{padding-top:0px; padding-bottom:0px;}
+     }
+     .mainPostIconbox{position: relative;
+    .posticonsbtn{ padding:10px 7px;@include dispflex(flex,row,space-between,center); margin-top:0px;
+         position: relative;
+       
+        .iconsbtnbox{
+            @include dispflex(flex,row,flex-start,center);
+             flex-wrap: wrap; 
+            .btnupload{
+                height:36px; cursor: pointer;
+            }
+            button{ padding:0px;  width: 36px; height: 36px; border-radius: 50px;
+                border:0px solid #ccc;@include dispflex(flex,row,center,center); margin-right: 0px;
+                &.btnfileupload{ cursor: pointer;
+                    position: relative;
+                    input{
+                        position: absolute; opacity: 0;
+                    }
+                }
+                svg{
+                    fill:$black; width: 20px;
+                }
+                &:hover{
+                    background: #e8f5fd!important; color:$black!important;
+                }
+            }
+        }
+        .btnbluepost{ border:0px; box-shadow: none; margin-right:10px;
+            border-radius: 50px; background:$black; width: 66px; height: 36px; color:$white; font-weight: bold;
+            &:hover{
+                background: $black!important; color:$white!important;
+            }
+        } 
+      
+        }
+    }
+       
+     
+
+.showpostcount{
+    width: 100%; height: 48px; border-top: 1px solid #e1e4e8; display: flex;
+    justify-content: center; align-items: center;
+    button{
+        width: 100%; border:0px; text-align: center; font-size:15px; color:$black;
+        box-shadow: none; height: 48px;
+        &:hover{
+            background: #f7f7f7!important; color:$black!important;
+        }
+    }
+}
+.wdth100{width: 100%;}
+.AdvanceFilter{
+    .colapseHeader{
+        padding:0px; border:0px; width: 100%; margin-top: 10px; margin-bottom: 15px;
+        h5{@include dispflex(flex,row,space-between,center); margin-bottom: 0px;
+            span{ font-size: 13px;                
+                &.filterhead{
+                    svg{fill:$lightgreen;}
+                }
+            }
+        
+        }
+        .notebox{
+            font-size: 11px; color:$lightgreen; width: 100%; text-align: left; display: block;
+        }
+    }
+    .formBtnarea{
+        @include dispflex(flex,row,space-between,center);
+        .ant-btn{ height: 30px; padding:3px 20px!important;
+            span{
+                font-weight: 500!important; font-size: 12px;
+            }
+            &.btnApply{
+                span{color:$white;}
+                &.disabled{
+                    background: $black;
+                    span{color:$white;}
+                }
+            }
+        }
+      .disabled{opacity: 0.5;}
+    }
+    .disabled{
+        background:$gray6; 
+        .ant-select:not(.ant-select-customize-input) .ant-select-selector{
+            background:$gray6; cursor: not-allowed;
+        }
+       }
+  .collapseBox{ height: 0; transition: ease all 0.5s; overflow: hidden;
+    &.show{
+        height:250px;transition: ease all 0.5s;
+    }
+  }   
+}
+
+.signupStepsMain{ 
+    width: 100%; @include dispflex(flex,row,center,center); font-family: $fntRaleway;
+    .signuplayerBox{
+        @include dispflex(flex,row,space-between,flex-start); width: 100%; background: $white;
+        min-height: 100vh;
+        .signupLeftBox{
+            flex:0 0 60%; max-width: 60%;  height: 100%; position: relative;
+            // img{max-height:100vh}
+            .signuplogo{position:absolute; left: 20px; top:20px; z-index: 999;
+                img{max-width: 150px; height:auto;}
+            } 
+            img{width: 100%;}
+
+            @include mini-desktop{
+                flex:0 0 50%; max-width: 50%;
+            }
+            @include tab{
+                display: none;
+                flex:0 0 100%; max-width: 100%;
+                @media screen and (orientation:'portrait'){
+                    img{
+                        width: auto; height: 100vh; object-fit: cover; object-position: center center;
+                    }
+                }
+                
+            }
+            @include phone{display: none;}
+        }
+        .signupRightBox{
+            flex:0 0 40%; max-width: 40%; height: 100%; @include dispflex(flex,column,space-between,flex-start); 
+            padding:20px 60px;  
+            @include mini-desktop{
+                flex:0 0 50%; max-width: 50%; 
+            }
+            @include phone{
+                padding:20px;
+            }
+            .burgerMenu{
+                display: none; padding:0px; border:0px;
+                svg{width: 30px; height: 28px;}
+                @include phone{
+                    display: flex; align-self: flex-end;
+                }
+            }
+            .deviceheader{
+                display: flex; flex-direction: row; justify-content: space-between; align-items: center;
+                width: 100%;  display: none;
+                .devicelogo{
+                    display: none;
+                    @include phone{
+                       width: 110px;   display: block; 
+                    }
+                   }
+
+                @include phone{
+                    display: flex;  width: 100%; display: flex; flex-direction: row; justify-content: center; align-items: center;
+                    a{padding-bottom: 0px!important; display: flex; flex-direction: row; justify-content: center; align-items: center;
+                    
+                    }
+                }
+            }
+          
+            .innernav{ width: 100%;   margin-bottom:50px;         
+                ul{ 
+                    @include dispflex(flex,row,space-between,center);  font-family: $fntRaleway;
+                    li{
+                        a{
+                            color:rgb(0, 0, 0); font-weight: 500; font-size: 16px;                         
+                            padding-bottom: 20px; font-family: $fntInter; font-weight: 400;
+                        }
+                        &:hover, &.active{
+                            a{
+                                color:rgba(0, 0, 0, 1);
+                                border-bottom: 3px solid #000000; 
+                            }
+                        }
+                        &:last-child{
+                            a{background: $black; color:$white; border-radius: 80px; padding:8px 15px;}
+                        }
+                    }
+                }
+                .btnCloseMenu{display: none;}
+
+                @include phone{                   
+                     ul{
+                        li{
+                            &:nth-child(1){
+                                display: none;
+                            }
+                            &:last-child{display: none;}
+                            a{white-space: nowrap;}
+                        }
+                     }
+                }
+            }
+            .signUpcntBoxmain{ position: relative; width: 100%; font-weight: 500;
+                &.scrollMain{
+                    height: 80vh; overflow-y: auto;
+                }
+                &.answerbox{ 
+                    .ant-btn{
+                        &:disabled{
+                            opacity: 0.3;
+                        }
+                    }
+                }
+              
+                .logousername{
+                    @include dispflex(flex,row,flex-start,center); margin-bottom: 15px;
+                    img{width: 40px; height:40px;}
+                    h2{margin-bottom: 0px; font-size:25px; font-weight:bold; margin-left: 5px; margin-right: 20px;}
+                    .infonote{font-size: 12px; color:red; white-space: nowrap;}
+                }
+                .verifyimgbox{
+                    img{max-width: 100%;}
+                    margin-bottom: 20px;
+                }
+                .mr15{margin-right:15px;}
+                .formbox{
+                    @include tab{
+                       background: $white;
+                    }
+                }
+                .signUpcntBox{ 
+                    max-width:100%; position: relative;
+                    h4{font-size: 18px; color:rgba(0, 0, 0, 0.5);
+                        &.blackColor{color:#000000}
+                    }
+                    h3{font-size:30px; color:rgba(0, 0, 0,1); font-weight: 700; line-height: 35px;}
+                    @include tab{
+                        max-width: 100%;
+                        > div{
+                            padding:0px; 
+                        }
+                    }
+                    .twobuttonsbox{
+                        @include dispflex(flex,row,space-between,center);
+                        .btnLearnmore{
+                            background: transparent!important; color:$black;
+                            &.btnresend{
+                                background: $black!important; color:$white;
+                            }
+                            @include phone{padding:8px 15px; font-size: 15px;}
+                        }
+                    }
+                    .btnback{margin-top: 10px;}
+                    .dewllmode{ margin-top: 20px; margin-bottom: 25px;
+                        border:2px solid #e9e7e7; position: relative; padding:25px; border-radius: 23px; position: relative;
+                        img{position: absolute; right:15px; top:15px;}
+                        h3{margin-bottom: 10px;}
+                    }
+                    .deviceimg{
+                        display: none;
+                        @include tab{
+                            display: block;
+                            img{max-width: 100%;}
+                        }
+                    }
+                }
+                .answerboxcnt{font-weight: 500;
+                    background:#6A51C6; padding:15px; border-radius:15px; color:$white; font-size: 16px; position: relative;
+                    .optionsbox{ position: relative;
+                        margin-top: 10px; min-height: 300px;
+                        button{font-weight: 500;
+                            background: #5541B0!important; margin:4px; border:0px; color:rgba(255,255,255,0.8); font-size: 15px;
+                            &.btnreturn{
+                                background:#dfdfdf!important; color:$black; position: absolute; right:0px;
+                            }
+                        }   
+                        label.ant-checkbox-wrapper:has(input[type="checkbox"]){
+                            background: #5541B0;margin:4px; border:0px; color:rgba(255,255,255,0.8); font-size: 15px; color:$white;
+                            padding:5px; border-radius: 3px;
+                            .ant-checkbox{
+                                display: none;
+                            }
+                          }     
+                        label.ant-checkbox-wrapper:has(input[type="checkbox"]:checked){
+                            background: #78C01A;
+                          }                 
+                    }
+                    .bottombtn{
+                        position: absolute; bottom:15px; right: 20px;
+                        .btnskipques{color:rgba(255,255,255,0.6); font-size: 14px;
+                            &:hover{color: $white;}
+                        }
+                    }
+                    .tagbox{margin-top: 20px; padding-left: 5px; display: flex; flex-direction: row; justify-content: flex-start;
+                        input{min-height: 40px; height: auto; padding:0px 10px;}
+                    }
+
+                    @include phone{
+                        padding:15px;
+                    }
+                    
+                }
+                .privacytext{font-size: 13px; font-family: $fntRaleway;font-weight: 500;}
+            }
+            .smallnote{font-size: 12px; color:#999999; text-align: center; font-weight: 400;}
+           
+            .btnLearnmore{
+                border:2px solid #000000; color:#ffffff; border-radius: 60px;
+                padding:8px 40px;  font-weight: 600; background: #000000;
+                display: block;
+                max-width: 80%;
+                margin: 50px auto 10px;
+                font-size: 18px;
+                text-align: center;
+                box-shadow: 0px 6px 8px #cccccc;
+                &.btnresend{
+                    background: #000000; color:#ffffff;
+                }
+            }
+            
+            @include tab{
+                flex:0 0 100%; max-width: 100%;
+                position: relative; top:0px; z-index: 99;  justify-content: flex-start;                       
+                .signUpcntBoxmain{
+                    .signUpcntBox{                     
+                        
+                        h3{font-size:30px; font-weight: 700;}
+                    }                   
+                }
+                .btnLearnmore{
+                    border:2px solid #000000; color:#ffffff; border-radius: 60px;
+                    padding:8px 40px;  font-weight: 600; background: #000000;
+                    display: block;
+                    max-width: 80%;
+                    margin: 50px auto 10px;
+                    font-size: 18px;
+                    text-align: center;
+                    box-shadow: 0px 6px 8px #cccccc;
+                }
+            }
+
+            .btnnextbox{
+                position: absolute; top:42%; right:0px; border:0px; background: transparent!important; 
+                img{max-width: 80%;}
+                @include phone{
+                    top:inherit;
+                }
+            }
+
+            .ant-checkbox-checked .ant-checkbox-inner {
+                background-color: #000000;
+                border-color: #000000;
+            }
+            @include tab{
+                flex:0 0 100%; max-width: 100%;
+                position: relative; top:0px; z-index: 99;  justify-content: flex-start; 
+                .signUpcntBoxmain{
+                    .signUpcntBox{                     
+                        
+                        h3{font-size:30px;  font-weight: 700;}
+                    }
+                    
+                    p{font-weight: 500;}
+                }
+                 
+            }
+        }
+
+       
+    }
+}
+.footerbox{background: #E9E7E7; color:#727679; font-size: 12px; padding:15px 25px;
+    position: fixed; bottom:0px; width: 100%;
+    @include dispflex(flex,row,space-between,center);
+    .ftr_left{
+        @include dispflex(flex,row,flex-start,center);
+        a{margin:0px 8px;
+            img{max-width: 20px;}}
+    }
+    .ftr_right{
+        p{margin: 0px; text-align: right; font-size: 12px;color:#727679;}
+        a{font-size: 12px;color:#727679; padding:0px 3px;}
+    }
+}
+  
+.disnone{display: none!important;}
+.ant-modal-body{max-height: 70vh; overflow: auto;} 
+.diviceAddpost{
+    position: fixed; right: 30px;  z-index: 9999;  bottom: 90px;  background: #05aeff;
+    width: 40px; height: 40px; border-radius: 80px; text-align: center; display: flex; flex-direction: row;
+    justify-content: center; align-items: center; display: none;
+    @include phone{display:flex;}
+    a{
+        svg{fill: $white;}
+    }
+    &.addmsg{
+        a{height: 20px;}
+        svg{
+            width: 20px; height: 20pxs;
+        }
+    }
+}
+@include phone{
+    .mdt-50{margin-top:35px;}
+} 
+ 
+.ant-image-mask-info{
+    font-size: 0px!important;
+    span{font-size: 20px!important;}
+}
+
+.spin.scroll{
+    align-items: flex-start!important; margin-top: 10px!important; 
+} 
+.postModal{top:20px!important;
+    .ant-modal-content{
+        background:transparent; box-shadow: none;
+        .ant-modal-body{
+            max-height:100vh; height: 100vh;
+            .uploadbox{
+                background: #ffffff; padding:15px; border-radius:20px 15px;
+                .innerSearchbox{padding-left: 0px;}
+            }
+        }
+        .ant-modal-close{top:20px; right:35px;}
+    }
+}
+.moremnuBox{
+        border:1px solid #d9dee1; border-radius: 10px; box-shadow: 0px 1px 5px #d9dee1;
+        li{
+            span{
+                font-size: 18px; padding:8px 10px;
+            }
+            &:hover{background:#f7f9f9;}
+        }
+}
+.ant-dropdown{
+    padding:0px!important; background: transparent;
+}
+.more{
+    button{
+        border:0px; background: transparent;
+    }
+}
+.accessAppllybox{
+    border:1px solid #d9dee1; background: #ffffff;
+    .ant-radio-group{
+        display:flex; flex-direction: column; justify-content: flex-start; align-items: flex-start;
+        .ant-radio-wrapper{
+            padding:8px 10px; width: 100%; margin:0px;
+            span{font-size: 17px; font-weight:bold;}
+            &:hover{
+                background: #f7f9f9;
+            }
+            .ant-radio-inner{border:0px!important; background: transparent;}
+            .ant-radio-checked input + span.ant-radio-inner{border:0px!important;}
+            .ant-radio-checked input:checked + span{
+               background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAADv5JREFUeJzt3VuoZnd5x/HfZOKkFZ0kPQQcjReamStLS2laBfEAhVjxgAfUVhObth6hvRAPoF7mQvBQg6BV8UZvFEXEKCiCXsTQBg8RLFrSUqEk1lprGx1NE7P39uLNxO1kDu9hrfVf//V8PvAwl/O+/9kr32etvfebBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJbvSOsXAAA85GiS309ybZKTSa5OcjzJpUlOJ/m/JHcm+U6S25L8qM3LBAB2dUmS65J8LMn/JjlYc/aTfCPJG5OcmPxVAwBbOZrkxiT/kvWjf765L8lHklwz6TsAADbylCR3ZPfwnz3/n+SmJL853VsBAC7mSJK3JHkgw8f/8Hwnye9N9J4AgAt4ZJJbMm74D8/pJM+a5J0BAOd0PMmtmS7+Z+b+JC+Z4P0BAGc5nuQfM338Dy8B143+LgGAh7SO/5m5J35DAAAmMZf4n5mvJzk26jsGgOLmFv8z8+Yx3zQAVDbX+B8k+Wke/NTAo2O9ewAo6HiSLyZ5cusXch7HsloEvtT6hQDAUsz5zv/spwDHPQEAgN3N/c7/sGNJ7rQAAMBueor/Gb/R+gUAQM96eex/9pwe4zAAoIJe439mAIAN9R5/CwAAbGgJ8bcAAMAGlhJ/CwAArOnyLCf+FgAAWMOS7vwtAACwhqXd+VsAAOAilnjnbwEAgAtY6p2/BQAAzmPp8f/FcEcFAMuw9PgfJLn9ksGOCwD6dzzJF9LX/9hnG59u/QIAYC4q3PkfJNlL8viBzgwAurbkn/Y/ez450JkBQNeq3PkfJNlP8ofDHBsA9KvSnf9Bko8Mc2wA0K9Kd/4HSf4ryVWDnBwAdKranf9+kucOcnIA0Klqd/4HSd46yMkBQKcqxv99g5wcAHSqYvw/nMSH/gFQlvgDQDHiDwDFiD8AFCP+AFCM+ANAMeIPAMWIPwAUI/4AUIz4A0Ax4g8AxYg/ABQj/gBQjPgDQDHiDwDFiD8AFCP+AFCM+ANAMeIPAMWIPwAUI/4AUIz4A0Ax4g8AxYg/ABQj/gBQjPgDQDHiDwDFiD8AFCP+AFBMxfh/KOIPQGHiDwDFiD8AFCP+AFCM+ANAMeIPAMWIPwAUI/4AUIz4A0Ax4g8AxYg/ABQj/gBQjPgDQDHiDwDFiD8AFCP+AFCM+ANAMeIPAMWIPwAUI/4AUEzV+B8Z4vAAoEfiDwDFiD8AFCP+AFCM+ANAMeIPAMWIPwAUI/4AUIz4A0Axlyf5p7QPsvgDwETEHwCKEX8AKEb8AaAY8QeAYsQfAIoRfwAoRvwBoBjxB4BixB8AihF/AChG/AGgGPEHgGLEHwCKEX8AKEb8AaAY8QeAYsQfAIoRfwAoRvwBoBjxB4BixB8AihF/AChG/AGgGPEHgGLEHwCKEX8AKEb8AaAY8QeAYsQfAIqpGP8PRvwBKEz8AaAY8QeAYsQfAIoRfwAoRvwBoBjxB4BixB8AihF/AChG/AGgGPEHgGLEHwCKEX8AKEb8AaAY8QeAYsQfAIoRfwAoRvwBoBjxB4BixB8AihF/AChG/AGgGPEHgGLEHwCKEX8AKEb8AaAY8QeAYsQfAIoRfwAoRvwBoBjxB4BixB8AihF/AChG/AGgGPEHgGLEHwCKEX8AKEb8AaAY8QeAYirG/x8i/gAUJv4AUIz4A0Ax4g8AxYg/ABQj/gBQjPgDQDHiDwDFiD8AFCP+AFCM+ANAMeIPAMWIPwAUI/4AUIz4A0Ax4g8zdcWDAzC0y5PcnvZBnnJujvgzM7+T5KVJ3p/ktiT/nYd/4f4wya1J3pfkxUl+q8krBZZA/KGhI0mel+SWJPdn8y/m+5J8Jsmz44saWJ/4Q0PPT/LPGe6L+1tJ/mzSdwD0SPyhkRNJPpfxvtA/neSqyd4N0BPxh0auy+r7+GN/wX8/yTMnek9AH8QfGrk+232ff9v5RZIbJ3lnwNz5VT9o5DVJ9jP9BbD34N8N1OXOHxp5UZIH0u5C2I8lAKoSf2jkmiQ/SfsLYj/J60d+r8C8eOwPjVya5Jtpf0EcXgJePeo7BubCnT809Ia0vyDOtQR4EgDL5s4fGroyyT1pf1GcbwnwJACWyZ0/NPb2tL8oLrYEeBIAy+LOHxo7mtUH8bS+MNZZAl410hkA03LnDzNwXdpfGJssAZ4EQN/c+cNMfCDtL45NZi+eBECv3PnDjHw37S+QTceTAOiPO3+YkeNp85G/Q8xekr8Z/kiAEVwRd/4wK3+U9hfJLuNJAMyfO3+YoRem/YWy63gSAPPlzh9m6pVpf7EMMftJXjfw2QC7cecPM/aqtL9ghhpPAmA+Kt75vzfiT0denvYXzZDjSQC0V/HO/+8j/nTm2Wl/4Qw9e0n+eshDAtbmzh86cSrtL54xxpMAmJ47f+jIpUnuTfuLaIzxJACm484fOvSVtL+QxhpPAmB87vyhU29L+4tpzNlL8leDnRZwmDt/6NgT0+/HAa87ngTA8Nz5wwLcmvYX1tjjSQAMx50/LMTz0v7immL2k7x2oDODqtz5w4IcSfKNtL/IphhPAmB77vxhga7NKo6tL7YpxpMA2Jw7f1iw96b9BTfV7CW5cZhjg8Vz5w8Ld1mSr6X9hWcJgPkQfyjiRJJ/T/sLcKrx7QA4P4/9oZhTSb6f9hfiVONJADycO38o6lSSu9P+gpxq9pO8ZpCTg/6584fiLAFQj/gDSSwBUIn4A7/GEgDLJ/7AOVkCYLnEH7ggSwAsj/gDa6m2BOwleeUgJwfzUzX+wJYsAdA/8Qe2YgmAfok/sBNLAPRH/IFBWAKgH+IPDMoSAPMn/sAoLAEwX+IPjMoSAPMj/sAkLAEwH+IPTMoSAO2JP9CEJQDaEX+gqYpLwA2DnBxsT/yBWai2BDwQSwDtiD8wK5YAGJ/4A7NkCYDxiD8wa5YAGJ74A12wBMBwxB/oiiUAdif+QJcsAbA98Qe6ZgmAzYk/sAgVl4DrBzk5KhJ/YFEsAXBx4g8skiUAzk/8gUWzBMDDiT9QgiUAfkX8gVIsASD+QFGWACoTf6C0U0nuSvv/MFkCmJL4AyQ5mXpLwCsGOTl6JP4Ah1gCqED8Ac7BEsCSiT/ABVgCWCLxB1iDJYAlEX+ADVgCWALxB9iCJYCeiT/ADiwB9Ej8AQZgCaAn4g8wIEsAPRB/gBFYApizivF/zyAnB7AGSwBzJP4AE7AEMCfiDzChikvAywc5OYYk/gANWAJoSfwBGrIE0IL4A8yAJYApiT/AjFgCmIL4A8yQJYAxiT/AjFkCGIP4A3TAEsCQLk9ye9r/O4s/wBoqLgF/McjJcZj4A3TIEsAuxB+gY5YAtiH+AAtgCWAT4g+wIJYA1iH+AAtkCeBCxB9gwSwBnIv4AxRgCeAw8QcoxBJAIv4AJVVcAv58kJNbBvEHKMwSUJP4A2AJKEb8AXiIJaAG8QfgYSwByyb+AJyXJWCZxB+Ai7IELIv4A7A2S8AyiD8AG6u4BLxskJObB/EHYGuWgD6JPwA7swT0RfwBGIwloA/iD8DgLAHzJv4AjMYSME/iD8Doqi0B9yd5wSAnNw7xB2AyloB5EH8AJmcJaEv8AWjGEtCG+APQnCVgWuIPwGycSnJ32odiyiXgJYOc3GZ+N8nXtni9Pc+7Bjk5AEZTbQnYS/J3g5zcep6Y5M4R3secR/wBOlHt2wEHST6V5IohDu8CXpDkxzN4r1POuwc5OQAmU3EJuDvJDUMc3llOJPnoDN6f+AOwlmrfDjgztyV5TpIjO57f1UluTvKzGbynqcdjf4DOVV0CDpJ8L8lNSf4kyaVrntdjk9yY5AtZfQRx6/fQYt655lkBXNCud2Hs7lSSr2T1KLuqnya5I6sf4Lsryekk9yV5VJKrsvrhvicleUKrFzgT70ryptYvAoDhVPyZALPZ+J4/wEJZAsz5RvwBFs4SYM4e8QcowhJgzoz4AxRjCTDiD1CUJaDuiD9AcZaAeiP+ACSxBFQa8Qfg11gClj/iD8A5WQKWO+IPwAVZApY34g/AWiwByxnxB2AjloD+R/wB2IoloN8RfwB2Ygnob8QfgEFYAvoZ8QdgUJaA+Y/4AzAKS8B8R/wBGJUlYH4j/gBMwhIwnxF/ACZlCWg/4g9AE5YA8QegKEuA+ANQ1Mkk/5H2Yaww71jz3wQAJvH4JHemfSCXPOIPwCw9Jsm30z6US5u9JH+7wb8DAEzu0Uk+n/bRXMrcm+RlG/0LAEAjj0jy4bSPZ+/zn0n+eMOzB4Dmbkjy87QPaY9za5ITmx85AMzDtUm+l/ZB7WX2s/o1v0dsc9gAMCfHk3ww7eM69/lBkudsecYAMFsvTvLDtA/tHOcTSX57+6MFgHm7IsnNWf1qW+vozmHuSvLCnU4UADry1CRfT/sAt5qfJ7kpySN3PUgA6M0lSa5PrY8R3kvy0SRXD3B+ANC1Y1n9yuC/pn2gxwz/LUn+YKAzA4DFOJbkL5PckfbBHmpOJ/lAklPDHRMALNfTk3w8q4/CbR3xbea7Sd6U5MqhDwYAKrgyyeuz+mS8uf/mwA+SvD/Jk0c5CQAo6jFJXpfks0l+nPbB38vq2xXvSfK0JEfHe+sA/TnS+gWwWE9I8qdZ/UrhMzL+T9bvJflWktuSfDXJl5P8z8h/J0C3LABM5XFJrkly8tCfJ5M8NquPI17nDv10knuS/FtWv5Vw9p/3Dv6qARbKAsBcXJbVB+9c+eCfl2UV+59l9cE897R7aQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAM/RL3XqKWnz3aIIAAAAASUVORK5CYII=) !important;
+                background-size: 20px;
+                background-position: left top;
+                width: 20px;
+                height: 20px;
+                display: block;
+                border: 0px;
+            }
+        }
+    }
+}
+.reportPost{
+    top:20px;
+    .ant-modal-header{
+        position: relative;
+        &:before{
+            position: absolute; left: 0px; bottom:0px; width: 150px; height: 2px; background:$black;
+            content: '';
+        }
+    }
+    .ant-modal-title{
+        font-size: 22px;  font-weight: bold;  position: relative; padding: 8px 0px;
+    }
+    h2{font-size:32px; font-family:$fntMonos; font-weight: bold; width: 100%; line-height: 35px;
+    a{
+        display: block; font-size: 18px; font-family: $fntSegoe; line-height: 20px; font-weight: normal;
+        margin-top: 10px;
+    }
+    }
+    .ant-modal-body{
+        padding:20px 70px;
+    }
+    .ant-radio-wrapper{ 
+        &::after{
+            display: none;
+        }
+    }
+    .ant-radio-group{
+        h3{ margin-bottom: 0px;
+            label{
+                display: flex; flex-direction: row-reverse; justify-content: space-between;
+                font-size:17px; font-weight: bold;
+                span{padding:0px;}
+            }
+        }
+        ul{
+            margin-bottom:20px; 
+            li{
+               p{ font-weight: normal; color:#8d8d8d; font-family: $fntSegoe;}
+            }
+        }
+    }
+    .ant-modal-footer{
+        padding:30px 0px; text-align: center;
+        .ant-btn{
+            border-radius: 80px; font-size: 18px; font-weight: bold; padding:12px;
+            background:#333333; color:$white; width: 70%;  height: auto;
+        }
+    }
+    &.deletePostModal{
+        top:30%!important;
+        &.blockUserModal{
+            .project-modal {
+                padding: 15px 10px !important;
+                p{font-size: 15px;
+                    line-height: 20px;}
+                   
+            }
+            .ant-modal-footer .ant-btn{width: 95%;
+                &.btnRed{width: 95%; background: #000000;
+                    &:hover{background: #000000!important; color:#ffffff;}
+                }
+            }
+        }
+    }
+}
+
+.youtube-video {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+  }
+  
+  .imgPreviewModal{
+    .imagePreview{
+        img{
+            max-width: 100%;
+        }
+      }
+      .ant-modal-header{
+        .ant-modal-title{
+            font-size: 20px; font-weight: bold;
+        }
+        .ant-modal-footer{
+            .ant-modal-footer{
+               
+            }
+        }
+      }
+  }
+  .btnBlack{
+    background: #000000; color:#ffffff;
+    &.btnrounded{border-radius:80px;}
+  }
+  .textRed{color:red;
+span{color:red;}
+}  
+
+.premiumModalTwo{
+    height: 95vh; top:35px;
+    h1{
+        font-size:25px; font-weight: 700; font-family:'Inter'; text-align: left; margin-bottom: 0px;
+        line-height: 30px; margin-top:0px; padding:0px 20px;
+    }
+    .ant-modal-body{padding-left:0px; padding-right: 0px;padding-bottom:0px;}
+    .ant-modal-content,.ant-modal-body{height: 90vh; max-height: 90vh; }
+     
+    .ant-modal-footer{
+        display: none;
+    }
+    .plansBox{
+        height: 100vh; max-height: 37vh; overflow: auto; padding: 20px 70px;
+        
+        .plansHead{
+            width: 100%; background:$black; width: 100%;
+            padding:8px 10px; border-radius: 10px;
+            display: flex; flex-direction: row; justify-content: space-between; align-items: center;
+            h3{font-size:20px;text-align: center;color:$white;  font-weight: bold; margin-bottom: 0px;          
+            }
+            button{
+                width: 30px; display: flex; flex-direction: row; justify-content:center; align-items: center;
+                padding:0px; height: 30px; color:$white; background: #525252; border-color: #525252;
+                &:hover{
+                    background: #525252!important;
+                }
+            }
+        }
+        .packgesdetails{
+            background: #eff3f4; border-radius: 15px; padding:20px; margin:15px 0px;
+            h4{margin:0px 0px 8px; padding:0px; font-size: 17px; font-weight: bold;}
+            ul{
+                li{
+                    display: flex; flex-direction: row; justify-content: space-between; align-items: center;
+                    padding:3px 0px; 
+                }
+            }
+        }
+    }
+    .packageMain{
+        display: flex; flex-direction: row; justify-content: center; align-items: center;
+        padding:5px 40px;
+        ul{
+            display: flex; flex-direction: row; justify-content: space-between; align-items: center; margin-top: 20px;
+            li{box-shadow: 0 0 15px rgba(101,119,134,0.2), 0 0 3px 1px rgba(101,119,134,0.15); width: 48%; min-height:100px;
+                border-radius: 10px;   display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+                padding:15px;    
+                p{text-align: left; margin:0px; padding:0px; font-size: 14px; line-height: 16px; font-weight: normal;
+                    color:#8c8b8b; font-family: 'Inter';
+                &.fnt13{font-size: 13px;}
+                }
+                h4{font-size: 17px; color:#333333; font-weight: bold; font-family:'Inter'; margin-top:2px; margin-bottom: 0px;}
+               &.activebox{
+                border:2px solid #1d9bf0;
+               }
+            }
+        }
+
+    }
+    .btnBlack{display: block; max-width: 80%; margin:15px  auto 25px; border-radius: 80px; width: 80%; padding:8px 8px; font-size: 16px;
+        font-weight: bold; font-family:'Inter'; height: auto; background: $black;
+        }
+        .packageNote{
+            border:1px solid #cccccc; border-radius: 15px; padding:12px; margin:0px 15px;
+            p{font-size: 12px; font-family:'Inter'; margin:0px; line-height: 14px;}
+        }
+        .packagesBottomBox{border-top:1px solid #ccc;}
+
+        &.verifymodal{  display: flex; flex-direction: column; justify-content: center; align-items: center;
+            .verifyImage{margin-bottom: 50px; display: flex; flex-direction: row; justify-content: center; align-items: center; margin-top: 30px;}
+            .btnBlack{ padding:12px 8px; margin-top: 25px; width: 100%; max-width: 100%;}
+            .veryfyText{ 
+                margin-top: 40px;max-width: 70%; margin:0px auto;
+                h3{font-size: 23px; font-weight: bold; font-family: $fntSegoeBold;}
+            }
+        }
+        .verifyPhonenumber{
+            width: 100%;
+            &.verifyPassword{ width: 600px;
+                .veryfyText{width: 100%;}
+            h3{font-size: 35px; line-height: 40px;}
+            .k4logo{
+                width: 100%; display: flex; flex-direction: row; justify-content: center; align-items: center;
+                margin:0px  auto 50px; width:55px; border-radius: 80px;
+                img{max-width: 100%;}
+            }
+            p{color:#7e7e7e;}
+            .passwordBox{
+                display: flex; flex-direction: row; justify-content: center; align-items: center;
+                .ant-btn{height: 45px;}
+            }
+                .verfypassBox{
+                    display: flex; flex-direction: column; justify-content: space-between; align-items: center;
+                    height: 70vh;
+                }
+                .btnBlack{max-width: 70%; margin:0px auto;}
+            }
+        }
+    .BluemarkBox{
+        background: url('../images/blueback.png') no-repeat left top;padding-top: 40px;
+        .blueTickBox{
+            padding:40px; display: flex; flex-direction: row; justify-content: flex-start; align-items: center;
+            max-width: 80%; margin:0px auto;  background:rgba(255,255,255,0.5);  border-radius: 15px;
+           p{font-size: 18px; line-height:22px;} 
+        }
+        .monthlyPlans{margin: 30px auto; max-width:80%;
+            .ant-tabs-nav-wrap{
+                width: 100%;
+                .ant-tabs-nav-list{
+                    width: 100%; background: #e7e7e7; border-radius: 20px; overflow: hidden;
+                    .ant-tabs-tab-btn{
+                        width: 100%;
+                        h4{
+                            display: flex; flex-direction: row; justify-content:center; align-items: center;
+                            margin-bottom: 0px; padding:10px 15px; text-align: center; width: 100%; font-size: 16px;
+                            span{
+                                margin-left: 10px; color:#04B720; font-size: 14px;
+                            }
+                        }
+                    }
+                }
+                .ant-tabs-ink-bar{display: none!important;}
+            }
+            .bluecntBox{
+                border:1px solid #ccc; padding:20px;  border-radius: 20px;
+                h4{
+                    font-size: 17px; font-weight: bold;
+                }
+            }
+        .ant-tabs-tab{
+            width: 50%; padding:0px;  
+            &.ant-tabs-tab-active{
+                background: black; 
+                h4{
+                    color:#ffffff;  
+                    
+                }
+            }           
+        }
+        }
+    }
+}
+.premiumModal{
+    h1{
+        font-size:35px; font-weight: 700; font-family:'Inter'; text-align: center; margin-bottom: 0px;
+        line-height: 35px; margin-top: 35px;
+    }
+    .ant-modal-body{padding-bottom: 50px;}
+    p{text-align: center; font-size: 14px; color:#6e6e6e;}
+    .packageMain{
+        display: flex; flex-direction: row; justify-content: center; align-items: center;
+        padding:5px 50px;
+        ul{
+            display: flex; flex-direction: row; justify-content: space-between; align-items: center; margin-top: 20px;
+            li{box-shadow: 0 0 15px rgba(101,119,134,0.2), 0 0 3px 1px rgba(101,119,134,0.15); width: 48%; min-height:130px;
+                border-radius: 10px;   display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+                padding:15px;    
+                p{text-align: left; margin:0px; padding:0px; font-size: 14px; line-height: 16px;
+                &.fnt13{font-size: 13px;}
+                }
+                h4{font-size: 17px; color:#333333; font-weight: bold; font-family:'Inter'; margin-top:2px; }
+               &.activebox{
+                border:2px solid #1d9bf0;
+               }
+            }
+        }
+
+    }
+    .btnBlack{display: block; max-width: 80%; margin:30px auto 25px; border-radius: 80px; width: 80%; padding:12px 8px; font-size: 16px;
+    font-weight: bold; font-family:'Inter'; height: auto;background: $black;
+    } 
+    .ant-modal-footer{display:none;}
+}
+
+.deviceFooterMenu{
+   
+    height: 60px; width: 100%; position: fixed; bottom:0px; left: 0px; background: $white; z-index: 99;
+    @include dispflex(flex,row,space-between,center); padding:0px 10px;
+    display: none;
+    svg{width: 20px; fill:$black; height:20px;}
+    a{width: 20%; height: 50px; display: flex; flex-direction: row; justify-content: center; align-items: center; border:0px;}
+    @include phone{  
+        display:flex;
+    }
+    &.fadeEfect{
+        opacity: 0.3;
+    }
+}
+.polMainBox{
+    border:1px solid #e6e6e6; border-radius: 15px; width: 97%; overflow: hidden; margin-bottom: 10px;
+        .polTextBox{
+        padding:10px 10px 0px 10px; display: flex; flex-direction: row; justify-content: space-between; align-items: flex-end;
+        .polcheckboxmain{width: 90%;}
+        .polqueAdd{margin-bottom: 15px;
+            .ant-btn{border:0px; padding:5px;
+                svg{width: 25px; height: 25px;}
+            }
+        }
+        input{margin-bottom: 0px; min-height: 60px;
+            &::placeholder{
+                font-size: 17px;
+            }
+        }
+        .checkBox{
+            border:1px solid #e6e6e6; border-radius: 5px; margin-bottom: 10px;
+        }
+    }
+    .pollengthbox{
+        border-top:1px solid #e6e6e6; padding:10px;
+        p{margin-top: 0px; margin-bottom: 5px; font-size: 16px; font-weight: normal; color:#333333;}
+        ul{
+            @include dispflex(flex,row,space-between,center);
+            li{
+                @include dispflex(flex,column,flex-start,flex-start); width: 32%!important;border:1px solid #e6e6e6;
+                border-radius: 6px;
+                & > span{    font-size: 14px; padding: 9px 10px 0px; line-height: 14px;}
+                .ant-select{
+                   width: 100%;
+                   div{border:0px!important;}
+                }
+            }
+        }
+    }
+    .polbuttonBox{
+        border-top:1px solid #e6e6e6;  margin-top: 3px;
+        @include dispflex(flex,row,center,center); 
+        .ant-btn{border:0px; width: 100%; height: auto; padding:15px 20px; color:red!important; font-size: 16px;
+            
+            &:hover{
+                background: #fee8ea!important;
+            }
+        }
+    }
+
+    &.posteventpage{
+        .coverPic{
+            margin-bottom: 15px!important;
+        }
+        .polTextBox{
+            .polcheckboxmain{
+                width: 100%;
+            }
+        }
+        .checkBox{border:0px;}
+
+       &.editprofileForm{
+            margin-top:40px!important;
+             .btnboxmain{border:0px!important;}
+            .ant-form-item{
+                border:1px solid #CAC8C8; border-radius: 10px;
+                .ant-form-item-label{
+                    padding-left: 10px; padding-top: 5px; padding-bottom: 0px; 
+                    label{font-family: $fntSegoe; font-size: 15px; color:$black;}
+                }
+                .ant-input,.ant-picker{border:0px; font-size: 18px; background: transparent; padding-left: 10px; padding-top: 0px; padding-bottom: 0pxs;}
+                .ant-form-item-control-input{min-height: 35px!important; font-size: 18px; background: transparent;}
+                .ant-select-selector{border:0px; font-size: 18px; background: transparent;}
+            }
+        }
+        .profilePicBox{
+            width:132px; height:132px; border-radius: 100%; border:1px solid #000000;
+            background: $gray; margin-top: -45px; overflow: hidden; z-index: 99;
+            @include dispflex(flex,column,center,center);
+            img{
+                width: 100%;
+            }
+            .uploadProfilePic{position:absolute; width: 40px; height: 40px; background: $white; border-radius: 80px;
+                z-index: 99;@include dispflex(flex,row,center,center); cursor: pointer;
+                input{opacity: 0; position: absolute;}
+                img{
+                    width: 25px; 
+                }
+            }
+           }
+    }
+}
+.eSTSud .polPostbox .polradio.votted .ant-radio-group label.ant-radio-wrapper-checked {
+    background-image: url(../images/checked.png) !important;
+    background-size: 12px!important;
+    background-repeat: no-repeat!important;
+    background-position: 8px 9px!important;
+    padding-left: 20px;
+}
+
+.communitiesBoxDetails{
+    h3{font-family:$fntMonoExtraBold;}
+}
+.CommunityModal{
+    .modalheader{
+        @include dispflex(flex,row,space-between,center);
+        h1{font-family: $fntMonoExtraBold; font-size:22px;}
+        a{
+            background: #000000; border-radius: 100px; color:$white; padding:5px 15px;
+            font-size:15px; font-weight: 100;
+        }
+    }
+    .modalBody{
+        p{color: rgb(83, 100, 113); font-size: 15px; line-height: 20px; margin-bottom: 5px; padding-bottom: 0px;
+            font-weight: normal; margin-top:0px; padding-top:0px; font-family:$fntInter;
+            &.smallfnt{font-size: 12px;}
+        }
+    }
+}
+.addMessageBox{
+    .modalHeader{
+        display:flex; flex-direction: row; justify-content: space-between; width: 93%;align-items: center;
+    }
+    .ant-modal-title{width: 100%;}
+    .btnnextheader{border-radius: 80px;}
+    .ant-modal-header{border-bottom:0px; display: flex; flex-direction: row; justify-content: space-between; align-items: center;}
+    .ant-modal-body{padding:0px;
+        .grGBel{margin-top:0px;
+        .messgsearcharea{width: 100%; border:0px; border-radius: 0px!important;}
+        }
+        .seachTagsBox{border-bottom:1px solid #e9e9e9; padding-bottom: 8px;
+            .messageTagsBox{
+                @include dispflex(flex,row,flex-start,center); padding-left: 15px;
+                flex-wrap: wrap;
+                .tagsMainBox{
+                    @include dispflex(flex,row,flex-start,center);  border:1px solid #cccccc; border-radius: 80px; 
+                    padding:1px 2px; margin-bottom: 5px;
+                    overflow: hidden;
+                    .userimgBox{
+                        width:24px; height:24px; margin-right: 5px;
+                        img{max-width: 100%;}
+                    }
+                    .ant-btn{border:0px; padding:0px 3px; margin-left: 3px; height:20px;}
+                    .userName{font-weight: bold;margin-right: 6px; }
+                }
+            }
+        }
+        .messagaBoxUsers{
+            display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start;
+            .Msgboxuser{
+                margin-bottom: 15px;
+            }
+        }
+    }
+    .modalSearch{margin:0px; padding:0px; 
+
+    }
+    .reportSpamBox{
+        padding:15px 25px; min-height: 350px;
+        h2{font-size: 21px; color:#7a8994; line-height: 27px;}
+        ul{
+            li{
+                font-weight: bold; padding:15px 10px; font-size: 16px; cursor: pointer; border-top:1px solid #e4e4e4;
+                &:hover{
+                    background: rgba(0, 0, 0, 0.03);
+                }
+                p{font-weight:normal; margin:0px; padding:0px;}
+            }
+        }
+    }
+}
+.form-control:focus{outline:none; box-shadow: none!important;}
+.headerText{    font-size: 20px; font-family:$fntMonoMedium;
+    color: #000000; font-family: $fntSegoeBold;
+    margin-bottom: 0px;}
+p{font-family:$fntInter;
+    div{
+        font-family:$fntInter;
+    }
+}
+.flex{display: flex;}
+.flexrow{flex-direction: row;}
+.flexcolumn{flex-direction: column;}
+.center{justify-content:center;}
+.aligncenter{align-items: center;}
+.flextart{justify-content: flex-start;}
+.noteInterested{
+    padding:20px 15px; border-top:1px solid #dedede; 
+    .thanksbox{
+        background: #f7f9f9; font-size: 16px; padding: 5px 10px; border-radius: 10px;
+        display: flex; flex-direction: row; justify-content: space-between; align-items: center;
+        color:#79828a;
+        .btnundo{border:0px; padding:5px 15px;background:transparent; border-radius: 50px; font-weight: bold;
+            &:hover{
+                background: #e6e6e6!important; color:#79828a!important;
+            }
+        }
+        margin-bottom: 0px;
+        
+    }
+    .btnReason{
+        font-weight: bold; font-size: 15px;color:#79828a; width: 100%!important; border:0px; background: transparent;
+        border:0px; text-align: left; padding:8px 15px; box-shadow: none; height: auto;
+        &:hover{
+            background: rgba(0, 0, 0, 0.03)!important;
+        }
+    }
+}
+
+.deletePostModal{
+    .ant-modal-body{padding:10px 20px;}
+    .ant-modal-header{ border:0px; padding:10px 25px 0px;
+        &:before{display: none;}
+    }
+    p{margin-top:0px;}
+    .ant-modal-footer{
+        display: flex; flex-direction: column; justify-content: center; align-items: center;
+        padding:10px 15px; border:0px;
+        .ant-btn{
+            width:80%; font-size: 14px; padding:12px 20px; margin:0px 0px 10px!important;
+            &.btnRed{
+                background: red;
+            }
+            &.btnDefault{
+                background: transparent; color:#333333;
+            }
+        }
+    }
+}
+.editgroupModal{
+    .ant-modal-footer{display: none}
+    .groupModalbox{
+        @include dispflex(flex,column,flex-start,center);min-height:200px;
+      
+        .uploadPhoto{
+            width:100px; height:100px; border-radius: 80px; border:1px solid #f4f4f4;
+            @include dispflex(flex,row,center,center); 
+            img{max-width: 100%; }
+            svg{width:40px; height:40px; fill: $white;}
+            .btnUploadimg{ padding:8px; border-radius: 50px; cursor: pointer;
+                width: 40px; height: 40px; position: absolute; overflow: hidden;
+                background: rgba(0, 0, 0, 0.5)!important; border:0px;
+                @include dispflex(flex,row,center,center);
+                #fileInput{position: absolute; opacity: 0;}
+            }
+        } 
+        .groupNameBox{ width: 90%; margin-top:30px; border:1px solid #dedcdc; border-radius: 5px;
+            padding:5px 10px; margin-bottom: 30px;
+            .groupnameText{
+                font-size: 14px;
+            }
+            input{border:0px; outline: none; padding:4px;
+            &:focus{
+                box-shadow: none; outline: none;
+            }
+            }
+        }
+    }
+}
+
+.noteboxText{font-size: 12px;} 
+
+.scrollMenuBox{ padding:0px;
+    a{
+        padding:0px; font-family:$fntSegoe; 
+    }
+}
+
+ 
+
