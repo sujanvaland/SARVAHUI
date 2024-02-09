@@ -21,7 +21,6 @@ import SupportAndResources from '../../container/pages/communities/admintools/su
 const MyComponent = lazy(() => import('../../container/pages/post/Message'));
 const Network = lazy(() => import('../../container/pages/Network'));
 const UserProfile = lazy(() => import('../../container/pages/UserProfile'));
-const Scroll = lazy(() => import('../../container/pages/Scroll'));
 const Setting = lazy(() => import('../../container/pages/settings/Setting'));
 const People = lazy(() => import('../../container/pages/FindPeople'));
 const Explore = lazy(() => import('../../container/pages/Explore'));
@@ -40,7 +39,7 @@ function Admin() {
   return (
     <Switch>
       <Suspense>
-        <Route exact path={path} component={Scroll} />
+        <Route exact path={path} component={Event} />
         <Route exact path="/linkedin" component={LinkedInCallback} />
         <Route path={`${path}postdetails/:postId`} component={PostDetails} />
         <Route path={`${path}message`} component={Chatting} />

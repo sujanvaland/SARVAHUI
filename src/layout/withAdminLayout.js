@@ -82,15 +82,6 @@ const ThemeLayout = (WrappedComponent) => {
     }
 
     // eslint-disable-next-line class-methods-use-this
-    handleMoreMenu = (link) => {
-      if (link === "helpcenter") {
-        window.location.href = "https://help.k4m2a.com";
-        return;
-      }
-      window.location.href = (window.location.href.includes("localhost")) ? `http://localhost:3000/${link}` : `https://k4m2a.com/${link}`
-    }
-
-    // eslint-disable-next-line class-methods-use-this
     handlelogout = () => {
       Cookies.remove('logedIn');
       Cookies.remove('token');
@@ -109,12 +100,7 @@ const ThemeLayout = (WrappedComponent) => {
           <Menu.Item key="1" onClick={this.handlelogout}>Logout</Menu.Item>
         </Menu>
       );
-      const Moremenu = (
-        <Menu className='moremnuBox'>
-          <Menu.Item key="1" onClick={() => this.handleMoreMenu('setting')}>Settings and Privacy</Menu.Item>
-          <Menu.Item key="2" onClick={() => this.handleMoreMenu('helpcenter')}>Help Center</Menu.Item>
-        </Menu>
-      );
+     
       const User = JSON.parse(localStorage.getItem("profile"))
       return (
         <div className='mainLayout' >
@@ -171,12 +157,7 @@ const ThemeLayout = (WrappedComponent) => {
                     path === "/explore" ? <svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 511.786 511.786" xmlSpace="preserve" width="512" height="512"><path d="M213.382,426.694c49.214,0.064,96.923-16.963,134.976-48.171l127.275,127.253c8.475,8.185,21.98,7.95,30.165-0.525   c7.984-8.267,7.984-21.373,0-29.641L378.545,348.337c74.545-91.24,61.011-225.636-30.229-300.181S122.68-12.855,48.135,78.385   S-12.876,304.02,78.364,378.566C116.472,409.701,164.172,426.704,213.382,426.694z" /></svg> : <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="512" height="512"><path d="M23.707,22.293l-5.969-5.969a10.016,10.016,0,1,0-1.414,1.414l5.969,5.969a1,1,0,0,0,1.414-1.414ZM10,18a8,8,0,1,1,8-8A8.009,8.009,0,0,1,10,18Z" /></svg>
                   }
 
-                  My Applications</Link></li>
-                  <li><Link to="/event" className={path === "/event" ? "active" : ""} onClick={() => this.setState({ path: "/event" })}>
-                  {
-                    path === "/event" ? <svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 511.786 511.786" xmlSpace="preserve" width="512" height="512"><path d="M213.382,426.694c49.214,0.064,96.923-16.963,134.976-48.171l127.275,127.253c8.475,8.185,21.98,7.95,30.165-0.525   c7.984-8.267,7.984-21.373,0-29.641L378.545,348.337c74.545-91.24,61.011-225.636-30.229-300.181S122.68-12.855,48.135,78.385   S-12.876,304.02,78.364,378.566C116.472,409.701,164.172,426.704,213.382,426.694z" /></svg> : <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="512" height="512"><path d="M23.707,22.293l-5.969-5.969a10.016,10.016,0,1,0-1.414,1.414l5.969,5.969a1,1,0,0,0,1.414-1.414ZM10,18a8,8,0,1,1,8-8A8.009,8.009,0,0,1,10,18Z" /></svg>
-                  }
-                  Post Job</Link></li>
+                  Applied Jobs</Link></li>
                 <li><Link to="/message" className={path === "/message" ? "active" : ""} onClick={() => this.setState({ path: "/message" })}>
                   {
                     path === "/message" ? <svg xmlns="http://www.w3.org/2000/svg" id="Filled" viewBox="0 0 24 24" width="512" height="512"><path d="M23.954,5.542,15.536,13.96a5.007,5.007,0,0,1-7.072,0L.046,5.542C.032,5.7,0,5.843,0,6V18a5.006,5.006,0,0,0,5,5H19a5.006,5.006,0,0,0,5-5V6C24,5.843,23.968,5.7,23.954,5.542Z" /><path d="M14.122,12.546l9.134-9.135A4.986,4.986,0,0,0,19,1H5A4.986,4.986,0,0,0,.744,3.411l9.134,9.135A3.007,3.007,0,0,0,14.122,12.546Z" /></svg> : <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="512" height="512"><path d="M19,1H5A5.006,5.006,0,0,0,0,6V18a5.006,5.006,0,0,0,5,5H19a5.006,5.006,0,0,0,5-5V6A5.006,5.006,0,0,0,19,1ZM5,3H19a3,3,0,0,1,2.78,1.887l-7.658,7.659a3.007,3.007,0,0,1-4.244,0L2.22,4.887A3,3,0,0,1,5,3ZM19,21H5a3,3,0,0,1-3-3V7.5L8.464,13.96a5.007,5.007,0,0,0,7.072,0L22,7.5V18A3,3,0,0,1,19,21Z" /></svg>
@@ -193,12 +174,12 @@ const ThemeLayout = (WrappedComponent) => {
                       <g><circle cx="256" cy="128" r="128" /><path d="M256,298.667c-105.99,0.118-191.882,86.01-192,192C64,502.449,73.551,512,85.333,512h341.333   c11.782,0,21.333-9.551,21.333-21.333C447.882,384.677,361.99,298.784,256,298.667z" /></g></svg> : <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="512" height="512"><path d="M12,12A6,6,0,1,0,6,6,6.006,6.006,0,0,0,12,12ZM12,2A4,4,0,1,1,8,6,4,4,0,0,1,12,2Z" /><path d="M12,14a9.01,9.01,0,0,0-9,9,1,1,0,0,0,2,0,7,7,0,0,1,14,0,1,1,0,0,0,2,0A9.01,9.01,0,0,0,12,14Z" /></svg>
                   }
                   Profile</Link></li>
-                <li>
-                  <Dropdown overlay={Moremenu} placement='topRight' trigger={['click']}  >
-                    <Link to="#"><svg viewBox="0 0 24 24" aria-hidden="true" className='iconsvg'><g><path d="M3.75 12c0-4.56 3.69-8.25 8.25-8.25s8.25 3.69 8.25 8.25-3.69 8.25-8.25 8.25S3.75 16.56 3.75 12zM12 1.75C6.34 1.75 1.75 6.34 1.75 12S6.34 22.25 12 22.25 22.25 17.66 22.25 12 17.66 1.75 12 1.75zm-4.75 11.5c.69 0 1.25-.56 1.25-1.25s-.56-1.25-1.25-1.25S6 11.31 6 12s.56 1.25 1.25 1.25zm9.5 0c.69 0 1.25-.56 1.25-1.25s-.56-1.25-1.25-1.25-1.25.56-1.25 1.25.56 1.25 1.25 1.25zM13.25 12c0 .69-.56 1.25-1.25 1.25s-1.25-.56-1.25-1.25.56-1.25 1.25-1.25 1.25.56 1.25 1.25z" /></g></svg>
-                      More</Link>
-                  </Dropdown>
-                </li>
+                <li><Link to="/setting" className={path === "/setting" ? "active" : ""} onClick={() => this.setState({ path: "/profile" })}>
+                  {
+                    path === "/setting" ? <svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 512 512" xmlSpace="preserve" width="512" height="512">
+                      <g><circle cx="256" cy="128" r="128" /><path d="M256,298.667c-105.99,0.118-191.882,86.01-192,192C64,502.449,73.551,512,85.333,512h341.333   c11.782,0,21.333-9.551,21.333-21.333C447.882,384.677,361.99,298.784,256,298.667z" /></g></svg> : <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="512" height="512"><path d="M12,12A6,6,0,1,0,6,6,6.006,6.006,0,0,0,12,12ZM12,2A4,4,0,1,1,8,6,4,4,0,0,1,12,2Z" /><path d="M12,14a9.01,9.01,0,0,0-9,9,1,1,0,0,0,2,0,7,7,0,0,1,14,0,1,1,0,0,0,2,0A9.01,9.01,0,0,0,12,14Z" /></svg>
+                  }
+                  Settings</Link></li>
                 <li className='addpostbtn' >
                   <Link to="/" className="btnPost" onClick={() => this.setState({ showUploadPost: true })}>Post
                   </Link>
