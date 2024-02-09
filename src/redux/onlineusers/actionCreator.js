@@ -1,7 +1,6 @@
 // import { toast } from 'react-toastify';
 import { message } from 'antd';
 import io from "socket.io-client";
-import * as signalR from '@microsoft/signalr';
 import actions from './actions';
 // eslint-disable-next-line import/no-cycle
 import { DataService } from '../../config/dataService/dataService';
