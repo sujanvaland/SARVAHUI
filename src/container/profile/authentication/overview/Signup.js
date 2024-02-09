@@ -176,7 +176,7 @@ function SignUp() {
           <div className="signuplayerBox">
             <div className="signupLeftBox">
               <div className='signuplogo'><img src={require('../../../../static/images/logowhite.png')} alt='' /></div>
-              {AboutUs && <img src={require('../../../../static/images/1.jpg')} alt="" />}
+              {AboutUs && <img src={require('../../../../static/images/3.jpg')} alt="" />}
               {GetInvolved && <img src={require('../../../../static/images/2.jpg')} alt="" />}
               {AvailableFosters && <img src={require('../../../../static/images/3.jpg')} alt="" />}
               {SignInStep && <img src={require('../../../../static/images/4.jpg')} alt="" />}
