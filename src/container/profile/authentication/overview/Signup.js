@@ -1,40 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Checkbox, Col, Form, Input, Row, message } from 'antd';
+import { Button, Checkbox, Col, Form, Input, Row, message, Radio } from 'antd';
 // import { toast } from 'react-toastify'; 
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import SignIn from './SignIn';
 import ForgotPassword from './ForgotPassword';
 import Terms from './components/termsmodal';
 import AboutUsComponent from './components/aboutus';
-import GetInvolvedComponent from './components/getInvolved';
-import ClaimUserNameComponent from './components/claimUsername';
-import Quiz from './components/quiz';
+
 import Fosters from './components/fosters';
 import { Main } from '../../../styled';
 // import { Modal } from '../../../../components/modals/antd-modals';
 import { preregister, sendVerificiationEmail } from '../../../../redux/authentication/actionCreator';
 
+
 function SignUp() {
 
   const history = useHistory();
-  const [username, setUsername] = useState('');
   const [AboutUs, setAboutUs] = useState(false);
   const [GetInvolved, setGetInvolved] = useState(true);
   const [AvailableFosters, setAvailableFosters] = useState(false);
   const [SignInStep, setSignInStep] = useState(false);
-  const [ClaimUserName, setClaimUserName] = useState(false);
-  const [Question, setQuestion] = useState(false);
   const [UserSignUp, setUserSignUp] = useState(false);
   const [ResendEmail, setResendEmail] = useState(false);
   const [forgotPassword, setforgotPassword] = useState(false);
   const [hidebox, sethidebox] = useState(false);
-  // const [watchVideo, setwatchVideo] = useState(false);
   const [showPrivacyPolicy, setshowPrivacyPolicy] = useState(false);
   const isLoading = useSelector((state) => state.auth.loading);
   const authdata = useSelector((state) => state.auth.data);
-  const [userAnswers, setuserAnswers] = useState([]);
   const [GoogleData, setGoogleData] = useState({});
   const dispatch = useDispatch();
 
@@ -47,11 +41,7 @@ function SignUp() {
     lastname: '',
     email: '',
     password: '',
-  });
-
-  const [verifyinfo, setverifyinfo] = useState({
-    username: '',
-    email: '',
+    loginType: '',
   });
 
   const [state, setState] = useState({
@@ -76,8 +66,6 @@ function SignUp() {
     setGetInvolved(false);
     setAvailableFosters(false);
     setSignInStep(false);
-    setClaimUserName(false);
-    setQuestion(false);
     setUserSignUp(false);
     setResendEmail(false);
     setforgotPassword(false);
@@ -88,18 +76,6 @@ function SignUp() {
 
       case 'GetInvolved':
         setGetInvolved(true);
-        break;
-
-      case 'ClaimUserName':
-        setClaimUserName(true);
-        break;
-
-      case 'Question':
-        setQuestion(true);
-        setverifyinfo({
-          username: '',
-          email: '',
-        })
         break;
 
       case 'UserSignUp':
@@ -127,11 +103,6 @@ function SignUp() {
 
   useEffect(() => {
     if (authdata?.success) {
-      console.log("authdata",authdata);
-      setverifyinfo({
-        username,
-        email: userinfo.email,
-      });
       sethidebox(true);
       setUserInfo({
         firstname: '',
@@ -157,29 +128,15 @@ function SignUp() {
     }
   }, [GoogleData])
 
-  const changeStepToQuestion = (step, username) => {
-    changeStep(step);
-    setUsername(username);
-  }
-
   const handleUserInfoSubmit = async () => {
-    if (username?.length > 0) {
       const obj = {
         ...userinfo,
-        username,
-        inviterName: '',
-        phoneNumber: '',
-        answers: userAnswers,
       };
       if (!userinfo.email) {
         message.error('Please add Email required');
         return;
       }
-      console.log("this is conf......", obj)
       await dispatch(preregister(obj,GoogleData,history));
-    } else {
-      message.error('Username required');
-    }
   };
 
   const [passwordError, setPasswordError] = useState('');
@@ -198,8 +155,19 @@ function SignUp() {
   };
 
   const resendVerificationEmail = async () => {
-    await dispatch(sendVerificiationEmail(username));
+    await dispatch(sendVerificiationEmail(userinfo.email));
   }
+
+  const loginTypeArray = [
+    {
+      id: 'jobSeeker',
+      title: 'Job Seeker',
+    },
+    {
+      id: 'recruiter',
+      title: 'Recruiter',
+    },
+  ];
 
   return (
     <>
@@ -212,8 +180,6 @@ function SignUp() {
               {GetInvolved && <img src={require('../../../../static/images/2.jpg')} alt="" />}
               {AvailableFosters && <img src={require('../../../../static/images/3.jpg')} alt="" />}
               {SignInStep && <img src={require('../../../../static/images/4.jpg')} alt="" />}
-              {ClaimUserName && <img src={require('../../../../static/images/5.jpg')} alt="" />}
-              {Question && <img src={require('../../../../static/images/6.jpg')} alt="" />}
               {(UserSignUp || forgotPassword) && <img src={require('../../../../static/images/7.jpg')} alt="" />}
             </div>
             <div className="signupRightBox">
@@ -226,7 +192,7 @@ function SignUp() {
                   </li>
                   <li className={AvailableFosters ? 'active' : ''}>
                     <Link to="" onClick={() => changeStep('AvailableFosters')}>
-                      Our Story
+                      About Us
                     </Link>
                   </li>
                   <li className="deviceheader">
@@ -239,37 +205,22 @@ function SignUp() {
                       Sign In
                     </Link>
                   </li>
-                  <li className={AboutUs || ClaimUserName || Question || UserSignUp || ResendEmail ? 'active' : ''}>
-                    <Link to="" onClick={() => changeStep('ClaimUserName')}>
-                      Join K4M2A
+                  <li className={AboutUs || UserSignUp || ResendEmail ? 'active' : ''}>
+                    <Link to="" onClick={() => changeStep('UserSignUp')}>
+                      Sign Up
                     </Link>
                   </li>
-
                 </ul>
               </div>
               {AboutUs && (
-                <AboutUsComponent changeStep={() => changeStep('ClaimUserName')} />
-              )}
-              {GetInvolved && (
-                <GetInvolvedComponent changeStep={() => changeStep('ClaimUserName')} />
+                <AboutUsComponent changeStep={() => changeStep('UserSignUp')} />
               )}
               {AvailableFosters && (
                 <Fosters />
               )}
-              {ClaimUserName && (
-                <ClaimUserNameComponent changeStepToQuestion={(step, username) => changeStepToQuestion(step, username)} />
-              )}
-              {Question && (
-                <Quiz changeStep={(step) => changeStep(step)} getUserAnswers={(answers) => setuserAnswers(answers)} />
-              )}
               {UserSignUp && !authdata?.success && (
                 <div className="signUpcntBoxmain answerbox ">
                   <div className="signUpcntBox">
-                    <div className='logousername'>
-                      <img src={require("../../../../static/images/img_circleK.png")} alt="" />
-                      <h2>k4m2a.com/{username}</h2> <span className='infonote'>Complete form to claim</span>
-                    </div>
-                    {/* <h4> Step 5/5</h4> */}
                     <h3>SignUp!</h3>
                     <div className="loginformarea signupform ">
                       <div className="container">
@@ -282,15 +233,6 @@ function SignUp() {
                                     <div className="formbox">
                                     {!(GoogleData?.password?.length > 5) &&
                                         <>
-                                      <Form.Item style={{ display: 'none' }} name="fusername">
-                                        <Input
-                                          type="text"
-                                          name="fusername"
-                                          defaultValue={username}
-                                          disabled
-                                          style={{ display: 'none' }}
-                                        />
-                                      </Form.Item>
                                       <Form.Item
                                         label=""
                                         name="firstname"
@@ -349,6 +291,23 @@ function SignUp() {
                                               placeholder="Password"
                                             />
                                           </Form.Item></>}
+                                        
+                                          <Form.Item
+                                        label=""
+                                        name="loginType"
+                                        rules={[{ required: true, message: 'Select Appropriate Login Type' }]}
+                                      >
+                                        <Radio.Group name="loginType" onChange={handleUserInfoChange} value={userinfo.loginType}>
+                                          {loginTypeArray.map((item) => (
+                                          <div key={item.id}>
+                                              <Radio value={item.id} />
+                                              <div>
+                                                <p className="title">{item.title}</p>
+                                              </div>
+                                            </div>
+                                          ))}
+                                        </Radio.Group>
+                                     </Form.Item>
                                       <div className="auth-form-action">
                                         <Checkbox onChange={onChange} checked={state.checked}>
                                           Creating an account means you’re okay with our Terms of Service and Privacy
@@ -378,7 +337,7 @@ function SignUp() {
                                       </Button>
                                     )}
                                   </Form>
-                                  <Button onClick={() => changeStep('Question')} className="btnback blockbtn">
+                                  <Button onClick={() => console.log("SIGN UP REQUESTED")} className="btnback blockbtn">
                                     Back
                                   </Button>
                                 </div>
@@ -416,7 +375,7 @@ function SignUp() {
                         <img src={require('../../../../static/images/imgverify.jpg')} alt="" />
                       </div>
                       <p>
-                        An email has been sent to {verifyinfo.email} with a link to verify your account. If you
+                        An email has been sent to {userinfo.email} with a link to verify your account. If you
                         have not received the email after a few minutes, please check your spam folder
                       </p>
                       <div className="twobuttonsbox">
