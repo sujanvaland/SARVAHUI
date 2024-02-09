@@ -14,7 +14,6 @@ import { Main } from '../../../styled';
 import { auth0options } from '../../../../config/auth0';
 import SigninComponent from '../google/Signin';
 import FacebookLoginComponent from '../facebook';
-import LinkedInLoginComponent from '../linkedin';
 
 const domain = process.env.REACT_APP_AUTH0_DOMAIN;
 const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
@@ -138,39 +137,19 @@ function SignIn(props) {
                       <div className="socialloginbox">
                         <ul className="social-login">
                           <li>
-                            {/* <Link className="google-signup" to="#">
-                                      <img src={require('../../../../static/img/google.png')} alt="" />
-                                      <span>Sign in with Google</span>
-                                    </Link> */}
                             <SigninComponent HanldeGoogleData={(data) => HanldeGoogleData(data)} gclicnet/>
                           </li>
-
                           <li>
                             <FacebookLoginComponent HanldeGoogleData={(data) => HanldeGoogleData(data)}/>
                           </li>
-
-                          <li>
-                            <LinkedInLoginComponent />
-                          </li>
-
                           <li>
                             <p className="auth-notice">
                               Don&rsquo;t have an account?{' '}
                               <NavLink to="/" onClick={goStep1} className="btn btnsignup">
-                                Get Involved
+                                Signup Now
                               </NavLink>
                             </p>
                           </li>
-                          {/* <li>
-                                    <Link className="facebook-sign" to="#">
-                                      <FacebookOutlined />
-                                    </Link>
-                                  </li>
-                                  <li>
-                                    <Link className="twitter-sign" to="#">
-                                      <TwitterOutlined />
-                                    </Link>
-                                  </li> */}
                         </ul>
                       </div>
                     </div>

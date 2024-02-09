@@ -8,8 +8,8 @@ import SignIn from './SignIn';
 import ForgotPassword from './ForgotPassword';
 import Terms from './components/termsmodal';
 import AboutUsComponent from './components/aboutus';
-
 import Fosters from './components/fosters';
+import GetInvolvedComponent from './components/getInvolved';
 import { Main } from '../../../styled';
 // import { Modal } from '../../../../components/modals/antd-modals';
 import { preregister, sendVerificiationEmail } from '../../../../redux/authentication/actionCreator';
@@ -212,6 +212,9 @@ function SignUp() {
                   </li>
                 </ul>
               </div>
+              {GetInvolved && (
+                <GetInvolvedComponent changeStep={() => changeStep('UserSignUp')} />
+              )}
               {AboutUs && (
                 <AboutUsComponent changeStep={() => changeStep('UserSignUp')} />
               )}
@@ -353,7 +356,7 @@ function SignUp() {
               {SignInStep && (
                 <div className="signUpcntBoxmain">
                   <div className="signUpcntBox">
-                    <SignIn goStep1={() => changeStep('AboutUs')} forgotPassword={() => changeStep('forgotPassword')}
+                    <SignIn goStep1={() => changeStep('UserSignUp')} forgotPassword={() => changeStep('forgotPassword')}
                       setGoogleData={(data) => setGoogleData(data)}  />
                   </div>
                 </div>

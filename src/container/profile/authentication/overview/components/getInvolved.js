@@ -9,26 +9,28 @@ function GetInvolvedComponent(props){
     return (
         <div className="signUpcntBoxmain scrollMain">
             <div className="signUpcntBox">
-                <h4>World’s First</h4>
-            <h3>Spiritual Network</h3>
+                <h4>SARVA World’s First</h4>
+            <h3>Dedicated Job Portal for CAD Industry</h3>
             <p>
-            for seekers, believers, mystics, and agnostics with verified spiritual profiles—a space for cosmic discoveries and conversations about the wonders of science and spirituality.
+            For Recruiters and Job Seekers, Are you ready to take the next step in your CAD career? Look no further than Your CAD Job Portal. 
+            We are your premier destination for finding exciting job opportunities in the CAD industry that align with your skills, 
+            passions, and ambitions.
             </p>
             <div className='deviceimg'>
                 <img src={require('../../../../../static/images/img_tab.jpg')} alt=""/>
              </div>
              <div className='dewllmode'>
                 <img src={require('../../../../../static/images/img_dwell.png')} alt=""/>
-                    <h4>Spiritual Immersion </h4>
-                    <h3>Dwell Mode</h3>
-                    <p>Dive deep into a chosen spiritual topic for a week. Immerse, absorb, and enhance your connection to the chosen theme in a focused exploration of your spiritual journey.</p>
+                    <h4>Search For Latest Jobs </h4>
+                    <h3>Job Seekers</h3>
+                    <p>Ready to elevate your CAD career to new heights? Your CAD Job Portal is your go-to destination for finding the perfect opportunities tailored to your CAD expertise. Whether you&apos;re a <span className="highlight">CAD designer</span>, <span className="highlight">draftsperson</span>, or <span className="highlight">engineer</span>, we&apos;ve got you covered.</p>
              </div>
              
              <div className='dewllmode'>
                 <img src={require('../../../../../static/images/img_spiritualprofile.png')} alt=""/>
-                    <h4>Verified and Detailed </h4>
-                    <h3>Spiritual Profile</h3>
-                    <p>Craft your unique spiritual profile on our platform. Share your beliefs, practices, and reflections with a community of like-minded spiritual seekers.</p>
+                    <h4>Post Your Jobs</h4>
+                    <h3>Compaines</h3>
+                    <p>Are you searching for top <span className="highlight">CAD talent</span> to join your team? Look no further than Your CAD Job Portal. We offer a streamlined platform designed to connect you with skilled CAD professionals who are ready to make an impact.</p>
              </div>
             <Link to="" className="btnLearnmore" onClick={() => changeStep('AboutUs')}>
                 Claim Username
