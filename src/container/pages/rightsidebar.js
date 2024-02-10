@@ -156,7 +156,7 @@ function RightSideBarComponent(){
             <Link to='/cookie'>Cookie Policy</Link>
             <Link to='/access'>Accessibility</Link>
             <Link to='/ads'>Ads info</Link>
-            <p>&copy; 2023 • K4M2A • v0.1</p>
+            <p>&copy; 2023 • SARVAH • v0.1</p>
           </div>
         </div>
       </div>
