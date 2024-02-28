@@ -1,5 +1,6 @@
 import Styled from 'styled-components';
 
+const LinkDiv = Styled.div``;
 const PricingCard = Styled.div`
   background: #fff;
   border-radius: 10px;
@@ -2231,11 +2232,10 @@ const SupportContentWrap = Styled.div`
 const brdrcolor = '#d4d4d4';
 const whitecolor = '#ffffff';
 const lightDark = '#333333';
-const lightgreen='#00aa45';
-const gray7= '#545454';
-const black='#000000';
+const lightgreen = '#00aa45';
+const gray7 = '#545454';
+const black = '#000000';
 const gray6 = '#f6f8fa';
-
 
 const UserinfoBox = Styled.div`
 position:relative; width: 100%; background: ${whitecolor};z-index: 9;
@@ -2375,7 +2375,6 @@ const Modalcntbox = Styled.div`
     }
   }
 `;
-
 
 const NamelistBox = Styled.div` 
   border:1px solid ${brdrcolor}; padding:5px; text-align:left; border-radius:5px;   
@@ -3295,8 +3294,11 @@ const SettingsBox = Styled.div`{
 }`;
 
 export {
-  PolpostBox,Communitiesb,DiscoverCommunities,
-  MainTabs,SettingsBox,
+  PolpostBox,
+  Communitiesb,
+  DiscoverCommunities,
+  MainTabs,
+  SettingsBox,
   TestimonialWrapper,
   PricingCard,
   ListGroup,
@@ -3321,7 +3323,20 @@ export {
   UserCarrdTop,
   SupportTopWrap,
   SupportContentWrap,
-  UserinfoBox,Modalcntbox,
-  NamelistBox,Notebox,PostBox,Namedetails,CommentSharebox,UserpostinfoBox,
-  DropdownBox,FormBox,SearchBox,MessageMainBox,ActiveUser,ChatMainBox,MessageMainBoxInner
+  UserinfoBox,
+  Modalcntbox,
+  NamelistBox,
+  Notebox,
+  PostBox,
+  Namedetails,
+  CommentSharebox,
+  UserpostinfoBox,
+  DropdownBox,
+  FormBox,
+  SearchBox,
+  MessageMainBox,
+  ActiveUser,
+  ChatMainBox,
+  MessageMainBoxInner,
+  LinkDiv,
 };

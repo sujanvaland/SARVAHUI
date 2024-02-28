@@ -14,6 +14,7 @@ import MemberRequest from '../../container/pages/communities/admintools/memberre
 import Members from '../../container/pages/communities/admintools/members';
 import Rules from '../../container/pages/communities/admintools/rules';
 import Settings from '../../container/pages/communities/admintools/settings';
+import PostJob from '../../container/pages/PostJob';
 import Communities from '../../container/pages/communities/communities';
 import SpotlightYourCommunity from '../../container/pages/communities/admintools/spotlightYourCommunity';
 import SupportAndResources from '../../container/pages/communities/admintools/supportAndResources';
@@ -48,6 +49,7 @@ function Admin() {
         <Route path={`${path}profile/:userName?`} component={UserProfile} />
         <Route path={`${path}editProfile`} component={EditProfile} />
         <Route path={`${path}setting`} component={Setting} />
+        <Route path={`${path}postjob`} component={PostJob} />
         <Route path={`${path}people`} component={People} />
         <Route path={`${path}explore`} component={Explore} />
         <Route path={`${path}event`} component={Event} />

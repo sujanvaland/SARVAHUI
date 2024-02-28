@@ -633,7 +633,7 @@ h5{font-family: $fntMonoMedium; font-size: 14px; color:$black;}
                 height: 70px;
             }
             img{
-                max-width:125px; 
+                max-width:65px; 
                 @include mini-desktop{
                     max-width: 100%;
                 } 
@@ -3209,5 +3209,5 @@ p{font-family:$fntInter;
     }
 }
 
- 
+ .widht100{width:100%; display:block;}
 

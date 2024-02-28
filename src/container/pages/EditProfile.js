@@ -3,10 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, Col, DatePicker, Form, Input, Row, Select, Spin } from 'antd';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
-import RightSideBarComponent from './rightsidebar';
 import { getUserProfile, updateUserProfile } from '../../redux/UserProfile/actionCreator';
 import { FileUploading } from '../../redux/UploadFile/actionCreator';
-import { extractFacebookURLs, extractLinkedinURLs } from '../../utility/validationHelper';
+import { extractLinkedinURLs } from '../../utility/validationHelper';
 
 function EditProfile() {
   const dispatch = useDispatch();
@@ -16,7 +15,7 @@ function EditProfile() {
     return {
       data: state.userProfile.getProfile,
       isLoader: state.userProfile.loading,
-      profileUrl:  state.uploadFile.profileImgUrl ,
+      profileUrl: state.uploadFile.profileImgUrl,
       backgroundUrl: state.uploadFile.backgroundImgUrl,
       username: state.auth.userprofile?.userName,
     };
@@ -27,23 +26,50 @@ function EditProfile() {
   }, [username]);
 
   const handleBinaryChange = async (e, imgType) => {
-    await dispatch(FileUploading(e.target.files[0], 'images/profile/',imgType));
+    await dispatch(FileUploading(e.target.files[0], 'images/profile/', imgType));
   };
 
   const [ProfileData, setProfileData] = useState({
-    about: data?.about || '',
+    firstName: data?.firstName || '',
+    lastName: data?.lastName || '',
     dob: data?.dob,
     gender: data?.gender || '',
-    location: data?.location || '',
-    profession: data?.profession || '',
-    organization: data?.organization || '',
-    title: data?.title || '',
-    facebookLink: data?.facebookLink || '',
+    address: data?.address || '',
+    address2: data?.address2 || '',
+    city: data?.city || '',
+    state: data?.state || '',
+    country: data?.country || '',
+    zipCode: data?.zipCode || '',
+    phoneNumber: data?.phoneNumber || '',
+    email: data?.email || '',
+    resume: data?.resume || '',
     linkedinLink: data?.linkedinLink || '',
     skills: data?.skills ? JSON.parse(data?.skills) : [],
     profileImg: data?.profileImg || '',
     backgroundImg: data?.backgroundImg || '',
     tags: data?.tags ? JSON.parse(data?.tags) : [],
+    education: data?.education
+      ? data?.education
+      : [
+          {
+            schoolName: '',
+            board: '',
+            collageName: '',
+            university: '',
+          },
+        ],
+    experience: data?.experience
+      ? data?.experience
+      : [
+          {
+            companyNameName: '',
+            designation: '',
+            doj: '',
+            dol: '',
+            responsibilities: '',
+          },
+        ],
+    certiNames: data?.certiNames || '',
   });
   const [validationErrorMSG, setvalidationErrorMSG] = useState({
     facebookError: '',
@@ -52,19 +78,45 @@ function EditProfile() {
 
   useEffect(() => {
     setProfileData({
-      about: data?.about || '',
+      firstName: data?.firstName || '',
+      lastName: data?.lastName || '',
       dob: data?.dob,
       gender: data?.gender || '',
-      location: data?.location || '',
-      profession: data?.profession || '',
-      organization: data?.organization || '',
-      title: data?.title || '',
-      facebookLink: data?.facebookLink || '',
+      address: data?.address || '',
+      address2: data?.address2 || '',
+      city: data?.city || '',
+      country: data?.country || '',
+      zipCode: data?.zipCode || '',
+      phoneNumber: data?.phoneNumber || '',
+      email: data?.email || '',
+      resume: data?.resume || '',
       linkedinLink: data?.linkedinLink || '',
       skills: data?.skills ? JSON.parse(data?.skills) : [],
       profileImg: data?.profileImg || '',
       backgroundImg: data?.backgroundImg || '',
       tags: data?.tags ? JSON.parse(data?.tags) : [],
+      education: data?.education
+        ? data?.education
+        : [
+            {
+              schoolName: '',
+              board: '',
+              collageName: '',
+              university: '',
+            },
+          ],
+      experience: data?.experience
+        ? data?.experience
+        : [
+            {
+              companyNameName: '',
+              designation: '',
+              doj: '',
+              dol: '',
+              responsibilities: '',
+            },
+          ],
+      certiNames: data?.certiNames || '',
     });
   }, [data]);
 
@@ -115,25 +167,7 @@ function EditProfile() {
   };
 
   const handleValidation = (platform, link) => {
-    if (platform === 'Facebook') {
-      if (extractFacebookURLs(link)) {
-        setvalidationErrorMSG({
-          ...validationErrorMSG,
-          facebookError: '',
-        });
-        console.log('Facebook link is valid:', link);
-      } else {
-        setProfileData({
-          ...ProfileData,
-          facebookLink: '',
-        });
-        setvalidationErrorMSG({
-          ...validationErrorMSG,
-          facebookError: 'Facebook link is Invalid',
-        });
-        console.log('Facebook link is Invalid:', link);
-      }
-    } else if (platform === 'LinkedIn') {
+    if (platform === 'LinkedIn') {
       if (extractLinkedinURLs(link)) {
         setvalidationErrorMSG({
           ...validationErrorMSG,
@@ -165,6 +199,30 @@ function EditProfile() {
     setProfileData({
       ...ProfileData,
       tags: selected,
+    });
+  };
+
+  const handleAddExp = () => {
+    const exp = ProfileData.experience;
+    exp.push({
+      companyNameName: '',
+      designation: '',
+      doj: '',
+      dol: '',
+      responsibilities: '',
+    });
+    setProfileData({
+      ...ProfileData,
+      experience: exp,
+    });
+  };
+
+  const handleRemoveExp = (index) => {
+    const exp = ProfileData.experience;
+    exp.splice(index, 1);
+    setProfileData({
+      ...ProfileData,
+      experience: exp,
     });
   };
 
@@ -215,8 +273,7 @@ function EditProfile() {
                   <div className="personaldetails editprofile">
                     <div className="profilePicBox">
                       {ProfileData?.profileImg && <img src={ProfileData?.profileImg} alt="" />}
-                      {
-                        !ProfileData?.profileImg &&
+                      {!ProfileData?.profileImg && (
                         <div className="uploadProfilePic">
                           <img src={require('../../static/images/icon_addphoto.png')} alt="" />
                           <Input
@@ -226,22 +283,44 @@ function EditProfile() {
                             onChange={(e) => handleBinaryChange(e, 'profile')}
                           />
                         </div>
-                      }
-                      
+                      )}
                     </div>
                     <div className="editprofileForm">
                       <Form name="UpdateProfile" form={form} onFinish={handleSubmit} layout="vertical">
+                        <h2>Basic Details</h2>
                         <Row gutter={25}>
                           <Col lg={24} sm={24}>
-                            <Form.Item label="About">
-                              <Input name="about" value={ProfileData?.about} onChange={handleChange} maxLength={1000} />
+                            <Form.Item
+                              label="First Name"
+                              // name="firstName"
+                              rules={[{ required: true, message: 'First Name is mandatory field' }]}
+                            >
+                              <Input
+                                name="firstName"
+                                value={ProfileData?.firstName}
+                                onChange={handleChange}
+                                maxLength={100}
+                              />
+                            </Form.Item>
+                            <Form.Item
+                              label="Last Name"
+                              // name="lastName"
+                              rules={[{ required: true, message: 'Last Name is mandatory field' }]}
+                            >
+                              <Input
+                                name="lastName"
+                                value={ProfileData?.lastName}
+                                onChange={handleChange}
+                                maxLength={100}
+                              />
                             </Form.Item>
                           </Col>
                           <Col lg={12} sm={12}>
-                            {/* <Form.Item label="DOB">
-                      <Input name="dob" value={ProfileData.dob} onChange={handleChange} />
-                    </Form.Item> */}
-                            <Form.Item label="Date Of Birth">
+                            <Form.Item
+                              label="Date Of Birth"
+                              // name="dob"
+                              rules={[{ required: true, message: 'Date Of Birth is mandatory field' }]}
+                            >
                               <DatePicker
                                 onChange={handleDate}
                                 style={{ width: '100%' }}
@@ -252,7 +331,11 @@ function EditProfile() {
                             </Form.Item>
                           </Col>
                           <Col lg={12} sm={12}>
-                            <Form.Item label="Gender">
+                            <Form.Item
+                              label="Gender"
+                              // name="gender"
+                              rules={[{ required: true, message: 'Gender is mandatory field' }]}
+                            >
                               <Select onChange={handleSelectedGender} value={ProfileData?.gender}>
                                 <Option value=""> Select Gender</Option>
                                 <Option value="male">Male </Option>
@@ -263,58 +346,78 @@ function EditProfile() {
                         </Row>
                         <Row gutter={25}>
                           <Col lg={24} sm={24}>
-                            <Form.Item label="Location">
+                            <Form.Item label="Address Line 1">
                               <Input
-                                name="location"
-                                value={ProfileData?.location}
+                                name="address"
+                                value={ProfileData?.address}
                                 onChange={handleChange}
-                                maxLength={1000}
+                                maxLength={200}
                               />
                             </Form.Item>
                           </Col>
                           <Col lg={24} sm={24}>
-                            <Form.Item label="Profession">
+                            <Form.Item label="Address Line 2">
                               <Input
-                                name="profession"
-                                value={ProfileData?.profession}
+                                name="address2"
+                                value={ProfileData?.address2}
                                 onChange={handleChange}
-                                maxLength={1000}
+                                maxLength={200}
                               />
                             </Form.Item>
                           </Col>
                         </Row>
                         <Row gutter={25}>
                           <Col lg={24} sm={24}>
-                            <Form.Item label="Organization">
+                            <Form.Item label="City">
+                              <Input name="city" value={ProfileData?.city} onChange={handleChange} maxLength={1000} />
+                            </Form.Item>
+                          </Col>
+                          <Col lg={24} sm={24}>
+                            <Form.Item label="State">
+                              <Input name="state" value={ProfileData?.state} onChange={handleChange} />
+                            </Form.Item>
+                          </Col>
+                          <Col lg={24} sm={24}>
+                            <Form.Item label="Country">
+                              <Input name="country" value={ProfileData?.country} onChange={handleChange} />
+                            </Form.Item>
+                          </Col>
+                          <Col lg={24} sm={24}>
+                            <Form.Item label="Zip Code">
                               <Input
-                                name="organization"
-                                value={ProfileData?.organization}
+                                type="number"
+                                name="zipCode"
+                                value={ProfileData?.zipCode}
                                 onChange={handleChange}
-                                maxLength={1000}
                               />
                             </Form.Item>
                           </Col>
                           <Col lg={24} sm={24}>
-                            <Form.Item label="Title">
-                              <Input name="title" value={ProfileData?.title} onChange={handleChange} />
+                            <Form.Item label="Phone Number">
+                              <Input
+                                type="number"
+                                name="phoneNumber"
+                                value={ProfileData?.phoneNumber}
+                                onChange={handleChange}
+                              />
                             </Form.Item>
                           </Col>
-                        </Row>
-                        <Row gutter={25}>
                           <Col lg={24} sm={24}>
                             <Form.Item
-                              label="Facebook Link"
-                              validateStatus={validationErrorMSG.facebookError ? 'error' : ''}
-                              help={validationErrorMSG.facebookError}
+                              label="Email"
+                              // name="email"
+                              rules={[{ required: true, message: 'Email is mandatory field' }]}
                             >
-                              <Input
-                                name="facebookLink"
-                                value={ProfileData?.facebookLink}
-                                onBlur={() => handleValidation('Facebook', ProfileData?.facebookLink)}
-                                onChange={handleChange}
-                              />
+                              <Input type="email" name="email" value={ProfileData?.email} onChange={handleChange} />
                             </Form.Item>
                           </Col>
+                          <Col lg={24} sm={24}>
+                            <Form.Item label="Resume">
+                              <Input type="file" name="resume" value={ProfileData?.resume} onChange={handleChange} />
+                            </Form.Item>
+                          </Col>
+                        </Row>
+                        <Row gutter={25}>
                           <Col lg={24} sm={24}>
                             <Form.Item
                               label="Linkedin Link"
@@ -351,7 +454,6 @@ function EditProfile() {
                             </Form.Item>
                           </Col>
                         </Row>
-
                         <Row gutter={25}>
                           <Col lg={24} sm={24}>
                             <Form.Item label="Tags ">
@@ -378,7 +480,119 @@ function EditProfile() {
                             </Form.Item>
                           </Col>
                         </Row>
-
+                        <h2>Education</h2>
+                        <Form.Item
+                          label="School Name"
+                          // name="schoolName"
+                          rules={[{ required: true, message: 'School Name is mandatory field' }]}
+                        >
+                          <Input
+                            name="schoolName"
+                            value={ProfileData?.education.schoolName}
+                            onChange={handleChange}
+                            maxLength={100}
+                          />
+                        </Form.Item>
+                        <Form.Item
+                          label="Board"
+                          // name="board"
+                          rules={[{ required: true, message: 'Board is mandatory field' }]}
+                        >
+                          <Input
+                            name="board"
+                            value={ProfileData?.education.board}
+                            onChange={handleChange}
+                            maxLength={100}
+                          />
+                        </Form.Item>
+                        <Form.Item label="Collage Name">
+                          <Input
+                            name="collageName"
+                            value={ProfileData?.education.collageName}
+                            onChange={handleChange}
+                            maxLength={100}
+                          />
+                        </Form.Item>
+                        <Form.Item label="University">
+                          <Input
+                            name="university"
+                            value={ProfileData?.education.university}
+                            onChange={handleChange}
+                            maxLength={100}
+                          />
+                        </Form.Item>
+                        <h2>Experience</h2>
+                        {ProfileData.experience?.map((experience, index) => {
+                          return (
+                            <>
+                              <Form.Item label={`Experience ${index + 1}`}>
+                                {ProfileData?.experience?.length > 1 && (
+                                  <Link to="#" type="button" size="large" onClick={() => handleRemoveExp(index)}>
+                                    Remove Experience
+                                  </Link>
+                                )}
+                                <Form.Item label="Company Name">
+                                  <Input
+                                    name="companyName"
+                                    value={experience.companyName}
+                                    onChange={handleChange}
+                                    maxLength={100}
+                                  />
+                                </Form.Item>
+                                <Form.Item label="Designation">
+                                  <Input
+                                    name="designation"
+                                    value={experience.designation}
+                                    onChange={handleChange}
+                                    maxLength={100}
+                                  />
+                                </Form.Item>
+                                <Form.Item label="Joining Date">
+                                  <DatePicker
+                                    onChange={handleDate}
+                                    style={{ width: '100%' }}
+                                    defaultValue={experience.doj ? moment(`${experience.doj}`, dateFormat) : null}
+                                    format={dateFormat}
+                                    disabledDate={disabledDate}
+                                  />
+                                </Form.Item>
+                                <Form.Item label="Date of Leaving">
+                                  <DatePicker
+                                    onChange={handleDate}
+                                    style={{ width: '100%' }}
+                                    defaultValue={experience.dol ? moment(`${experience.dol}`, dateFormat) : null}
+                                    format={dateFormat}
+                                    disabledDate={disabledDate}
+                                  />
+                                </Form.Item>
+                                <Form.Item label="Responsibilities">
+                                  <Input
+                                    name="responsibilities"
+                                    value={experience.responsibilities}
+                                    onChange={handleChange}
+                                    maxLength={1000}
+                                  />
+                                </Form.Item>
+                              </Form.Item>
+                            </>
+                          );
+                        })}
+                        <Link to="#" type="button" size="large" onClick={handleAddExp}>
+                          Add Experience
+                        </Link>{' '}
+                        <h2>Certification</h2>
+                        <Form.Item
+                          label="Certificates"
+                          // name="certiName"
+                          rules={[{ required: true, message: 'Certificates is mandatory field' }]}
+                        >
+                          <Input
+                            name="certiName"
+                            value={ProfileData?.experience.certiName}
+                            onChange={handleChange}
+                            maxLength={100}
+                          />
+                        </Form.Item>
                         <Row gutter={25}>
                           <Col lg={24} sm={24}>
                             <Form.Item className="btnboxmain">
@@ -399,9 +613,6 @@ function EditProfile() {
                 </div>
               </div>
             </div>
-
-            <RightSideBarComponent />
-
           </div>
         </>
       )}

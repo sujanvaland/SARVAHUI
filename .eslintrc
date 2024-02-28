@@ -21,6 +21,7 @@
   },
   "plugins": ["react", "import", "react-hooks"],
   "rules": {
+    "react/prop-types": "off",
     "prettier/prettier": 0,
     "import/no-named-as-default-member": 0,
     "import/order": [2, { "groups": ["external", "index", "sibling", "parent", "internal", "builtin"] }],

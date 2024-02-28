@@ -1,0 +1,115 @@
+[
+  {
+    "id": 1,
+    "jobTitle": "Software Engineer",
+    "companyName": "Tech Solutions Inc.",
+    "jobDescription": "Develop and maintain software applications.",
+    "requiredQualification": "Bachelor's degree in Computer Science or related field.",
+    "numberOfVacancies": 3,
+    "applicationDeadline": "2024-02-15",
+    "skillsRequired": ["JavaScript", "React", "Node.js"],
+    "postedBy": "Sujan",
+    "applicationReceived": 99,
+    "salary": "1,50,000"
+  },
+  {
+    "id": 2,
+    "jobTitle": "Marketing Specialist",
+    "companyName": "Global Marketing Agency",
+    "jobDescription": "Plan and execute marketing campaigns.",
+    "requiredQualification": "Bachelor's degree in Marketing or equivalent.",
+    "numberOfVacancies": 2,
+    "applicationDeadline": "2024-02-16",
+    "skillsRequired": ["Digital Marketing", "Social Media Management"],
+    "postedBy": "SK",
+    "applicationReceived": 10,
+    "salary": "1,00,000"
+  },
+  {
+    "id": 3,
+    "jobTitle": "Data Analyst",
+    "companyName": "Data Insights Corp.",
+    "jobDescription": "Analyze and interpret complex data sets.",
+    "requiredQualification": "Bachelor's degree in Statistics or related field.",
+    "numberOfVacancies": 5,
+    "applicationDeadline": "2024-02-17",
+    "skillsRequired": ["SQL", "Excel", "Data Visualization"],
+    "postedBy": "SK",
+    "applicationReceived": 100,
+    "salary": "Negotiable"
+
+  },
+  {
+    "id": 4,
+    "jobTitle": "Graphic Designer",
+    "companyName": "Creative Designs Studio",
+    "jobDescription": "Create visually appealing designs for various platforms.",
+    "requiredQualification": "Bachelor's degree in Graphic Design or equivalent.",
+    "numberOfVacancies": 1,
+    "applicationDeadline": "2024-02-18",
+    "skillsRequired": ["Adobe Photoshop", "Illustrator", "UI/UX Design"]
+  },
+  {
+    "id": 5,
+    "jobTitle": "Financial Analyst",
+    "companyName": "Finance Solutions Ltd.",
+    "jobDescription": "Conduct financial analysis and prepare reports.",
+    "requiredQualification": "Bachelor's degree in Finance or related field.",
+    "numberOfVacancies": 4,
+    "applicationDeadline": "2024-02-19",
+    "skillsRequired": ["Financial Modeling", "Excel", "Accounting"]
+  },
+  {
+    "id": 6,
+    "jobTitle": "Customer Support Representative",
+    "companyName": "Supportive Services Inc.",
+    "jobDescription": "Assist customers with product inquiries and issues.",
+    "requiredQualification": "High school diploma or equivalent.",
+    "numberOfVacancies": 2,
+    "applicationDeadline": "2024-02-20",
+    "skillsRequired": ["Customer Service", "Communication", "Problem Solving"]
+  },
+  {
+    "id": 7,
+    "jobTitle": "Network Administrator",
+    "companyName": "Network Solutions Tech",
+    "jobDescription": "Manage and maintain computer networks.",
+    "requiredQualification": "Bachelor's degree in IT or related field.",
+    "numberOfVacancies": 3,
+    "applicationDeadline": "2024-02-21",
+    "skillsRequired": ["Network Security", "Cisco", "Troubleshooting"],
+    "postedBy": "Kamal"
+  },
+  {
+    "id": 8,
+    "jobTitle": "Human Resources Coordinator",
+    "companyName": "HR Dynamics Ltd.",
+    "jobDescription": "Coordinate HR activities and assist with recruitment.",
+    "requiredQualification": "Bachelor's degree in Human Resources or related field.",
+    "numberOfVacancies": 2,
+    "applicationDeadline": "2024-02-22",
+    "skillsRequired": ["Recruitment", "Employee Relations", "HRIS"],
+    "postedBy": "Sujan"
+  },
+  {
+    "id": 9,
+    "jobTitle": "Sales Representative",
+    "companyName": "Sales Excellence Co.",
+    "jobDescription": "Promote and sell products to customers.",
+    "requiredQualification": "High school diploma or equivalent.",
+    "numberOfVacancies": 3,
+    "applicationDeadline": "2024-02-23",
+    "skillsRequired": ["Sales", "Negotiation", "Customer Relationship"],
+    "postedBy": "Vasu"
+  },
+  {
+    "id": 10,
+    "jobTitle": "IT Support Specialist",
+    "companyName": "Tech Support Solutions",
+    "jobDescription": "Provide technical support to end-users.",
+    "requiredQualification": "Associate degree in IT or related field.",
+    "numberOfVacancies": 4,
+    "applicationDeadline": "2024-02-24",
+    "skillsRequired": ["Help Desk", "Troubleshooting", "Windows/Linux"]
+  }
+]
