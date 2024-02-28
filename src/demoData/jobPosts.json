@@ -10,7 +10,7 @@
     "skillsRequired": ["JavaScript", "React", "Node.js"],
     "postedBy": "Sujan",
     "applicationReceived": 99,
-    "salary": "1,50,000"
+    "salary": "100000"
   },
   {
     "id": 2,
@@ -23,7 +23,7 @@
     "skillsRequired": ["Digital Marketing", "Social Media Management"],
     "postedBy": "SK",
     "applicationReceived": 10,
-    "salary": "1,00,000"
+    "salary": "200000"
   },
   {
     "id": 3,
