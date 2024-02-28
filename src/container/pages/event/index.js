@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Modal, Button, Dropdown, Menu } from 'antd';
+import { Modal, Button, Dropdown, Menu, Input, Form, Select } from 'antd';
 import { DownOutlined, UploadOutlined } from '@ant-design/icons';
 import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import EventDetailsComponent from './eventDetails';
@@ -9,6 +9,8 @@ import { getAllJobs } from '../../../redux/postJob/actionCreator';
 
 function EventTimeline() {
   const dispatch = useDispatch();
+
+  const { Option } = Select;
 
   useEffect(() => {
     dispatch(getAllJobs());
@@ -23,6 +25,16 @@ function EventTimeline() {
   const history = useHistory();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [type, setType] = useState('comingEvent');
+  const [filter, setFilter] = useState({
+    searchText: '',
+    skills: [],
+    minSalary: 0,
+    maxSalary: 0,
+  });
+
+  useEffect(() => {
+    dispatch(getAllJobs(filter));
+  }, [filter]);
 
   const settingBox = () => {
     setIsModalOpen(true);
@@ -37,21 +49,66 @@ function EventTimeline() {
   const showTimeLine = (currenttype) => {
     setType(currenttype);
   };
-  const handleMenuClick = (e) => {
+  const handleSalaryFilter = (e) => {
     // Accessing e.item.props.type, but e.item.props may be undefined
     console.log(e.item.props.type);
+    const minSalary = e.item.props.type.split('-')[0];
+    const maxSalary = e.item.props.type.split('-')[1];
+    setFilter({
+      ...filter,
+      minSalary,
+      maxSalary,
+    });
   };
 
-  const menu = (
-    <Menu onClick={handleMenuClick}>
-      <Menu.Item key="1" type="optionType1">
-        Option 1
+  const handlePostedOnFilter = (e) => {
+    // Accessing e.item.props.type, but e.item.props may be undefined
+    console.log(e.item.props.type);
+    const selectedDateRange = e.item.props.type;
+    setFilter({
+      ...filter,
+      selectedDateRange,
+    });
+  };
+
+  const handleJobSearch = () => {
+    console.log('Search the job');
+  };
+
+  const handleSelectedSkills = (selected) => {
+    setFilter({
+      ...filter,
+      skills: selected,
+    });
+  };
+
+  const salaryMenu = (
+    <Menu onClick={handleSalaryFilter}>
+      <Menu.Item key="1" type="100000-300000">
+        1lac - 3lac
       </Menu.Item>
-      <Menu.Item key="2" type="optionType2">
-        Option 2
+      <Menu.Item key="2" type="300000-600000">
+        3lac - 6lac
       </Menu.Item>
-      <Menu.Item key="3" type="optionType3">
-        Option 3
+      <Menu.Item key="3" type="600000-1000000">
+        6lac - 10lac
+      </Menu.Item>
+    </Menu>
+  );
+
+  // const start = startOfWeek(date);
+  // const end = endOfWeek(date);
+
+  const postedOnMenu = (
+    <Menu onClick={handlePostedOnFilter}>
+      <Menu.Item key="1" type="1">
+        Today
+      </Menu.Item>
+      <Menu.Item key="2" type="2">
+        This Week
+      </Menu.Item>
+      <Menu.Item key="3" type="3">
+        This Month
       </Menu.Item>
     </Menu>
   );
@@ -65,6 +122,7 @@ function EventTimeline() {
     SetJobData(item);
   };
 
+  console.log(filter);
   return (
     <>
       <div className="cntpagecomponent">
@@ -95,25 +153,35 @@ function EventTimeline() {
           <div className="wdth100 mdt-50" ref={scrollRef}>
             <DiscoverCommunities className="communitiesBoxDetails eventDetails">
               <div className="eventSearch">
+                <Input name="Search" maxLength={1000} placeholder="Search Jobs" onChange={handleJobSearch} />
                 <ul>
                   <li>
-                    <Dropdown overlay={menu} trigger={['click']}>
+                    <Form.Item label="Skills">
+                      <Select
+                        mode="tags"
+                        showSearch
+                        filterOption={(input, option) =>
+                          option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                        }
+                        onChange={handleSelectedSkills}
+                      >
+                        <Option value="AutoCad"> AutoCad</Option>
+                        <Option value="Maya">Maya </Option>
+                        <Option value="Houdini"> Houdini</Option>
+                      </Select>
+                    </Form.Item>
+                  </li>
+                  <li>
+                    <Dropdown overlay={postedOnMenu} trigger={['click']}>
                       <a href="#" className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
-                        Any Time <DownOutlined />
+                        Posted On <DownOutlined />
                       </a>
                     </Dropdown>
                   </li>
                   <li>
-                    <Dropdown overlay={menu} trigger={['click']}>
+                    <Dropdown overlay={salaryMenu} trigger={['click']}>
                       <a href="#" className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
-                        Any Date <DownOutlined />
-                      </a>
-                    </Dropdown>
-                  </li>
-                  <li>
-                    <Dropdown overlay={menu} trigger={['click']}>
-                      <a href="#" className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
-                        Any Place <DownOutlined />
+                        Salary <DownOutlined />
                       </a>
                     </Dropdown>
                   </li>
