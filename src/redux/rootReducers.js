@@ -25,6 +25,7 @@ import SuggestionReducer from './usersSuggestion/reducers';
 import SearchUserReducer from './SearchUsers/reducers';
 import amaReducer from './ama/reducers';
 import fetchContactsReducer from './usercontacts/reducers';
+import bookmarkJobReducer from './bookmarkJobs/reducers';
 
 const rootReducers = combineReducers({
   fb: firebaseReducer,
@@ -58,6 +59,7 @@ const rootReducers = combineReducers({
   getUser: SearchUserReducer,
   ama: amaReducer,
   UserContacts: fetchContactsReducer,
+  bookmark: bookmarkJobReducer,
 });
 
 export default rootReducers;
