@@ -37,6 +37,7 @@ function SignUp() {
   }));
 
   const [userinfo, setUserInfo] = useState({
+    username: '',
     firstname: '',
     lastname: '',
     email: '',
@@ -105,6 +106,7 @@ function SignUp() {
     if (authdata?.success) {
       sethidebox(true);
       setUserInfo({
+        username: '',
         firstname: '',
         lastname: '',
         email: '',
@@ -235,7 +237,20 @@ function SignUp() {
                                   <Form name="register" onFinish={handleUserInfoSubmit} layout="vertical">
                                     <div className="formbox">
                                     {!(GoogleData?.password?.length > 5) &&
-                                        <>
+                                      <>
+                                      <Form.Item
+                                        label=""
+                                        name="username"
+                                        rules={[{ required: true, message: 'Username required' }]}
+                                      >
+                                        <Input
+                                          type="text"
+                                          name="username"
+                                          value={userinfo?.username}
+                                          onChange={handleUserInfoChange}
+                                          placeholder="Username"
+                                        />
+                                      </Form.Item>
                                       <Form.Item
                                         label=""
                                         name="firstname"

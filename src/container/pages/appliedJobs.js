@@ -1,29 +1,27 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
-import { Dropdown, Menu } from "antd";
+/* eslint-disable import/named */
+import React, { useRef, useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Dropdown, Menu } from 'antd';
 import { ShareAltOutlined, LinkOutlined, UploadOutlined, MailOutlined } from '@ant-design/icons';
-import { DiscoverCommunities, LinkDiv } from "../style";
-import { getAllBookmarkJobs } from "../../../redux/bookmarkJobs/actionCreator";
-import EventDetailsComponent from "../event/eventDetails";
-// import PostComponent from "../post";
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import EventDetailsComponent from './event/eventDetails';
+import { DiscoverCommunities, LinkDiv } from './style';
+import { getAllJobs } from '../../redux/postJob/actionCreator';
 
-
-const Bookmarks = () => {
-
+function appliedJobs() {
     const dispatch = useDispatch();
-    const scrollRef = useRef(null);
-
 
 
     useEffect(() => {
-        dispatch(getAllBookmarkJobs())
-    }, [])
+        dispatch(getAllJobs());
+    }, []);
 
     const { jobDetails } = useSelector((state) => ({
-        jobDetails: state?.bookmark?.bookmark,
+        jobDetails: state?.postJob?.jobDetails,
         isLoader: state?.Post.loading,
     }));
+
+    const scrollRef = useRef(null);
 
     const [jobData, SetJobData] = useState();
 
@@ -44,14 +42,12 @@ const Bookmarks = () => {
 
     const dropdownClassName = 'reportdropdown';
 
-
-
     return (
         <>
-            <div className='cntpagecomponent'>
-                <div className='centersidebarcontent flexcolumn mt56'>
+            <div className="cntpagecomponent">
+                <div className="centersidebarcontent flexcolumn mt56">
                     <div className="userNamedetails headerBox">
-                        <h2>Bookmarks</h2>
+                        <h2>Applied Jobs</h2>
                     </div>
                     <div className="wdth100 mdt-50" ref={scrollRef}>
                         <DiscoverCommunities className="communitiesBoxDetails eventDetails">
@@ -81,6 +77,7 @@ const Bookmarks = () => {
                                                             <ShareAltOutlined />
                                                         </Dropdown>
                                                     </Link>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -93,7 +90,7 @@ const Bookmarks = () => {
                 {jobData && <EventDetailsComponent jobDetails={jobData} />}
             </div>
         </>
-    )
+    );
 }
 
-export default Bookmarks;
+export default appliedJobs;

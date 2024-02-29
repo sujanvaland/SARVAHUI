@@ -31,13 +31,10 @@ const getAllJobs = (filter) => {
       dispatch(getAllJobsBegin());
       if (initialState && filter) {
         dispatch(getAllJobsSuccess(initialState));
-        message.success('Get Filtered Jobs Successfull');
       } else if (initialState) {
         dispatch(getAllJobsSuccess(initialState));
-        message.success('Get All Jobs Successfull');
       } else {
         dispatch(getAllJobsErr(null));
-        message.error('Get Job Post Failed');
       }
     } catch (err) {
       dispatch(getAllJobsErr(err));

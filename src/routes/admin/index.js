@@ -30,6 +30,7 @@ const Invitefriend = lazy(() => import('../../container/pages/Invitefriend'));
 const EditProfile = lazy(() => import('../../container/pages/EditProfile'));
 const Chatting = lazy(() => import('../../container/pages/chatting'));
 const Event = lazy(() => import('../../container/pages/event'));
+const AppliedJobs = lazy(() => import('../../container/pages/appliedJobs'));
 
 
 
@@ -52,7 +53,7 @@ function Admin() {
         <Route path={`${path}postjob`} component={PostJob} />
         <Route path={`${path}people`} component={People} />
         <Route path={`${path}explore`} component={Explore} />
-        <Route path={`${path}event`} component={Event} />
+        <Route path={`${path}appliedjobs`} component={AppliedJobs} />
         <Route path={`${path}communities`} component={Communities} />
         <Route path={`${path}bookmarks`} component={Bookmarks} />
         <Route path={`${path}notification`} component={Notification} />

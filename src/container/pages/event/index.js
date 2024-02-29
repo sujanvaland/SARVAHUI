@@ -1,8 +1,9 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Dropdown, Menu, Input, Form, Select } from 'antd';
-import { DownOutlined, UploadOutlined, FilterOutlined } from '@ant-design/icons';
-import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { DownOutlined, FilterOutlined, ShareAltOutlined, LinkOutlined,
+  UploadOutlined, MailOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import EventDetailsComponent from './eventDetails';
 import { DiscoverCommunities, LinkDiv } from '../style';
 import { getAllJobs } from '../../../redux/postJob/actionCreator';
@@ -22,7 +23,6 @@ function EventTimeline() {
   }));
 
   const scrollRef = useRef(null);
-  const history = useHistory();
   const [type, setType] = useState('comingEvent');
   const [filter, setFilter] = useState({
     searchText: '',
@@ -118,15 +118,22 @@ function EventTimeline() {
     SetJobData(item);
   };
 
+  const shareMenu = (
+    <Menu>
+        <Menu.Item><LinkOutlined /> Copy Link</Menu.Item>
+        <Menu.Item><UploadOutlined /> Share post via...</Menu.Item>
+        <Menu.Item><MailOutlined /> Send via Direct Message</Menu.Item>
+    </Menu>
+);
+
+const dropdownClassName = 'reportdropdown';
+
   console.log(filter);
   return (
     <>
       <div className="cntpagecomponent">
         <div className="centersidebarcontent flexcolumn mt56">
           <div className="tabbox">
-            <Link to="#" onClick={() => history.goBack()} className="btnBacklink">
-              <img src={require('../../../static/images/icon_back.png')} alt="" />
-            </Link>
             <Button
               onClick={() => showTimeLine('comingEvent')}
               className={type === 'comingEvent' ? 'btntab active' : 'btntab'}
@@ -202,15 +209,19 @@ function EventTimeline() {
                       <div className="eventBottom">
                         <div className="countMembers">{item.applicationReceived} Application Received</div>
                         <div className="eventRight">
-                          <Link to="">
-                            <UploadOutlined />
-                          </Link>
-                          <Link to="">
+                          <Link to="#">
                             <svg viewBox="0 0 24 24" aria-hidden="true">
                               <g>
                                 <path d="M4 4.5C4 3.12 5.119 2 6.5 2h11C18.881 2 20 3.12 20 4.5v18.44l-8-5.71-8 5.71V4.5zM6.5 4c-.276 0-.5.22-.5.5v14.56l6-4.29 6 4.29V4.5c0-.28-.224-.5-.5-.5h-11z" />
                               </g>
                             </svg>
+                          </Link>
+                          <Link to="#">
+                            <Dropdown overlay={shareMenu} trigger={['click']}
+                              overlayClassName={dropdownClassName}
+                              placement="bottomRight" width={100}>
+                              <ShareAltOutlined />
+                            </Dropdown>
                           </Link>
                         </div>
                       </div>
@@ -221,7 +232,7 @@ function EventTimeline() {
             </DiscoverCommunities>
           </div>
         </div>
-        <EventDetailsComponent jobDetails={jobData} />
+        {jobData && <EventDetailsComponent jobDetails={jobData} />}
       </div>
     </>
   );
