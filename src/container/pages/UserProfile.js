@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { EnvironmentOutlined, CalendarOutlined } from '@ant-design/icons';
-import { Tabs, } from 'antd';
+import { Tabs } from 'antd';
 import { Link, useParams, useHistory } from 'react-router-dom';
-import RightSideBarComponent from './rightsidebar';
-import Scroll from './Scroll';
+// import RightSideBarComponent from './rightsidebar';
+// import Scroll from './Scroll';
 import { getUserProfile } from '../../redux/UserProfile/actionCreator';
 import { convertToMonthYear } from '../../utility/ConvertToMonthYear';
 import {
@@ -21,22 +21,20 @@ function UserProfile() {
   const history = useHistory();
   const UserProfile = JSON.parse(localStorage.getItem('profile'));
   const { userName } = useParams();
-  const { data, loginuser } = useSelector(
-    (state) => {
-      return {
-        // data: userName?.length > 4 ? state.getUser.getSearchUserProfile : state.userProfile.getProfile,
-        data: state.userProfile.getProfile,
-        isLoader: state.userProfile.loading,
-        bookSuggest: state.getSuggest.bookSuggest,
-        movieSuggest: state.getSuggest.movieSuggest,
-        guruSuggest: state.getSuggest.guruSuggest,
-        practiceSuggest: state.getSuggest.practiceSuggest,
-        experienceSuggest: state.getSuggest.experienceSuggest,
-        loginuser: state.auth.userprofile?.userName,
-        loginuserId: state.auth.userprofile?.id,
-      };
-    },
-  );
+  const { data, loginuser } = useSelector((state) => {
+    return {
+      // data: userName?.length > 4 ? state.getUser.getSearchUserProfile : state.userProfile.getProfile,
+      data: state.userProfile.getProfile,
+      isLoader: state.userProfile.loading,
+      bookSuggest: state.getSuggest.bookSuggest,
+      movieSuggest: state.getSuggest.movieSuggest,
+      guruSuggest: state.getSuggest.guruSuggest,
+      practiceSuggest: state.getSuggest.practiceSuggest,
+      experienceSuggest: state.getSuggest.experienceSuggest,
+      loginuser: state.auth.userprofile?.userName,
+      loginuserId: state.auth.userprofile?.id,
+    };
+  });
 
   const [ProfileData, setProfileData] = useState({
     skills: data?.skills ? JSON.parse(data?.skills) : [],
@@ -87,14 +85,14 @@ function UserProfile() {
   //   refreshSuggestion();
   // };
 
-  const [currentTab, setCurrentTab] = useState("1");
+  const [currentTab, setCurrentTab] = useState('1');
   const onTabChange = (key) => {
     setCurrentTab(key);
-  }
+  };
 
   const showSocialLink = () => {
-    onTabChange("7");
-  }
+    onTabChange('7');
+  };
 
   const { TabPane } = Tabs;
   const firstName = data?.firstName ? data.firstName.charAt(0).toUpperCase() + data.firstName.slice(1) : '';
@@ -103,8 +101,7 @@ function UserProfile() {
 
   return (
     <>
-      {
-        data?.id > 0 &&
+      {data?.id > 0 && (
         <div className="cntpagecomponent userprofilepage">
           <div className="centersidebarcontent flexcolumn mt56">
             <div className="userNamedetails">
@@ -113,8 +110,12 @@ function UserProfile() {
                   <img src={require('../../static/images/icon_back.png')} alt="" />
                 </Link>
                 {firstName} {lastName}{' '}
-                {data?.isPremium && <img src={require('../../static/images/blue_tick.png')} className="blueTick" alt="" />}
-                <span>@{data?.userName} {timeline?.length} posts</span>
+                {data?.isPremium && (
+                  <img src={require('../../static/images/blue_tick.png')} className="blueTick" alt="" />
+                )}
+                <span>
+                  @{data?.userName} {timeline?.length} posts
+                </span>
               </h2>
               {userName === undefined && (
                 <Link to="/editProfile" className="btn btn-default mr-3">
@@ -144,7 +145,8 @@ function UserProfile() {
                           )}
                           {data?.profession?.length > 0 && (
                             <li>
-                              <EnvironmentOutlined /> {data.profession.charAt(0).toUpperCase() + data.profession.slice(1)}
+                              <EnvironmentOutlined />{' '}
+                              {data.profession.charAt(0).toUpperCase() + data.profession.slice(1)}
                             </li>
                           )}
                           {UserProfile?.createdDate?.length > 0 && (
@@ -158,10 +160,10 @@ function UserProfile() {
                       <div className="tagsbox">
                         {ProfileData?.tags?.length > 0
                           ? ProfileData?.tags.map((item, index) => (
-                            <Link key={index} to={`/${item.toLowerCase().replace(/\s+/g, '-')}`}>
-                              {item}
-                            </Link>
-                          ))
+                              <Link key={index} to={`/${item.toLowerCase().replace(/\s+/g, '-')}`}>
+                                {item}
+                              </Link>
+                            ))
                           : ''}
                       </div>
                       <div className="locaitonbox followers">
@@ -172,7 +174,7 @@ function UserProfile() {
                             </Link>
                           </li>
                           <li>
-                            <Link to="/network/Follower" >
+                            <Link to="/network/Follower">
                               <span>{data?.noOfFollowers}</span> Followers
                             </Link>
                           </li>
@@ -191,9 +193,45 @@ function UserProfile() {
             </div>
             <div className="tabspanel">
               <Tabs defaultActiveKey="1" activeKey={currentTab} className="custom-active-tab" onChange={onTabChange}>
-                <TabPane tab="Posts" key="1" className="tabcntbox">
+                <TabPane tab="Basic Details" key="1" className="tabcntbox">
                   <div className="projectlist">
-                    <Scroll isProfile profileUserId={data?.id} />
+                    {/* <Scroll isProfile profileUserId={data?.id} /> */}
+                    <div className="tabhead">
+                      <ul>
+                        <li>
+                          <div>
+                            <h3>
+                              Full Name: {data?.firstName} {data?.lastName}
+                            </h3>
+                          </div>
+                        </li>
+                        <li>
+                          <div>
+                            <h3>Phone Number: {data?.phoneNumber}</h3>
+                          </div>
+                        </li>
+                        <li>
+                          <div>
+                            <h3>Email: {data?.email}</h3>
+                          </div>
+                        </li>
+                        <li>
+                          <div>
+                            <h3>Date of Birth: {data?.dob}</h3>
+                          </div>
+                        </li>
+                        <li>
+                          <div>
+                            <h3>Gender: {data?.gender}</h3>
+                          </div>
+                        </li>
+                        <li>
+                          <div>
+                            <h3>Address: {data?.address}</h3>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
                 </TabPane>
                 <TabPane tab="Education" key="8" className="tabcntbox">
@@ -260,14 +298,14 @@ function UserProfile() {
                 <TabPane tab="Certification" key="3" className="tabcntbox">
                   {userName === undefined && (
                     <div className="tabhead">
-                    <ul>
-                      <li>
-                        <div>
-                          <h3>Certificates: </h3>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
+                      <ul>
+                        <li>
+                          <div>
+                            <h3>Certificates: </h3>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
                   )}
                 </TabPane>
                 <TabPane tab="Social Media" key="4" className="tabcntbox">
@@ -323,11 +361,9 @@ function UserProfile() {
             </div>
           </div>
 
-          <RightSideBarComponent />
-
+          {/* <RightSideBarComponent /> */}
         </div>
-      }
-
+      )}
     </>
   );
 }

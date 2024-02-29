@@ -16,7 +16,7 @@ import {
   FundOutlined,
   MailOutlined,
   SettingOutlined,
-  SettingFilled
+  SettingFilled,
 } from '@ant-design/icons';
 import SearchUser from './components/SearchUser';
 import PremiumModal from './components/PremiumModal';
@@ -286,7 +286,7 @@ const ThemeLayout = (WrappedComponent) => {
                     className={path === '/setting' ? 'active' : ''}
                     onClick={() => this.setState({ path: '/setting' })}
                   >
-                    {path === '/setting' ? (<SettingFilled />) : (<SettingOutlined />)}
+                    {path === '/setting' ? <SettingFilled /> : <SettingOutlined />}
                     Settings
                   </Link>
                 </li>
