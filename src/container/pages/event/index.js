@@ -1,8 +1,14 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Dropdown, Menu, Input, Form, Select } from 'antd';
-import { DownOutlined, FilterOutlined, ShareAltOutlined, LinkOutlined,
-  UploadOutlined, MailOutlined } from '@ant-design/icons';
+import {
+  DownOutlined,
+  FilterOutlined,
+  ShareAltOutlined,
+  LinkOutlined,
+  UploadOutlined,
+  MailOutlined,
+} from '@ant-design/icons';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import EventDetailsComponent from './eventDetails';
 import { DiscoverCommunities, LinkDiv } from '../style';
@@ -23,6 +29,9 @@ console.log("All Jobs: ", jobDetails);
   const [filter, setFilter] = useState({
     searchText: '',
     skills: null,
+    // postedOn: 'Posted On',
+    // salary: 'Salary',
+    // skills: [],
     minSalary: 0,
     maxSalary: 0,
     timePeriod: 0,
@@ -43,17 +52,17 @@ console.log("All Jobs: ", jobDetails);
     const maxSalary = e.item.props.type.split('-')[1];
     setFilter({
       ...filter,
+      salary: e.key,
       minSalary,
       maxSalary,
     });
   };
 
   const handlePostedOnFilter = (e) => {
-    // Accessing e.item.props.type, but e.item.props may be undefined
-    console.log(e.item.props.type);
     const selectedDateRange = e.item.props.type;
     setFilter({
       ...filter,
+      postedOn: e.key,
       selectedDateRange,
     });
   };
@@ -62,7 +71,7 @@ console.log("All Jobs: ", jobDetails);
 
   const handleFilter = () => {
     setIsFilter(!isFilter);
-  }
+  };
 
   const handleJobSearch = () => {
     console.log('Search the job');
@@ -77,30 +86,27 @@ console.log("All Jobs: ", jobDetails);
 
   const salaryMenu = (
     <Menu onClick={handleSalaryFilter}>
-      <Menu.Item key="1" type="100000-300000">
+      <Menu.Item key="1lac - 3lac" type="100000-300000">
         1lac - 3lac
       </Menu.Item>
-      <Menu.Item key="2" type="300000-600000">
+      <Menu.Item key="3lac - 6lac" type="300000-600000">
         3lac - 6lac
       </Menu.Item>
-      <Menu.Item key="3" type="600000-1000000">
+      <Menu.Item key="6lac - 10lac" type="600000-1000000">
         6lac - 10lac
       </Menu.Item>
     </Menu>
   );
 
-  // const start = startOfWeek(date);
-  // const end = endOfWeek(date);
-
   const postedOnMenu = (
     <Menu onClick={handlePostedOnFilter}>
-      <Menu.Item key="1" type="1">
+      <Menu.Item key="Today" type="1">
         Today
       </Menu.Item>
-      <Menu.Item key="2" type="2">
+      <Menu.Item key="This Week" type="2">
         This Week
       </Menu.Item>
-      <Menu.Item key="3" type="3">
+      <Menu.Item key="This Month" type="3">
         This Month
       </Menu.Item>
     </Menu>
@@ -117,13 +123,19 @@ console.log("All Jobs: ", jobDetails);
 
   const shareMenu = (
     <Menu>
-        <Menu.Item><LinkOutlined /> Copy Link</Menu.Item>
-        <Menu.Item><UploadOutlined /> Share post via...</Menu.Item>
-        <Menu.Item><MailOutlined /> Send via Direct Message</Menu.Item>
+      <Menu.Item>
+        <LinkOutlined /> Copy Link
+      </Menu.Item>
+      <Menu.Item>
+        <UploadOutlined /> Share post via...
+      </Menu.Item>
+      <Menu.Item>
+        <MailOutlined /> Send via Direct Message
+      </Menu.Item>
     </Menu>
-);
+  );
 
-const dropdownClassName = 'reportdropdown';
+  const dropdownClassName = 'reportdropdown';
 
   console.log(filter);
   return (
@@ -148,8 +160,7 @@ const dropdownClassName = 'reportdropdown';
           </div>
           <div className="wdth100 mdt-50" ref={scrollRef}>
             <DiscoverCommunities className="communitiesBoxDetails eventDetails">
-
-              {isFilter &&
+              {isFilter && (
                 <div className="eventSearch">
                   <Input name="Search" maxLength={1000} placeholder="Search Jobs" onChange={handleJobSearch} />
                   <ul>
@@ -172,14 +183,14 @@ const dropdownClassName = 'reportdropdown';
                     <li>
                       <Dropdown overlay={postedOnMenu} trigger={['click']}>
                         <a href="#" className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
-                          Posted On <DownOutlined />
+                          {filter.postedOn} <DownOutlined />
                         </a>
                       </Dropdown>
                     </li>
                     <li>
                       <Dropdown overlay={salaryMenu} trigger={['click']}>
                         <a href="#" className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
-                          Salary <DownOutlined />
+                          {filter.salary} <DownOutlined />
                         </a>
                       </Dropdown>
                     </li>
@@ -190,8 +201,7 @@ const dropdownClassName = 'reportdropdown';
                     </li>
                   </ul>
                 </div>
-              }
-
+              )}
 
               <h3> All Jobs </h3>
               {jobDetails?.map((item) => (
@@ -214,9 +224,13 @@ const dropdownClassName = 'reportdropdown';
                             </svg>
                           </Link>
                           <Link to="#">
-                            <Dropdown overlay={shareMenu} trigger={['click']}
+                            <Dropdown
+                              overlay={shareMenu}
+                              trigger={['click']}
                               overlayClassName={dropdownClassName}
-                              placement="bottomRight" width={100}>
+                              placement="bottomRight"
+                              width={100}
+                            >
                               <ShareAltOutlined />
                             </Dropdown>
                           </Link>

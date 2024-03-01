@@ -39,7 +39,9 @@ function EventDetailsComponent(props) {
             <p>Company Name:{jobDetails?.companyName}</p>
           </div>
           <div>
-            <p>Salary: {jobDetails?.salary}</p>
+            <p>
+              Salary Range: {jobDetails?.minSalary}-{jobDetails?.maxSalary}
+            </p>
           </div>
         </div>
         <div className="detailsBox">
