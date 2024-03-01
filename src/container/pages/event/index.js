@@ -13,22 +13,19 @@ function EventTimeline() {
 
   const { Option } = Select;
 
-  useEffect(() => {
-    dispatch(getAllJobs());
-  }, []);
-
   const { jobDetails } = useSelector((state) => ({
     jobDetails: state?.postJob?.jobDetails,
     isLoader: state?.Post.loading,
   }));
-
+console.log("All Jobs: ", jobDetails);
   const scrollRef = useRef(null);
   const [type, setType] = useState('comingEvent');
   const [filter, setFilter] = useState({
     searchText: '',
-    skills: [],
+    skills: null,
     minSalary: 0,
     maxSalary: 0,
+    timePeriod: 0,
   });
 
   useEffect(() => {

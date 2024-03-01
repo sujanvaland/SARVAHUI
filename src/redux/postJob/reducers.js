@@ -11,7 +11,7 @@ const {
 } = actions;
 
 const JobPostReducer = (state = initialState, action) => {
-  const { type, data, err, } = action;
+  const { type, jobDetails, job, err,} = action;
   switch (type) {
     case JOB_POST_DATA_BEGIN:
       return {
@@ -21,7 +21,7 @@ const JobPostReducer = (state = initialState, action) => {
     case JOB_POST_DATA_SUCCESS:
       return {
         ...state,
-        job: data,
+        job,
         postLoading: false,
       };
     case JOB_POST_DATA_ERR:
@@ -38,7 +38,7 @@ const JobPostReducer = (state = initialState, action) => {
     case GET_ALL_JOBS_SUCCESS:
       return {
         ...state,
-        jobDetails: data,
+        jobDetails,
         postLoading: false,
       };
     case GET_ALL_JOBS_ERR:

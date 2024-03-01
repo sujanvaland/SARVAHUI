@@ -10,7 +10,6 @@ import { headerSearchReducer } from './headerSearch/reducers';
 import { chatReducer, SingleChatReducer, groupChatReducer, SingleChatGroupReducer } from './chat/reducers';
 import Note from './note/reducers';
 import Profile from './profile/reducers';
-import PostJobReducer from './postJob/reducers';
 import { fsCrudReducer, fsSingleCrudReducer } from './firebase/firestore/reducers';
 import firebaseAuth from './firebase/auth/reducers';
 import questionReducer from './question/reducers';
@@ -26,6 +25,7 @@ import SearchUserReducer from './SearchUsers/reducers';
 import amaReducer from './ama/reducers';
 import fetchContactsReducer from './usercontacts/reducers';
 import bookmarkJobReducer from './bookmarkJobs/reducers';
+import JobPostReducer from './postJob/reducers';
 
 const rootReducers = combineReducers({
   fb: firebaseReducer,
@@ -45,7 +45,7 @@ const rootReducers = combineReducers({
   singleCrud: fsSingleCrudReducer,
   Note,
   Profile,
-  postJob: PostJobReducer,
+  postJob: JobPostReducer,
   firebaseAuth,
   Ques: questionReducer,
   Connection: connectionReducer,

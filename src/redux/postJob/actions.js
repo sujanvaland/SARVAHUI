@@ -17,7 +17,7 @@ const actions = {
   jobPostDataSuccess: (data) => {
     return {
       type: actions.JOB_POST_DATA_SUCCESS,
-      data,
+      job:data,
     };
   },
 
@@ -37,7 +37,7 @@ const actions = {
   getAllJobsSuccess: (data) => {
     return {
       type: actions.GET_ALL_JOBS_SUCCESS,
-      data,
+      jobDetails: data,
     };
   },
 

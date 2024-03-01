@@ -1,7 +1,7 @@
 import { message } from 'antd';
 import actions from './actions';
 import { DataService } from '../../config/dataService/dataService';
-import initialState from '../../demoData/jobPosts.json';
+// import initialState from '../../demoData/jobPosts.json';
 
 const { jobPostDataBegin, jobPostDataSuccess, jobPostDataErr, getAllJobsBegin, getAllJobsSuccess, getAllJobsErr,
    } =
@@ -38,16 +38,15 @@ const submitPost = (data) => {
   };
 };
 
-const getAllJobs = (filter) => {
+const getAllJobs = (data) => {
   return async (dispatch) => {
     try {
       dispatch(getAllJobsBegin());
-      if (initialState && filter) {
-        dispatch(getAllJobsSuccess(initialState));
-      } else if (initialState) {
-        dispatch(getAllJobsSuccess(initialState));
+      const response = await DataService.post('Job/GetAllJobs',data);
+      if (response.data.success) {
+        dispatch(getAllJobsSuccess(response.data.result));
       } else {
-        dispatch(getAllJobsErr(null));
+        dispatch(getAllJobsErr(response.data.success));
       }
     } catch (err) {
       dispatch(getAllJobsErr(err));
