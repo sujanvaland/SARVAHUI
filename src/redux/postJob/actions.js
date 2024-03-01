@@ -7,6 +7,10 @@ const actions = {
   GET_ALL_JOBS_SUCCESS: 'GET_ALL_JOBS_SUCCESS',
   GET_ALL_JOBS_ERR: 'GET_ALL_JOBS_ERR',
 
+  POST_JOBS_BEGIN: 'POST_JOBS_BEGIN',
+  POST_JOBS_SUCCESS: 'POST_JOBS_SUCCESS',
+  POST_JOBS_ERR: 'POST_JOBS_ERR',
+
   jobPostDataBegin: () => {
     return {
       type: actions.JOB_POST_DATA_BEGIN,
@@ -43,6 +47,26 @@ const actions = {
   getAllJobsErr: (err) => {
     return {
       type: actions.GET_ALL_JOBS_ERR,
+      err,
+    };
+  },
+
+  postJobsBegin: () => {
+    return {
+      type: actions.POST_JOBS_BEGIN,
+    };
+  },
+
+  postJobsSuccess: (postjob) => {
+    return {
+      type: actions.POST_JOBS_SUCCESS,
+      postjob,
+    };
+  },
+
+  postJobsErr: (err) => {
+    return {
+      type: actions.POST_JOBS_ERR,
       err,
     };
   },

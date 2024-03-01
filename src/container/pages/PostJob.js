@@ -1,4 +1,4 @@
-import { Form, Input, Row, Col, DatePicker, message, Button } from 'antd';
+import { Form, Input, Row, Col, DatePicker, Button } from 'antd';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { submitPost } from '../../redux/postJob/actionCreator';
@@ -35,7 +35,6 @@ function PostJob() {
   const handleJobInfoSubmit = () => {
     console.log(JobDetails);
     dispatch(submitPost(JobDetails));
-    message.error('all good');
   };
 
   return (
@@ -85,7 +84,7 @@ function PostJob() {
                     >
                       <TextArea
                         rows={4}
-                        name="companyInfo"
+                        name="jobDescription"
                         value={JobDetails.jobDescription}
                         onChange={handleJobDetailsChange}
                       />

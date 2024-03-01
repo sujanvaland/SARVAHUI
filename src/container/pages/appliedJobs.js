@@ -1,16 +1,19 @@
-/* eslint-disable import/named */
+/* eslint-disable no-undef */
 import React, { useRef, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Dropdown, Menu } from 'antd';
+// import { WhatsappShareButton, WhatsappIcon, FacebookShareButton, FacebookIcon,
+//     TwitterShareButton, TwitterIcon } from 'react-share';
+import { Dropdown, Menu, } from 'antd';
 import { ShareAltOutlined, LinkOutlined, UploadOutlined, MailOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import EventDetailsComponent from './event/eventDetails';
 import { DiscoverCommunities, LinkDiv } from './style';
+// import FindUser from './chatting/findUser';
 import { getAllJobs } from '../../redux/postJob/actionCreator';
 
 function appliedJobs() {
-    const dispatch = useDispatch();
 
+    const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(getAllJobs());
@@ -31,6 +34,40 @@ function appliedJobs() {
         console.log(item);
         SetJobData(item);
     };
+
+    // const copyJobLink = (id) => {
+    //     const tempInput = document.createElement('input');
+    //     tempInput.value = `${process.env.REACT_APP_BASE_URL}/events/${id}`;
+    //     document.body.appendChild(tempInput);
+    //     tempInput.select();
+    //     document.execCommand('copy');
+    //     document.body.removeChild(tempInput);
+
+    //     message.success('Copied to clipboard');
+    // };
+
+    // const [shareModalVisible, setShareModalVisible] = useState(false);
+
+    // const showShareModal = () => {
+    //     setShareModalVisible(true);
+    // }
+    // const hideShareModal = () => {
+    //     setShareModalVisible(false);
+    // };
+
+    // const shareJobLink = `${process.env.REACT_APP_BASE_URL}/events/${id}`;
+
+    // const [directMessage, setDirectMessage] = useState(false);
+    // const [ForwardLink, setForwardLink] = useState(null);
+
+    // const handleDirectMessage = (id) => {
+    //     const jobLink = `${process.env.REACT_APP_BASE_URL}/event/${id}`;
+    //     setForwardLink(jobLink);
+    //     setDirectMessage(true);
+    // }
+    // const handleCloseDirectMessage = () => {
+    //     setDirectMessage(false);
+    // }
 
     const shareMenu = (
         <Menu>
@@ -77,7 +114,27 @@ function appliedJobs() {
                                                             <ShareAltOutlined />
                                                         </Dropdown>
                                                     </Link>
-
+                                                    {/* <Modal visible={shareModalVisible} onCancel={hideShareModal} onOk={hideShareModal}>
+                                                        <div>
+                                                            <WhatsappShareButton url={shareJobLink}>
+                                                                <WhatsappIcon size={32} round />
+                                                            </WhatsappShareButton>
+                                                        </div>
+                                                        <div>
+                                                            <FacebookShareButton url={shareJobLink}>
+                                                                <FacebookIcon size={32} round />
+                                                            </FacebookShareButton>
+                                                        </div>
+                                                        <div>
+                                                            <TwitterShareButton url={shareJobLink}>
+                                                                <TwitterIcon size={32} round />
+                                                            </TwitterShareButton>
+                                                        </div>
+                                                    </Modal>
+                                                    {
+                                                        directMessage &&
+                                                        <FindUser onClose={handleCloseDirectMessage} ForwardMessage={ForwardLink} IsForward />
+                                                    } */}
                                                 </div>
                                             </div>
                                         </div>
