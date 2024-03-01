@@ -137,6 +137,30 @@ function PostJob() {
                         onChange={handleJobDetailsChange}
                       />
                     </Form.Item>
+                    <Form.Item
+                      label="Minimum Salary"
+                      name="minSalary"
+                      rules={[{ required: true, message: 'Minimum Salary' }]}
+                    >
+                      <Input
+                        type="number"
+                        name="minSalary"
+                        value={JobDetails.minSalary}
+                        onChange={handleJobDetailsChange}
+                      />
+                    </Form.Item>
+                    <Form.Item
+                      label="Maximum Salary"
+                      name="maxSalary"
+                      rules={[{ required: true, message: 'Maximum Salary' }]}
+                    >
+                      <Input
+                        type="number"
+                        name="maxSalary"
+                        value={JobDetails.maxSalary}
+                        onChange={handleJobDetailsChange}
+                      />
+                    </Form.Item>
                     <Button
                       className="btn-joinus"
                       htmlType="submit"
