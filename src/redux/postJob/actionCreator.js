@@ -19,6 +19,8 @@ const submitPost = (data) => {
         NoOfVaccancy : data.numberOfVacancies,
         ApplicationDeadline : data.dateOfApplicationDeadline,
         SkillsRequired : data.skillsRequired,
+        MinSalary : data.minSalary,
+        MaxSalary : data.maxSalary,
       }
       const response = await DataService.post('Job/SaveUpdateJobPost',obj);
 

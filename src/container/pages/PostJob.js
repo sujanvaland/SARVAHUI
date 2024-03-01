@@ -15,6 +15,8 @@ function PostJob() {
     numberOfVacancies: '',
     dateOfApplicationDeadline: '',
     skillsRequired: '',
+    minSalary: '',
+    maxSalary: '',
   });
 
   const handleJobDetailsChange = (e, isDate = false) => {
