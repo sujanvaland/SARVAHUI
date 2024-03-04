@@ -13,7 +13,7 @@ const initialState = {
 const { UPLOAD_FILE_REQUEST, UPLOAD_FILE_SUCCESS, UPLOAD_FILE_ERR } = actions;
 
 const UploadFileReducer = (state = initialState, action) => {
-  const { type, getUrl, profileImgUrl, shareImg,backgroundImgUrl, GroupImg, err } = action;
+  const { type, getUrl, profileImgUrl, shareImg,backgroundImgUrl,resumeUrl, GroupImg, err } = action;
 
   switch (type) {
     
@@ -29,6 +29,7 @@ const UploadFileReducer = (state = initialState, action) => {
         shareImg,
         profileImgUrl,
         backgroundImgUrl,
+        resumeUrl,
         GroupImg,
         loading: false,
       };

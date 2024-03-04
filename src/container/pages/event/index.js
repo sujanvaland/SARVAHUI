@@ -12,7 +12,7 @@ import {
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import EventDetailsComponent from './eventDetails';
 import { DiscoverCommunities, LinkDiv } from '../style';
-import { getAllJobs } from '../../../redux/postJob/actionCreator';
+import { getAllJobs, toggleBookmark, getJobDetails } from '../../../redux/postJob/actionCreator';
 
 function EventTimeline() {
   const dispatch = useDispatch();
@@ -22,7 +22,10 @@ function EventTimeline() {
   const { jobDetails } = useSelector((state) => ({
     jobDetails: state?.postJob?.jobDetails,
     isLoader: state?.Post.loading,
+    
   }));
+
+
 console.log("All Jobs: ", jobDetails);
   const scrollRef = useRef(null);
   const [type, setType] = useState('comingEvent');
@@ -36,6 +39,10 @@ console.log("All Jobs: ", jobDetails);
     maxSalary: 0,
     timePeriod: 0,
   });
+
+  const handleToggleBookmark = (data) => {
+    dispatch(toggleBookmark(data));
+  }
 
   useEffect(() => {
     dispatch(getAllJobs(filter));
@@ -112,14 +119,12 @@ console.log("All Jobs: ", jobDetails);
     </Menu>
   );
 
-  const [jobData, SetJobData] = useState();
+  const [jobData, SetJobData] = useState(false);
 
-  const handleJobData = (item) => {
-    // message.success('I was clicked');
-    console.log('item');
-    console.log(item);
-    SetJobData(item);
-  };
+  const handleJobDetails = (data) => {
+    SetJobData(true);
+    dispatch(getJobDetails(data));
+  }
 
   const shareMenu = (
     <Menu>
@@ -206,7 +211,7 @@ console.log("All Jobs: ", jobDetails);
               <h3> All Jobs </h3>
               {jobDetails?.map((item) => (
                 <>
-                  <LinkDiv className="disCommunities" onClick={() => handleJobData(item)}>
+                  <LinkDiv className="disCommunities" onClick={() => handleJobDetails({jobId:item.id})}>
                     <div className="rightBox">
                       <div className="CommunitiesDetails">
                         <div className="countMembers">{item.dateOfApplication}</div>
@@ -216,7 +221,7 @@ console.log("All Jobs: ", jobDetails);
                       <div className="eventBottom">
                         <div className="countMembers">{item.applicationReceived} Application Received</div>
                         <div className="eventRight">
-                          <Link to="#">
+                          <Link to="#" onClick={() => handleToggleBookmark({PostId :item.id})}>
                             <svg viewBox="0 0 24 24" aria-hidden="true">
                               <g>
                                 <path d="M4 4.5C4 3.12 5.119 2 6.5 2h11C18.881 2 20 3.12 20 4.5v18.44l-8-5.71-8 5.71V4.5zM6.5 4c-.276 0-.5.22-.5.5v14.56l6-4.29 6 4.29V4.5c0-.28-.224-.5-.5-.5h-11z" />
@@ -243,7 +248,7 @@ console.log("All Jobs: ", jobDetails);
             </DiscoverCommunities>
           </div>
         </div>
-        {jobData && <EventDetailsComponent jobDetails={jobData} />}
+        {jobData && <EventDetailsComponent />}
       </div>
     </>
   );

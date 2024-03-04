@@ -373,7 +373,7 @@ const postUpload = (postfiles, postdata, clearStates) => {
       dispatch(postUploadRequest());
       const formData = new FormData();
       formData.append("text", JSON.stringify(postdata));
-
+      
       postfiles.forEach((element, i) => {
         formData.append(i.toString(), element)
       });

@@ -114,7 +114,6 @@ const login = (credential, history, loginMethod) => {
         dispatch(loginErr('Login methods not same'));
         return;
       }
-
       const res = await DataService.post('User/SignIn', credential);
       if (res.data.message === 'Success') {
         const obj = {

@@ -1,23 +1,25 @@
 import actions from './actions';
-// import { DataService } from '../../config/dataService/dataService';
-import initialState from '../../demoData/bookmarkJobs.json';
+import { DataService } from '../../config/dataService/dataService';
+// import initialState from '../../demoData/bookmarkJobs.json';
 
 
-const { bookmarkJobBegin, bookmarkJobSuccess, bookmarkJobErr } =
+const { getBookmarkJobBegin, getBookmarkJobSuccess, getBookmarkJobErr } =
     actions;
 
-const getAllBookmarkJobs = () => {
-    return async (dispatch) => {
-        try {
-            dispatch(bookmarkJobBegin());
-            if (initialState) {
-                dispatch(bookmarkJobSuccess(initialState));
+    const getAllBookmarkJobs = () => {
+        return async (dispatch) => {
+          try {
+            dispatch(getBookmarkJobBegin());
+            const response = await DataService.get('Job/GetAllBookmarkJobs');
+            if (response.data.success) {
+              dispatch(getBookmarkJobSuccess(response.data.result));
             } else {
-                dispatch(bookmarkJobErr(null));
+              dispatch(getBookmarkJobErr(response.data.success));
             }
-        } catch (err) {
-            dispatch(bookmarkJobErr(err));
-        }
-    };
-};
-export { getAllBookmarkJobs };
+          } catch (err) {
+            dispatch(getBookmarkJobErr(err));
+          }
+        };
+      };
+
+export default getAllBookmarkJobs;
