@@ -22,11 +22,9 @@ function EventTimeline() {
   const { jobDetails } = useSelector((state) => ({
     jobDetails: state?.postJob?.jobDetails,
     isLoader: state?.Post.loading,
-    
   }));
 
-
-console.log("All Jobs: ", jobDetails);
+  console.log('All Jobs: ', jobDetails);
   const scrollRef = useRef(null);
   const [type, setType] = useState('comingEvent');
   const [filter, setFilter] = useState({
@@ -38,11 +36,12 @@ console.log("All Jobs: ", jobDetails);
     minSalary: 0,
     maxSalary: 0,
     timePeriod: 0,
+    pageNo: 1,
   });
 
   const handleToggleBookmark = (data) => {
     dispatch(toggleBookmark(data));
-  }
+  };
 
   useEffect(() => {
     dispatch(getAllJobs(filter));
@@ -62,6 +61,7 @@ console.log("All Jobs: ", jobDetails);
       salary: e.key,
       minSalary,
       maxSalary,
+      pageNo: 1,
     });
   };
 
@@ -124,7 +124,7 @@ console.log("All Jobs: ", jobDetails);
   const handleJobDetails = (data) => {
     SetJobData(true);
     dispatch(getJobDetails(data));
-  }
+  };
 
   const shareMenu = (
     <Menu>
@@ -211,7 +211,7 @@ console.log("All Jobs: ", jobDetails);
               <h3> All Jobs </h3>
               {jobDetails?.map((item) => (
                 <>
-                  <LinkDiv className="disCommunities" onClick={() => handleJobDetails({jobId:item.id})}>
+                  <LinkDiv className="disCommunities" onClick={() => handleJobDetails({ jobId: item.id })}>
                     <div className="rightBox">
                       <div className="CommunitiesDetails">
                         <div className="countMembers">{item.dateOfApplication}</div>
@@ -221,7 +221,7 @@ console.log("All Jobs: ", jobDetails);
                       <div className="eventBottom">
                         <div className="countMembers">{item.applicationReceived} Application Received</div>
                         <div className="eventRight">
-                          <Link to="#" onClick={() => handleToggleBookmark({PostId :item.id})}>
+                          <Link to="#" onClick={() => handleToggleBookmark({ PostId: item.id })}>
                             <svg viewBox="0 0 24 24" aria-hidden="true">
                               <g>
                                 <path d="M4 4.5C4 3.12 5.119 2 6.5 2h11C18.881 2 20 3.12 20 4.5v18.44l-8-5.71-8 5.71V4.5zM6.5 4c-.276 0-.5.22-.5.5v14.56l6-4.29 6 4.29V4.5c0-.28-.224-.5-.5-.5h-11z" />
