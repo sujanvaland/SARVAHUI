@@ -3,8 +3,9 @@ import actions from './actions';
 import { DataService } from '../../config/dataService/dataService';
 // import initialState from '../../demoData/jobPosts.json';
 
-const { jobPostDataBegin, jobPostDataSuccess, jobPostDataErr, getAllJobsBegin, getAllJobsSuccess, getAllJobsErr,
-   } =
+const { jobPostDataBegin, jobPostDataSuccess, jobPostDataErr, getAllJobsBegin, getAllJobsSuccess,
+  getAllJobsErr, toggleBookmarkBegin, toggleBookmarkSuccess, toggleBookmarkErr, getJobDetailsBegin,
+  getJobDetailsSuccess, getJobDetailsErr } =
   actions;
 
 const submitPost = (data) => {
@@ -54,4 +55,36 @@ const getAllJobs = (data) => {
   };
 };
 
-export { submitPost, getAllJobs,  };
+const toggleBookmark = (data) => {
+  return async (dispatch) => {
+    try {
+      dispatch(toggleBookmarkBegin());
+      const response = await DataService.post('Job/ToggleBookmark',data);
+      if (response.data.success) {
+        dispatch(toggleBookmarkSuccess(response.data.result));
+      } else {
+        dispatch(toggleBookmarkErr(response.data.success));
+      }
+    } catch (err) {
+      dispatch(toggleBookmarkErr(err));
+    }
+  };
+};
+
+const getJobDetails = (data) => {
+  return async (dispatch) => {
+    try {
+      dispatch(getJobDetailsBegin());
+      const response = await DataService.post("Job/GetJobById",data);
+      if (response.data.success) {
+        dispatch(getJobDetailsSuccess(response.data.result));
+      } else {
+        dispatch(getJobDetailsErr(response.data.success));
+      }
+    } catch (err) {
+      dispatch(getJobDetailsErr(err));
+    }
+  };
+};
+
+export { submitPost, getAllJobs, toggleBookmark, getJobDetails };

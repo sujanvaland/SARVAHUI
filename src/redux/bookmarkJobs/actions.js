@@ -1,24 +1,24 @@
 const actions = {
-    BOOKMARK_JOB_BEGIN: 'BOOKMARK_JOB_BEGIN',
-    BOOKMARK_JOB_SUCCESS: 'BOOKMARK_JOB_SUCCESS',
-    BOOKMARK_JOB_ERR: 'BOOKMARK_JOB_ERR',
+    GET_BOOKMARK_JOB_BEGIN: 'GET_BOOKMARK_JOB_BEGIN',
+    GET_BOOKMARK_JOB_SUCCESS: 'GET_BOOKMARK_JOB_SUCCESS',
+    GET_BOOKMARK_JOB_ERR: 'GET_BOOKMARK_JOB_ERR',
 
-    bookmarkJobBegin: () => {
+    getBookmarkJobBegin: () => {
         return {
-            type: actions.BOOKMARK_JOB_BEGIN,
+            type: actions.GET_BOOKMARK_JOB_BEGIN,
         };
     },
 
-    bookmarkJobSuccess: (bookmarkjobs) => {
+    getBookmarkJobSuccess: (bookmarkjobs) => {
         return {
-            type: actions.BOOKMARK_JOB_SUCCESS,
+            type: actions.GET_BOOKMARK_JOB_SUCCESS,
             bookmarkjobs,
         };
     },
 
-    bookmarkJobErr: (err) => {
+    getBookmarkJobErr: (err) => {
         return {
-            type: actions.BOOKMARK_JOB_ERR,
+            type: actions.GET_BOOKMARK_JOB_ERR,
             err,
         };
     },

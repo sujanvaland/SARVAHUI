@@ -7,6 +7,15 @@ const actions = {
   GET_ALL_JOBS_SUCCESS: 'GET_ALL_JOBS_SUCCESS',
   GET_ALL_JOBS_ERR: 'GET_ALL_JOBS_ERR',
 
+  TOGGLE_BOOKMARK_BEGIN: 'TOGGLE_BOOKMARK_BEGIN',
+  TOGGLE_BOOKMARK_SUCCESS: 'TOGGLE_BOOKMARK_SUCCESS',
+  TOGGLE_BOOKMARK_ERR: 'TOGGLE_BOOKMARK_ERR',
+
+  GET_JOBS_DETAILS_BEGIN: 'GET_JOBS_DETAILS_BEGIN',
+  GET_JOBS_DETAILS_SUCCESS: 'GET_JOBS_DETAILS_SUCCESS',
+  GET_JOBS_DETAILS_ERR: 'GET_JOBS_DETAILS_ERR',
+
+
   
   jobPostDataBegin: () => {
     return {
@@ -47,6 +56,47 @@ const actions = {
       err,
     };
   },
+
+  toggleBookmarkBegin: () => {
+    return {
+      type: actions.TOGGLE_BOOKMARK_BEGIN,
+    };
+  },
+
+  toggleBookmarkSuccess: (data) => {
+    return {
+      type: actions.TOGGLE_BOOKMARK_SUCCESS,
+      toggleBookmark: data,
+    };
+  },
+
+  toggleBookmarkErr: (err) => {
+    return {
+      type: actions.TOGGLE_BOOKMARK_ERR,
+      err,
+    };
+  },
+
+  getJobDetailsBegin: () => {
+    return {
+      type: actions.GET_JOBS_DETAILS_BEGIN,
+    };
+  },
+
+  getJobDetailsSuccess: (data) => {
+    return {
+      type: actions.GET_JOBS_DETAILS_SUCCESS,
+      jobpostdetails: data,
+    };
+  },
+
+  getJobDetailsErr: (err) => {
+    return {
+      type: actions.GET_JOBS_DETAILS_ERR,
+      err,
+    };
+  },
+
 
 };
 

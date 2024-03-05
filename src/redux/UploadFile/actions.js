@@ -18,6 +18,8 @@ const actions = {
       profileImgUrl: type === "profile" ? data : null,
       backgroundImgUrl: type === "background" ? data : null,
       GroupImg : type === "groupImg" ? data : null,
+      resumeUrl: type === "resume" ? data : null,
+
     };
   },
 

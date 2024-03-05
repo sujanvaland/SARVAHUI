@@ -11,16 +11,18 @@ function EditProfile() {
   const dispatch = useDispatch();
   const { Option } = Select;
   const dateFormat = 'YYYY/MM/DD';
-  const { username, data, profileUrl, backgroundUrl, isLoader } = useSelector((state) => {
+  const { username, data, profileUrl, backgroundUrl, isLoader, resumeUrl } = useSelector((state) => {
     return {
       data: state.userProfile.getProfile,
       isLoader: state.userProfile.loading,
       profileUrl: state.uploadFile.profileImgUrl,
       backgroundUrl: state.uploadFile.backgroundImgUrl,
+      resumeUrl: state.uploadFile.resumeUrl,
       username: state.auth.userprofile?.userName,
     };
   });
 
+  console.log("resumeUrl", resumeUrl)
   useEffect(() => {
     dispatch(getUserProfile(username));
   }, [username]);
@@ -48,29 +50,43 @@ function EditProfile() {
     profileImg: data?.profileImg || '',
     backgroundImg: data?.backgroundImg || '',
     tags: data?.tags ? data?.tags.split(', ') : [],
+    totalExperience: data?.totalExperience || '',
     education: data?.education
       ? data?.education
       : [
-          {
-            schoolName: '',
-            board: '',
-            collageName: '',
-            university: '',
-          },
-        ],
-    experience: data?.experience
-      ? data?.experience
+        {
+          university: '',
+          highestQualification: '',
+          course: '',
+          startingYear: '',
+          passingYear: '',
+          grades: '',
+        },
+      ],
+    experience: data?.experience?.length > 0
+      ? data.experience.map((job) => ({
+        id: job.id,
+        userId: job.userId || 0,
+        company: job.company || '',
+        designation: job.designation || '',
+        joinedDate: job.joinedDate || '',
+        endDate: job.endDate || '',
+        responsibility: job.responsibility || '',
+      }))
       : [
-          {
-            companyNameName: '',
-            designation: '',
-            doj: '',
-            dol: '',
-            responsibilities: '',
-          },
-        ],
+        {
+          id: 0,
+          userId: 0,
+          company: '',
+          designation: '',
+          joinedDate: '',
+          endDate: '',
+          responsibility: '',
+        },
+      ],
     certiNames: data?.certiNames || '',
   });
+  console.log("Total Experience: ", ProfileData);
   const [validationErrorMSG, setvalidationErrorMSG] = useState({
     facebookError: '',
     linkedinError: '',
@@ -95,27 +111,41 @@ function EditProfile() {
       profileImg: data?.profileImg || '',
       backgroundImg: data?.backgroundImg || '',
       tags: data?.tags ? data?.tags.split(', ') : [],
+      totalExperience: data?.totalExperience || 0,
       education: data?.education
         ? data?.education
         : [
-            {
-              schoolName: '',
-              board: '',
-              collageName: '',
-              university: '',
-            },
-          ],
-      experience: data?.experience
-        ? data?.experience
+          {
+            university: '',
+            highestQualification: '',
+            course: '',
+            specialization: '',
+            startingYear: '',
+            passingYear: '',
+            grades: '',
+          },
+        ],
+      experience: data?.experience?.length > 0
+        ? data.experience.map((job) => ({
+          id: job.id,
+          userId: job.userId || 0,
+          company: job.company || '',
+          designation: job.designation || '',
+          joinedDate: job.joinedDate || '',
+          endDate: job.endDate || '',
+          responsibility: job.responsibility || '',
+        }))
         : [
-            {
-              companyNameName: '',
-              designation: '',
-              doj: '',
-              dol: '',
-              responsibilities: '',
-            },
-          ],
+          {
+            id: 0,
+            userId: 0,
+            company: '',
+            designation: '',
+            joinedDate: '',
+            endDate: '',
+            responsibility: '',
+          },
+        ],
       certiNames: data?.certiNames || '',
     });
   }, [data]);
@@ -136,11 +166,25 @@ function EditProfile() {
   }, [backgroundUrl]);
 
   const handleChange = (e) => {
+    console.log("data", e.target.name, e.target.value)
     e.preventDefault();
     setProfileData({
       ...ProfileData,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const handleChangeExperience = (index, e) => {
+    const { name, value } = e.target;
+    const updatedExperience = [...ProfileData.experience]; // Copy the experience array
+    updatedExperience[index] = { ...updatedExperience[index], [name]: value }; // Update the specific property
+    setProfileData({ ...ProfileData, experience: updatedExperience }); // Update ProfileData with the updated experience array
+  };
+
+  const handleDateExperience = (date, dateString, index, field) => {
+    const updatedExperience = [...ProfileData.experience];
+    updatedExperience[index][field] = dateString; // Update the specific date field
+    setProfileData({ ...ProfileData, experience: updatedExperience });
   };
 
   const handleDate = (dateString) => {
@@ -208,10 +252,10 @@ function EditProfile() {
   const handleAddExp = () => {
     const exp = ProfileData.experience;
     exp.push({
-      companyNameName: '',
+      company: '',
       designation: '',
-      doj: '',
-      dol: '',
+      joinedDate: '',
+      endDate: '',
       responsibilities: '',
     });
     setProfileData({
@@ -290,6 +334,15 @@ function EditProfile() {
                     </div>
                     <div className="editprofileForm">
                       <Form name="UpdateProfile" form={form} onFinish={handleSubmit} layout="vertical">
+                        <Col lg={24} sm={24}>
+                          <Form.Item label="Resume">
+                            <Input
+                              type="file"
+                              id="Resume"
+                              multiple={false}
+                              onChange={(e) => handleBinaryChange(e, 'resume')}
+                            /></Form.Item>
+                        </Col>
                         <h2>Basic Details</h2>
                         <Row gutter={25}>
                           <Col lg={24} sm={24}>
@@ -414,11 +467,11 @@ function EditProfile() {
                               <Input type="email" name="email" value={ProfileData?.email} onChange={handleChange} />
                             </Form.Item>
                           </Col>
-                          <Col lg={24} sm={24}>
+                          {/* <Col lg={24} sm={24}>
                             <Form.Item label="Resume">
                               <Input type="file" name="resume" value={ProfileData?.resume} onChange={handleChange} />
                             </Form.Item>
-                          </Col>
+                          </Col> */}
                         </Row>
                         <Row gutter={25}>
                           <Col lg={24} sm={24}>
@@ -481,10 +534,22 @@ function EditProfile() {
                                 <Option value="NodeJS"> NodeJS</Option>
                               </Select>
                             </Form.Item>
+                            <Form.Item
+                              label="Total Years of Experience"
+                              rules={[{ required: true, message: 'Need to define' }]}
+                            >
+                              <Input
+                                type="number"
+                                name="totalExperience"
+                                value={ProfileData?.totalExperience}
+                                onChange={handleChange}
+                                maxLength={100}
+                              />
+                            </Form.Item>
                           </Col>
                         </Row>
                         <h2>Education</h2>
-                        <Form.Item
+                        {/* <Form.Item
                           label="School Name"
                           // name="schoolName"
                           rules={[{ required: true, message: 'School Name is mandatory field' }]}
@@ -515,11 +580,91 @@ function EditProfile() {
                             onChange={handleChange}
                             maxLength={100}
                           />
-                        </Form.Item>
-                        <Form.Item label="University">
+                        </Form.Item> */}
+                        <Form.Item label="University Name/Collage Name">
                           <Input
                             name="university"
                             value={ProfileData?.education.university}
+                            onChange={handleChange}
+                            maxLength={100}
+                          />
+                        </Form.Item>
+                        <Row gutter={25}>
+                          <Col lg={24} sm={24}>
+                            <Form.Item label="Highest Qualification">
+                              <Select
+                                // mode="tags
+                                // showSearch
+                                filterOption={(input, option) =>
+                                  option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                                }
+                                value={ProfileData?.education.highestQualification}
+                              >
+                                <Option value="Phd">Doctorate/Phd </Option>
+                                <Option value="Masters">Masters/Post-Graduation </Option>
+                                <Option value="Graduation">Graduation/Diploma</Option>
+                                <Option value="12">12th </Option>
+                                <Option value="10">10th</Option>
+                              </Select>
+                            </Form.Item>
+                          </Col>
+                        </Row>
+                        <Form.Item
+                          label="Course"
+                          // name="board"
+                          rules={[{ required: true, message: 'Course is mandatory field' }]}
+                        >
+                          <Input
+                            name="course"
+                            value={ProfileData?.education.course}
+                            onChange={handleChange}
+                            maxLength={100}
+                          />
+                        </Form.Item>
+                        <Form.Item
+                          label="Specialization"
+                          // name="board"
+                          rules={[{ required: true, message: 'Specialization is mandatory field' }]}
+                        >
+                          <Input
+                            name="specialization"
+                            value={ProfileData?.education.specialization}
+                            onChange={handleChange}
+                            maxLength={100}
+                          />
+                        </Form.Item>
+                        <Form.Item
+                          label="Starting Year"
+                          // name="board"
+                          rules={[{ required: true, message: 'Starting Year is mandatory field' }]}
+                        >
+                          <Input
+                            name="startingYear"
+                            value={ProfileData?.education.startingYear}
+                            onChange={handleChange}
+                            maxLength={100}
+                          />
+                        </Form.Item>
+                        <Form.Item
+                          label="Passing Year"
+                          // name="board"
+                          rules={[{ required: true, message: 'Passing Year is mandatory field' }]}
+                        >
+                          <Input
+                            name="passingYear"
+                            value={ProfileData?.education.passingYear}
+                            onChange={handleChange}
+                            maxLength={100}
+                          />
+                        </Form.Item>
+                        <Form.Item
+                          label="Grades"
+                          // name="board"
+                          rules={[{ required: true, message: 'Grades is mandatory field' }]}
+                        >
+                          <Input
+                            name="grades"
+                            value={ProfileData?.education.grades}
                             onChange={handleChange}
                             maxLength={100}
                           />
@@ -536,9 +681,10 @@ function EditProfile() {
                                 )}
                                 <Form.Item label="Company Name">
                                   <Input
-                                    name="companyName"
-                                    value={experience.companyName}
-                                    onChange={handleChange}
+                                    type='text'
+                                    name="company"
+                                    value={experience.company}
+                                    onChange={(e) => handleChangeExperience(index, e)}
                                     maxLength={100}
                                   />
                                 </Form.Item>
@@ -546,33 +692,31 @@ function EditProfile() {
                                   <Input
                                     name="designation"
                                     value={experience.designation}
-                                    onChange={handleChange}
+                                    onChange={(e) => handleChangeExperience(index, e)}
                                     maxLength={100}
                                   />
                                 </Form.Item>
                                 <Form.Item label="Joining Date">
                                   <DatePicker
-                                    onChange={handleDate}
+                                    onChange={(date, dateString) => handleDateExperience(date, dateString, index, 'joinedDate')}
                                     style={{ width: '100%' }}
-                                    defaultValue={experience.doj ? moment(`${experience.doj}`, dateFormat) : null}
+                                    defaultValue={experience.joinedDate ? moment(`${experience.joinedDate}`, dateFormat) : null}
                                     format={dateFormat}
-                                    disabledDate={disabledDate}
                                   />
                                 </Form.Item>
                                 <Form.Item label="Date of Leaving">
                                   <DatePicker
-                                    onChange={handleDate}
+                                    onChange={(date, dateString) => handleDateExperience(date, dateString, index, 'endDate')}
                                     style={{ width: '100%' }}
-                                    defaultValue={experience.dol ? moment(`${experience.dol}`, dateFormat) : null}
+                                    defaultValue={experience.endDate ? moment(`${experience.endDate}`, dateFormat) : null}
                                     format={dateFormat}
-                                    disabledDate={disabledDate}
                                   />
                                 </Form.Item>
-                                <Form.Item label="Responsibilities">
+                                <Form.Item label="Responsibility">
                                   <Input
-                                    name="responsibilities"
-                                    value={experience.responsibilities}
-                                    onChange={handleChange}
+                                    name="responsibility"
+                                    value={experience.responsibility}
+                                    onChange={(e) => handleChangeExperience(index, e)}
                                     maxLength={1000}
                                   />
                                 </Form.Item>

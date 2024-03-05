@@ -240,22 +240,37 @@ function UserProfile() {
                       <ul>
                         <li>
                           <div>
-                            <h3>School Name: </h3>
+                            <h3>University Name/Collage Name: </h3>
                           </div>
                         </li>
                         <li>
                           <div>
-                            <h3>Board: </h3>
+                            <h3>Highest Qualification: </h3>
                           </div>
                         </li>
                         <li>
                           <div>
-                            <h3>Collage Name: </h3>
+                            <h3>Course: </h3>
                           </div>
                         </li>
                         <li>
                           <div>
-                            <h3>University: </h3>
+                            <h3>Specialization: </h3>
+                          </div>
+                        </li>
+                        <li>
+                          <div>
+                            <h3>Starting Year: </h3>
+                          </div>
+                        </li>
+                        <li>
+                          <div>
+                            <h3>Passing Year: </h3>
+                          </div>
+                        </li>
+                        <li>
+                          <div>
+                            <h3>Grades: </h3>
                           </div>
                         </li>
                       </ul>

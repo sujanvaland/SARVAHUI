@@ -5,23 +5,23 @@ const initialState = {
     error: null,
 };
 
-const { BOOKMARK_JOB_BEGIN, BOOKMARK_JOB_SUCCESS, BOOKMARK_JOB_ERR } = actions;
+const { GET_BOOKMARK_JOB_BEGIN, GET_BOOKMARK_JOB_SUCCESS, GET_BOOKMARK_JOB_ERR } = actions;
 
 const bookmarkJobReducer = (state = initialState, action) => {
     const { type, bookmarkjobs, err } = action;
     switch (type) {
-        case BOOKMARK_JOB_BEGIN:
+        case GET_BOOKMARK_JOB_BEGIN:
             return {
                 ...state,
                 postLoading: true,
             };
-        case BOOKMARK_JOB_SUCCESS:
+        case GET_BOOKMARK_JOB_SUCCESS:
             return {
                 ...state,
                 bookmark: bookmarkjobs,
                 postLoading: false,
             };
-        case BOOKMARK_JOB_ERR:
+        case GET_BOOKMARK_JOB_ERR:
             return {
                 ...state,
                 error: err,
