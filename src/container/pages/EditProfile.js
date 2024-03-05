@@ -44,10 +44,10 @@ function EditProfile() {
     email: data?.email || '',
     resume: data?.resume || '',
     linkedinLink: data?.linkedinLink || '',
-    skills: data?.skills ? JSON.parse(data?.skills) : [],
+    skills: data?.skills ? data?.skills.split(', ') : [],
     profileImg: data?.profileImg || '',
     backgroundImg: data?.backgroundImg || '',
-    tags: data?.tags ? JSON.parse(data?.tags) : [],
+    tags: data?.tags ? data?.tags.split(', ') : [],
     education: data?.education
       ? data?.education
       : [
@@ -91,10 +91,10 @@ function EditProfile() {
       email: data?.email || '',
       resume: data?.resume || '',
       linkedinLink: data?.linkedinLink || '',
-      skills: data?.skills ? JSON.parse(data?.skills) : [],
+      skills: data?.skills ? data?.skills.split(', ') : [],
       profileImg: data?.profileImg || '',
       backgroundImg: data?.backgroundImg || '',
-      tags: data?.tags ? JSON.parse(data?.tags) : [],
+      tags: data?.tags ? data?.tags.split(', ') : [],
       education: data?.education
         ? data?.education
         : [
@@ -120,6 +120,7 @@ function EditProfile() {
     });
   }, [data]);
 
+  console.log("data",ProfileData);
   useEffect(() => {
     setProfileData({
       ...ProfileData,
@@ -152,8 +153,8 @@ function EditProfile() {
   const handleSubmit = async () => {
     const res = {
       ...ProfileData,
-      skills: JSON.stringify(ProfileData.skills),
-      tags: JSON.stringify(ProfileData.tags),
+      skills: ProfileData?.skills.join(', '),
+      tags: ProfileData?.tags.join(', '),
     };
     await dispatch(updateUserProfile(res));
   };
@@ -196,6 +197,8 @@ function EditProfile() {
   };
 
   const handleSelectedTags = (selected) => {
+    const filter = selected.join(', ')
+    console.log("selected",filter);
     setProfileData({
       ...ProfileData,
       tags: selected,
