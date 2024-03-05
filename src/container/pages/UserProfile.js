@@ -37,10 +37,11 @@ function UserProfile() {
   });
 
   const [ProfileData, setProfileData] = useState({
-    skills: data?.skills ? JSON.parse(data?.skills) : [],
-    tags: data?.tags ? JSON.parse(data?.tags) : [],
+    skills: data?.skills ? data?.skills.split(', ') : [],
+    tags: data?.tags ? data?.tags.split(', ') : [],
   });
 
+  console.log(ProfileData);
   useEffect(() => {
     const user = userName !== undefined ? userName : loginuser;
     if (user !== undefined) {
@@ -57,8 +58,8 @@ function UserProfile() {
       dispatch(GetExperienceSuggestion(data.id));
 
       setProfileData({
-        skills: data?.skills ? JSON.parse(data?.skills) : [],
-        tags: data?.tags ? JSON.parse(data?.tags) : [],
+        skills: data?.skills ? data?.skills.split(', ') : [],
+        tags: data?.tags ? data?.tags.split(', ') : [],
       });
     }
   }, [data]);
@@ -157,7 +158,7 @@ function UserProfile() {
                         </ul>
                       </div>
 
-                      <div className="tagsbox">
+                      {/* <div className="tagsbox">
                         {ProfileData?.tags?.length > 0
                           ? ProfileData?.tags.map((item, index) => (
                               <Link key={index} to={`/${item.toLowerCase().replace(/\s+/g, '-')}`}>
@@ -165,7 +166,7 @@ function UserProfile() {
                               </Link>
                             ))
                           : ''}
-                      </div>
+                      </div> */}
                       <div className="locaitonbox followers">
                         <ul>
                           <li>
