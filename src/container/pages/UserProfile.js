@@ -41,7 +41,7 @@ function UserProfile() {
     tags: data?.tags ? data?.tags.split(', ') : [],
   });
 
-  console.log(ProfileData);
+  console.log("data", ProfileData);
   useEffect(() => {
     const user = userName !== undefined ? userName : loginuser;
     if (user !== undefined) {
@@ -99,6 +99,8 @@ function UserProfile() {
   const firstName = data?.firstName ? data.firstName.charAt(0).toUpperCase() + data.firstName.slice(1) : '';
   const lastName = data?.lastName ? data.lastName.charAt(0).toUpperCase() + data.lastName.slice(1) : '';
   const JoinedDate = data?.createdDate ? convertToMonthYear(data?.createdDate) : '';
+
+  console.log("data", data);
 
   return (
     <>
@@ -279,37 +281,49 @@ function UserProfile() {
                   )}
                 </TabPane>
                 <TabPane tab="Experience" key="2" className="tabcntbox">
-                  {userName === undefined && (
-                    <div className="tabhead">
-                      <ul>
-                        <li>
-                          <div>
-                            <h3>Company Name: </h3>
-                          </div>
-                        </li>
-                        <li>
-                          <div>
-                            <h3>Designation: </h3>
-                          </div>
-                        </li>
-                        <li>
-                          <div>
-                            <h3>Joining Date: </h3>
-                          </div>
-                        </li>
-                        <li>
-                          <div>
-                            <h3>Date of Leaving: </h3>
-                          </div>
-                        </li>
-                        <li>
-                          <div>
-                            <h3>Responsibilities: </h3>
-                          </div>
-                        </li>
-                      </ul>
+                  {data.experience ?
+                    (data?.experience.map((exper, index) => (
+                      <div className="tabhead">
+                        <ul>
+                          <li>
+                            <div>
+                              <h3>Experience {index + 1} </h3>
+                            </div>
+                          </li>
+                          <li>
+                            <div>
+                              <h3>Company Name: {exper.company} </h3>
+                            </div>
+                          </li>
+                          <li>
+                            <div>
+                              <h3>Designation: {exper.designation}</h3>
+                            </div>
+                          </li>
+                          <li>
+                            <div>
+                              <h3>Joining Date: {exper.joinedDate}</h3>
+                            </div>
+                          </li>
+                          <li>
+                            <div>
+                              <h3>Date of Leaving:{exper.endDate} </h3>
+                            </div>
+                          </li>
+                          <li>
+                            <div>
+                              <h3>Responsibilities: {exper.responsibility}</h3>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    ))) :
+                  <li>
+                    <div>
+                      <h3>No Experience</h3>
                     </div>
-                  )}
+                  </li>}
+
                 </TabPane>
                 <TabPane tab="Certification" key="3" className="tabcntbox">
                   {userName === undefined && (

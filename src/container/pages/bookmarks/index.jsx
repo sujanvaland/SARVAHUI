@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { Dropdown, Menu } from "antd";
 import { ShareAltOutlined, LinkOutlined, UploadOutlined, MailOutlined } from '@ant-design/icons';
-import { toggleBookmark } from "../../../redux/reaction/actionCreator";
 import getAllBookmarkJobs from "../../../redux/bookmarkJobs/actionCreator";
 import { DiscoverCommunities, LinkDiv } from "../style";
 import EventDetailsComponent from "../event/eventDetails";
+import { toggleBookmark } from "../../../redux/postJob/actionCreator";
 // import PostComponent from "../post";
 
 
