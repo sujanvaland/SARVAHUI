@@ -143,13 +143,8 @@ function EventTimeline() {
       <div className="cntpagecomponent">
         <div className="centersidebarcontent flexcolumn mt56">
           <div className="tabbox">
-            <Button
-              className="btntab active"
-            >
-              {' '}
-             All Jobs
-            </Button>
-            
+            <Button className="btntab active"> All Jobs</Button>
+
             <Button className="btntabsetting" onClick={() => handleFilter()}>
               <FilterOutlined />
             </Button>
@@ -215,7 +210,11 @@ function EventTimeline() {
                           <Link to="#" onClick={() => handleToggleBookmark({ PostId: item.id })}>
                             <svg viewBox="0 0 24 24" aria-hidden="true">
                               <g>
-                                <path d="M4 4.5C4 3.12 5.119 2 6.5 2h11C18.881 2 20 3.12 20 4.5v18.44l-8-5.71-8 5.71V4.5zM6.5 4c-.276 0-.5.22-.5.5v14.56l6-4.29 6 4.29V4.5c0-.28-.224-.5-.5-.5h-11z" />
+                                {item.isBookmarked === 1 ? (
+                                  <path d="M2.849,23.55a2.954,2.954,0,0,0,3.266-.644L12,17.053l5.885,5.853a2.956,2.956,0,0,0,2.1.881,3.05,3.05,0,0,0,1.17-.237A2.953,2.953,0,0,0,23,20.779V5a5.006,5.006,0,0,0-5-5H6A5.006,5.006,0,0,0,1,5V20.779A2.953,2.953,0,0,0,2.849,23.55Z" />
+                                ) : (
+                                  <path d="M4 4.5C4 3.12 5.119 2 6.5 2h11C18.881 2 20 3.12 20 4.5v18.44l-8-5.71-8 5.71V4.5zM6.5 4c-.276 0-.5.22-.5.5v14.56l6-4.29 6 4.29V4.5c0-.28-.224-.5-.5-.5h-11z" />
+                                )}
                               </g>
                             </svg>
                           </Link>
