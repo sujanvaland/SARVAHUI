@@ -79,7 +79,19 @@ function EditProfile() {
           responsibility: '',
         },
       ],
-    certiNames: data?.certiNames || '',
+    certificate: data?.certificate?.length > 0
+      ? data.certificate.map((job) => ({
+        id: job.id,
+        userId: job.userId || 0,
+        certificateName: job.certificateName || '',
+      }))
+      : [
+        {
+          id: 0,
+          userId: 0,
+          certificateName: '',
+        },
+      ],
   });
   console.log("Total Experience: ", ProfileData);
   const [validationErrorMSG, setvalidationErrorMSG] = useState({
@@ -135,7 +147,19 @@ function EditProfile() {
             responsibility: '',
           },
         ],
-      certiNames: data?.certiNames || '',
+      certificate: data?.certificate?.length > 0
+        ? data.certificate.map((job) => ({
+          id: job.id,
+          userId: job.userId || 0,
+          certificateName: job.certificateName || '',
+        }))
+        : [
+          {
+            id: 0,
+            userId: 0,
+            certificateName: '',
+          },
+        ],
     });
   }, [data]);
 
@@ -169,7 +193,12 @@ function EditProfile() {
     updatedExperience[index] = { ...updatedExperience[index], [name]: value }; // Update the specific property
     setProfileData({ ...ProfileData, experience: updatedExperience }); // Update ProfileData with the updated experience array
   };
-
+  const handleChangeCertificate = (index, e) => {
+    const { name, value } = e.target;
+    const updatedcertificate = [...ProfileData.certificate]; // Copy the experience array
+    updatedcertificate[index] = { ...updatedcertificate[index], [name]: value }; // Update the specific property
+    setProfileData({ ...ProfileData, certificate: updatedcertificate }); // Update ProfileData with the updated experience array
+  };
   const handleDateExperience = (date, dateString, index, field) => {
     const updatedExperience = [...ProfileData.experience];
     updatedExperience[index][field] = dateString; // Update the specific date field
@@ -183,14 +212,14 @@ function EditProfile() {
     });
   };
 
-  const handleStartingYear  = (dateString) => {
+  const handleStartingYear = (dateString) => {
     setProfileData({
       ...ProfileData,
       startingYear: dateString,
     });
   };
 
-  const handlePassingYear  = (dateString) => {
+  const handlePassingYear = (dateString) => {
     setProfileData({
       ...ProfileData,
       passingYear: dateString,
@@ -261,15 +290,30 @@ function EditProfile() {
   const handleAddExp = () => {
     const exp = ProfileData.experience;
     exp.push({
+      id: 0,
+      userId: 0,
       company: '',
       designation: '',
       joinedDate: '',
       endDate: '',
-      responsibilities: '',
+      responsibility: '',
     });
     setProfileData({
       ...ProfileData,
       experience: exp,
+    });
+  };
+
+  const handleAddCerti = () => {
+    const exp = ProfileData.certificate;
+    exp.push({
+      id: 0,
+      userId: 0,
+      certificateName: '',
+    });
+    setProfileData({
+      ...ProfileData,
+      certificate: exp,
     });
   };
 
@@ -281,7 +325,14 @@ function EditProfile() {
       experience: exp,
     });
   };
-
+  const handleRemoveCerti = (index) => {
+    const exp = ProfileData.certificate;
+    exp.splice(index, 1);
+    setProfileData({
+      ...ProfileData,
+      certificate: exp,
+    });
+  };
   const disabledDate = (current) => {
     const fifteenYearsAgo = moment().subtract(15, 'years');
     return current && current > fifteenYearsAgo.endOf('day');
@@ -734,18 +785,34 @@ function EditProfile() {
                           Add Experience
                         </Link>{' '}
                         <h2>Certification</h2>
-                        <Form.Item
-                          label="Certificates"
-                          // name="certiName"
-                          rules={[{ required: true, message: 'Certificates is mandatory field' }]}
-                        >
-                          <Input
-                            name="certiName"
-                            value={ProfileData?.experience.certiName}
-                            onChange={handleChange}
-                            maxLength={100}
-                          />
-                        </Form.Item>
+                        {ProfileData.certificate?.map((certi, index) => {
+                          return (
+                            <div key={index}>
+                              <Form.Item>
+                                {ProfileData?.certificate?.length > 1 && (
+                                  <Link to="#" type="button" size="large" onClick={() => handleRemoveCerti(index)}>
+                                    Remove Certificate {/* Change button text here */}
+                                  </Link>
+                                )}
+                                <Form.Item
+                                   label={`Certificate ${index + 1}`}
+                                >
+                                  <Input
+                                    name="certificateName"
+                                    value={certi?.certificateName}
+                                    onChange={(e) => handleChangeCertificate(index,e)}
+                                    maxLength={100}
+                                  />
+                                </Form.Item>
+
+
+                              </Form.Item>
+                            </div>
+                          );
+                        })}
+                        <Link to="#" type="button" size="large" onClick={handleAddCerti}>
+                          Add Certificate {/* Change button text here */}
+                        </Link>{' '}
                         <Row gutter={25}>
                           <Col lg={24} sm={24}>
                             <Form.Item className="btnboxmain">
@@ -760,7 +827,7 @@ function EditProfile() {
                             </Form.Item>
                           </Col>
                         </Row>
-                      </Form>
+                      </Form >
                     </div>
                   </div>
                 </div>

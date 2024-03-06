@@ -243,37 +243,37 @@ function UserProfile() {
                       <ul>
                         <li>
                           <div>
-                            <h3>University Name/Collage Name: </h3>
+                            <h3>University Name/Collage Name: {data?.university} </h3>
                           </div>
                         </li>
                         <li>
                           <div>
-                            <h3>Highest Qualification: </h3>
+                            <h3>Highest Qualification: {data?.highestQualification} </h3>
                           </div>
                         </li>
                         <li>
                           <div>
-                            <h3>Course: </h3>
+                            <h3>Course: {data?.course} </h3>
                           </div>
                         </li>
                         <li>
                           <div>
-                            <h3>Specialization: </h3>
+                            <h3>Specialization: {data?.specialization} </h3>
                           </div>
                         </li>
                         <li>
                           <div>
-                            <h3>Starting Year: </h3>
+                            <h3>Starting Year: {convertToMonthYear(data?.startingYear)}</h3>
                           </div>
                         </li>
                         <li>
                           <div>
-                            <h3>Passing Year: </h3>
+                            <h3>Passing Year: {convertToMonthYear(data?.passingYear)}</h3>
                           </div>
                         </li>
                         <li>
                           <div>
-                            <h3>Grades: </h3>
+                            <h3>Grades: {data?.grades} </h3>
                           </div>
                         </li>
                       </ul>
@@ -281,7 +281,7 @@ function UserProfile() {
                   )}
                 </TabPane>
                 <TabPane tab="Experience" key="2" className="tabcntbox">
-                  {data.experience ?
+                  {data.experience.length > 0 ?
                     (data?.experience.map((exper, index) => (
                       <div className="tabhead">
                         <ul>
@@ -302,12 +302,12 @@ function UserProfile() {
                           </li>
                           <li>
                             <div>
-                              <h3>Joining Date: {exper.joinedDate}</h3>
+                              <h3>Joining Date: {convertToMonthYear(exper.joinedDate)}</h3>
                             </div>
                           </li>
                           <li>
                             <div>
-                              <h3>Date of Leaving:{exper.endDate} </h3>
+                              <h3>Date of Leaving: {convertToMonthYear(exper.endDate)} </h3>
                             </div>
                           </li>
                           <li>
@@ -318,25 +318,32 @@ function UserProfile() {
                         </ul>
                       </div>
                     ))) :
-                  <li>
-                    <div>
-                      <h3>No Experience</h3>
-                    </div>
-                  </li>}
+                    <li>
+                      <div>
+                        <h3>No Experience</h3>
+                      </div>
+                    </li>}
 
                 </TabPane>
                 <TabPane tab="Certification" key="3" className="tabcntbox">
-                  {userName === undefined && (
-                    <div className="tabhead">
-                      <ul>
-                        <li>
-                          <div>
-                            <h3>Certificates: </h3>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                  )}
+                  {data.certificate.length > 0 ?
+                    (data?.certificate.map((certi, index) => (
+                      <div className="tabhead">
+                        <ul>
+                          <li>
+                            <div>
+                              <h3>Certificates {index + 1} : {certi?.certificateName}</h3>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    ))) :
+                    <li>
+                      <div>
+                        <h3>No Experience</h3>
+                      </div>
+                    </li>}
+
                 </TabPane>
                 <TabPane tab="Social Media" key="4" className="tabcntbox">
                   <>

@@ -7,6 +7,8 @@ const actions = {
   GET_ALL_JOBS_SUCCESS: 'GET_ALL_JOBS_SUCCESS',
   GET_ALL_JOBS_ERR: 'GET_ALL_JOBS_ERR',
 
+  GET_ALL_JOBS_EMPTY: 'GET_ALL_JOBS_EMPTY',
+
   TOGGLE_BOOKMARK_BEGIN: 'TOGGLE_BOOKMARK_BEGIN',
   TOGGLE_BOOKMARK_SUCCESS: 'TOGGLE_BOOKMARK_SUCCESS',
   TOGGLE_BOOKMARK_ERR: 'TOGGLE_BOOKMARK_ERR',
@@ -68,10 +70,19 @@ const actions = {
   getAllJobsSuccess: (data) => {
     return {
       type: actions.GET_ALL_JOBS_SUCCESS,
-      jobDetails: data,
+      totalCount: data[0] ? data[0].totalCount : 0, 
+      totalSize: data[0] ? data[0].totalSize : 0,
+      jobDetails: data ,
     };
   },
-
+  getAllJobsEmpty: (data) => {
+    return {
+      type: actions.GET_ALL_JOBS_EMPTY,
+      totalCount: data ? data[0].totalCount : 0, 
+      totalSize: data ? data[0].totalSize : 0,
+      jobDetails: data || [],
+    };
+  },
   getAllJobsErr: (err) => {
     return {
       type: actions.GET_ALL_JOBS_ERR,

@@ -5,7 +5,7 @@ import { DataService } from '../../config/dataService/dataService';
 
 const { jobPostDataBegin, jobPostDataSuccess, jobPostDataErr, getAllJobsBegin, getAllJobsSuccess,
   getAllJobsErr, toggleBookmarkBegin, toggleBookmarkSuccess, toggleBookmarkErr, getJobDetailsBegin,
-  getJobDetailsSuccess, getJobDetailsErr, getBookmarkJobBegin, getBookmarkJobSuccess, getBookmarkJobErr } =
+  getJobDetailsSuccess, getJobDetailsErr, getBookmarkJobBegin, getBookmarkJobSuccess, getBookmarkJobErr, getAllJobsEmpty } =
   actions;
 
 const submitPost = (data) => {
@@ -39,12 +39,21 @@ const submitPost = (data) => {
   };
 };
 
+const EmptyMyJobs = () => {
+  return async (dispatch) => {
+    dispatch(getAllJobsEmpty(null))
+  }
+}
+
 const getAllJobs = (data) => {
   return async (dispatch) => {
     try {
       dispatch(getAllJobsBegin());
       const response = await DataService.post('Job/GetAllJobs', data);
       if (response.data.success) {
+        if (data?.pageNo === 1) {
+          dispatch(EmptyMyJobs());
+        }
         dispatch(getAllJobsSuccess(response.data.result));
       } else {
         dispatch(getAllJobsErr(response.data.success));
@@ -72,7 +81,7 @@ const toggleBookmark = (data) => {
               ...jobDetails[idxj],
               isBookmarked: jobDetails[idxj].isBookmarked === 1 ? 0 : 1
             };
-            dispatch(getAllJobsSuccess(jobDetails));
+            dispatch(getAllJobsEmpty(jobDetails));
           }
         }
 

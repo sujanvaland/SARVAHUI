@@ -18,13 +18,29 @@ function EventTimeline() {
   const dispatch = useDispatch();
 
   const { Option } = Select;
+  const [isFilter, setIsFilter] = useState(false);
+  const [isMore, setIsMore] = useState(true);
+  const [PageNo, setPageNo] = useState(1);
 
-  const { jobDetails } = useSelector((state) => ({
+  const { jobDetails, totalCount, totalSize } = useSelector((state) => ({
     jobDetails: state?.postJob?.jobDetails,
+    totalCount: state?.postJob?.totalCount,
+    totalSize: state?.postJob?.totalSize,
     isLoader: state?.Post.loading,
   }));
 
-  console.log('All Jobs: ', jobDetails);
+  console.log(totalCount,totalSize);
+  useEffect(() => {
+    const totalPages = Math.ceil(totalCount / totalSize);
+    console.log("data",totalPages);
+    if (PageNo >= totalPages || !totalPages) {
+      setIsMore(false);
+    }else{
+      setIsMore(true);
+    }
+    console.log("data","reached",PageNo)
+  }, [jobDetails]);
+
   const scrollRef = useRef(null);
   const [filter, setFilter] = useState({
     searchText: '',
@@ -47,6 +63,7 @@ function EventTimeline() {
   }, [filter]);
 
   const handleSalaryFilter = (e) => {
+    setPageNo(1);
     // Accessing e.item.props.type, but e.item.props may be undefined
     console.log(e.item.props.type);
     const minSalary = e.item.props.type.split('-')[0];
@@ -61,31 +78,54 @@ function EventTimeline() {
   };
 
   const handlePostedOnFilter = (e) => {
+    setPageNo(1);
     const selectedDateRange = e.item.props.type;
     setFilter({
       ...filter,
+      pageNo: 1,
       postedOn: e.key,
       selectedDateRange,
     });
   };
 
-  const [isFilter, setIsFilter] = useState(false);
 
   const handleFilter = () => {
     setIsFilter(!isFilter);
   };
 
-  const handleJobSearch = () => {
-    console.log('Search the job');
-  };
-
-  const handleSelectedSkills = (selected) => {
+  const handleJobSearch = (e) => {
+    setPageNo(1);
     setFilter({
       ...filter,
-      skills: selected,
+      [e.target.name]: e.target.value,
     });
   };
 
+  const handleSelectedSkills = (selected) => {
+    setPageNo(1);
+    setFilter({
+      ...filter,
+      skills: selected,
+      pageNo: 1,
+    });
+  };
+
+  const handleResetFilter = () => {
+    setPageNo(1);
+
+    setFilter({
+      searchText: '',
+      skills: null,
+      // postedOn: 'Posted On',
+      // salary: 'Salary',
+      // skills: [],
+      minSalary: 0,
+      maxSalary: 0,
+      timePeriod: 0,
+      pageNo: 1,
+    });
+
+  }
   const salaryMenu = (
     <Menu onClick={handleSalaryFilter}>
       <Menu.Item key="1lac - 3lac" type="100000-300000">
@@ -121,6 +161,11 @@ function EventTimeline() {
     dispatch(getJobDetails(data));
   };
 
+  const handlePageNo = () => {
+    setPageNo(PageNo + 1);
+    dispatch(getAllJobs({ ...filter, pageNo: PageNo + 1 }));
+
+  }
   const shareMenu = (
     <Menu>
       <Menu.Item>
@@ -153,7 +198,7 @@ function EventTimeline() {
             <DiscoverCommunities className="communitiesBoxDetails eventDetails">
               {isFilter && (
                 <div className="eventSearch">
-                  <Input name="Search" maxLength={1000} placeholder="Search Jobs" onChange={handleJobSearch} />
+                  <Input name="searchText" maxLength={100} value={filter.searchText} placeholder="Search Jobs" onChange={handleJobSearch} />
                   <ul>
                     <li>
                       <Form.Item label="Skills">
@@ -186,7 +231,7 @@ function EventTimeline() {
                       </Dropdown>
                     </li>
                     <li>
-                      <Link to="" className="resetLink">
+                      <Link to="" className="resetLink" onClick={() => handleResetFilter()}>
                         Reset Filter
                       </Link>
                     </li>
@@ -235,6 +280,11 @@ function EventTimeline() {
                   </LinkDiv>
                 </>
               ))}
+              {isMore &&
+                <LinkDiv onClick={() => handlePageNo()}>
+                  Load More
+                </LinkDiv>
+              }
             </DiscoverCommunities>
           </div>
         </div>

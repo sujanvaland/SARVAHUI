@@ -3,18 +3,19 @@ import actions from './actions';
 const initialState = {
   loading: false,
   error: null,
+  jobDetails:[]
 };
 
 const {
   JOB_POST_DATA_BEGIN, JOB_POST_DATA_SUCCESS, JOB_POST_DATA_ERR,
-  GET_ALL_JOBS_BEGIN, GET_ALL_JOBS_SUCCESS, GET_ALL_JOBS_ERR,
+  GET_ALL_JOBS_BEGIN, GET_ALL_JOBS_SUCCESS, GET_ALL_JOBS_ERR, GET_ALL_JOBS_EMPTY,
   TOGGLE_BOOKMARK_BEGIN, TOGGLE_BOOKMARK_SUCCESS, TOGGLE_BOOKMARK_ERR,
   GET_JOBS_DETAILS_BEGIN, GET_JOBS_DETAILS_SUCCESS, GET_JOBS_DETAILS_ERR,
   GET_BOOKMARK_JOB_BEGIN, GET_BOOKMARK_JOB_SUCCESS, GET_BOOKMARK_JOB_ERR
 } = actions;
 
 const JobPostReducer = (state = initialState, action) => {
-  const { type, jobDetails, job, err, bookmarkjobs,toggleBookmark, jobpostdetails } = action;
+  const { type, jobDetails, job, err, bookmarkjobs, toggleBookmark, totalCount, totalSize, jobpostdetails } = action;
   switch (type) {
     case GET_BOOKMARK_JOB_BEGIN:
       return {
@@ -59,9 +60,19 @@ const JobPostReducer = (state = initialState, action) => {
     case GET_ALL_JOBS_SUCCESS:
       return {
         ...state,
-        jobDetails,
+        totalCount,
+        totalSize,
+        jobDetails:[...state.jobDetails,...jobDetails],
         loading: false,
       };
+      case GET_ALL_JOBS_EMPTY:
+        return {
+          ...state,
+          totalCount,
+          totalSize,
+          jobDetails,
+          loading: false,
+        };
     case GET_ALL_JOBS_ERR:
       return {
         ...state,
