@@ -10,80 +10,98 @@ const {
   GET_ALL_JOBS_BEGIN, GET_ALL_JOBS_SUCCESS, GET_ALL_JOBS_ERR,
   TOGGLE_BOOKMARK_BEGIN, TOGGLE_BOOKMARK_SUCCESS, TOGGLE_BOOKMARK_ERR,
   GET_JOBS_DETAILS_BEGIN, GET_JOBS_DETAILS_SUCCESS, GET_JOBS_DETAILS_ERR,
-
+  GET_BOOKMARK_JOB_BEGIN, GET_BOOKMARK_JOB_SUCCESS, GET_BOOKMARK_JOB_ERR
 } = actions;
 
 const JobPostReducer = (state = initialState, action) => {
-  const { type, jobDetails, job, err, toggleBookmark, jobpostdetails } = action;
+  const { type, jobDetails, job, err, bookmarkjobs,toggleBookmark, jobpostdetails } = action;
   switch (type) {
+    case GET_BOOKMARK_JOB_BEGIN:
+      return {
+          ...state,
+          loading: true,
+      };
+  case GET_BOOKMARK_JOB_SUCCESS:
+      return {
+          ...state,
+          bookmarkjobs,
+          loading: false,
+      };
+  case GET_BOOKMARK_JOB_ERR:
+      return {
+          ...state,
+          error: err,
+          loading: false,
+      };
+  
     case JOB_POST_DATA_BEGIN:
       return {
         ...state,
-        postLoading: true,
+        loading: true,
       };
     case JOB_POST_DATA_SUCCESS:
       return {
         ...state,
         job,
-        postLoading: false,
+        loading: false,
       };
     case JOB_POST_DATA_ERR:
       return {
         ...state,
         error: err,
-        postLoading: false,
+        loading: false,
       };
     case GET_ALL_JOBS_BEGIN:
       return {
         ...state,
-        postLoading: true,
+        loading: true,
       };
     case GET_ALL_JOBS_SUCCESS:
       return {
         ...state,
         jobDetails,
-        postLoading: false,
+        loading: false,
       };
     case GET_ALL_JOBS_ERR:
       return {
         ...state,
         error: err,
-        postLoading: false,
+        loading: false,
       };
     case TOGGLE_BOOKMARK_BEGIN:
       return {
         ...state,
-        postLoading: true,
+        loading: true,
       };
     case TOGGLE_BOOKMARK_SUCCESS:
       return {
         ...state,
         toggleBookmark,
-        postLoading: false,
+        loading: false,
       };
     case TOGGLE_BOOKMARK_ERR:
       return {
         ...state,
         error: err,
-        postLoading: false,
+        loading: false,
       };
 
     case GET_JOBS_DETAILS_BEGIN:
       return {
         ...state,
-        postLoading: true,
+        loading: true,
       };
     case GET_JOBS_DETAILS_SUCCESS:
       return {
         ...state,
         jobpostdetails,
-        postLoading: false,
+        loading: false,
       };
     case GET_JOBS_DETAILS_ERR:
       return {
         ...state,
         error: err,
-        postLoading: false,
+        loading: false,
       };
 
     default:
