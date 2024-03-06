@@ -28,13 +28,10 @@ const Explore = lazy(() => import('../../container/pages/Explore'));
 const Notification = lazy(() => import('../../container/pages/Notification'));
 const Invitefriend = lazy(() => import('../../container/pages/Invitefriend'));
 const EditProfile = lazy(() => import('../../container/pages/EditProfile'));
+const Dashboard = lazy(() => import('../../container/pages/Dashboard'));
 const Chatting = lazy(() => import('../../container/pages/chatting'));
 const Event = lazy(() => import('../../container/pages/event'));
 const AppliedJobs = lazy(() => import('../../container/pages/appliedJobs'));
-
-
-
-
 
 function Admin() {
   const { path } = useRouteMatch();
@@ -45,6 +42,7 @@ function Admin() {
         <Route exact path="/linkedin" component={LinkedInCallback} />
         <Route path={`${path}postdetails/:postId`} component={PostDetails} />
         <Route path={`${path}message`} component={Chatting} />
+        <Route path={`${path}admin/dashboard`} component={Dashboard} />
         <Route path={`${path}scoket`} component={MyComponent} />
         <Route path={`${path}network/:network?`} component={Network} />
         <Route path={`${path}profile/:userName?`} component={UserProfile} />
@@ -60,9 +58,9 @@ function Admin() {
         <Route path={`${path}invitefriend`} component={Invitefriend} />
         <Route exact path="/tos" component={TermOfService} />
         <Route exact path="/privacy" component={PrivacyPolicy} />
-        <Route exact path="/cookie" component={CookiePolicy}/>
-        <Route exact path="/access" component={Accessibility}/>
-        <Route exact path="/ads" component={AdsInfo}/>
+        <Route exact path="/cookie" component={CookiePolicy} />
+        <Route exact path="/access" component={Accessibility} />
+        <Route exact path="/ads" component={AdsInfo} />
         <Route exact path="/reportpost" component={ReportPost} />
         <Route exact path="/memberrequest" component={MemberRequest} />
         <Route exact path="/members" component={Members} />
@@ -71,11 +69,9 @@ function Admin() {
         <Route exact path="/communities" component={Communities} />
         <Route exact path="/spotlightYourCommunity" component={SpotlightYourCommunity} />
         <Route exact path="/supportAndResources" component={SupportAndResources} />
-
       </Suspense>
     </Switch>
   );
 }
 
 export default withAdminLayout(Admin);
-
