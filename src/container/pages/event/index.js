@@ -26,7 +26,6 @@ function EventTimeline() {
 
   console.log('All Jobs: ', jobDetails);
   const scrollRef = useRef(null);
-  const [type, setType] = useState('comingEvent');
   const [filter, setFilter] = useState({
     searchText: '',
     skills: null,
@@ -46,10 +45,6 @@ function EventTimeline() {
   useEffect(() => {
     dispatch(getAllJobs(filter));
   }, [filter]);
-
-  const showTimeLine = (currenttype) => {
-    setType(currenttype);
-  };
 
   const handleSalaryFilter = (e) => {
     // Accessing e.item.props.type, but e.item.props may be undefined
@@ -149,16 +144,12 @@ function EventTimeline() {
         <div className="centersidebarcontent flexcolumn mt56">
           <div className="tabbox">
             <Button
-              onClick={() => showTimeLine('comingEvent')}
-              className={type === 'comingEvent' ? 'btntab active' : 'btntab'}
+              className="btntab active"
             >
               {' '}
-              Explore Jobs
+             All Jobs
             </Button>
-            <Button onClick={() => showTimeLine('myEvent')} className={type === 'myEvent' ? 'btntab active' : 'btntab'}>
-              {' '}
-              Matched Jobs{' '}
-            </Button>
+            
             <Button className="btntabsetting" onClick={() => handleFilter()}>
               <FilterOutlined />
             </Button>

@@ -51,18 +51,13 @@ function EditProfile() {
     backgroundImg: data?.backgroundImg || '',
     tags: data?.tags ? data?.tags.split(', ') : [],
     totalExperience: data?.totalExperience || '',
-    education: data?.education
-      ? data?.education
-      : [
-        {
-          university: '',
-          highestQualification: '',
-          course: '',
-          startingYear: '',
-          passingYear: '',
-          grades: '',
-        },
-      ],
+    university: data?.university || '',
+    highestQualification: data?.highestQualification || '',
+    course: data?.course || '',
+    specialization: data?.specialization || '',
+    startingYear: data?.startingYear || '',
+    passingYear: data?.passingYear || '',
+    grades: data?.grades || '',
     experience: data?.experience?.length > 0
       ? data.experience.map((job) => ({
         id: job.id,
@@ -112,19 +107,13 @@ function EditProfile() {
       backgroundImg: data?.backgroundImg || '',
       tags: data?.tags ? data?.tags.split(', ') : [],
       totalExperience: data?.totalExperience || 0,
-      education: data?.education
-        ? data?.education
-        : [
-          {
-            university: '',
-            highestQualification: '',
-            course: '',
-            specialization: '',
-            startingYear: '',
-            passingYear: '',
-            grades: '',
-          },
-        ],
+      university: data?.university || '',
+      highestQualification: data?.highestQualification || '',
+      course: data?.course || '',
+      specialization: data?.specialization || '',
+      startingYear: data?.startingYear || '',
+      passingYear: data?.passingYear || '',
+      grades: data?.grades || '',
       experience: data?.experience?.length > 0
         ? data.experience.map((job) => ({
           id: job.id,
@@ -150,7 +139,7 @@ function EditProfile() {
     });
   }, [data]);
 
-  console.log("data",ProfileData);
+  console.log("data", ProfileData);
   useEffect(() => {
     setProfileData({
       ...ProfileData,
@@ -194,6 +183,19 @@ function EditProfile() {
     });
   };
 
+  const handleStartingYear  = (dateString) => {
+    setProfileData({
+      ...ProfileData,
+      startingYear: dateString,
+    });
+  };
+
+  const handlePassingYear  = (dateString) => {
+    setProfileData({
+      ...ProfileData,
+      passingYear: dateString,
+    });
+  };
   const handleSubmit = async () => {
     const res = {
       ...ProfileData,
@@ -242,10 +244,17 @@ function EditProfile() {
 
   const handleSelectedTags = (selected) => {
     const filter = selected.join(', ')
-    console.log("selected",filter);
+    console.log("selected", filter);
     setProfileData({
       ...ProfileData,
       tags: selected,
+    });
+  };
+
+  const handleQualification = (selected) => {
+    setProfileData({
+      ...ProfileData,
+      highestQualification: selected,
     });
   };
 
@@ -584,7 +593,7 @@ function EditProfile() {
                         <Form.Item label="University Name/Collage Name">
                           <Input
                             name="university"
-                            value={ProfileData?.education.university}
+                            value={ProfileData?.university}
                             onChange={handleChange}
                             maxLength={100}
                           />
@@ -598,7 +607,8 @@ function EditProfile() {
                                 filterOption={(input, option) =>
                                   option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                                 }
-                                value={ProfileData?.education.highestQualification}
+                                value={ProfileData?.highestQualification}
+                                onChange={handleQualification}
                               >
                                 <Option value="Phd">Doctorate/Phd </Option>
                                 <Option value="Masters">Masters/Post-Graduation </Option>
@@ -616,7 +626,7 @@ function EditProfile() {
                         >
                           <Input
                             name="course"
-                            value={ProfileData?.education.course}
+                            value={ProfileData?.course}
                             onChange={handleChange}
                             maxLength={100}
                           />
@@ -628,33 +638,29 @@ function EditProfile() {
                         >
                           <Input
                             name="specialization"
-                            value={ProfileData?.education.specialization}
+                            value={ProfileData?.specialization}
                             onChange={handleChange}
                             maxLength={100}
                           />
                         </Form.Item>
                         <Form.Item
                           label="Starting Year"
-                          // name="board"
-                          rules={[{ required: true, message: 'Starting Year is mandatory field' }]}
                         >
-                          <Input
-                            name="startingYear"
-                            value={ProfileData?.education.startingYear}
-                            onChange={handleChange}
-                            maxLength={100}
+                          <DatePicker
+                            onChange={handleStartingYear}
+                            style={{ width: '100%' }}
+                            defaultValue={ProfileData?.startingYear ? moment(`${ProfileData?.startingYear}`, dateFormat) : null}
+                            format={dateFormat}
                           />
                         </Form.Item>
                         <Form.Item
                           label="Passing Year"
-                          // name="board"
-                          rules={[{ required: true, message: 'Passing Year is mandatory field' }]}
                         >
-                          <Input
-                            name="passingYear"
-                            value={ProfileData?.education.passingYear}
-                            onChange={handleChange}
-                            maxLength={100}
+                          <DatePicker
+                            onChange={handlePassingYear}
+                            style={{ width: '100%' }}
+                            defaultValue={ProfileData?.passingYear ? moment(`${ProfileData?.passingYear}`, dateFormat) : null}
+                            format={dateFormat}
                           />
                         </Form.Item>
                         <Form.Item
@@ -664,7 +670,7 @@ function EditProfile() {
                         >
                           <Input
                             name="grades"
-                            value={ProfileData?.education.grades}
+                            value={ProfileData?.grades}
                             onChange={handleChange}
                             maxLength={100}
                           />
