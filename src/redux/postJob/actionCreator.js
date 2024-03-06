@@ -61,7 +61,7 @@ const toggleBookmark = (data) => {
       dispatch(toggleBookmarkBegin());
       const response = await DataService.post('Job/ToggleBookmark', data);
       if (response.data.success) {
-        const { jobDetails, bookmark } = getState().postJob;
+        const { jobDetails, bookmarkjobs } = getState().postJob;
         let idxj = -1;
         let idxb = -1;
 
@@ -76,14 +76,14 @@ const toggleBookmark = (data) => {
           }
         }
 
-        if (bookmark) {
-          idxb = bookmark.findIndex(x => x.id === data.PostId);
+        if (bookmarkjobs) {
+          idxb = bookmarkjobs.findIndex(x => x.id === data.PostId);
           if (idxb !== -1) {
-            bookmark[idxb] = {
-              ...bookmark[idxb],
-              isBookmarked: bookmark[idxb].isBookmarked === 1 ? 0 : 1
+            bookmarkjobs[idxb] = {
+              ...bookmarkjobs[idxb],
+              isBookmarked: bookmarkjobs[idxb].isBookmarked === 1 ? 0 : 1
             };
-            dispatch(getBookmarkJobSuccess(bookmark));
+            dispatch(getBookmarkJobSuccess(bookmarkjobs));
           }
         }
         dispatch(toggleBookmarkSuccess(response.data.result));
