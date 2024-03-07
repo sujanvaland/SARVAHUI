@@ -28,8 +28,8 @@ function EventTimeline() {
     totalSize: state?.postJob?.totalSize,
     isLoader: state?.Post.loading,
   }));
+  const User = JSON.parse(localStorage.getItem('profile'));
 
-  console.log(totalCount,totalSize);
   useEffect(() => {
     const totalPages = Math.ceil(totalCount / totalSize);
     if (PageNo >= totalPages || !totalPages) {
@@ -183,7 +183,7 @@ function EventTimeline() {
       <div className="cntpagecomponent">
         <div className="centersidebarcontent flexcolumn mt56">
           <div className="tabbox">
-            <Button className="btntab active"> All Jobs</Button>
+            <Button className="btntab active">{User.loginType === "jobSeeker" ? <> All Jobs </> : <> My Jobs </>}</Button>
 
             <Button className="btntabsetting" onClick={() => handleFilter()}>
               <FilterOutlined />
@@ -233,8 +233,6 @@ function EventTimeline() {
                   </ul>
                 </div>
               )}
-
-              <h3> All Jobs </h3>
               {jobDetails?.map((item) => (
                 <>
                   <LinkDiv className="disCommunities" onClick={() => handleJobDetails({ jobId: item.id })}>
