@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from 'antd';
 import { FieldTimeOutlined, VideoCameraOutlined } from '@ant-design/icons';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { ApplyJobs } from '../../../redux/postJob/actionCreator';
 // import { getJobDetails } from '../../../redux/postJob/actionCreator';
 // import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
@@ -10,6 +11,8 @@ function EventDetailsComponent() {
   // const { jobDetails } = props;
     const [JobPostDetails, setjob] = useState(null);
   //   console.log(jobDetails, 'values');
+  const dispatch = useDispatch();
+  const User = JSON.parse(localStorage.getItem('profile'));
 
   const { job } = useSelector((state) => ({
     job: state?.postJob?.jobpostdetails,
@@ -19,6 +22,10 @@ function EventDetailsComponent() {
         setjob(job);
       }, [job]);
 
+  const handleApplyJob = (data) =>{
+    dispatch(ApplyJobs(data))
+  }
+
   return (
     <div className="rightsidebarcntbox ">
       <div className="rightsidecntbox scrollbox eventDetailsbox">
@@ -27,10 +34,14 @@ function EventDetailsComponent() {
             <span>Posted by</span> {JobPostDetails?.postedBy}
             <img src={require('../../../static/images/blue_tick.png')} alt="" />
           </h2>
+          {User.loginType === "jobSeeker" && 
           <div>
             {/* <Button> free</Button> */}
-            <Button className="btnBlack"> Apply </Button>
-          </div>
+            {JobPostDetails?.isApplied === 1 ?  
+            <Button className="btnBlack">Applied</Button>
+            :
+            <Button className="btnBlack" onClick={()=>handleApplyJob({jobId:JobPostDetails?.id})}> Apply </Button>}
+          </div>}
         </div>
         <div className="analyticsBox subscribe whitebox">
           <div className="boxOne">

@@ -11,11 +11,13 @@ const {
   GET_ALL_JOBS_BEGIN, GET_ALL_JOBS_SUCCESS, GET_ALL_JOBS_ERR, GET_ALL_JOBS_EMPTY,
   TOGGLE_BOOKMARK_BEGIN, TOGGLE_BOOKMARK_SUCCESS, TOGGLE_BOOKMARK_ERR,
   GET_JOBS_DETAILS_BEGIN, GET_JOBS_DETAILS_SUCCESS, GET_JOBS_DETAILS_ERR,
-  GET_BOOKMARK_JOB_BEGIN, GET_BOOKMARK_JOB_SUCCESS, GET_BOOKMARK_JOB_ERR
+  GET_BOOKMARK_JOB_BEGIN, GET_BOOKMARK_JOB_SUCCESS, GET_BOOKMARK_JOB_ERR,
+  APPLY_JOB_BEGIN, APPLY_JOB_SUCCESS, APPLY_JOB_ERR,
 } = actions;
 
 const JobPostReducer = (state = initialState, action) => {
-  const { type, jobDetails, job, err, bookmarkjobs, toggleBookmark, totalCount, totalSize, jobpostdetails } = action;
+  const { type, jobDetails, job, err, bookmarkjobs, toggleBookmark,
+    applyJob, totalCount, totalSize, jobpostdetails } = action;
   switch (type) {
     case GET_BOOKMARK_JOB_BEGIN:
       return {
@@ -109,6 +111,23 @@ const JobPostReducer = (state = initialState, action) => {
         loading: false,
       };
     case GET_JOBS_DETAILS_ERR:
+      return {
+        ...state,
+        error: err,
+        loading: false,
+      };
+    case APPLY_JOB_BEGIN:
+      return {
+        ...state,
+        loading: true,
+      };
+    case APPLY_JOB_SUCCESS:
+      return {
+        ...state,
+        applyJob,
+        loading: false,
+      };
+    case APPLY_JOB_ERR:
       return {
         ...state,
         error: err,

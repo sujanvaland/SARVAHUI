@@ -32,26 +32,22 @@ function EventTimeline() {
   console.log(totalCount,totalSize);
   useEffect(() => {
     const totalPages = Math.ceil(totalCount / totalSize);
-    console.log("data",totalPages);
     if (PageNo >= totalPages || !totalPages) {
       setIsMore(false);
     }else{
       setIsMore(true);
     }
-    console.log("data","reached",PageNo)
   }, [jobDetails]);
 
   const scrollRef = useRef(null);
   const [filter, setFilter] = useState({
     searchText: '',
     skills: null,
-    // postedOn: 'Posted On',
-    // salary: 'Salary',
-    // skills: [],
     minSalary: 0,
     maxSalary: 0,
     timePeriod: 0,
     pageNo: 1,
+    userType: "job",
   });
 
   const handleToggleBookmark = (data) => {
@@ -164,7 +160,6 @@ function EventTimeline() {
   const handlePageNo = () => {
     setPageNo(PageNo + 1);
     dispatch(getAllJobs({ ...filter, pageNo: PageNo + 1 }));
-
   }
   const shareMenu = (
     <Menu>

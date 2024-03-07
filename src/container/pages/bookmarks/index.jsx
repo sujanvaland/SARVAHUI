@@ -5,7 +5,7 @@ import { Dropdown, Menu } from "antd";
 import { ShareAltOutlined, LinkOutlined, UploadOutlined, MailOutlined } from '@ant-design/icons';
 import { DiscoverCommunities, LinkDiv } from "../style";
 import EventDetailsComponent from "../event/eventDetails";
-import { getAllBookmarkJobs, toggleBookmark } from "../../../redux/postJob/actionCreator";
+import { getAllJobs, toggleBookmark } from "../../../redux/postJob/actionCreator";
 // import PostComponent from "../post";
 
 
@@ -14,18 +14,46 @@ const Bookmarks = () => {
     const dispatch = useDispatch();
     const scrollRef = useRef(null);
 
+    const [isMore, setIsMore] = useState(true);
+    const [PageNo, setPageNo] = useState(1);
+    const obj = {
+        searchText: '',
+        skills: null,
+        minSalary: 0,
+        maxSalary: 0,
+        timePeriod: 0,
+        pageNo: 1,
+        userType: "bookmarked"
+    }
+
     useEffect(() => {
-        dispatch(getAllBookmarkJobs())
+        dispatch(getAllJobs(obj))
     }, [])
+
+    const handlePageNo = () => {
+        setPageNo(PageNo + 1);
+        dispatch(getAllJobs({ ...obj, pageNo: PageNo + 1 }));
+    }
 
     const handleToggleBookmark = (data) => {
         dispatch(toggleBookmark(data));
     }
 
-    const { jobDetails } = useSelector((state) => ({
-        jobDetails: state?.postJob?.bookmarkjobs,
+    const { jobDetails, totalCount, totalSize } = useSelector((state) => ({
+        jobDetails: state?.postJob?.jobDetails,
+        totalCount: state?.postJob?.totalCount,
+        totalSize: state?.postJob?.totalSize,
         isLoader: state?.Post.loading,
     }));
+
+    useEffect(() => {
+        const totalPages = Math.ceil(totalCount / totalSize);
+        if (PageNo >= totalPages || !totalPages) {
+            setIsMore(false);
+        } else {
+            setIsMore(true);
+        }
+    }, [jobDetails]);
 
     const [jobData, SetJobData] = useState();
 
@@ -45,6 +73,7 @@ const Bookmarks = () => {
     );
 
     const dropdownClassName = 'reportdropdown';
+
 
 
 
@@ -94,6 +123,11 @@ const Bookmarks = () => {
                                     </LinkDiv>
                                 </>
                             ))}
+                            {isMore &&
+                                <LinkDiv onClick={() => handlePageNo()}>
+                                    Load More
+                                </LinkDiv>
+                            }
                         </DiscoverCommunities>
                     </div>
                 </div>

@@ -7,14 +7,7 @@ import { Link, useParams, useHistory } from 'react-router-dom';
 // import Scroll from './Scroll';
 import { getUserProfile } from '../../redux/UserProfile/actionCreator';
 import { convertToMonthYear } from '../../utility/ConvertToMonthYear';
-import {
-  GetBookSuggestion,
-  GetExperienceSuggestion,
-  GetGuruSuggestion,
-  GetMovieSuggestion,
-  GetPracticeSuggestion,
-} from '../../redux/usersSuggestion/actionCreator';
-// import { GetSearchUserProfile } from '../../redux/SearchUsers/actionCreator';
+
 
 function UserProfile() {
   const dispatch = useDispatch();
@@ -26,22 +19,12 @@ function UserProfile() {
       // data: userName?.length > 4 ? state.getUser.getSearchUserProfile : state.userProfile.getProfile,
       data: state.userProfile.getProfile,
       isLoader: state.userProfile.loading,
-      bookSuggest: state.getSuggest.bookSuggest,
-      movieSuggest: state.getSuggest.movieSuggest,
-      guruSuggest: state.getSuggest.guruSuggest,
-      practiceSuggest: state.getSuggest.practiceSuggest,
-      experienceSuggest: state.getSuggest.experienceSuggest,
       loginuser: state.auth.userprofile?.userName,
       loginuserId: state.auth.userprofile?.id,
     };
   });
 
-  const [ProfileData, setProfileData] = useState({
-    skills: data?.skills ? data?.skills.split(', ') : [],
-    tags: data?.tags ? data?.tags.split(', ') : [],
-  });
 
-  console.log("data", ProfileData);
   useEffect(() => {
     const user = userName !== undefined ? userName : loginuser;
     if (user !== undefined) {
@@ -49,42 +32,10 @@ function UserProfile() {
     }
   }, [loginuser, userName]);
 
-  useEffect(() => {
-    if (data !== undefined) {
-      dispatch(GetBookSuggestion(data.id));
-      dispatch(GetMovieSuggestion(data.id));
-      dispatch(GetGuruSuggestion(data.id));
-      dispatch(GetPracticeSuggestion(data.id));
-      dispatch(GetExperienceSuggestion(data.id));
-
-      setProfileData({
-        skills: data?.skills ? data?.skills.split(', ') : [],
-        tags: data?.tags ? data?.tags.split(', ') : [],
-      });
-    }
-  }, [data]);
 
   const { timeline } = useSelector((state) => ({
     timeline: state?.Post?.userprofiletimelinedetails,
   }));
-
-  // const refreshSuggestion = async () => {
-  //   await dispatch(GetBookSuggestion(data.id));
-  //   await dispatch(GetMovieSuggestion(data.id));
-  //   await dispatch(GetGuruSuggestion(data.id));
-  //   await dispatch(GetPracticeSuggestion(data.id));
-  //   await dispatch(GetExperienceSuggestion(data.id));
-  // };
-
-  // const handleCheckboxChange = async (id) => {
-  //   await dispatch(GetUpdateReadSuggestion(id));
-  //   refreshSuggestion();
-  // };
-
-  // const handleDeleteSuggest = async (id) => {
-  //   await dispatch(GetDeleteSuggestion(id));
-  //   refreshSuggestion();
-  // };
 
   const [currentTab, setCurrentTab] = useState('1');
   const onTabChange = (key) => {
@@ -159,16 +110,6 @@ function UserProfile() {
                           )}
                         </ul>
                       </div>
-
-                      {/* <div className="tagsbox">
-                        {ProfileData?.tags?.length > 0
-                          ? ProfileData?.tags.map((item, index) => (
-                              <Link key={index} to={`/${item.toLowerCase().replace(/\s+/g, '-')}`}>
-                                {item}
-                              </Link>
-                            ))
-                          : ''}
-                      </div> */}
                       <div className="locaitonbox followers">
                         <ul>
                           <li>
