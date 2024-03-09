@@ -608,15 +608,15 @@ h5{font-family: $fntMonoMedium; font-size: 14px; color:$black;}
 }
 
 .mainLayout{
-    @include dispflex(flex,row,space-between,stretch); max-width: 1240px; margin:0px auto;
+    @include dispflex(flex,row,space-between,stretch); max-width:98%; margin:0px auto;
     padding-top:0px; background: $white; min-height: 100%; flex:1; flex-grow: 1; font-family: $fntSegoe;
     border-right:0px solid $brdrcolor; position: relative;
     @media screen and (max-width:1100px){
-        max-width: 1000px;
+        max-width:98%;
     }
     @media screen and (max-width:992px){
-        max-width: 900px; margin:0px 0px;
-    }
+        max-width:98%; margin:0px 0px;
+    } 
  
   
 
@@ -1830,6 +1830,17 @@ h5{font-family: $fntMonoMedium; font-size: 14px; color:$black;}
 
                             @include phone{
                                 flex:0 0 46.5%; max-width: 46.5%;
+                            }
+                        }
+                    }
+                    .profilecnt{
+                        border:1px solid #000;
+                        ul{ display: flex; flex-direction: row; flex-wrap: wrap;
+                            li{ margin-bottom: 10px; min-width: 300px;
+                                p{
+                                    margin:0px; padding:0px; font-size: 14px;
+                                    white-space:normal;word-break: break-all;
+                                }
                             }
                         }
                     }
@@ -3210,4 +3221,24 @@ p{font-family:$fntInter;
 }
 
  .widht100{width:100%; display:block;}
+ #register_loginType{
+    display:flex; flex-direction: row; justify-content: flex-start; align-items: center;  padding:15px 10px;
+    .radiobox{
+        display: flex; flex-direction: row; margin-right: 15px;
+    }
+    p{margin:0px; padding:0px;}
+ }
+ .socialloginbox{
+    ul{
+        &.social-login{
+            li{
+                display: flex; flex-direction: row; justify-content: center; align-items: center; margin-bottom: 15px;
+                .kep-login-facebook{
+                    
+                    text-transform: capitalize; padding: 1px 20px; height: 45px; line-height: 12px;
+                }
+            }
+        }
+    }
+ }
 

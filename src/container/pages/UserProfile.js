@@ -199,38 +199,43 @@ function UserProfile() {
                 <TabPane tab="Basic Details" key="1" className="tabcntbox">
                   <div className="projectlist">
                     {/* <Scroll isProfile profileUserId={data?.id} /> */}
-                    <div className="tabhead">
+                    <div className="tabhead profilecnt">
                       <ul>
                         <li>
                           <div>
-                            <h3>
-                              Full Name: {data?.firstName} {data?.lastName}
-                            </h3>
+                            <div className='form-group'> Full Name:</div>
+                             <p>{data?.firstName} {data?.lastName}</p>
+                           
                           </div>
                         </li>
                         <li>
                           <div>
-                            <h3>Phone Number: {data?.phoneNumber}</h3>
+                            <div className='form-group'> Phone Number:</div>
+                             <p>{data?.phoneNumber}</p>
                           </div>
                         </li>
                         <li>
                           <div>
-                            <h3>Email: {data?.email}</h3>
+                            <div className='form-group'>Email:</div>
+                             <p>{data?.email}</p> 
                           </div>
                         </li>
                         <li>
-                          <div>
-                            <h3>Date of Birth: {data?.dob}</h3>
+                          <div> 
+                            <div className='form-group'>Date of Birth:</div>
+                             <p>{data?.dob}</p> 
                           </div>
                         </li>
                         <li>
-                          <div>
-                            <h3>Gender: {data?.gender}</h3>
+                          <div>                             
+                            <div className='form-group'>Gender:</div>
+                             <p>{data?.gender}</p> 
                           </div>
                         </li>
                         <li>
-                          <div>
-                            <h3>Address: {data?.address}</h3>
+                          <div> 
+                            <div className='form-group'>Address:</div>
+                             <p>{data?.address}</p> 
                           </div>
                         </li>
                       </ul>

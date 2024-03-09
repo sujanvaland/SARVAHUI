@@ -182,7 +182,7 @@ function SignUp() {
               {GetInvolved && <img src={require('../../../../static/images/2.jpg')} alt="" />}
               {AvailableFosters && <img src={require('../../../../static/images/3.jpg')} alt="" />}
               {SignInStep && <img src={require('../../../../static/images/4.jpg')} alt="" />}
-              {(UserSignUp || forgotPassword) && <img src={require('../../../../static/images/7.jpg')} alt="" />}
+              {(UserSignUp || forgotPassword) && <img src={require('../../../../static/images/img_registerimg.jpg')} alt="" />}
             </div>
             <div className="signupRightBox">
               <div className='innernav'>
@@ -311,13 +311,14 @@ function SignUp() {
                                           </Form.Item></>}
                                         
                                           <Form.Item
-                                        label=""
-                                        name="loginType"
-                                        rules={[{ required: true, message: 'Select Appropriate Login Type' }]}
-                                      >
+                                              label=""
+                                              name="loginType"
+                                              rules={[{ required: true, message: 'Select Appropriate Login Type' }]}
+
+                                            >
                                         <Radio.Group name="loginType" onChange={handleUserInfoChange} value={userinfo.loginType}>
                                           {loginTypeArray.map((item) => (
-                                          <div key={item.id}>
+                                          <div key={item.id} className='radiobox'>
                                               <Radio value={item.id} />
                                               <div>
                                                 <p className="title">{item.title}</p>
