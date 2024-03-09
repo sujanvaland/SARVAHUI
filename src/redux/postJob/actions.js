@@ -17,10 +17,13 @@ const actions = {
   GET_JOBS_DETAILS_SUCCESS: 'GET_JOBS_DETAILS_SUCCESS',
   GET_JOBS_DETAILS_ERR: 'GET_JOBS_DETAILS_ERR',
 
-
   GET_BOOKMARK_JOB_BEGIN: 'GET_BOOKMARK_JOB_BEGIN',
   GET_BOOKMARK_JOB_SUCCESS: 'GET_BOOKMARK_JOB_SUCCESS',
   GET_BOOKMARK_JOB_ERR: 'GET_BOOKMARK_JOB_ERR',
+
+  APPLY_JOB_BEGIN: 'APPLY_JOB_BEGIN',
+  APPLY_JOB_SUCCESS: 'APPLY_JOB_SUCCESS',
+  APPLY_JOB_ERR: 'APPLY_JOB_ERR',
 
   getBookmarkJobBegin: () => {
       return {
@@ -126,6 +129,26 @@ const actions = {
   getJobDetailsErr: (err) => {
     return {
       type: actions.GET_JOBS_DETAILS_ERR,
+      err,
+    };
+  },
+
+  applyJobBegin: () => {
+    return {
+      type: actions.APPLY_JOB_BEGIN,
+    };
+  },
+
+  applyJobSuccess: (data) => {
+    return {
+      type: actions.APPLY_JOB_SUCCESS,
+      applyJob: data,
+    };
+  },
+
+  applyJobErr: (err) => {
+    return {
+      type: actions.APPLY_JOB_ERR,
       err,
     };
   },

@@ -100,10 +100,6 @@ const ThemeLayout = (WrappedComponent) => {
           </Menu.Item>
         </Menu>
       );
-
-      const UserProfile = JSON.parse(localStorage.getItem('profile'));
-
-
       const User = JSON.parse(localStorage.getItem('profile'));
       return (
         <div className="mainLayout">
@@ -186,7 +182,7 @@ const ThemeLayout = (WrappedComponent) => {
                     Home
                   </Link>
                 </li>
-                {UserProfile.loginType === "jobSeeker" &&<li>
+                {User.loginType === "jobSeeker" &&<li>
                   <Link
                     to="/appliedjobs"
                     className={path === '/appliedjobs' ? 'active' : ''}
@@ -293,7 +289,7 @@ const ThemeLayout = (WrappedComponent) => {
                     Settings
                   </Link>
                 </li>
-                {UserProfile.loginType === "recruiter" && <li>
+                {User.loginType === "recruiter" && <li>
                   <Link
                     to="/postJob"
                     className={path === '/postJob' ? 'active' : ''}

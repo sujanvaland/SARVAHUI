@@ -15,15 +15,38 @@ function appliedJobs() {
 
     const dispatch = useDispatch();
 
+    const [isMore, setIsMore] = useState(true);
+    const [PageNo, setPageNo] = useState(1);
+
+    const obj = {
+        searchText: '',
+        skills: null,
+        minSalary: 0,
+        maxSalary: 0,
+        timePeriod: 0,
+        pageNo: 1,
+        userType: "applied"
+    }
+
     useEffect(() => {
-        dispatch(getAllJobs());
+        dispatch(getAllJobs(obj));
     }, []);
 
-    const { jobDetails } = useSelector((state) => ({
+    const { jobDetails, totalCount, totalSize } = useSelector((state) => ({
         jobDetails: state?.postJob?.jobDetails,
+        totalCount: state?.postJob?.totalCount,
+        totalSize: state?.postJob?.totalSize,
         isLoader: state?.Post.loading,
     }));
 
+    useEffect(() => {
+        const totalPages = Math.ceil(totalCount / totalSize);
+        if (PageNo >= totalPages || !totalPages) {
+            setIsMore(false);
+        } else {
+            setIsMore(true);
+        }
+    }, [jobDetails]);
     const scrollRef = useRef(null);
 
     const [jobData, SetJobData] = useState();
@@ -34,6 +57,11 @@ function appliedJobs() {
         console.log(item);
         SetJobData(item);
     };
+
+    const handlePageNo = () => {
+        setPageNo(PageNo + 1);
+        dispatch(getAllJobs({ ...obj, pageNo: PageNo + 1 }));
+    }
 
     // const copyJobLink = (id) => {
     //     const tempInput = document.createElement('input');
@@ -141,6 +169,11 @@ function appliedJobs() {
                                     </LinkDiv>
                                 </>
                             ))}
+                            {isMore &&
+                                <LinkDiv onClick={() => handlePageNo()}>
+                                    Load More
+                                </LinkDiv>
+                            }
                         </DiscoverCommunities>
                     </div>
                 </div>

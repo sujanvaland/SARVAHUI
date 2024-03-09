@@ -5,7 +5,8 @@ import { DataService } from '../../config/dataService/dataService';
 
 const { jobPostDataBegin, jobPostDataSuccess, jobPostDataErr, getAllJobsBegin, getAllJobsSuccess,
   getAllJobsErr, toggleBookmarkBegin, toggleBookmarkSuccess, toggleBookmarkErr, getJobDetailsBegin,
-  getJobDetailsSuccess, getJobDetailsErr, getBookmarkJobBegin, getBookmarkJobSuccess, getBookmarkJobErr, getAllJobsEmpty } =
+  getJobDetailsSuccess, getJobDetailsErr, getBookmarkJobBegin, getBookmarkJobSuccess, getBookmarkJobErr, 
+  getAllJobsEmpty, applyJobBegin, applyJobSuccess, applyJobErr } =
   actions;
 
 const submitPost = (data) => {
@@ -139,4 +140,21 @@ const getAllBookmarkJobs = () => {
   };
 };
 
-export { submitPost, getAllJobs, toggleBookmark, getJobDetails, getAllBookmarkJobs };
+const ApplyJobs = (data) => {
+  return async (dispatch) => {
+    try {
+      dispatch(applyJobBegin());
+      const response = await DataService.post("Job/SaveApplication",data);
+      if (response.data.success) {
+        dispatch(applyJobSuccess(response.data.result));
+        dispatch(getJobDetails(data));
+      } else {
+        dispatch(applyJobErr(response.data.success));
+      }
+    } catch (err) {
+      dispatch(applyJobErr(err));
+    }
+  };
+};
+
+export { submitPost, getAllJobs, toggleBookmark, getJobDetails, getAllBookmarkJobs, ApplyJobs };

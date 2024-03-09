@@ -28,30 +28,26 @@ function EventTimeline() {
     totalSize: state?.postJob?.totalSize,
     isLoader: state?.Post.loading,
   }));
+  const User = JSON.parse(localStorage.getItem('profile'));
 
-  console.log(totalCount,totalSize);
   useEffect(() => {
     const totalPages = Math.ceil(totalCount / totalSize);
-    console.log("data",totalPages);
     if (PageNo >= totalPages || !totalPages) {
       setIsMore(false);
     }else{
       setIsMore(true);
     }
-    console.log("data","reached",PageNo)
   }, [jobDetails]);
 
   const scrollRef = useRef(null);
   const [filter, setFilter] = useState({
     searchText: '',
     skills: null,
-    // postedOn: 'Posted On',
-    // salary: 'Salary',
-    // skills: [],
     minSalary: 0,
     maxSalary: 0,
     timePeriod: 0,
     pageNo: 1,
+    userType: "job",
   });
 
   const handleToggleBookmark = (data) => {
@@ -164,7 +160,6 @@ function EventTimeline() {
   const handlePageNo = () => {
     setPageNo(PageNo + 1);
     dispatch(getAllJobs({ ...filter, pageNo: PageNo + 1 }));
-
   }
   const shareMenu = (
     <Menu>
@@ -188,7 +183,7 @@ function EventTimeline() {
       <div className="cntpagecomponent">
         <div className="centersidebarcontent flexcolumn mt56">
           <div className="tabbox">
-            <Button className="btntab active"> All Jobs</Button>
+            <Button className="btntab active">{User.loginType === "jobSeeker" ? <> All Jobs </> : <> My Jobs </>}</Button>
 
             <Button className="btntabsetting" onClick={() => handleFilter()}>
               <FilterOutlined />
@@ -238,8 +233,6 @@ function EventTimeline() {
                   </ul>
                 </div>
               )}
-
-              <h3> All Jobs </h3>
               {jobDetails?.map((item) => (
                 <>
                   <LinkDiv className="disCommunities" onClick={() => handleJobDetails({ jobId: item.id })}>
