@@ -8,7 +8,7 @@ import EventDetailsComponent from "../event/eventDetails";
 import { getAllJobs, toggleBookmark } from "../../../redux/postJob/actionCreator";
 // import PostComponent from "../post";
 
-
+ 
 const Bookmarks = () => {
 
     const dispatch = useDispatch();
@@ -81,8 +81,11 @@ const Bookmarks = () => {
         <>
             <div className='cntpagecomponent'>
                 <div className='centersidebarcontent flexcolumn mt56'>
-                    <div className="userNamedetails headerBox">
+                    {/* <div className="userNamedetails headerBox">
                         <h2>Bookmarks</h2>
+                    </div> */}
+                     <div className='userNamedetails headerBox msgheader'>
+                        <h2>Bookmarks</h2>                        
                     </div>
                     <div className="wdth100 mdt-50" ref={scrollRef}>
                         <DiscoverCommunities className="communitiesBoxDetails eventDetails">

@@ -343,7 +343,7 @@ const Chatting = () => {
     }
     const dropdownClassName = 'reportdropdown';
     return (
-        <>
+        <> 
             <div className='cntpagecomponent'>
                 <div className={showChatBox === true ? 'centersidebarcontent flexcolumn mt56 messageBoxDiv hideBox' : 'centersidebarcontent flexcolumn mt56 messageBoxDiv'}>
                     <div className='userNamedetails headerBox msgheader'>
