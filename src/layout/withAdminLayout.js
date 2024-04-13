@@ -17,8 +17,7 @@ import {
   MailOutlined,
   SettingOutlined,
   SettingFilled,
-} from '@ant-design/icons';
-import SearchUser from './components/SearchUser';
+} from '@ant-design/icons'; 
 import PremiumModal from './components/PremiumModal';
 import UploadPost from '../container/pages/post/uploadPost';
 import { changeRtlMode, changeLayoutMode, changeMenuMode } from '../redux/themeLayout/actionCreator';
@@ -35,7 +34,7 @@ const ThemeLayout = (WrappedComponent) => {
     constructor(props) {
       super(props);
       this.state = {
-        headerTitle: '',
+       // headerTitle: '',
         displaySidemenu: false,
         path: window.location.pathname,
         showUploadPost: false,
@@ -60,9 +59,9 @@ const ThemeLayout = (WrappedComponent) => {
       }
     };
 
-    setHeader = (header) => {
-      this.setState({ headerTitle: header });
-    };
+    // setHeader = (header) => {
+    //   this.setState({ headerTitle: header });
+    // };
 
     // eslint-disable-next-line class-methods-use-this
     handleScrenClick = (e) => {
@@ -92,7 +91,7 @@ const ThemeLayout = (WrappedComponent) => {
     };
 
     render() {
-      const { headerTitle, displaySidemenu, path, showUploadPost, fadeFooter } = this.state;
+      const {  displaySidemenu, path, showUploadPost, fadeFooter } = this.state;
       const Profilemenu = (
         <Menu className="moremnuBox">
           <Menu.Item key="1" onClick={this.handlelogout}>
@@ -374,14 +373,7 @@ const ThemeLayout = (WrappedComponent) => {
           </div>
           {path === '/premium' && <PremiumModal />}
           <div className="rightmainbar">
-            {path !== '/message' && path !== '/event' && (
-              <div className="righheader">
-                <div className="centersidebar">
-                  <div className="innerheader">{headerTitle}</div>
-                </div>
-                <SearchUser />
-              </div>
-            )}
+       
             <WrappedComponent {...this.props} setHeader={this.setHeader} />
           </div>
 
