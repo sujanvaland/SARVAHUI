@@ -2977,6 +2977,7 @@ const ChatMainBox = Styled.div`{
     }
       a{margin-right:10px;}
     }
+
     .profileMain{ width:100%;  width: 100%; margin-top:30px; border-bottom:1px solid #ebebeb;
       display: flex; flex-direction: column;justify-content: center; align-items: center;
       padding-bottom:20px;
@@ -2996,6 +2997,8 @@ const ChatMainBox = Styled.div`{
       .fnt18{font-family:'Inter'; font-size:14px; text-align:center; line-height:18px; color:#536471;}
       .cntFollowed{font-family:'Inter'; font-size:11px; text-align:center; line-height:18px; color:#536471; margin-bottom:5px;}
     }
+
+    
     .chattingBox{ margin-top:20px; display: flex; flex-direction: column; justify-content: flex-end;
    
       ul{

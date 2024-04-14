@@ -44,7 +44,7 @@ const PostDetails = (props) => {
                     <div className="userNamedetails headerBox">
                         <h2>
                             <Button className='btn-primary btnback'  onClick={() => history.goBack()}>
-                                <img src={require('../../../static/images/icon_back.png')} alt="" />
+                                <img src={require('../../../static/images/icon_prevarrow.png')} alt="" />
                             </Button>
 
                         </h2>

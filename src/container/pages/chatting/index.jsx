@@ -672,10 +672,9 @@ const Chatting = () => {
                 }
 
                 {(showSettingBox) &&
-                    <div className="rightsidebarcntbox messageChat">
-                        <div className="rightsidecntbox scrollbox">
-                            <ChatMainBox>
-                                <div className="chatMainbox" ref={messagesEndRef}>
+                    
+                            <ChatMainBox className="newmessageChat">
+                                <div className="chatMainbox " ref={messagesEndRef}>
                                     <div className="oneBox">
                                         <div className="chatUsername">
                                             <h2>Direct Messages</h2>
@@ -702,8 +701,7 @@ const Chatting = () => {
                                     </div>
                                 </div>
                             </ChatMainBox>
-                        </div>
-                    </div>
+                       
                 }
                 {
                     showAddMessage &&

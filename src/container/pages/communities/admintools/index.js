@@ -61,7 +61,7 @@ const CommunitySetting = () => {
                 <div className='centersidebarcontent flexcolumn mt56 messageBoxDiv hideBox'>
                     <div className='userNamedetails headerBox msgheader'>
                         <h2><Link to="#" onClick={() => history.goBack()} className="btnBacklink">
-                            <img src={require('../../../../static/images/icon_back.png')} alt="" />
+                            <img src={require('../../../../static/images/icon_prevarrow.png')} alt="" />
                         </Link>
                             Admin Tools</h2>
 

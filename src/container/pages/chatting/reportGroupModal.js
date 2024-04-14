@@ -28,7 +28,7 @@ const ReportGroupModal = (props) => {
                 title={
                     <>
                         <h2><Link to="#" className="btnBacklink">
-                            <img src={require('../../../static/images/icon_back.png')} alt="" />
+                            <img src={require('../../../static/images/icon_prevarrow.png')} alt="" />
                         </Link> Report an issue</h2>
                     </>
                 }
