@@ -18,6 +18,7 @@ import PostJob from '../../container/pages/PostJob';
 import Communities from '../../container/pages/communities/communities';
 import SpotlightYourCommunity from '../../container/pages/communities/admintools/spotlightYourCommunity';
 import SupportAndResources from '../../container/pages/communities/admintools/supportAndResources';
+import JobApplication from '../../container/pages/ViewApplication';
 
 const MyComponent = lazy(() => import('../../container/pages/post/Message'));
 const Network = lazy(() => import('../../container/pages/Network'));
@@ -49,6 +50,8 @@ function Admin() {
         <Route path={`${path}editProfile`} component={EditProfile} />
         <Route path={`${path}setting`} component={Setting} />
         <Route path={`${path}postjob`} component={PostJob} />
+        <Route path={`${path}jobApplication/:jobId?`} component={JobApplication} />
+
         <Route path={`${path}people`} component={People} />
         <Route path={`${path}explore`} component={Explore} />
         <Route path={`${path}appliedjobs`} component={AppliedJobs} />

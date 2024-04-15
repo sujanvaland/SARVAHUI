@@ -6,12 +6,13 @@ import moment from 'moment';
 import { getUserProfile, updateUserProfile } from '../../redux/UserProfile/actionCreator';
 import { FileUploading } from '../../redux/UploadFile/actionCreator';
 import { extractLinkedinURLs } from '../../utility/validationHelper';
+import { GetUserResume } from '../../redux/postJob/actionCreator';
 
 function EditProfile() {
   const dispatch = useDispatch();
   const { Option } = Select;
   const dateFormat = 'YYYY/MM/DD';
-  const { username, data, profileUrl, backgroundUrl, isLoader, resumeUrl } = useSelector((state) => {
+  const { username, data, profileUrl, backgroundUrl, isLoader, resumeUrl, jobResume } = useSelector((state) => {
     return {
       data: state.userProfile.getProfile,
       isLoader: state.userProfile.loading,
@@ -19,16 +20,26 @@ function EditProfile() {
       backgroundUrl: state.uploadFile.backgroundImgUrl,
       resumeUrl: state.uploadFile.resumeUrl,
       username: state.auth.userprofile?.userName,
+      jobResume: state?.postJob?.jobResume,
     };
   });
 
-  console.log("resumeUrl", resumeUrl)
+  console.log("resumeUrl", jobResume);
+
   useEffect(() => {
     dispatch(getUserProfile(username));
   }, [username]);
 
+  useEffect(() => {
+    dispatch(GetUserResume());
+  }, [data]);
+
   const handleBinaryChange = async (e, imgType) => {
-    await dispatch(FileUploading(e.target.files[0], 'images/profile/', imgType));
+    let path = 'images/profile/'
+    if (imgType === 'resume') {
+      path = 'resume/'
+    }
+    await dispatch(FileUploading(e.target.files[0], path, imgType));
   };
 
   const [ProfileData, setProfileData] = useState({
@@ -44,7 +55,8 @@ function EditProfile() {
     zipCode: data?.zipCode || '',
     phoneNumber: data?.phoneNumber || '',
     email: data?.email || '',
-    resume: data?.resume || '',
+    resumeId: data?.resumeId || 0,
+    resume: jobResume?.actualUrl || '',
     linkedinLink: data?.linkedinLink || '',
     skills: data?.skills ? data?.skills.split(', ') : [],
     profileImg: data?.profileImg || '',
@@ -93,7 +105,7 @@ function EditProfile() {
         },
       ],
   });
-  console.log("Total Experience: ", ProfileData);
+
   const [validationErrorMSG, setvalidationErrorMSG] = useState({
     facebookError: '',
     linkedinError: '',
@@ -101,6 +113,7 @@ function EditProfile() {
 
   useEffect(() => {
     setProfileData({
+      ...ProfileData,
       firstName: data?.firstName || '',
       lastName: data?.lastName || '',
       dob: data?.dob,
@@ -112,19 +125,18 @@ function EditProfile() {
       zipCode: data?.zipCode || '',
       phoneNumber: data?.phoneNumber || '',
       email: data?.email || '',
-      resume: data?.resume || '',
+      resumeId: data?.resumeId || 0,
+      resume: jobResume?.actualUrl || '',
       linkedinLink: data?.linkedinLink || '',
       skills: data?.skills ? data?.skills.split(', ') : [],
-      profileImg: data?.profileImg || '',
-      backgroundImg: data?.backgroundImg || '',
       tags: data?.tags ? data?.tags.split(', ') : [],
       totalExperience: data?.totalExperience || 0,
       university: data?.university || '',
       highestQualification: data?.highestQualification || '',
       course: data?.course || '',
       specialization: data?.specialization || '',
-      startingYear: data?.startingYear || '',
-      passingYear: data?.passingYear || '',
+      startingYear: data?.startingYear || null,
+      passingYear: data?.passingYear || null,
       grades: data?.grades || '',
       experience: data?.experience?.length > 0
         ? data.experience.map((job) => ({
@@ -163,23 +175,38 @@ function EditProfile() {
     });
   }, [data]);
 
-  console.log("data", ProfileData);
+  console.log("data", ProfileData, profileUrl, backgroundUrl);
+
   useEffect(() => {
-    setProfileData({
-      ...ProfileData,
-      profileImg: profileUrl?.data?.result[0]?.actualUrl,
-    });
+    if(resumeUrl?.data?.result[0]?.id > 0){
+      console.log("reached");
+      setProfileData({
+        ...ProfileData,
+        resumeId: resumeUrl?.data?.result[0]?.id,
+        resume: resumeUrl?.data?.result[0]?.actualUrl,
+      });
+    }
+  }, [resumeUrl]);
+
+  useEffect(() => {
+    if(profileUrl?.data?.result[0]?.actualUrl?.length > 0){
+      setProfileData({
+        ...ProfileData,
+        profileImg: profileUrl?.data?.result[0]?.actualUrl,
+      });
+    }
   }, [profileUrl]);
 
   useEffect(() => {
-    setProfileData({
-      ...ProfileData,
-      backgroundImg: backgroundUrl?.data?.result[0]?.actualUrl,
-    });
+    if(backgroundUrl?.data?.result[0]?.actualUrl?.length > 0){
+      setProfileData({
+        ...ProfileData,
+        backgroundImg: backgroundUrl?.data?.result[0]?.actualUrl,
+      });
+    }
   }, [backgroundUrl]);
 
   const handleChange = (e) => {
-    console.log("data", e.target.name, e.target.value)
     e.preventDefault();
     setProfileData({
       ...ProfileData,
@@ -795,12 +822,12 @@ function EditProfile() {
                                   </Link>
                                 )}
                                 <Form.Item
-                                   label={`Certificate ${index + 1}`}
+                                  label={`Certificate ${index + 1}`}
                                 >
                                   <Input
                                     name="certificateName"
                                     value={certi?.certificateName}
-                                    onChange={(e) => handleChangeCertificate(index,e)}
+                                    onChange={(e) => handleChangeCertificate(index, e)}
                                     maxLength={100}
                                   />
                                 </Form.Item>

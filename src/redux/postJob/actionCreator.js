@@ -6,7 +6,9 @@ import { DataService } from '../../config/dataService/dataService';
 const { jobPostDataBegin, jobPostDataSuccess, jobPostDataErr, getAllJobsBegin, getAllJobsSuccess,
   getAllJobsErr, toggleBookmarkBegin, toggleBookmarkSuccess, toggleBookmarkErr, getJobDetailsBegin,
   getJobDetailsSuccess, getJobDetailsErr, getBookmarkJobBegin, getBookmarkJobSuccess, getBookmarkJobErr, 
-  getAllJobsEmpty, applyJobBegin, applyJobSuccess, applyJobErr } =
+  getAllJobsEmpty, applyJobBegin, applyJobSuccess, applyJobErr,
+  getJobApplicationBegin, getJobApplicationSuccess, getJobApplicationErr,
+  getUserResumeBegin, getUserResumeSuccess, getUserResumeErr } =
   actions;
 
 const submitPost = (data) => {
@@ -123,6 +125,37 @@ const getJobDetails = (data) => {
   };
 };
 
+const GetJobApplication = (data) => {
+  return async (dispatch) => {
+    try {
+      dispatch(getJobApplicationBegin());
+      const response = await DataService.post("Job/GetAllApplications", data);
+      if (response.data.success) {
+        dispatch(getJobApplicationSuccess(response.data.result));
+      } else {
+        dispatch(getJobApplicationErr(response.data.success));
+      }
+    } catch (err) {
+      dispatch(getJobApplicationErr(err));
+    }
+  };
+};
+
+const GetUserResume = () => {
+  return async (dispatch) => {
+    try {
+      dispatch(getUserResumeBegin());
+      const response = await DataService.get("Job/GetResume");
+      if (response.data.success) {
+        dispatch(getUserResumeSuccess(response.data.result));
+      } else {
+        dispatch(getUserResumeErr(response.data.success));
+      }
+    } catch (err) {
+      dispatch(getUserResumeErr(err));
+    }
+  };
+};
 
 const getAllBookmarkJobs = () => {
   return async (dispatch) => {
@@ -157,4 +190,5 @@ const ApplyJobs = (data) => {
   };
 };
 
-export { submitPost, getAllJobs, toggleBookmark, getJobDetails, getAllBookmarkJobs, ApplyJobs };
+export { submitPost, getAllJobs, toggleBookmark, getJobDetails, getAllBookmarkJobs, 
+        ApplyJobs, GetUserResume, GetJobApplication };

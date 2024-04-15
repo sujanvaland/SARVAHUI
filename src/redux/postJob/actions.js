@@ -3,6 +3,14 @@ const actions = {
   JOB_POST_DATA_SUCCESS: 'JOB_POST_DATA_SUCCESS',
   JOB_POST_DATA_ERR: 'JOB_POST_DATA_ERR',
 
+  GET_USER_RESUME_BEGIN: 'GET_USER_RESUME_BEGIN',
+  GET_USER_RESUME_SUCCESS: 'GET_USER_RESUME_SUCCESS',
+  GET_USER_RESUME_ERR: 'GET_USER_RESUME_ERR',
+
+  GET_JOB_APPLICATION_BEGIN: 'GET_JOB_APPLICATION_BEGIN',
+  GET_JOB_APPLICATION_SUCCESS: 'GET_JOB_APPLICATION_SUCCESS',
+  GET_JOB_APPLICATION_ERR: 'GET_JOB_APPLICATION_ERR',
+
   GET_ALL_JOBS_BEGIN: 'GET_ALL_JOBS_BEGIN',
   GET_ALL_JOBS_SUCCESS: 'GET_ALL_JOBS_SUCCESS',
   GET_ALL_JOBS_ERR: 'GET_ALL_JOBS_ERR',
@@ -24,6 +32,26 @@ const actions = {
   APPLY_JOB_BEGIN: 'APPLY_JOB_BEGIN',
   APPLY_JOB_SUCCESS: 'APPLY_JOB_SUCCESS',
   APPLY_JOB_ERR: 'APPLY_JOB_ERR',
+
+  getUserResumeBegin: () => {
+    return {
+      type: actions.GET_USER_RESUME_BEGIN,
+    };
+  },
+
+  getUserResumeSuccess: (data) => {
+    return {
+      type: actions.GET_USER_RESUME_SUCCESS,
+      jobResume:data,
+    };
+  },
+
+  getUserResumeErr: (err) => {
+    return {
+      type: actions.GET_USER_RESUME_ERR,
+      err,
+    };
+  },
 
   getBookmarkJobBegin: () => {
       return {
@@ -63,6 +91,27 @@ const actions = {
       err,
     };
   },
+
+  getJobApplicationBegin: () => {
+    return {
+      type: actions.GET_JOB_APPLICATION_BEGIN,
+    };
+  },
+
+  getJobApplicationSuccess: (data) => {
+    return {
+      type: actions.GET_JOB_APPLICATION_SUCCESS,
+      jobApplication:data,
+    };
+  },
+
+  getJobApplicationErr: (err) => {
+    return {
+      type: actions.GET_JOB_APPLICATION_ERR,
+      err,
+    };
+  },
+
 
   getAllJobsBegin: () => {
     return {

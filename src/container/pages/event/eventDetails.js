@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from 'antd';
 import { FieldTimeOutlined, VideoCameraOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import { useSelector, useDispatch } from 'react-redux';
 import { ApplyJobs } from '../../../redux/postJob/actionCreator';
 // import { getJobDetails } from '../../../redux/postJob/actionCreator';
@@ -9,7 +10,7 @@ import { ApplyJobs } from '../../../redux/postJob/actionCreator';
 function EventDetailsComponent() {
   // eslint-disable-next-line react/prop-types
   // const { jobDetails } = props;
-    const [JobPostDetails, setjob] = useState(null);
+  const [JobPostDetails, setjob] = useState(null);
   //   console.log(jobDetails, 'values');
   const dispatch = useDispatch();
   const User = JSON.parse(localStorage.getItem('profile'));
@@ -19,10 +20,10 @@ function EventDetailsComponent() {
   }))
 
   useEffect(() => {
-        setjob(job);
-      }, [job]);
+    setjob(job);
+  }, [job]);
 
-  const handleApplyJob = (data) =>{
+  const handleApplyJob = (data) => {
     dispatch(ApplyJobs(data))
   }
 
@@ -34,14 +35,19 @@ function EventDetailsComponent() {
             <span>Posted by</span> {JobPostDetails?.postedBy}
             <img src={require('../../../static/images/blue_tick.png')} alt="" />
           </h2>
-          {User.loginType === "jobSeeker" && 
-          <div>
-            {/* <Button> free</Button> */}
-            {JobPostDetails?.isApplied === 1 ?  
-            <Button className="btnBlack">Applied</Button>
-            :
-            <Button className="btnBlack" onClick={()=>handleApplyJob({jobId:JobPostDetails?.id})}> Apply </Button>}
-          </div>}
+          {User.loginType === "jobSeeker" &&
+            <div>
+              {JobPostDetails?.isApplied === 1 ?
+                <Button className="btnBlack">Applied</Button>
+                :
+                <Button className="btnBlack" onClick={() => handleApplyJob({ jobId: JobPostDetails?.id })}> Apply </Button>}
+            </div>}
+          {User.loginType === "recruiter" &&
+            <div>
+              <Link to={`jobApplication/${JobPostDetails?.id}`} className="btn btn-default mr-3">
+                View Application
+              </Link>
+            </div>}
         </div>
         <div className="analyticsBox subscribe whitebox">
           <div className="boxOne">
