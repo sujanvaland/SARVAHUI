@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from "react";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Button, Input } from 'antd';
-import { CloseOutlined,SearchOutlined } from '@ant-design/icons';
+import { CloseOutlined, SearchOutlined } from '@ant-design/icons';
 import { Modal } from '../../../components/modals/antd-modals';
 import { sendMessage } from "../../../redux/chatting/actionCreator";
 import { MessageMainBoxInner, MessageMainBox, SearchBox } from '../style';
@@ -19,51 +19,54 @@ const FindUser = (props) => {
             SearchUser: state.getUser.getSearchUser,
             FollowingData: state.userProfile.getNetwork?.following,
         };
-      });
+    });
 
-    const { handleCloseAddMessageBox, onClose, ForwardMessage, IsForward, handleOpenChatBox , setTagUser, IsTag, TagUser, IsInvite } = props;
+    const { handleCloseAddMessageBox, onClose, ForwardMessage, IsForward, handleOpenChatBox, setTagUser, IsTag, TagUser, IsInvite } = props;
 
     const [State, setState] = useState({
         SearchUserName: '',
         focustext: false,
         showboxlist: false,
-      });
-    
-    useEffect(()=>{
+    });
+
+    useEffect(() => {
         if (State.SearchUserName?.length < 3) {
             SetSearchUserdata(FollowingData);
         }
-        if(IsTag)
-        {
+        if (IsTag) {
             SetUserThreads(TagUser);
         }
-    },[])
+    }, [])
 
-    useEffect(()=>{
+    useEffect(() => {
         if (State.SearchUserName?.length > 3) {
             SetSearchUserdata(SearchUser);
         }
-    },[SearchUser])
+    }, [SearchUser])
 
-    useEffect(()=>{
-    if (State.SearchUserName?.length > 3) {
-        setState({
-            ...State,
-            showboxlist: true,
-        });
-        dispatch(GetSearchUser({ name: State.SearchUserName, pageNo:1, records: 50 }));
-    }
-    },[State.SearchUserName])
+    useEffect(() => {
+        if (State.SearchUserName?.length > 3) {
+            setState({
+                ...State,
+                showboxlist: true,
+            });
+            dispatch(GetSearchUser({ name: State.SearchUserName, pageNo: 1, records: 50 }));
+        }
+    }, [State.SearchUserName])
 
 
 
     const handleUserThreads = (thread) => {
-        if (!UserThreads?.map(x=> x.id).includes(thread?.id)) {
+        if (!UserThreads?.map(x => x.id).includes(thread?.id)) {
             SetUserThreads([...UserThreads, thread]);
+        }
+
+        if (!IsForward && !IsTag && !IsInvite) {
+            handleOpenChatBox([thread]);
         }
     };
 
-    const handleRemoveThreads = (id)=> {
+    const handleRemoveThreads = (id) => {
         const newThreads = UserThreads.filter(user => user.id !== id);
         SetUserThreads(newThreads);
     }
@@ -84,7 +87,7 @@ const FindUser = (props) => {
                 "deleteForUserId2": 0
             }
             // eslint-disable-next-line array-callback-return
-            UserThreads.map((item)=>{
+            UserThreads.map((item) => {
                 const userObj = { ...obj, receiverId: parseInt(item.id) };
                 dispatch(sendMessage(userObj));
             })
@@ -96,25 +99,25 @@ const FindUser = (props) => {
     const handleChange = (e) => {
         e.preventDefault();
         setState({
-          ...State,
-          SearchUserName: e.target.value,
-          showboxlist: true,
+            ...State,
+            SearchUserName: e.target.value,
+            showboxlist: true,
         });
     };
 
     const fnFocus = () => {
         setState({
-          ...State,
-          focustext: true,
+            ...State,
+            focustext: true,
         });
-      };
-    
-      const fnFocusOut = () => {
+    };
+
+    const fnFocusOut = () => {
         setState({
-          ...State,
-          focustext: false,
+            ...State,
+            focustext: false,
         });
-      };
+    };
 
     const hideSearch = () => {
         setState({
@@ -123,23 +126,23 @@ const FindUser = (props) => {
             showboxlist: false,
         });
     };
-    
+
     return (
         <Modal
             type="primary"
             title={
                 <div className="modalHeader">
                     New Message
-                    {(!IsForward && !IsTag && !IsInvite) &&
+                    {/* {(!IsForward && !IsTag && !IsInvite) &&
                         <Button className="btnnextheader" onClick={() => handleOpenChatBox(UserThreads)}>
                             Next
-                        </Button>}
+                        </Button>} */}
                     {IsForward &&
                         <Button className="btnnextheader btnBlack" onClick={() => handleFowardMessage()}>
                             Next
                         </Button>}
                     {IsTag &&
-                        <Button className="btnnextheader btnBlack" onClick={() => {setTagUser(UserThreads); onClose();}}>
+                        <Button className="btnnextheader btnBlack" onClick={() => { setTagUser(UserThreads); onClose(); }}>
                             Tag
                         </Button>
                     }
@@ -152,27 +155,27 @@ const FindUser = (props) => {
             top={20}
             className="imgPreviewModal addMessageBox">
             <div className="seachTagsBox">
-           
+
                 <SearchBox>
-                <div className="messgsearcharea">
-                    <div className="searchIconbox">
-                    <SearchOutlined />
+                    <div className="messgsearcharea">
+                        <div className="searchIconbox">
+                            <SearchOutlined />
+                        </div>
+                        <Input
+                            className="form-control"
+                            placeholder="Search"
+                            name="SearchUserName"
+                            onFocus={fnFocus}
+                            onBlur={fnFocusOut}
+                            onChange={handleChange}
+                            value={State?.SearchUserName}
+                        />
+                        <Button className={State.showboxlist ? 'btnClose show' : 'btnClose'} onClick={hideSearch}>
+                            <CloseOutlined />
+                        </Button>
                     </div>
-                    <Input
-                    className="form-control"
-                    placeholder="Search"
-                    name="SearchUserName"
-                    onFocus={fnFocus}
-                    onBlur={fnFocusOut}
-                    onChange={handleChange}
-                    value={State?.SearchUserName}
-                    />
-                    <Button className={State.showboxlist ? 'btnClose show' : 'btnClose'} onClick={hideSearch}>
-                    <CloseOutlined />
-                    </Button>
-                </div>
                 </SearchBox>
-            
+
                 <div className="messageTagsBox">
                     {UserThreads && UserThreads?.length > 0 &&
                         UserThreads?.map((user) => (
@@ -183,39 +186,39 @@ const FindUser = (props) => {
                                         <img src={require('../../../static/images/img_userpic.jpg')} alt="" />}
                                 </div>
                                 <div className="userName">
-                                {user.firstName}{" "}{user.lastName}
+                                    {user.firstName}{" "}{user.lastName}
                                 </div>
                                 <Button>
-                                    <CloseOutlined onClick={()=>handleRemoveThreads(user.id)}/>
+                                    <CloseOutlined onClick={() => handleRemoveThreads(user.id)} />
                                 </Button>
                             </div>))}
                 </div>
             </div>
             <MessageMainBox className="messagaBoxUsers">
                 {SearchUserdata && SearchUserdata.length > 0 ? (
-                        SearchUserdata?.map((User) => (
-                <MessageMainBoxInner onClick={()=>handleUserThreads(User)} className="Msgboxuser">
-                    <div className="userPic" >
-                        {User?.profileImg?.length > 5 ?
-                            <img src={User.profileImg} alt="" /> :
-                            <img src={require('../../../static/images/img_userpic.jpg')} alt="" />}
-                    </div>
-                    <div className="nameMsgBox">
-                        <div className="namedtls">
-                            <div>
-                                <span className="uname"> {User.firstName} {User.lastName}</span>
-                                <div className="flex row flextart aligncenter">
-                                    {User.online &&
-                                    <span className="greentickicon">
-                                    <img src={require('../../../static/images/icon_check.png')} alt="" />
-                                    </span>}
-                                    <span className="accountname">@ {User.userName}</span>
+                    SearchUserdata?.map((User) => (
+                        <MessageMainBoxInner onClick={() => handleUserThreads(User)} className="Msgboxuser">
+                            <div className="userPic" >
+                                {User?.profileImg?.length > 5 ?
+                                    <img src={User.profileImg} alt="" /> :
+                                    <img src={require('../../../static/images/img_userpic.jpg')} alt="" />}
+                            </div>
+                            <div className="nameMsgBox">
+                                <div className="namedtls">
+                                    <div>
+                                        <span className="uname"> {User.firstName} {User.lastName}</span>
+                                        <div className="flex row flextart aligncenter">
+                                            {User.online &&
+                                                <span className="greentickicon">
+                                                    <img src={require('../../../static/images/icon_check.png')} alt="" />
+                                                </span>}
+                                            <span className="accountname">@ {User.userName}</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </MessageMainBoxInner>
-                ))
+                        </MessageMainBoxInner>
+                    ))
                 ) : (
                     <li>No user found</li>
                 )}

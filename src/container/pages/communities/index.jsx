@@ -5,7 +5,7 @@ import { Col, Input, Modal, Radio, Spin } from "antd";
 import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import PostComponent from "../post";
 import { getTimeline } from "../../../redux/post/actionCreator";
-import { doConnect } from "../../../redux/onlineusers/actionCreator";
+// import { doConnect } from "../../../redux/onlineusers/actionCreator";
 import { Communitiesb,DiscoverCommunities} from '../style';
 
 
@@ -22,9 +22,9 @@ function Communities () {
         dispatch(getTimeline({ pageNo,type:"post" }))
     }, [pageNo])
 
-    useEffect(() => {
-        dispatch(doConnect())
-    }, [])
+    // useEffect(() => {
+    //     dispatch(doConnect())
+    // }, [])
 
     const { timeline, isLoader } = useSelector((state) => ({
         timeline: state?.Post?.timelinedata,

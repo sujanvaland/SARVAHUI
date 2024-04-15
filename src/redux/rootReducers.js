@@ -17,7 +17,6 @@ import postReducer from './post/reducers';
 import reactionReducer from './reaction/reducers';
 import connectionReducer from './connection/reducers';
 import onlineUsersReducer from './onlineusers/reducers';
-import chattingReducer from './chatting/reducers';
 import UserProfileReducer from './UserProfile/reducers';
 import UploadFileReducer from './UploadFile/reducers';
 import SuggestionReducer from './usersSuggestion/reducers';
@@ -26,6 +25,7 @@ import amaReducer from './ama/reducers';
 import fetchContactsReducer from './usercontacts/reducers';
 import bookmarkJobReducer from './bookmarkJobs/reducers';
 import JobPostReducer from './postJob/reducers';
+import chattingReducer from './chatting/reducers';
 
 const rootReducers = combineReducers({
   fb: firebaseReducer,

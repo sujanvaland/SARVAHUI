@@ -5,7 +5,10 @@ const initialState = {
   loading: false,
   infoLoading: false,
   error: null,
-  chats: []
+  chats: [],
+  chatMessages: [],
+  DMuser: [],
+  isDMUser: false,
 };
 
 const { GET_CHAT_HISTORY_REQ, GET_CHAT_HISTORY_SUCCESS, GET_CHAT_HISTORY_ERR,
@@ -17,13 +20,30 @@ const { GET_CHAT_HISTORY_REQ, GET_CHAT_HISTORY_SUCCESS, GET_CHAT_HISTORY_ERR,
   LEAVE_GROUP_REQ, LEAVE_GROUP_SUCCESS, LEAVE_GROUP_ERR,
   GROUP_INFO_REQ, GROUP_INFO_SUCCESS, GROUP_INFO_ERR,
   REMOVE_FROMGROUP_REQ, REMOVE_FROMGROUP_SUCCESS, REMOVE_FROMGROUP_ERR,
-  SNOOZE_GROUPUSER_REQ, SNOOZE_GROUPUSER_SUCCESS, SNOOZE_GROUPUSER_ERR  } = actions;
+  SNOOZE_GROUPUSER_REQ, SNOOZE_GROUPUSER_SUCCESS, SNOOZE_GROUPUSER_ERR,
+  GET_EMPTYCHAT_HISTORY_SUCCESS, SET_DMUSER, SET_EMPTY_DMUSER } = actions;
 
 const chattingReducer = (state = initialState, action) => {
-  const { type, messageSent,chatProfile, getCreatedGroup, err, chats, deleteChat,
-    getRemoveGroup, getUpdatedGroupDetails, getLeaveGroup, getGroupInfo, getSnooze } = action;
- 
+  const { type, messageSent, chatProfile, getCreatedGroup, err, chatMessages, DMuser, isDMUser,
+    userProfile, chatCount, chatSize, deleteChat, getRemoveGroup, getUpdatedGroupDetails,
+    getLeaveGroup, getGroupInfo, getSnooze } = action;
+
   switch (type) {
+
+    case SET_DMUSER:
+      return {
+        ...state,
+        DMuser:[DMuser],
+        isDMUser: isDMUser,
+        loading: false,
+      };
+    case SET_EMPTY_DMUSER:
+      return {
+        ...state,
+        DMuser:[],
+        isDMUser: false,
+        loading: false,
+      };
 
     case SEND_MESSAGE_REQ:
       return {
@@ -51,7 +71,19 @@ const chattingReducer = (state = initialState, action) => {
     case GET_CHAT_HISTORY_SUCCESS:
       return {
         ...state,
-        chats,
+        chatMessages: [...chatMessages, ...state.chatMessages],
+        userProfile,
+        chatCount,
+        chatSize,
+        loading: false,
+      };
+    case GET_EMPTYCHAT_HISTORY_SUCCESS:
+      return {
+        ...state,
+        chatMessages: [],
+        userProfile,
+        chatCount,
+        chatSize,
         loading: false,
       };
     case GET_CHAT_HISTORY_ERR:
@@ -132,7 +164,7 @@ const chattingReducer = (state = initialState, action) => {
         error: err,
         loading: false,
       };
-    
+
     case LEAVE_GROUP_REQ:
       return {
         ...state,

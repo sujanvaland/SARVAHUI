@@ -1,32 +1,55 @@
 import actions from './actions';
 // eslint-disable-next-line import/no-cycle
 import { DataService } from '../../config/dataService/dataService';
-import {ClearFileUploadState}  from '../UploadFile/actionCreator';
+import { ClearFileUploadState } from '../UploadFile/actionCreator';
+// import { NodeDataService } from '../../config/dataService/nodeDataService';
 
 const { getChatHistoryRequest, getChatHistorySuccess, getChatHistoryError,
-sendMessageRequest, sendMessageSuccess, sendMessageError,
-getChatProfileRequest, getChatProfileSuccess, getChatProfileError,
-getCreateGroupRequest, getCreateGroupSuccess, getCreateGroupError,
-deleteChatRequest, deleteChatSuccess, deleteChatError,
-updateGroupDetailRequest, updateGroupDetailSuccess, updateGroupDetailError,
-leaveGroupError, leaveGroupRequest, leaveGroupSuccess,
-getGroupInfoRequest, getGroupInfoSuccess, getGroupInfoError,
-getRemoveUserRequest, getRemoveUserSuccess, getRemoveUserError,
-snoozeGroupUserRequest, snoozeGroupUserSuccess, snoozeGroupUserError } = actions;
+  sendMessageRequest, sendMessageSuccess, sendMessageError,
+  getChatProfileRequest, getChatProfileSuccess, getChatProfileError,
+  getCreateGroupRequest, getCreateGroupSuccess, getCreateGroupError,
+  deleteChatRequest, deleteChatSuccess, deleteChatError,
+  updateGroupDetailRequest, updateGroupDetailSuccess, updateGroupDetailError,
+  leaveGroupError, leaveGroupRequest, leaveGroupSuccess,
+  getGroupInfoRequest, getGroupInfoSuccess, getGroupInfoError,
+  getRemoveUserRequest, getRemoveUserSuccess, getRemoveUserError,
+  snoozeGroupUserRequest, snoozeGroupUserSuccess, snoozeGroupUserError,
+  getEmptyChatHistorySuccess, setDMuserForMessage, setEmptyDMuserForMessage } = actions;
 
-const getChats = (userId) => {
+
+const EmptyChatHistory = () => {
+  return async (dispatch) => {
+    dispatch(getEmptyChatHistorySuccess(null));
+  };
+};
+
+const SetDMUser = (data) => {
+  return async (dispatch) => {
+    dispatch(setDMuserForMessage(data));
+  };
+};
+
+const EmptyDMUser = () => {
+  return async (dispatch) => {
+    dispatch(setEmptyDMuserForMessage(null));
+  };
+};
+
+const getChats = (data) => {
   return async (dispatch) => {
     try {
       dispatch(getChatHistoryRequest())
-
-      const res = await DataService.post("Chat/GetChatHistory",(userId));
-
-      if(res.data.message === "Success")
-      {
+      console.log("data",data);
+      
+      const res = await DataService.post("Chat/GetChatHistory", (data));
+      if (res.data.message === "Success") {
+        if (data?.pageNo === 1) {
+          dispatch(EmptyChatHistory())
+        }
+        dispatch(EmptyDMUser());
         dispatch(getChatHistorySuccess(res.data.result))
       }
-      else
-      {
+      else {
         dispatch(getChatHistoryError("Something went wrong"))
       }
     }
@@ -36,33 +59,7 @@ const getChats = (userId) => {
   }
 }
 
-const sendMessage = (messageObj) => {
-  return async (dispatch) => {
-    try {
-      dispatch(sendMessageRequest())
 
-      const res = await DataService.post(`Chat/SaveChat`,messageObj);
-
-      if(res.data.message === "Success")
-      {
-        dispatch(sendMessageSuccess(res.data.message))
-        dispatch(ClearFileUploadState("chatting"));
-        const obj =  {
-            "userId": messageObj.groupId === 0 ? messageObj.receiverId : messageObj.groupId,
-            "isGroup":  messageObj.groupId === 0 ? 0 : 1,
-          }
-        dispatch(getChats(obj))
-      }
-      else
-      {
-        dispatch(sendMessageError("Something went wrong"))
-      }
-    }
-    catch (err) {
-      dispatch(sendMessageError(err))
-    }
-  }
-}
 
 const GetChatUserProfile = () => {
   return async (dispatch) => {
@@ -71,12 +68,10 @@ const GetChatUserProfile = () => {
 
       const res = await DataService.get("Chat/GetUserChatProfile");
 
-      if(res.data.message === "Success")
-      {
+      if (res.data.message === "Success") {
         dispatch(getChatProfileSuccess(res.data.result))
       }
-      else
-      {
+      else {
         dispatch(getChatProfileError("Something went wrong"))
       }
     }
@@ -86,21 +81,45 @@ const GetChatUserProfile = () => {
   }
 }
 
+const sendMessage = (messageObj) => {
+  return async (dispatch) => {
+    try {
+      dispatch(sendMessageRequest())
+      const res = await DataService.post(`Chat/SaveChat`, messageObj);
+      if (res.data.message === "Success") {
+        dispatch(sendMessageSuccess(res.data.message))
+        dispatch(GetChatUserProfile());
+        dispatch(ClearFileUploadState("chatting"));
+        const obj = {
+          "userId": messageObj.groupId === 0 ? messageObj.receiverId : messageObj.groupId,
+          "isGroup": messageObj.groupId === 0 ? 0 : 1,
+          "pageNo": 1
+        }
+        dispatch(getChats(obj))
+      }
+      else {
+        dispatch(sendMessageError("Something went wrong"))
+      }
+    }
+    catch (err) {
+      dispatch(sendMessageError(err))
+    }
+  }
+}
+
 const CreateGroup = (data) => {
   return async (dispatch) => {
     try {
       dispatch(getCreateGroupRequest())
 
-      const res = await DataService.post("Chat/CreateGroup",data);
+      const res = await DataService.post("Chat/CreateGroup", data);
 
-      if(res.data.message === "Success")
-      {
+      if (res.data.message === "Success") {
         await dispatch(getCreateGroupSuccess(res.data.result))
         await dispatch(GetChatUserProfile());
 
       }
-      else
-      {
+      else {
         dispatch(getCreateGroupError("Something went wrong"))
       }
     }
@@ -115,15 +134,13 @@ const DeleteChat = (data) => {
     try {
       dispatch(deleteChatRequest())
 
-      const res = await DataService.post("Chat/DeleteChatMessage",data);
+      const res = await DataService.post("Chat/DeleteChatMessage", data);
 
-      if(res.data.message === "Success")
-      {
+      if (res.data.message === "Success") {
         dispatch(deleteChatSuccess(res.data.result))
         dispatch(GetChatUserProfile());
       }
-      else
-      {
+      else {
         dispatch(deleteChatError("Something went wrong"))
       }
     }
@@ -139,15 +156,13 @@ const UpdateGroupDetails = (data) => {
     try {
       dispatch(updateGroupDetailRequest())
 
-      const res = await DataService.post("Chat/UpdateGroupDetails",data);
+      const res = await DataService.post("Chat/UpdateGroupDetails", data);
 
-      if(res.data.message === "Success")
-      {
+      if (res.data.message === "Success") {
         dispatch(updateGroupDetailSuccess(res.data.result))
         dispatch(GetChatUserProfile());
       }
-      else
-      {
+      else {
         dispatch(updateGroupDetailError("Something went wrong"))
       }
     }
@@ -162,15 +177,13 @@ const LeaveGroupConversation = (GroupId) => {
     try {
       dispatch(leaveGroupRequest())
 
-      const res = await DataService.post("Chat/LeaveGroupConversation",{GroupId});
+      const res = await DataService.post("Chat/LeaveGroupConversation", { GroupId });
 
-      if(res.data.message === "Success")
-      {
+      if (res.data.message === "Success") {
         dispatch(leaveGroupSuccess(res.data.result))
         dispatch(GetChatUserProfile());
       }
-      else
-      {
+      else {
         dispatch(leaveGroupError("Something went wrong"))
       }
     }
@@ -184,13 +197,11 @@ const GetGroupInfo = (data) => {
   return async (dispatch) => {
     try {
       dispatch(getGroupInfoRequest())
-      const res = await DataService.post("Chat/GetInfolist",data);
-      if(res.data.message === "Success")
-      {
+      const res = await DataService.post("Chat/GetInfolist", data);
+      if (res.data.message === "Success") {
         dispatch(getGroupInfoSuccess(res.data.result))
       }
-      else
-      {
+      else {
         dispatch(getGroupInfoError("Something went wrong"))
       }
     }
@@ -204,13 +215,11 @@ const MakeActionFromGroup = (data) => {
   return async (dispatch) => {
     try {
       dispatch(getRemoveUserRequest())
-      const res = await DataService.post("Chat/MakeAdminRemoveFromGroup",data);
-      if(res.data.message === "Success")
-      {
+      const res = await DataService.post("Chat/MakeAdminRemoveFromGroup", data);
+      if (res.data.message === "Success") {
         dispatch(getRemoveUserSuccess(res.data.result))
       }
-      else
-      {
+      else {
         dispatch(getRemoveUserError("Something went wrong"))
       }
     }
@@ -225,13 +234,11 @@ const SnoozeGroupUser = (data) => {
   return async (dispatch) => {
     try {
       dispatch(snoozeGroupUserRequest())
-      const res = await DataService.post("Chat/SnoozeGroupUser",data);
-      if(res.data.message === "Success")
-      {
+      const res = await DataService.post("Chat/SnoozeGroupUser", data);
+      if (res.data.message === "Success") {
         dispatch(snoozeGroupUserSuccess(res.data.result))
       }
-      else
-      {
+      else {
         dispatch(snoozeGroupUserError("Something went wrong"))
       }
     }
@@ -241,6 +248,7 @@ const SnoozeGroupUser = (data) => {
   }
 }
 
-export { getChats, sendMessage, GetChatUserProfile, CreateGroup, DeleteChat, 
+export {
+  getChats, sendMessage, GetChatUserProfile, CreateGroup, DeleteChat,
   MakeActionFromGroup, UpdateGroupDetails, LeaveGroupConversation, GetGroupInfo,
-  SnoozeGroupUser  };
+  SnoozeGroupUser, EmptyChatHistory, SetDMUser, EmptyDMUser };

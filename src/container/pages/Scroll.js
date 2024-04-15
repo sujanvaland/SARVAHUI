@@ -10,7 +10,7 @@ import UploadPost from './post/uploadPost';
 import PostComponent from './post';
 import { getTimeline, getUserProfileTimeline } from '../../redux/post/actionCreator';
 // import { onlineUser } from '../../redux/onlineusers/actionCreator';
-import { doConnect } from '../../redux/onlineusers/actionCreator';
+// import { doConnect } from '../../redux/onlineusers/actionCreator';
 import { getUserNetwork } from '../../redux/UserProfile/actionCreator';
 import askMeAnything from '../../redux/ama/actionCreator';
 
@@ -70,9 +70,8 @@ function Scroll(props) {
 
 
   useEffect(() => {
-    // dispatch(doConnect());
     dispatch(getUserNetwork(UserProfile?.id));
-    dispatch(doConnect);
+    // dispatch(doConnect);
   }, [])
 
   const { timeline, isLoader, newpostcount } = useSelector((state) => ({

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from 'antd';
 import { FieldTimeOutlined, VideoCameraOutlined } from '@ant-design/icons';
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import { useSelector, useDispatch } from 'react-redux';
 import { ApplyJobs } from '../../../redux/postJob/actionCreator';
 // import { getJobDetails } from '../../../redux/postJob/actionCreator';
@@ -42,12 +41,12 @@ function EventDetailsComponent() {
                 :
                 <Button className="btnBlack" onClick={() => handleApplyJob({ jobId: JobPostDetails?.id })}> Apply </Button>}
             </div>}
-          {User.loginType === "recruiter" &&
+          {/* {User.loginType === "recruiter" &&
             <div>
               <Link to={`jobApplication/${JobPostDetails?.id}`} className="btn btn-default mr-3">
                 View Application
               </Link>
-            </div>}
+            </div>} */}
         </div>
         <div className="analyticsBox subscribe whitebox">
           <div className="boxOne">

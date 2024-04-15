@@ -4,6 +4,8 @@ const actions = {
   GET_CHAT_HISTORY_SUCCESS:"GET_CHAT_HISTORY_SUCCESS",
   GET_CHAT_HISTORY_ERR:"GET_CHAT_HISTORY_ERR",
 
+  GET_EMPTYCHAT_HISTORY_SUCCESS:"GET_EMPTYCHAT_HISTORY_SUCCESS",
+  
   SEND_MESSAGE_REQ: "SEND_MESSAGE_REQ",
   SEND_MESSAGE_SUCCESS: "SEND_MESSAGE_SUCCESS",
   SEND_MESSAGE_ERR: "SEND_MESSAGE_ERR",
@@ -41,7 +43,23 @@ const actions = {
   SNOOZE_GROUPUSER_SUCCESS: "SNOOZE_GROUPUSER_SUCCESS",
   SNOOZE_GROUPUSER_ERR: "SNOOZE_GROUPUSER_ERR",
 
+  SET_DMUSER:'SET_DMUSER',
+  SET_EMPTY_DMUSER:'SET_EMPTY_DMUSER',
 
+  setDMuserForMessage: (data) => {
+    const check = data?.id > 0;
+    return {
+      type:actions.SET_DMUSER,
+      DMuser:data,
+      isDMUser: check,
+    }
+  },
+  
+  setEmptyDMuserForMessage: () => {
+    return {
+      type:actions.SET_EMPTY_DMUSER,
+    }
+  },
   sendMessageRequest: () => {
     return {
       type:actions.SEND_MESSAGE_REQ,
@@ -69,10 +87,23 @@ const actions = {
     }
   },
 
-  getChatHistorySuccess: (chats) => {
+  getChatHistorySuccess: (data) => {
     return {
       type:actions.GET_CHAT_HISTORY_SUCCESS,
-      chats
+      chatMessages:data.chatMessages,
+      userProfile:data.userProfile, 
+      chatCount:data.totalCount,
+      chatSize:data.size,
+    }
+  },
+
+  getEmptyChatHistorySuccess: () => {
+    return {
+      type:actions.GET_EMPTYCHAT_HISTORY_SUCCESS,
+      chatMessages:null,
+      userProfile:null, 
+      chatCount:null,
+      chatSize:null,
     }
   },
 

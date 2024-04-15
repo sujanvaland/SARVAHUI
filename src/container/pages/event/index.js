@@ -34,7 +34,7 @@ function EventTimeline() {
     const totalPages = Math.ceil(totalCount / totalSize);
     if (PageNo >= totalPages || !totalPages) {
       setIsMore(false);
-    }else{
+    } else {
       setIsMore(true);
     }
   }, [jobDetails]);
@@ -182,14 +182,14 @@ function EventTimeline() {
     <>
       <div className="cntpagecomponent">
         <div className="centersidebarcontent flexcolumn mt56">
-            <div className='userNamedetails headerBox msgheader'>
-                        <h2>{User.loginType === "jobSeeker" ? <> All Jobs </> : <> My Jobs </>}</h2>
-                        <div className="hdRight">
-                        <Button className="btntabsetting" onClick={() => handleFilter()}>
-                          <FilterOutlined />
-                        </Button>
-                        </div>
-                    </div>
+          <div className='userNamedetails headerBox msgheader'>
+            <h2>{User.loginType === "jobSeeker" ? <> All Jobs </> : <> My Jobs </>}</h2>
+            <div className="hdRight">
+              <Button className="btntabsetting" onClick={() => handleFilter()}>
+                <FilterOutlined />
+              </Button>
+            </div>
+          </div>
 
           {/* <div className="tabbox">
             <Button className="btntab active"></Button>
@@ -207,8 +207,8 @@ function EventTimeline() {
                     <li>
                       <Form.Item >
                         <Select
-                          mode="tags"   
-                          placeholder="Select Skills"                       
+                          mode="tags"
+                          placeholder="Select Skills"
                           showSearch
                           filterOption={(input, option) =>
                             option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
@@ -221,17 +221,17 @@ function EventTimeline() {
                         </Select>
                       </Form.Item>
                     </li>
-                    <li> 
+                    <li>
                       <Dropdown overlay={postedOnMenu} trigger={['click']} placeholder="Posted On">
                         <a href="#" className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
-                        {filter.postedOn===undefined? <span className='placeholderlabel'>Posted On</span> : ''}   {filter.postedOn} <DownOutlined />
+                          {filter.postedOn === undefined ? <span className='placeholderlabel'>Posted On</span> : ''}   {filter.postedOn} <DownOutlined />
                         </a>
                       </Dropdown>
                     </li>
-                    <li>                      
+                    <li>
                       <Dropdown overlay={salaryMenu} trigger={['click']}>
                         <a href="#" className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
-                         {filter.salary===undefined? <span className='placeholderlabel'>Salary</span> : ''}  {filter.salary}   <DownOutlined />
+                          {filter.salary === undefined ? <span className='placeholderlabel'>Salary</span> : ''}  {filter.salary}   <DownOutlined />
                         </a>
                       </Dropdown>
                     </li>
@@ -249,15 +249,22 @@ function EventTimeline() {
                     <div className="rightBox">
                       <div className="CommunitiesDetails">
                         {
-                          item.dateOfApplication !== undefined && item.dateOfApplication !== null && item.dateOfApplication !== ""  &&
+                          item.dateOfApplication !== undefined && item.dateOfApplication !== null && item.dateOfApplication !== "" &&
                           <div className="countMembers"><p>{item.dateOfApplication}</p></div>
                         }
-                       
+
                         <h4>{item.jobTitle}</h4>
                         <div className="countMembers"><p>{item.jobDescription}</p>  </div>
                       </div>
                       <div className="eventBottom">
-                        <div className="countMembers badgebox">{item.applicationReceived} Application Received</div>
+                        {User.loginType === "jobSeeker" ? <>
+                          <div className="countMembers badgebox">{item.applicationReceived} Application Received</div>
+                        </> : <>
+                          <Link to={`jobApplication/${item?.id}`} >
+                            <div className="countMembers badgebox"> View Application ({item.applicationReceived})
+                            </div>
+                          </Link>
+                        </>}
                         <div className="eventRight">
                           <Link to="#" onClick={() => handleToggleBookmark({ PostId: item.id })}>
                             <svg viewBox="0 0 24 24" aria-hidden="true">

@@ -9,14 +9,14 @@ import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import EventDetailsComponent from './event/eventDetails';
 import { DiscoverCommunities, LinkDiv } from './style';
 // import FindUser from './chatting/findUser';
-import { getAllJobs } from '../../redux/postJob/actionCreator';
+import { getAllJobs, getJobDetails } from '../../redux/postJob/actionCreator';
 
 function appliedJobs() {
 
     const dispatch = useDispatch();
-
     const [isMore, setIsMore] = useState(true);
     const [PageNo, setPageNo] = useState(1);
+    const User = JSON.parse(localStorage.getItem('profile'));
 
     const obj = {
         searchText: '',
@@ -49,13 +49,11 @@ function appliedJobs() {
     }, [jobDetails]);
     const scrollRef = useRef(null);
 
-    const [jobData, SetJobData] = useState();
+    const [jobData, SetJobData] = useState(false);
 
-    const handleJobData = (item) => {
-        // message.success('I was clicked');
-        console.log('item');
-        console.log(item);
-        SetJobData(item);
+    const handleJobData = (data) => {
+        SetJobData(true);
+        dispatch(getJobDetails(data));
     };
 
     const handlePageNo = () => {
@@ -118,7 +116,7 @@ function appliedJobs() {
                         <DiscoverCommunities className="communitiesBoxDetails eventDetails">
                             {jobDetails?.map((item) => (
                                 <>
-                                    <LinkDiv className="disCommunities" onClick={() => handleJobData(item)}>
+                                    <LinkDiv className="disCommunities" onClick={() => handleJobData({ jobId: item.id })}>
                                         <div className="rightBox">
                                             <div className="CommunitiesDetails">
                                                 <div className="countMembers">{item.dateOfApplication}</div>
@@ -126,7 +124,14 @@ function appliedJobs() {
                                                 <div className="countMembers"> {item.jobDescription} </div>
                                             </div>
                                             <div className="eventBottom">
-                                                <div className="countMembers">{item.applicationReceived} Application Received</div>
+                                                {User.loginType === "jobSeeker" ? <>
+                                                    <div className="countMembers badgebox">{item.applicationReceived} Application Received</div>
+                                                </> : <>
+                                                    <Link to={`jobApplication/${item?.id}`} >
+                                                        <div className="countMembers badgebox"> View Application ({item.applicationReceived})
+                                                        </div>
+                                                    </Link>
+                                                </>}
                                                 <div className="eventRight">
                                                     <Link to="#">
                                                         <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -177,7 +182,7 @@ function appliedJobs() {
                         </DiscoverCommunities>
                     </div>
                 </div>
-                {jobData && <EventDetailsComponent jobDetails={jobData} />}
+                {jobData && <EventDetailsComponent />}
             </div>
         </>
     );

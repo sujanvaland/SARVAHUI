@@ -13,6 +13,7 @@ const Bookmarks = () => {
 
     const dispatch = useDispatch();
     const scrollRef = useRef(null);
+    const User = JSON.parse(localStorage.getItem('profile'));
 
     const [isMore, setIsMore] = useState(true);
     const [PageNo, setPageNo] = useState(1);
@@ -99,7 +100,14 @@ const Bookmarks = () => {
                                                 <div className="countMembers"> {item.jobDescription} </div>
                                             </div>
                                             <div className="eventBottom">
-                                                <div className="countMembers">{item.applicationReceived} Application Received</div>
+                                            {User.loginType === "jobSeeker" ? <>
+                                                    <div className="countMembers badgebox">{item.applicationReceived} Application Received</div>
+                                                </> : <>
+                                                    <Link to={`jobApplication/${item?.id}`} >
+                                                        <div className="countMembers badgebox"> View Application ({item.applicationReceived})
+                                                        </div>
+                                                    </Link>
+                                                </>}
                                                 <div className="eventRight">
                                                     <Link to="#" onClick={() => handleToggleBookmark({ PostId: item.id })}>
                                                         <svg viewBox="0 0 24 24" aria-hidden="true">

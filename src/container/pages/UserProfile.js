@@ -51,8 +51,6 @@ function UserProfile() {
   const lastName = data?.lastName ? data.lastName.charAt(0).toUpperCase() + data.lastName.slice(1) : '';
   const JoinedDate = data?.createdDate ? convertToMonthYear(data?.createdDate) : '';
 
-  console.log("data", data);
-
   return (
     <>
       {data?.id > 0 && (
@@ -78,9 +76,9 @@ function UserProfile() {
               )}
             </div>
 
-            <div className="coverPic grayback">
+            {/* <div className="coverPic grayback">
               <img src={data?.backgroundImg} alt="" />
-            </div>
+            </div> */}
             <div className="userpersondetails">
               <div className="leftcol">
                 <div className="personaldetails">
@@ -173,12 +171,12 @@ function UserProfile() {
                              <p>{data?.gender}</p> 
                           </div>
                         </li>
-                        <li>
+                        {/* <li>
                           <div> 
                             <div className='form-group'>Address:</div>
                              <p>{data?.address}</p> 
                           </div>
-                        </li>
+                        </li> */}
                       </ul>
                     </div>
                   </div>
