@@ -54,17 +54,17 @@ function EventDetailsComponent() {
             <div className="iconBox">
               <FieldTimeOutlined />
             </div>
-            <p>Role: {JobPostDetails?.jobTitle}</p>
+            <p><strong>Role:</strong> {JobPostDetails?.jobTitle}</p>
           </div>
           <div className="boxOne">
             <div className="iconBox">
               <VideoCameraOutlined />
             </div>
-            <p>Company Name:{JobPostDetails?.companyName}</p>
+            <p><strong>Company Name:</strong>{JobPostDetails?.companyName}</p>
           </div>
-          <div>
+          <div className="boxOne">
             <p>
-              Salary Range: {JobPostDetails?.minSalary}-{JobPostDetails?.maxSalary}
+            <strong>Salary Range:</strong> {JobPostDetails?.minSalary}-{JobPostDetails?.maxSalary}
             </p>
           </div>
         </div>

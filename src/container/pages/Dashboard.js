@@ -305,7 +305,7 @@ function Dashboard() {
               <div className="userNamedetails">
                 <h2>
                   <Link to="/profile" className="btnBacklink">
-                    <img src={require('../../static/images/icon_back.png')} alt="" />
+                    <img src={require('../../static/images/icon_prevarrow.png')} alt="" />
                   </Link>
                   Profile
                 </h2>

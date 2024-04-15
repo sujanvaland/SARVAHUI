@@ -305,7 +305,7 @@ function Notification() {
           <div className="userNamedetails">
             <h2>
               <Link to="#" onClick={() => history.goBack()} className="btnBacklink">
-                <img src={require('../../static/images/icon_back.png')} alt="" />
+                <img src={require('../../static/images/icon_prevarrow.png')} alt="" />
               </Link>
               Notification
             </h2>

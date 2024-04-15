@@ -54,7 +54,7 @@ function RightAside() {
             );
           })}
 
-          <Link to="#" className="btn-loadMore">
+          <Link to="#" className='btnloadMore'>
             Load more friends
           </Link>
         </ul>

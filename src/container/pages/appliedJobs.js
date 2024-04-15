@@ -170,7 +170,7 @@ function appliedJobs() {
                                 </>
                             ))}
                             {isMore &&
-                                <LinkDiv onClick={() => handlePageNo()}>
+                                <LinkDiv onClick={() => handlePageNo()} className='btnloadMore'>
                                     Load More
                                 </LinkDiv>
                             }

@@ -2977,6 +2977,7 @@ const ChatMainBox = Styled.div`{
     }
       a{margin-right:10px;}
     }
+
     .profileMain{ width:100%;  width: 100%; margin-top:30px; border-bottom:1px solid #ebebeb;
       display: flex; flex-direction: column;justify-content: center; align-items: center;
       padding-bottom:20px;
@@ -2996,6 +2997,8 @@ const ChatMainBox = Styled.div`{
       .fnt18{font-family:'Inter'; font-size:14px; text-align:center; line-height:18px; color:#536471;}
       .cntFollowed{font-family:'Inter'; font-size:11px; text-align:center; line-height:18px; color:#536471; margin-bottom:5px;}
     }
+
+    
     .chattingBox{ margin-top:20px; display: flex; flex-direction: column; justify-content: flex-end;
    
       ul{
@@ -3154,24 +3157,37 @@ const DiscoverCommunities = Styled.div`{
   margin-top:15px;
   &.eventDetails{
     margin-top:60px;
+    .btnloadMore{
+      width:100%; text-align:center; padding:10px 0px; font-size:16px; font-weight:bold;
+      display:flex; flex-direction:row; justify-content:center; align-items:center; cursor:pointer;
+      &:hover{
+        background: rgb(241, 247, 254);
+      }
+    }
     .disCommunities{ align-items:flex-start; cursor:pointer; padding-right:0px;
+      border-bottom:1px solid color:rgb(241, 247, 254);
       .comminitiesImage{
         width:150px;
         img{
           width:100%;
         }
       }
-      .rightBox{ flex-wrap:wrap; align-item:flex-start; width:71%;
-        .CommunitiesDetails{ min-height:100px; display: flex;
+      .rightBox{ flex-wrap:wrap; align-item:flex-start; width:100%;
+        .CommunitiesDetails{ min-height:70px; display: flex;
           flex-direction: column; justify-content: center;
           .countMembers{
-            font-size:13px; font-weight:600;
+            font-size:16px; font-weight:500;
           }
           h4{
             margin-top:6px;
           }
         }
-        .countMembers{font-size:13px;}
+      
+        .countMembers{font-size:13px;
+          &.badgebox{
+            background:#ecf2fb; padding:3px 10px; border-radius:40px; border:1px solid rgb(219 230 246);
+          }
+        }
         .eventBottom{
           display:flex; flex-direction:row; justify-content:space-between; align-items:center;
           a{margin:0px 10px;
@@ -3195,14 +3211,36 @@ const DiscoverCommunities = Styled.div`{
       }
     }
     h3{border-bottom:1px solid rgba(0,0,0,0.08); width:95%; margin-top:20px; padding-bottom:10px;}
-    .eventSearch{ width:95%;  padding:0px 15px; margin-bottom:15px;
-      ul{ width:100%;
+    .eventSearch{ width:100%;  padding:10px 15px 10px; margin-bottom:15px;   margin-top:0px; background:#eef6ff; 
+      ul{ width:100%; margin-top:10px;
         display:flex; flex-direction:row; justify-content:space-between; align-items:center;
-        li{
+        li{width:25%;
+          label, p{font-size:15px; color:#000000; line-height:16px; height:auto; font-family: "Inter", sans-serif;}
+          p{margin:0px; padding:0px;}
+          .ant-form-item-label{line-height:10px;}
+          .ant-form-item{margin-bottom:0px;
+            .ant-form-item-row{
+              display:flex; flex-direction:column;
+              .ant-form-item-label{text-align:left!important;}
+            }
+          }
           a{
             background:rgba(0,0,0,0.05); padding:8px 15px; border-radius:40px; font-size:15px;
             font-weight:600;  color:#333333;
-            &.resetLink{background:#ffffff; color:#000000}
+            &.resetLink{background:rgb(21 108 207); color:#ffffff}
+            &.ant-dropdown-trigger{
+              background:#ffffff; color:#000000; width:100%; border-radius:0px; display:flex;
+              border: 1px solid #d9d9d9; border-radius:5px; height:42px; flex-direction:row;
+              justify-content:space-between; align-items:center; 
+              
+            }
+            .placeholderlabel{
+              font-size:15px; color:#cccccc; font-weight:400;
+            
+            }
+          }
+          &:last-child{
+            width:110px;
           }
         }
       }
@@ -3213,9 +3251,9 @@ const DiscoverCommunities = Styled.div`{
   }
   h3{font-weight:bold; margin-left:15px;}
   .disCommunities{ display:flex; flex-direction:row; justify-content:flex-start; align-items:center; flex-wrap:wrap;
-    margin-bottom:0px; width:100%; padding:12px 15px;
+    margin-bottom:0px; width:100%; padding:12px 15px; border-bottom:1px solid  rgb(229 236 245);
     &:hover{
-      background:#f4f4f4;
+      background:rgb(241 247 254);
     }
     .comminitiesImage{
       width:96px; height:96px; overflow:hidden; border-radius:10px; margin-right:15px;
@@ -3224,9 +3262,15 @@ const DiscoverCommunities = Styled.div`{
     .rightBox{
       .CommunitiesDetails{
         display:flex; flex-direction:column; justify-content:flex-start; align-items:flex-start;
-        h4{font-size:16px; line-height:16px; margin-bottom:5px; padding-bottom:0px; font-weight:bold;}
+        h4{font-size:18px; line-height:20px; margin-bottom:5px; padding-bottom:0px; font-weight:bold;}
         .countMembers{font-size:15px; color:rgb(83, 100, 113);
           strong{color:#333333;}
+          p{
+            font-weight:400; font-size:15px; line-height:20px; color:#5a5a5a;
+          }
+          &.badgebox{
+            background:#ecf2fb;
+          }
         }
         
       }

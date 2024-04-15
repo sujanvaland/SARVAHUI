@@ -343,7 +343,7 @@ const Chatting = () => {
     }
     const dropdownClassName = 'reportdropdown';
     return (
-        <>
+        <> 
             <div className='cntpagecomponent'>
                 <div className={showChatBox === true ? 'centersidebarcontent flexcolumn mt56 messageBoxDiv hideBox' : 'centersidebarcontent flexcolumn mt56 messageBoxDiv'}>
                     <div className='userNamedetails headerBox msgheader'>
@@ -672,10 +672,9 @@ const Chatting = () => {
                 }
 
                 {(showSettingBox) &&
-                    <div className="rightsidebarcntbox messageChat">
-                        <div className="rightsidecntbox scrollbox">
-                            <ChatMainBox>
-                                <div className="chatMainbox" ref={messagesEndRef}>
+                    
+                            <ChatMainBox className="newmessageChat">
+                                <div className="chatMainbox " ref={messagesEndRef}>
                                     <div className="oneBox">
                                         <div className="chatUsername">
                                             <h2>Direct Messages</h2>
@@ -702,8 +701,7 @@ const Chatting = () => {
                                     </div>
                                 </div>
                             </ChatMainBox>
-                        </div>
-                    </div>
+                       
                 }
                 {
                     showAddMessage &&

@@ -83,7 +83,7 @@ function Communities () {
                 <div className='centersidebarcontent flexcolumn mt56'>
                     <div className="userNamedetails headerBox">                        
                         <h2><Link to="#" onClick={() => history.goBack()} className="btnBacklink">
-                            <img src={require('../../../static/images/icon_back.png')} alt="" />
+                            <img src={require('../../../static/images/icon_prevarrow.png')} alt="" />
                         </Link>Communities</h2>
                         <div className="communityHeader">
                         <Link to="#"><SearchOutlined /></Link>
