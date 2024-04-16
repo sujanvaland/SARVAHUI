@@ -766,16 +766,21 @@ function EditProfile() {
                               </Form.Item>
                             </TabPane>
                             <TabPane tab="Experience" key="2" className="tabcntbox">
+                              <div className='experiencemainbox'>
                               <h2>Experience</h2>
                               {ProfileData.experience?.map((experience, index) => {
                                 return (
                                   <>
-                                    <Form.Item label={`Experience ${index + 1}`}>
-                                      {ProfileData?.experience?.length > 1 && (
+                                  <div className='expsubboxmain'> 
+                                    <div className='expsubboxtitle'> 
+                                    <h3>{`Experience ${index + 1}`}</h3>
+                                    {ProfileData?.experience?.length > 1 && (
                                         <Link to="#" type="button" size="large" onClick={() => handleRemoveExp(index)}>
                                           Remove Experience
                                         </Link>
-                                      )}
+                                      )}</div>
+                                    <Form.Item>
+                                      
                                       <Form.Item label="Company Name">
                                         <Input
                                           type='text'
@@ -818,28 +823,34 @@ function EditProfile() {
                                         />
                                       </Form.Item>
                                     </Form.Item>
+                                    </div>
                                   </>
                                 );
+                                
                               })}
+                              </div>
+                              <div className='addexpbtnbox'>
                               <Link to="#" type="button" size="large" onClick={handleAddExp}>
                                 Add Experience
-                              </Link>{' '}
+                              </Link></div>{' '}
 
                             </TabPane>
                             <TabPane tab="Certification" key="3" className="tabcntbox">
                               <h2>Certification</h2>
-                              {ProfileData.certificate?.map((certi, index) => {
+                              <div className='expsubboxmain'> 
+                                <div> 
+                                {ProfileData.certificate?.map((certi, index) => {
                                 return (
-                                  <div key={index}>
-                                    <Form.Item>
-                                      {ProfileData?.certificate?.length > 1 && (
-                                        <Link to="#" type="button" size="large" onClick={() => handleRemoveCerti(index)}>
-                                          Remove Certificate {/* Change button text here */}
-                                        </Link>
-                                      )}
-                                      <Form.Item
-                                        label={`Certificate ${index + 1}`}
-                                      >
+                                  <div key={index}> 
+                                    <Form.Item className='certificateform'>                                     
+                                      <Form.Item >
+                                        <div className='expsubboxtitle'> 
+                                        <h3>{`Certificate ${index + 1}`}</h3> 
+                                        {ProfileData?.certificate?.length > 1 && (
+                                            <Link to="#" type="button" size="large" onClick={() => handleRemoveCerti(index)}>
+                                              Remove Certificate {/* Change button text here */}
+                                            </Link>
+                                          )}</div>
                                         <Input
                                           name="certificateName"
                                           value={certi?.certificateName}
@@ -853,9 +864,12 @@ function EditProfile() {
                                   </div>
                                 );
                               })}
+                              </div>
+                              </div>
+                              <div className='addexpbtnbox'>
                               <Link to="#" type="button" size="large" onClick={handleAddCerti}>
                                 Add Certificate {/* Change button text here */}
-                              </Link>{' '}
+                              </Link></div>{' '}
                             </TabPane>
                           </Tabs>
                         </div>

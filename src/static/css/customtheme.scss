@@ -988,6 +988,7 @@ h5{font-family: $fntMonoMedium; font-size: 14px; color:$black;}
                 }
 
                 .rightsidebarcntbox{   display: none;
+                   
                     &.show{
                         display: block;
                     }
@@ -1388,6 +1389,22 @@ h5{font-family: $fntMonoMedium; font-size: 14px; color:$black;}
         }
 
         .rightsidebarcntbox{ margin-left: 23px; position: sticky; top:0px;
+            &.settingsrightbox{
+                padding:0px; margin-left: 0px;
+                .rightsidecntbox {
+                    padding:0px;
+                }
+                .scrolldisable{margin-top: 0px;}
+                .settingBox{
+                    .settingcntbox{padding:10px 20px;}
+                    .settingsheader{
+                        background: #1b4172;
+                        height: 63px; display: flex; flex-direction: row; justify-content: flex-start; align-items: center;
+                        padding-left: 20px;
+                        h2{color:#ffffff;}
+                    }
+                }
+            }
             @include tab{
                 display:none;
                 
@@ -1672,7 +1689,8 @@ h5{font-family: $fntMonoMedium; font-size: 14px; color:$black;}
         }
         .userpersondetails{
             @include dispflex(flex,row,space-between,center); z-index: 2;
-            padding:0px 25px 30px; width: 100%;  
+            padding:0px 25px 30px; width: 100%;    
+            &.profileheader{margin-top: 130px;}
             
             .leftcol{
                 @include dispflex(flex,row,center,center);
@@ -1722,7 +1740,8 @@ h5{font-family: $fntMonoMedium; font-size: 14px; color:$black;}
                     }
 
                     &.editprofile{@include dispflex(flex,column,flex-start,flex-start); 
-                        .editprofileForm{
+                        width:800px;
+                        .editprofileForm{ width:100%;
                             margin-top:40px!important;
                              .btnboxmain{border:0px!important;}
                             .ant-form-item{
@@ -1734,11 +1753,55 @@ h5{font-family: $fntMonoMedium; font-size: 14px; color:$black;}
                                 .ant-input,.ant-picker{border:0px; font-size: 18px; padding-left: 10px; padding-top: 0px; padding-bottom: 0pxs;}
                                 .ant-form-item-control-input{min-height: 35px!important; font-size: 18px; }
                                 .ant-select-selector{border:0px; font-size: 18px; }
+                                .ant-picker-input > input, input{font-size: 18px;}
+                                    .ant-form-item-row label{font-size: 15px;}
+                            }
+
+                            .experiencemainbox{
+                                .expsubboxmain{ border:1px solid #CAC8C8; border-radius: 10px; padding:20px; margin-bottom: 20px;
+                                    .expsubboxtitle{
+                                        display: flex; flex-direction: row; justify-content: space-between; align-items: center;
+                                        margin-bottom: 15px;
+                                        h3{margin-top: 0px; font-weight:bold; font-size: 18px;}
+
+                                    }
+                                    .ant-form-item{
+                                        padding:0px; border:0px;         
+                                        .ant-form-item-control-input-content{
+                                            .ant-form-item{ border:1px solid #CAC8C8;}
+                                        }                        
+                                    }
+                                    .subtitlebox{
+                                        .ant-form-item-label{
+                                            label{
+                                                font-size:20px; color:$black; font-weight: 600;
+                                            }
+                                        }
+                                    }
+                                }
+                                
+                                
+                            }
+
+                            .certificateform{
+                                border:0px!important; margin-bottom: 0px!important;
+                                .ant-form-item{
+                                    .ant-form-item-control-input-content{
+                                        padding:10px 15px 15px;
+                                        input{padding-left: 0px;}
+                                    }
+                                }
+                                .expsubboxtitle{
+                                    display: flex; flex-direction: row; justify-content: space-between; align-items: center;
+                                    h3{margin-top: 0px;}
+                                    a{font-size: 14px;}
+                                }
+                               
                             }
                         }
                         .profilePicBox{
                             width:132px; height:132px; border-radius: 100%; border:1px solid #000000;
-                            background: $gray; margin-top: -45px; overflow: hidden; z-index: 99;
+                            background: $gray; margin: -45px auto 0px; overflow: hidden; z-index: 99;
                             @include dispflex(flex,column,center,center);
                             img{
                                 width: 100%;
@@ -1804,6 +1867,12 @@ h5{font-family: $fntMonoMedium; font-size: 14px; color:$black;}
                 color:$black;
             }
             h4{color:#817E7E; font-size: 13px!important; font-family: $fntSegoe;}
+            .addexpbtnbox{
+                display: flex; flex-direction: row; justify-content: flex-end;
+                a{
+                    background: #000000; color:#ffffff; padding:8px 20px; border-radius: 50px; font-size: 15px;
+                }
+            }
           }
             .ant-tabs-tab.ant-tabs-tab-active {border-bottom-color: $black;
                 .ant-tabs-tab-btn{color:$black;  }
@@ -1867,6 +1936,9 @@ h5{font-family: $fntMonoMedium; font-size: 14px; color:$black;}
                     }
                     .profilecnt{
                         border:1px solid #dcecfe; padding:20px;
+                        &.socialmedialinks{
+                            flex-direction:column; justify-content: flex-start; align-items: flex-start;
+                        }
                         ul{ display: flex; flex-direction: row; flex-wrap: wrap;
                             li{ margin-bottom: 10px; min-width: 300px;
                                 p{
@@ -1874,6 +1946,7 @@ h5{font-family: $fntMonoMedium; font-size: 14px; color:$black;}
                                     white-space:normal;word-break: break-all;
                                 }
                             }
+                            
                         }
                     }
                     .centersidebarcontent{
@@ -3061,7 +3134,7 @@ span{color:red;}
         }
         .profilePicBox{
             width:132px; height:132px; border-radius: 100%; border:1px solid #000000;
-            background: $gray; margin-top: -45px; overflow: hidden; z-index: 99;
+            background: $gray; margin: -45px auto 0px; overflow: hidden; z-index: 99;
             @include dispflex(flex,column,center,center);
             img{
                 width: 100%;

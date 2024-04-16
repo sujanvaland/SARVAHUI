@@ -3434,6 +3434,40 @@ h5 {
   max-width: 35%;
   border-right: 0px solid #e1e4e8;
 }
+.mainLayout .rightmainbar .cntpagecomponent .rightsidebarcntbox.settingsrightbox {
+  padding: 0px;
+  margin-left: 0px;
+}
+.mainLayout .rightmainbar .cntpagecomponent .rightsidebarcntbox.settingsrightbox .rightsidecntbox {
+  padding: 0px;
+}
+.mainLayout .rightmainbar .cntpagecomponent .rightsidebarcntbox.settingsrightbox .scrolldisable {
+  margin-top: 0px;
+}
+.mainLayout .rightmainbar .cntpagecomponent .rightsidebarcntbox.settingsrightbox .settingBox .settingcntbox {
+  padding: 10px 20px;
+}
+.mainLayout .rightmainbar .cntpagecomponent .rightsidebarcntbox.settingsrightbox .settingBox .settingsheader {
+  background: #1b4172;
+  height: 63px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-left: 20px;
+}
+.mainLayout .rightmainbar .cntpagecomponent .rightsidebarcntbox.settingsrightbox .settingBox .settingsheader h2 {
+  color: #ffffff;
+}
 @media (max-width: 991px) {
   .mainLayout .rightmainbar .cntpagecomponent .rightsidebarcntbox {
     display: none;
@@ -4176,6 +4210,9 @@ h5 {
   padding: 0px 25px 30px;
   width: 100%;
 }
+.mainLayout .rightmainbar .cntpagecomponent .userpersondetails.profileheader {
+  margin-top: 130px;
+}
 .mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -4350,8 +4387,10 @@ h5 {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
+  width: 800px;
 }
 .mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .editprofileForm {
+  width: 100%;
   margin-top: 40px !important;
 }
 .mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .editprofileForm .btnboxmain {
@@ -4387,13 +4426,89 @@ h5 {
   border: 0px;
   font-size: 18px;
 }
+.mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .editprofileForm .ant-form-item .ant-picker-input > input, .mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .editprofileForm .ant-form-item input {
+  font-size: 18px;
+}
+.mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .editprofileForm .ant-form-item .ant-form-item-row label {
+  font-size: 15px;
+}
+.mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .editprofileForm .experiencemainbox .expsubboxmain {
+  border: 1px solid #CAC8C8;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .editprofileForm .experiencemainbox .expsubboxmain .expsubboxtitle {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 15px;
+}
+.mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .editprofileForm .experiencemainbox .expsubboxmain .expsubboxtitle h3 {
+  margin-top: 0px;
+  font-weight: bold;
+  font-size: 18px;
+}
+.mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .editprofileForm .experiencemainbox .expsubboxmain .ant-form-item {
+  padding: 0px;
+  border: 0px;
+}
+.mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .editprofileForm .experiencemainbox .expsubboxmain .ant-form-item .ant-form-item-control-input-content .ant-form-item {
+  border: 1px solid #CAC8C8;
+}
+.mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .editprofileForm .experiencemainbox .expsubboxmain .subtitlebox .ant-form-item-label label {
+  font-size: 20px;
+  color: #000000;
+  font-weight: 600;
+}
+.mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .editprofileForm .certificateform {
+  border: 0px !important;
+  margin-bottom: 0px !important;
+}
+.mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .editprofileForm .certificateform .ant-form-item .ant-form-item-control-input-content {
+  padding: 10px 15px 15px;
+}
+.mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .editprofileForm .certificateform .ant-form-item .ant-form-item-control-input-content input {
+  padding-left: 0px;
+}
+.mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .editprofileForm .certificateform .expsubboxtitle {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .editprofileForm .certificateform .expsubboxtitle h3 {
+  margin-top: 0px;
+}
+.mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .editprofileForm .certificateform .expsubboxtitle a {
+  font-size: 14px;
+}
 .mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .profilePicBox {
   width: 132px;
   height: 132px;
   border-radius: 100%;
   border: 1px solid #000000;
   background: #cccccc;
-  margin-top: -45px;
+  margin: -45px auto 0px;
   overflow: hidden;
   z-index: 99;
   display: -webkit-box;
@@ -4599,6 +4714,25 @@ h5 {
   font-size: 13px !important;
   font-family: "segoe_ui", sans-serif;
 }
+.mainLayout .rightmainbar .cntpagecomponent .tabspanel .tabcntbox .addexpbtnbox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+.mainLayout .rightmainbar .cntpagecomponent .tabspanel .tabcntbox .addexpbtnbox a {
+  background: #000000;
+  color: #ffffff;
+  padding: 8px 20px;
+  border-radius: 50px;
+  font-size: 15px;
+}
 .mainLayout .rightmainbar .cntpagecomponent .tabspanel .ant-tabs-tab.ant-tabs-tab-active {
   border-bottom-color: #000000;
 }
@@ -4774,6 +4908,18 @@ h5 {
 .mainLayout .rightmainbar .cntpagecomponent .tabspanel .ant-tabs-content-holder .projectlist .profilecnt {
   border: 1px solid #dcecfe;
   padding: 20px;
+}
+.mainLayout .rightmainbar .cntpagecomponent .tabspanel .ant-tabs-content-holder .projectlist .profilecnt.socialmedialinks {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
 }
 .mainLayout .rightmainbar .cntpagecomponent .tabspanel .ant-tabs-content-holder .projectlist .profilecnt ul {
   display: -webkit-box;
@@ -7619,7 +7765,7 @@ h5 {
   border-radius: 100%;
   border: 1px solid #000000;
   background: #cccccc;
-  margin-top: -45px;
+  margin: -45px auto 0px;
   overflow: hidden;
   z-index: 99;
   display: -webkit-box;

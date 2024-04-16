@@ -79,7 +79,7 @@ function UserProfile() {
             {/* <div className="coverPic grayback">
               <img src={data?.backgroundImg} alt="" />
             </div> */}
-            <div className="userpersondetails">
+            <div className="userpersondetails profileheader">
               <div className="leftcol">
                 <div className="personaldetails">
                   <div className="usercol">
@@ -183,83 +183,101 @@ function UserProfile() {
                 </TabPane>
                 <TabPane tab="Education" key="8" className="tabcntbox">
                   {userName === undefined && (
-                    <div className="tabhead">
+                     <div className="projectlist">
+                    <div className="tabhead profilecnt">
                       <ul>
                         <li>
                           <div>
-                            <h3>University Name/Collage Name: {data?.university} </h3>
+                            <div className='form-group'>University Name/Collage Name:</div>
+                              <p> {data?.university}</p> 
+                            </div>
+                        </li>
+                        <li>
+                          <div>
+                              <div className='form-group'>Highest Qualification:</div>
+                              <p> {data?.highestQualification} </p>  
                           </div>
                         </li>
                         <li>
                           <div>
-                            <h3>Highest Qualification: {data?.highestQualification} </h3>
+                              <div className='form-group'>Course</div>
+                              <p> {data?.course}  </p>   
                           </div>
                         </li>
                         <li>
                           <div>
-                            <h3>Course: {data?.course} </h3>
+                              <div className='form-group'>Specialization</div>
+                              <p> {data?.specialization}  </p>  
                           </div>
                         </li>
                         <li>
                           <div>
-                            <h3>Specialization: {data?.specialization} </h3>
+                            <div className='form-group'>Starting Year:</div>
+                              <p> {convertToMonthYear(data?.startingYear)} </p>   
                           </div>
                         </li>
                         <li>
                           <div>
-                            <h3>Starting Year: {convertToMonthYear(data?.startingYear)}</h3>
+                            <div className='form-group'>Passing Year: </div>
+                              <p> {convertToMonthYear(data?.passingYear)}</p>    
                           </div>
                         </li>
                         <li>
                           <div>
-                            <h3>Passing Year: {convertToMonthYear(data?.passingYear)}</h3>
-                          </div>
-                        </li>
-                        <li>
-                          <div>
-                            <h3>Grades: {data?.grades} </h3>
+                              <div className='form-group'>Grades</div>
+                              <p>{data?.grades}</p>     
                           </div>
                         </li>
                       </ul>
+                    </div>
                     </div>
                   )}
                 </TabPane>
                 <TabPane tab="Experience" key="2" className="tabcntbox">
                   {data.experience.length > 0 ?
                     (data?.experience.map((exper, index) => (
-                      <div className="tabhead">
+                      <div className="projectlist">
+                      <div className="tabhead profilecnt">
                         <ul>
                           <li>
                             <div>
-                              <h3>Experience {index + 1} </h3>
+                              <div className='form-group'>Experience</div>
+                              <p>{index + 1} </p>    
                             </div>
                           </li>
                           <li>
                             <div>
-                              <h3>Company Name: {exper.company} </h3>
+                            <div className='form-group'>Company Name</div>
+                              <p>{exper.company} </p>    
+                             
                             </div>
                           </li>
                           <li>
                             <div>
-                              <h3>Designation: {exper.designation}</h3>
+                            <div className='form-group'>Designation</div>
+                              <p>{exper.designation} </p>    
                             </div>
                           </li>
                           <li>
                             <div>
-                              <h3>Joining Date: {convertToMonthYear(exper.joinedDate)}</h3>
+                            <div className='form-group'>Joining Date</div>
+                              <p>{convertToMonthYear(exper.joinedDate)}</p>   
                             </div>
                           </li>
                           <li>
                             <div>
-                              <h3>Date of Leaving: {convertToMonthYear(exper.endDate)} </h3>
+                            <div className='form-group'>Date of Leaving</div>
+                              <p> {convertToMonthYear(exper.endDate)}</p>  
                             </div>
                           </li>
                           <li>
                             <div>
-                              <h3>Responsibilities: {exper.responsibility}</h3>
+                            <div className='form-group'>Responsibilities</div>
+                              <p>{exper.responsibility}</p>  
                             </div>
                           </li>
                         </ul>
+                      </div>
                       </div>
                     ))) :
                     <li>
@@ -270,32 +288,39 @@ function UserProfile() {
 
                 </TabPane>
                 <TabPane tab="Certification" key="3" className="tabcntbox">
+                <div className="projectlist">
+                      <div className="tabhead profilecnt"> 
+                      <ul>
                   {data.certificate.length > 0 ?
                     (data?.certificate.map((certi, index) => (
-                      <div className="tabhead">
-                        <ul>
+                      
                           <li>
                             <div>
-                              <h3>Certificates {index + 1} : {certi?.certificateName}</h3>
+                            <div className='form-group'>Certificates</div>
+                              <p> {index + 1} : {certi?.certificateName}</p>  
                             </div>
                           </li>
-                        </ul>
-                      </div>
-                    ))) :
+                       
+                    )))  :
                     <li>
                       <div>
                         <h3>No Experience</h3>
                       </div>
-                    </li>}
+                      </li>
+                    }
+                     </ul>
+                        </div>
+                      </div>
 
                 </TabPane>
                 <TabPane tab="Social Media" key="4" className="tabcntbox">
                   <>
-                    <div className="tabhead">
+                  <div className="projectlist">
+                    <div className="tabhead profilecnt socialmedialinks">
                       <h3>Social Links</h3>
-                    </div>
+                   
                     <div className="analyticsBox">
-                      <ul className="listItemsbox">
+                      <ul className="listItemsbox ">
                         {data?.facebookLink?.length > 5 && (
                           <li>
                             <div className="headbpx">
@@ -335,6 +360,8 @@ function UserProfile() {
                           </li>
                         )}
                       </ul>
+                    </div>
+                    </div>
                     </div>
                   </>
                 </TabPane>

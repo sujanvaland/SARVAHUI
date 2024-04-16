@@ -125,7 +125,7 @@ function Setting() {
             </ul>
           </SettingsBox>
         </div>
-        <div className="rightsidebarcntbox messageChat ">
+        <div className="rightsidebarcntbox settingsrightbox">
           <div className="rightsidecntbox scrollbox">
             <ChatMainBox className="conversionInfoBox scrolldisable">
               {showAccountSetting &&

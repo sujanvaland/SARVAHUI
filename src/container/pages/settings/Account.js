@@ -96,16 +96,16 @@ const Account = () => {
       {!showPassChange && !showDeactivateAcc &&
 
         <div className='settingBox'>
-          <div>
-            <div>
+          <div className='settingsheader'>
               <h2>Your Account</h2>
             </div>
+          <div className='settingcntbox'>
+            
             <div>
               <p>
                 See information about your account, download an archive of your data,
                 or learn about your account deactivation options </p>
             </div>
-          </div>
           <div>
             <ul>
               <li>
@@ -116,17 +116,18 @@ const Account = () => {
               </li>
             </ul>
           </div>
+          </div>
         </div>
 
       }
       {showPassChange &&
         <>
           <div className='settingBox'>
-            <div>
-              <div className='header'>
-                <Link to="#" onClick={() => setShowPassChange(false)} ><ArrowLeftOutlined /> </Link>
+          <div className='settingsheader'>
+          <Link to="#" onClick={() => setShowPassChange(false)} ><ArrowLeftOutlined /> </Link>
                 <h2>Change your password</h2>
-              </div>
+            </div>
+          <div className='settingcntbox'>              
               <div className='formMain'>
                 <Form name="register" onFinish={handleSaveClick} layout="vertical">
                   <ul>
@@ -202,12 +203,14 @@ const Account = () => {
       }
       {showDeactivateAcc &&
         <>
+          
           <div className='settingBox'>
-            <div>
-              <div className='header'>
-                <Link to="#" onClick={() => setShowDeactivateAcc(false)}><ArrowLeftOutlined /> </Link>
+          <div className='settingsheader'>
+          <Link to="#" onClick={() => setShowDeactivateAcc(false)}><ArrowLeftOutlined /> </Link>
                 <h2>Deactivate your account</h2>
-              </div>
+            </div>
+          <div className='settingcntbox'>   
+             
               <div>
                 <MessageMainBox>
                   <MessageMainBoxInner>

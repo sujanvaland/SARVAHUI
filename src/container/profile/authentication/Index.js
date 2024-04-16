@@ -40,7 +40,7 @@ const AuthLayout = (WraperContent) => {
                   <Link to=""><img src={require('../../../static/images/icon_fb.png')} alt=''/></Link>
               </div>
               <div className='ftr_right'>
-                  <p>&copy; K4M2A Inc. 2024</p>
+                  <p>&copy; SARVAH 2024</p>
                   <Link to="/donation">Donate</Link>
                   <Link to='/tos'>Terms of Service</Link>
                   <Link to='/privacy'>Privacy Policy</Link>

@@ -33,9 +33,9 @@ function VerifyEmailComponents() {
         <div className="signupStepsMain">
           <div className="signuplayerBox">
             <div className="signupLeftBox">
-              <div className="signuplogo">
+              {/* <div className="signuplogo">
                 <img src={require('../../../../static/images/logowhite.png')} alt="" />
-              </div>
+              </div> */}
               <img src={require('../../../../static/images/3.jpg')} alt="" />
             </div>
             <div className="signupRightBox">
