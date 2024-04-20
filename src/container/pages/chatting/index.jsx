@@ -7,7 +7,7 @@ import {
 } from '@ant-design/icons';
 import { Icon } from '@iconify/react';
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import MessageBox from "./MessageBox";
 import FindUser from "./findUser";
 import BlockUserModal from "./blockUserModal";
@@ -18,9 +18,12 @@ import { DeleteChat, GetChatUserProfile, GetGroupInfo, SnoozeGroupUser, getChats
 import { convertToMonthYear, formatDate } from "../../../utility/ConvertToMonthYear";
 import { messageTime } from "../../../utility/utility";
 
+
 const Chatting = () => {
 
     const dispatch = useDispatch();
+    const history = useHistory();
+
     const UserProfile = JSON.parse(localStorage.getItem('profile'));
     const messagesEndRef = useRef()
     const [chatThreads, setChatThreads] = useState([]);
@@ -39,7 +42,7 @@ const Chatting = () => {
     const [deleteChatModalOpen, isDeleteChatModalOpen] = useState(false);
     const [IsLoadMore, setIsLoadMore] = useState(true);
 
-    const { chatProfile, chatHistory, chatCount, chatSize, chatUser, groupInfo, infoLoading, DMuser, isDMUser  } = useSelector((state) => {
+    const { chatProfile, chatHistory, chatCount, chatSize, chatUser, groupInfo, infoLoading, DMuser, isDMUser } = useSelector((state) => {
         return {
             chatProfile: state.Chatting.chatProfile,
             chatHistory: state.Chatting.chatMessages,
@@ -118,10 +121,10 @@ const Chatting = () => {
     }
 
     useEffect(() => {
-        if (DMuser[0]?.id > 0 && isDMUser ) {
+        if (DMuser[0]?.id > 0 && isDMUser) {
             handleOpenChatBox(DMuser);
         }
-        console.log("data",DMuser, isDMUser);
+        console.log("data", DMuser, isDMUser);
     }, [DMuser, isDMUser])
 
     const handleCloseAddMessageBox = () => {
@@ -283,19 +286,22 @@ const Chatting = () => {
             <div className='cntpagecomponent'>
                 <div className={showChatBox === true ? 'centersidebarcontent flexcolumn mt56 messageBoxDiv hideBox' : 'centersidebarcontent flexcolumn mt56 messageBoxDiv'}>
                     <div className='userNamedetails headerBox msgheader'>
-                        <h2>Messages</h2>
+                        <h2><Link to="#" onClick={() => history.goBack()} className="btnBacklink">
+                                <img src={require('../../../static/images/icon_prevarrow.png')} alt="" />
+                            </Link>
+                            Messages</h2>
                         <div className="hdRight">
                             {/* <Button className="btnSettings" onClick={() => handleSettingBox(2)}>
                                 <SettingOutlined />
                             </Button> */}
                             {UserProfile.loginType === "recruiter" &&
-                            <Button className="btnAddMsg" onClick={() => handleAddMessage(2)}>
-                                <svg viewBox="0 0 24 24" aria-hidden="true" ><g><path d="M1.998 5.5c0-1.381 1.119-2.5 2.5-2.5h15c1.381 0 2.5 1.119 2.5 2.5V12h-2v-1.537l-8 3.635-8-3.635V18.5c0 .276.224.5.5.5H13v2H4.498c-1.381 0-2.5-1.119-2.5-2.5v-13zm2 2.766l8 3.635 8-3.635V5.5c0-.276-.224-.5-.5-.5h-15c-.276 0-.5.224-.5.5v2.766zM19 18v-3h2v3h3v2h-3v3h-2v-3h-3v-2h3z" /></g></svg>
-                            </Button>}
+                                <Button className="btnAddMsg" onClick={() => handleAddMessage(2)}>
+                                    <svg viewBox="0 0 24 24" aria-hidden="true" ><g><path d="M1.998 5.5c0-1.381 1.119-2.5 2.5-2.5h15c1.381 0 2.5 1.119 2.5 2.5V12h-2v-1.537l-8 3.635-8-3.635V18.5c0 .276.224.5.5.5H13v2H4.498c-1.381 0-2.5-1.119-2.5-2.5v-13zm2 2.766l8 3.635 8-3.635V5.5c0-.276-.224-.5-.5-.5h-15c-.276 0-.5.224-.5.5v2.766zM19 18v-3h2v3h3v2h-3v3h-2v-3h-3v-2h3z" /></g></svg>
+                                </Button>}
                         </div>
                     </div>
-                    <br/>
-                    <br/>
+                    <br />
+                    <br />
                     <SearchBox className="modalSearch">
                         <div className="messgsearcharea">
                             <div className="searchIconbox">
@@ -400,7 +406,7 @@ const Chatting = () => {
 
                                             <div className="chattingBox">
                                                 <ul>
-                                                    {IsLoadMore &&<li>
+                                                    {IsLoadMore && <li>
                                                         <Link to="#" onClick={() => HandleLoadMore()}>Load More</Link>
                                                     </li>}
 
@@ -458,10 +464,10 @@ const Chatting = () => {
                                             </div>
                                         </div>
                                     </div>
-                              
-                                        <MessageBox senderId={UserProfile?.id} receiverId={chatUser.isGroup ? 0 : chatUser?.id}
-                                            groupId={chatUser.isGroup ? chatUser?.id : 0} Reply={Reply}
-                                            setReply={(value) => setReply(value)} /> 
+
+                                    <MessageBox senderId={UserProfile?.id} receiverId={chatUser.isGroup ? 0 : chatUser?.id}
+                                        groupId={chatUser.isGroup ? chatUser?.id : 0} Reply={Reply}
+                                        setReply={(value) => setReply(value)} />
                                 </ChatMainBox>
                             }
                             {chatHistory?.length > 0 &&

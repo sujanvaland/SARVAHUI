@@ -15,12 +15,50 @@ const {
   GET_JOBS_DETAILS_BEGIN, GET_JOBS_DETAILS_SUCCESS, GET_JOBS_DETAILS_ERR,
   GET_BOOKMARK_JOB_BEGIN, GET_BOOKMARK_JOB_SUCCESS, GET_BOOKMARK_JOB_ERR,
   APPLY_JOB_BEGIN, APPLY_JOB_SUCCESS, APPLY_JOB_ERR,
+  GET_ALL_CANDIDATE_REQUEST, GET_ALL_CANDIDATE_SUCCESS, GET_ALL_CANDIDATE_ERR,
+  GET_ALL_RECUITER_REQUEST, GET_ALL_RECUITER_SUCCESS, GET_ALL_RECUITER_ERR
 } = actions;
 
 const JobPostReducer = (state = initialState, action) => {
-  const { type, jobDetails, job, err, bookmarkjobs, toggleBookmark,jobApplication,jobResume,
-    applyJob, totalCount, totalSize, jobpostdetails } = action;
+  const { type, jobDetails, job, err, bookmarkjobs, toggleBookmark, jobApplication, jobResume,
+    applyJob, totalCount, totalSize, jobpostdetails, getAllCandidate, getAllRecuiter } = action;
   switch (type) {
+    case GET_ALL_RECUITER_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case GET_ALL_RECUITER_SUCCESS:
+      return {
+        ...state,
+        getAllRecuiter,
+        loading: false,
+      };
+    case GET_ALL_RECUITER_ERR:
+      return {
+        ...state,
+        error: err,
+        loading: false,
+      };
+
+    case GET_ALL_CANDIDATE_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case GET_ALL_CANDIDATE_SUCCESS:
+      return {
+        ...state,
+        getAllCandidate,
+        loading: false,
+      };
+    case GET_ALL_CANDIDATE_ERR:
+      return {
+        ...state,
+        error: err,
+        loading: false,
+      };
+
     case GET_BOOKMARK_JOB_BEGIN:
       return {
         ...state,
@@ -57,7 +95,7 @@ const JobPostReducer = (state = initialState, action) => {
         loading: false,
       };
 
-      case GET_USER_RESUME_BEGIN:
+    case GET_USER_RESUME_BEGIN:
       return {
         ...state,
         loading: true,

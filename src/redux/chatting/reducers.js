@@ -34,7 +34,7 @@ const chattingReducer = (state = initialState, action) => {
       return {
         ...state,
         DMuser:[DMuser],
-        isDMUser: isDMUser,
+        isDMUser,
         loading: false,
       };
     case SET_EMPTY_DMUSER:

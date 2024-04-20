@@ -28,7 +28,6 @@ const JobApplication = () => {
 
     const handleDMuser = (id) =>
     {
-        console.log('data',id)
         dispatch(SetDMUser({id}))
         history.push('/message');
     }

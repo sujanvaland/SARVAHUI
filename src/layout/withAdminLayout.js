@@ -17,7 +17,7 @@ import {
   MailOutlined,
   SettingOutlined,
   SettingFilled,
-} from '@ant-design/icons'; 
+} from '@ant-design/icons';
 import PremiumModal from './components/PremiumModal';
 import UploadPost from '../container/pages/post/uploadPost';
 import { changeRtlMode, changeLayoutMode, changeMenuMode } from '../redux/themeLayout/actionCreator';
@@ -34,7 +34,7 @@ const ThemeLayout = (WrappedComponent) => {
     constructor(props) {
       super(props);
       this.state = {
-       // headerTitle: '',
+        // headerTitle: '',
         displaySidemenu: false,
         path: window.location.pathname,
         showUploadPost: false,
@@ -91,7 +91,7 @@ const ThemeLayout = (WrappedComponent) => {
     };
 
     render() {
-      const {  displaySidemenu, path, showUploadPost, fadeFooter } = this.state;
+      const { displaySidemenu, path, showUploadPost, fadeFooter } = this.state;
       const Profilemenu = (
         <Menu className="moremnuBox">
           <Menu.Item key="1" onClick={this.handlelogout}>
@@ -157,58 +157,164 @@ const ThemeLayout = (WrappedComponent) => {
 
             <div className="sidemenu">
               <ul>
-                <li>
-                  <Link to="/" className={path === '/' ? 'active' : ''} onClick={() => this.setState({ path: '/' })}>
-                    {path === '/' ? (
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        id="Layer_1"
-                        data-name="Layer 1"
-                        viewBox="0 0 24 24"
-                        width="512"
-                        height="512"
-                      >
-                        <path d="M12,14a3,3,0,0,0-3,3v7.026h6V17A3,3,0,0,0,12,14Z" />
-                        <path d="M13.338.833a2,2,0,0,0-2.676,0L0,10.429v10.4a3.2,3.2,0,0,0,3.2,3.2H7V17a5,5,0,0,1,10,0v7.026h3.8a3.2,3.2,0,0,0,3.2-3.2v-10.4Z" />
-                      </svg>
-                    ) : (
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="512" height="512">
-                        <g id="_01_align_center" data-name="01 align center">
-                          <path d="M13.338.833a2,2,0,0,0-2.676,0L0,10.429v10.4a3.2,3.2,0,0,0,3.2,3.2H20.8a3.2,3.2,0,0,0,3.2-3.2v-10.4ZM15,22.026H9V17a3,3,0,0,1,6,0Zm7-1.2a1.2,1.2,0,0,1-1.2,1.2H17V17A5,5,0,0,0,7,17v5.026H3.2a1.2,1.2,0,0,1-1.2-1.2V11.319l10-9,10,9Z" />
-                        </g>
-                      </svg>
-                    )}
-                    Home
-                  </Link>
-                </li>
-                {User.loginType === "jobSeeker" &&<li>
-                  <Link
-                    to="/appliedjobs"
-                    className={path === '/appliedjobs' ? 'active' : ''}
-                    onClick={() => this.setState({ path: '/appliedjobs' })}
-                  >
-                    {path === '/appliedjobs' ? (
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        version="1.1"
-                        id="Capa_1"
-                        x="0px"
-                        y="0px"
-                        viewBox="0 0 511.786 511.786"
-                        xmlSpace="preserve"
-                        width="512"
-                        height="512"
-                      >
-                        <path d="M213.382,426.694c49.214,0.064,96.923-16.963,134.976-48.171l127.275,127.253c8.475,8.185,21.98,7.95,30.165-0.525   c7.984-8.267,7.984-21.373,0-29.641L378.545,348.337c74.545-91.24,61.011-225.636-30.229-300.181S122.68-12.855,48.135,78.385   S-12.876,304.02,78.364,378.566C116.472,409.701,164.172,426.704,213.382,426.694z" />
-                      </svg>
-                    ) : (
-                      <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="512" height="512">
-                        <path d="M23.707,22.293l-5.969-5.969a10.016,10.016,0,1,0-1.414,1.414l5.969,5.969a1,1,0,0,0,1.414-1.414ZM10,18a8,8,0,1,1,8-8A8.009,8.009,0,0,1,10,18Z" />
-                      </svg>
-                    )}
-                    Applied Jobs
-                  </Link>
-                </li>}
+                {User.loginType !== "admin" &&
+                  <li>
+                    <Link to="/" className={path === '/' ? 'active' : ''} onClick={() => this.setState({ path: '/' })}>
+                      {path === '/' ? (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          id="Layer_1"
+                          data-name="Layer 1"
+                          viewBox="0 0 24 24"
+                          width="512"
+                          height="512"
+                        >
+                          <path d="M12,14a3,3,0,0,0-3,3v7.026h6V17A3,3,0,0,0,12,14Z" />
+                          <path d="M13.338.833a2,2,0,0,0-2.676,0L0,10.429v10.4a3.2,3.2,0,0,0,3.2,3.2H7V17a5,5,0,0,1,10,0v7.026h3.8a3.2,3.2,0,0,0,3.2-3.2v-10.4Z" />
+                        </svg>
+                      ) : (
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="512" height="512">
+                          <g id="_01_align_center" data-name="01 align center">
+                            <path d="M13.338.833a2,2,0,0,0-2.676,0L0,10.429v10.4a3.2,3.2,0,0,0,3.2,3.2H20.8a3.2,3.2,0,0,0,3.2-3.2v-10.4ZM15,22.026H9V17a3,3,0,0,1,6,0Zm7-1.2a1.2,1.2,0,0,1-1.2,1.2H17V17A5,5,0,0,0,7,17v5.026H3.2a1.2,1.2,0,0,1-1.2-1.2V11.319l10-9,10,9Z" />
+                          </g>
+                        </svg>
+                      )}
+                      Home
+                    </Link>
+                  </li>}
+
+                {User.loginType === "jobSeeker" &&
+                  <li>
+                    <Link
+                      to="/appliedjobs"
+                      className={path === '/appliedjobs' ? 'active' : ''}
+                      onClick={() => this.setState({ path: '/appliedjobs' })}
+                    >
+                      {path === '/appliedjobs' ? (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          version="1.1"
+                          id="Capa_1"
+                          x="0px"
+                          y="0px"
+                          viewBox="0 0 511.786 511.786"
+                          xmlSpace="preserve"
+                          width="512"
+                          height="512"
+                        >
+                          <path d="M213.382,426.694c49.214,0.064,96.923-16.963,134.976-48.171l127.275,127.253c8.475,8.185,21.98,7.95,30.165-0.525   c7.984-8.267,7.984-21.373,0-29.641L378.545,348.337c74.545-91.24,61.011-225.636-30.229-300.181S122.68-12.855,48.135,78.385   S-12.876,304.02,78.364,378.566C116.472,409.701,164.172,426.704,213.382,426.694z" />
+                        </svg>
+                      ) : (
+                        <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="512" height="512">
+                          <path d="M23.707,22.293l-5.969-5.969a10.016,10.016,0,1,0-1.414,1.414l5.969,5.969a1,1,0,0,0,1.414-1.414ZM10,18a8,8,0,1,1,8-8A8.009,8.009,0,0,1,10,18Z" />
+                        </svg>
+                      )}
+                      Applied Jobs
+                    </Link>
+                  </li>}
+                {User.loginType === "admin" &&
+                  <>
+                    <li>
+                      <Link to="/" className={path === '/' ? 'active' : ''} onClick={() => this.setState({ path: '/' })}>
+                        {path === '/' ? (
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            id="Layer_1"
+                            data-name="Layer 1"
+                            viewBox="0 0 24 24"
+                            width="512"
+                            height="512"
+                          >
+                            <path d="M12,14a3,3,0,0,0-3,3v7.026h6V17A3,3,0,0,0,12,14Z" />
+                            <path d="M13.338.833a2,2,0,0,0-2.676,0L0,10.429v10.4a3.2,3.2,0,0,0,3.2,3.2H7V17a5,5,0,0,1,10,0v7.026h3.8a3.2,3.2,0,0,0,3.2-3.2v-10.4Z" />
+                          </svg>
+                        ) : (
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="512" height="512">
+                            <g id="_01_align_center" data-name="01 align center">
+                              <path d="M13.338.833a2,2,0,0,0-2.676,0L0,10.429v10.4a3.2,3.2,0,0,0,3.2,3.2H20.8a3.2,3.2,0,0,0,3.2-3.2v-10.4ZM15,22.026H9V17a3,3,0,0,1,6,0Zm7-1.2a1.2,1.2,0,0,1-1.2,1.2H17V17A5,5,0,0,0,7,17v5.026H3.2a1.2,1.2,0,0,1-1.2-1.2V11.319l10-9,10,9Z" />
+                            </g>
+                          </svg>
+                        )}
+                        DashBoard
+                      </Link>
+                    </li>
+                    <li>
+                    <Link to="/" className={path === '/' ? 'active' : ''} onClick={() => this.setState({ path: '/' })}>
+                      {path === '/' ? (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          id="Layer_1"
+                          data-name="Layer 1"
+                          viewBox="0 0 24 24"
+                          width="512"
+                          height="512"
+                        >
+                          <path d="M12,14a3,3,0,0,0-3,3v7.026h6V17A3,3,0,0,0,12,14Z" />
+                          <path d="M13.338.833a2,2,0,0,0-2.676,0L0,10.429v10.4a3.2,3.2,0,0,0,3.2,3.2H7V17a5,5,0,0,1,10,0v7.026h3.8a3.2,3.2,0,0,0,3.2-3.2v-10.4Z" />
+                        </svg>
+                      ) : (
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="512" height="512">
+                          <g id="_01_align_center" data-name="01 align center">
+                            <path d="M13.338.833a2,2,0,0,0-2.676,0L0,10.429v10.4a3.2,3.2,0,0,0,3.2,3.2H20.8a3.2,3.2,0,0,0,3.2-3.2v-10.4ZM15,22.026H9V17a3,3,0,0,1,6,0Zm7-1.2a1.2,1.2,0,0,1-1.2,1.2H17V17A5,5,0,0,0,7,17v5.026H3.2a1.2,1.2,0,0,1-1.2-1.2V11.319l10-9,10,9Z" />
+                          </g>
+                        </svg>
+                      )}
+                      All Jobs
+                    </Link>
+                  </li>
+                    <li>
+                      <Link to="/recuiter" className={path === '/recuiter' ? 'active' : ''} onClick={() => this.setState({ path: '/recuiter' })}>
+                        {path === '/recuiter' ? (
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            id="Layer_1"
+                            data-name="Layer 1"
+                            viewBox="0 0 24 24"
+                            width="512"
+                            height="512"
+                          >
+                            <path d="M12,14a3,3,0,0,0-3,3v7.026h6V17A3,3,0,0,0,12,14Z" />
+                            <path d="M13.338.833a2,2,0,0,0-2.676,0L0,10.429v10.4a3.2,3.2,0,0,0,3.2,3.2H7V17a5,5,0,0,1,10,0v7.026h3.8a3.2,3.2,0,0,0,3.2-3.2v-10.4Z" />
+                          </svg>
+                        ) : (
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="512" height="512">
+                            <g id="_01_align_center" data-name="01 align center">
+                              <path d="M13.338.833a2,2,0,0,0-2.676,0L0,10.429v10.4a3.2,3.2,0,0,0,3.2,3.2H20.8a3.2,3.2,0,0,0,3.2-3.2v-10.4ZM15,22.026H9V17a3,3,0,0,1,6,0Zm7-1.2a1.2,1.2,0,0,1-1.2,1.2H17V17A5,5,0,0,0,7,17v5.026H3.2a1.2,1.2,0,0,1-1.2-1.2V11.319l10-9,10,9Z" />
+                            </g>
+                          </svg>
+                        )}
+                        Recuiter
+                      </Link>
+                    </li>
+
+                  </>
+                }
+                {User.loginType !== "jobSeeker" &&
+                  <li>
+                    <Link to="/candidate" className={path === '/candidate' ? 'active' : ''} onClick={() => this.setState({ path: '/candidate' })}>
+                      {path === '/candidate' ? (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          id="Layer_1"
+                          data-name="Layer 1"
+                          viewBox="0 0 24 24"
+                          width="512"
+                          height="512"
+                        >
+                          <path d="M12,14a3,3,0,0,0-3,3v7.026h6V17A3,3,0,0,0,12,14Z" />
+                          <path d="M13.338.833a2,2,0,0,0-2.676,0L0,10.429v10.4a3.2,3.2,0,0,0,3.2,3.2H7V17a5,5,0,0,1,10,0v7.026h3.8a3.2,3.2,0,0,0,3.2-3.2v-10.4Z" />
+                        </svg>
+                      ) : (
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="512" height="512">
+                          <g id="_01_align_center" data-name="01 align center">
+                            <path d="M13.338.833a2,2,0,0,0-2.676,0L0,10.429v10.4a3.2,3.2,0,0,0,3.2,3.2H20.8a3.2,3.2,0,0,0,3.2-3.2v-10.4ZM15,22.026H9V17a3,3,0,0,1,6,0Zm7-1.2a1.2,1.2,0,0,1-1.2,1.2H17V17A5,5,0,0,0,7,17v5.026H3.2a1.2,1.2,0,0,1-1.2-1.2V11.319l10-9,10,9Z" />
+                          </g>
+                        </svg>
+                      )}
+                      Candidate
+                    </Link>
+                  </li>
+                }
                 <li>
                   <Link
                     to="/message"
@@ -228,24 +334,29 @@ const ThemeLayout = (WrappedComponent) => {
                     Messages
                   </Link>
                 </li>
-                <li>
-                  <Link
-                    to="/bookmarks"
-                    className={path === '/bookmarks' ? 'active' : ''}
-                    onClick={() => this.setState({ path: '/bookmarks' })}
-                  >
-                    {path === '/bookmarks' ? (
-                      <svg xmlns="http://www.w3.org/2000/svg" id="Filled" viewBox="0 0 24 24" width="512" height="512">
-                        <path d="M2.849,23.55a2.954,2.954,0,0,0,3.266-.644L12,17.053l5.885,5.853a2.956,2.956,0,0,0,2.1.881,3.05,3.05,0,0,0,1.17-.237A2.953,2.953,0,0,0,23,20.779V5a5.006,5.006,0,0,0-5-5H6A5.006,5.006,0,0,0,1,5V20.779A2.953,2.953,0,0,0,2.849,23.55Z" />
-                      </svg>
-                    ) : (
-                      <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="512" height="512">
-                        <path d="M20.137,24a2.8,2.8,0,0,1-1.987-.835L12,17.051,5.85,23.169a2.8,2.8,0,0,1-3.095.609A2.8,2.8,0,0,1,1,21.154V5A5,5,0,0,1,6,0H18a5,5,0,0,1,5,5V21.154a2.8,2.8,0,0,1-1.751,2.624A2.867,2.867,0,0,1,20.137,24ZM6,2A3,3,0,0,0,3,5V21.154a.843.843,0,0,0,1.437.6h0L11.3,14.933a1,1,0,0,1,1.41,0l6.855,6.819a.843.843,0,0,0,1.437-.6V5a3,3,0,0,0-3-3Z" />
-                      </svg>
-                    )}
-                    Bookmarks
-                  </Link>
-                </li>
+                
+
+
+                {User.loginType !== "admin" &&
+                  <li>
+                    <Link
+                      to="/bookmarks"
+                      className={path === '/bookmarks' ? 'active' : ''}
+                      onClick={() => this.setState({ path: '/bookmarks' })}
+                    >
+                      {path === '/bookmarks' ? (
+                        <svg xmlns="http://www.w3.org/2000/svg" id="Filled" viewBox="0 0 24 24" width="512" height="512">
+                          <path d="M2.849,23.55a2.954,2.954,0,0,0,3.266-.644L12,17.053l5.885,5.853a2.956,2.956,0,0,0,2.1.881,3.05,3.05,0,0,0,1.17-.237A2.953,2.953,0,0,0,23,20.779V5a5.006,5.006,0,0,0-5-5H6A5.006,5.006,0,0,0,1,5V20.779A2.953,2.953,0,0,0,2.849,23.55Z" />
+                        </svg>
+                      ) : (
+                        <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="512" height="512">
+                          <path d="M20.137,24a2.8,2.8,0,0,1-1.987-.835L12,17.051,5.85,23.169a2.8,2.8,0,0,1-3.095.609A2.8,2.8,0,0,1,1,21.154V5A5,5,0,0,1,6,0H18a5,5,0,0,1,5,5V21.154a2.8,2.8,0,0,1-1.751,2.624A2.867,2.867,0,0,1,20.137,24ZM6,2A3,3,0,0,0,3,5V21.154a.843.843,0,0,0,1.437.6h0L11.3,14.933a1,1,0,0,1,1.41,0l6.855,6.819a.843.843,0,0,0,1.437-.6V5a3,3,0,0,0-3-3Z" />
+                        </svg>
+                      )}
+                      Bookmarks
+                    </Link>
+                  </li>}
+
                 <li>
                   <Link
                     to="/profile"
@@ -288,38 +399,39 @@ const ThemeLayout = (WrappedComponent) => {
                     Settings
                   </Link>
                 </li>
-                {User.loginType === "recruiter" && <li>
-                  <Link
-                    to="/postJob"
-                    className={path === '/postJob' ? 'active' : ''}
-                    onClick={() => this.setState({ path: '/postJob' })}
-                  >
-                    {path === '/postJob' ? (
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        version="1.1"
-                        id="Capa_1"
-                        x="0px"
-                        y="0px"
-                        viewBox="0 0 512 512"
-                        xmlSpace="preserve"
-                        width="512"
-                        height="512"
-                      >
-                        <g>
-                          <circle cx="256" cy="128" r="128" />
-                          <path d="M256,298.667c-105.99,0.118-191.882,86.01-192,192C64,502.449,73.551,512,85.333,512h341.333   c11.782,0,21.333-9.551,21.333-21.333C447.882,384.677,361.99,298.784,256,298.667z" />
-                        </g>
-                      </svg>
-                    ) : (
-                      <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="512" height="512">
-                        <path d="M12,12A6,6,0,1,0,6,6,6.006,6.006,0,0,0,12,12ZM12,2A4,4,0,1,1,8,6,4,4,0,0,1,12,2Z" />
-                        <path d="M12,14a9.01,9.01,0,0,0-9,9,1,1,0,0,0,2,0,7,7,0,0,1,14,0,1,1,0,0,0,2,0A9.01,9.01,0,0,0,12,14Z" />
-                      </svg>
-                    )}
-                    Post Job
-                  </Link>
-                </li>}
+                {User.loginType === "recruiter" &&
+                  <li>
+                    <Link
+                      to="/postJob"
+                      className={path === '/postJob' ? 'active' : ''}
+                      onClick={() => this.setState({ path: '/postJob' })}
+                    >
+                      {path === '/postJob' ? (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          version="1.1"
+                          id="Capa_1"
+                          x="0px"
+                          y="0px"
+                          viewBox="0 0 512 512"
+                          xmlSpace="preserve"
+                          width="512"
+                          height="512"
+                        >
+                          <g>
+                            <circle cx="256" cy="128" r="128" />
+                            <path d="M256,298.667c-105.99,0.118-191.882,86.01-192,192C64,502.449,73.551,512,85.333,512h341.333   c11.782,0,21.333-9.551,21.333-21.333C447.882,384.677,361.99,298.784,256,298.667z" />
+                          </g>
+                        </svg>
+                      ) : (
+                        <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="512" height="512">
+                          <path d="M12,12A6,6,0,1,0,6,6,6.006,6.006,0,0,0,12,12ZM12,2A4,4,0,1,1,8,6,4,4,0,0,1,12,2Z" />
+                          <path d="M12,14a9.01,9.01,0,0,0-9,9,1,1,0,0,0,2,0,7,7,0,0,1,14,0,1,1,0,0,0,2,0A9.01,9.01,0,0,0,12,14Z" />
+                        </svg>
+                      )}
+                      Post Job
+                    </Link>
+                  </li>}
                 {/* <li className="addpostbtn">
                   <Link
                     to="/postjob"
@@ -373,7 +485,7 @@ const ThemeLayout = (WrappedComponent) => {
           </div>
           {path === '/premium' && <PremiumModal />}
           <div className="rightmainbar">
-       
+
             <WrappedComponent {...this.props} setHeader={this.setHeader} />
           </div>
 

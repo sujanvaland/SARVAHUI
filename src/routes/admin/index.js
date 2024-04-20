@@ -19,6 +19,9 @@ import Communities from '../../container/pages/communities/communities';
 import SpotlightYourCommunity from '../../container/pages/communities/admintools/spotlightYourCommunity';
 import SupportAndResources from '../../container/pages/communities/admintools/supportAndResources';
 import JobApplication from '../../container/pages/ViewApplication';
+import AdminCandidate from '../../container/pages/admin/admin-candidate';
+import AdminRecuiter from '../../container/pages/admin/admin-recuiter';
+import CandidateAppliedJobs from '../../container/pages/admin/admin-candidateapplied';
 
 const MyComponent = lazy(() => import('../../container/pages/post/Message'));
 const Network = lazy(() => import('../../container/pages/Network'));
@@ -51,6 +54,12 @@ function Admin() {
         <Route path={`${path}setting`} component={Setting} />
         <Route path={`${path}postjob`} component={PostJob} />
         <Route path={`${path}jobApplication/:jobId?`} component={JobApplication} />
+
+        <Route path={`${path}candidate`} component={AdminCandidate} />
+        <Route path={`${path}recuiter`} component={AdminRecuiter} />
+        <Route path={`${path}candidateApplied/:userId?/:userType?/:userName?`} component={CandidateAppliedJobs} />
+        <Route path={`${path}recuiterJob/:userId?/:userType?/:userName?`} component={CandidateAppliedJobs} />
+
 
         <Route path={`${path}people`} component={People} />
         <Route path={`${path}explore`} component={Explore} />

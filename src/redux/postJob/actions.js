@@ -33,6 +33,54 @@ const actions = {
   APPLY_JOB_SUCCESS: 'APPLY_JOB_SUCCESS',
   APPLY_JOB_ERR: 'APPLY_JOB_ERR',
 
+  GET_ALL_CANDIDATE_REQUEST: 'GET_ALL_CANDIDATE_REQUEST',
+  GET_ALL_CANDIDATE_SUCCESS: 'GET_ALL_CANDIDATE_SUCCESS',
+  GET_ALL_CANDIDATE_ERR: 'GET_ALL_CANDIDATE_ERR',
+
+  GET_ALL_RECUITER_REQUEST: "GET_ALL_RECUITER_REQUEST",
+  GET_ALL_RECUITER_SUCCESS: "GET_ALL_RECUITER_SUCCESS",
+  GET_ALL_RECUITER_ERR: "GET_ALL_RECUITER_ERR",
+
+  getAllRecuiterRequest: () => {
+    return {
+      type:actions.GET_ALL_RECUITER_REQUEST,
+    }
+  },
+
+  getAllRecuiterSuccess: (getAllRecuiter) => {
+    return {
+      type:actions.GET_ALL_RECUITER_SUCCESS,
+      getAllRecuiter
+    }
+  },
+
+  getAllRecuiterError: (err) => {
+    return {
+      type:actions.GET_ALL_RECUITER_ERR,
+      err
+    }
+  },
+
+  getAllCandidateRequest: () => {
+    return {
+      type:actions.GET_ALL_CANDIDATE_REQUEST,
+    }
+  },
+
+  getAllCandidateSuccess: (getAllCandidate) => {
+    return {
+      type:actions.GET_ALL_CANDIDATE_SUCCESS,
+      getAllCandidate
+    }
+  },
+
+  getAllCandidateError: (err) => {
+    return {
+      type:actions.GET_ALL_CANDIDATE_ERR,
+      err
+    }
+  },
+  
   getUserResumeBegin: () => {
     return {
       type: actions.GET_USER_RESUME_BEGIN,
