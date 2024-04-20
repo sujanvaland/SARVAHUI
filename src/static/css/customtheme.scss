@@ -576,6 +576,9 @@ p{
     &.btnsaveprofile{
         border-radius: 40px;
     }
+    &:hover{
+        background: $black!important; 
+    }
 }
 .btn{padding:4px 10px; border-radius: 5px;} 
 input{ font-family: $fntSegoe;}
@@ -1739,26 +1742,75 @@ h5{font-family: $fntMonoMedium; font-size: 14px; color:$black;}
                         }
                     }
 
-                    &.editprofile{@include dispflex(flex,column,flex-start,flex-start); 
-                        width:800px;
+                    &.editprofile{@include dispflex(flex,row,flex-start,flex-start); 
+                        width:100%; 
+                        .ant-tabs-nav-wrap{padding:0px;}
+                        .ant-tabs-content-holder{
+                            h2{
+                                font-family: $fntSegoe; color:$black;
+                            }
+                        }
+                        .ant-tabs-nav{
+                            background:#ffffff!important;
+                            .ant-tabs-tab-btn{
+                                 font-size: 16px; font-weight: 600;
+                            }
+                            .ant-tabs-tab-active{
+                                background: #F5F9FE;                                
+                                .ant-tabs-tab-btn{
+                                    color:#0b53af; font-size: 16px;
+                                }
+                            }
+                            .ant-tabs-nav-list{
+                                justify-content: flex-start!important;
+                                .ant-tabs-tab{margin-right:20px;}
+                            }
+                        }
+                        .profilepicboxmain{
+                            min-width: 300px;
+                            .profilePicBox{margin-top: 0px!important;}
+                            .btnresumemain{
+                                margin-right:35px; margin-top: 20px;
+                                .btnuploadresume{ 
+                                    position: relative;
+                                    width: 100%; background: #518CDA; border-color: #518CDA;
+                                    height: 45px; color:#ffffff; font-size: 17px;
+                                    .ant-form-item{
+                                        position: absolute; top:0px; width: 100%;
+                                        input{opacity: 0; cursor: pointer;}
+                                        
+                                    }
+                                }
+                            }
+                        }
                         .editprofileForm{ width:100%;
-                            margin-top:40px!important;
-                             .btnboxmain{border:0px!important;}
+                            margin-top:0px!important;  background: #F5F9FE;
+                            border:1px solid #F5F9FE;
+                            .ant-select-multiple .ant-select-selection-item{
+                                background: #cce3ff;
+                                border: 1px solid #cce3ff;
+                            }
+                             .btnboxmain{border:0px!important; padding-left: 20px;}
                             .ant-form-item{
-                                border:1px solid #CAC8C8; border-radius: 10px; overflow: hidden;
+                                border:0px solid #CAC8C8; border-radius:0px; overflow: hidden;
                                 .ant-form-item-label{
-                                    padding-left: 10px; padding-top: 5px; padding-bottom: 0px; 
+                                    padding-left: 0px; padding-top: 5px; padding-bottom: 0px; 
+                                    margin-bottom: 5px;
+                                    font-size: 13px!important; color:#807F7F!important;
                                     label{font-family: $fntSegoe; font-size: 18px; color:$black;}
                                 }
-                                .ant-input,.ant-picker{border:0px; font-size: 18px; padding-left: 10px; padding-top: 0px; padding-bottom: 0pxs;}
+                                .ant-select-selector{ height: 45px!important; border:1px solid #CFDEF0!important;}
+                                .ant-input,.ant-picker{border:0px; height: 45px; border:1px solid #CFDEF0; font-size: 18px; padding-left: 10px; padding-top: 0px; padding-bottom: 0px;}
                                 .ant-form-item-control-input{min-height: 35px!important; font-size: 18px; }
                                 .ant-select-selector{border:0px; font-size: 18px; }
-                                .ant-picker-input > input, input{font-size: 18px;}
-                                    .ant-form-item-row label{font-size: 15px;}
+                                .ant-picker-input > input, input{font-size: 18px; padding:0px; background: #ffffff;
+                                 
+                                }
+                                    .ant-form-item-row label{font-size: 15px; color:#807F7F!important;}
                             }
 
                             .experiencemainbox{
-                                .expsubboxmain{ border:1px solid #CAC8C8; border-radius: 10px; padding:20px; margin-bottom: 20px;
+                                .expsubboxmain{ border:1px solid #e9eff7; background: #e9eff7; border-radius: 10px; padding:20px; margin-bottom: 20px;
                                     .expsubboxtitle{
                                         display: flex; flex-direction: row; justify-content: space-between; align-items: center;
                                         margin-bottom: 15px;
@@ -1768,7 +1820,7 @@ h5{font-family: $fntMonoMedium; font-size: 14px; color:$black;}
                                     .ant-form-item{
                                         padding:0px; border:0px;         
                                         .ant-form-item-control-input-content{
-                                            .ant-form-item{ border:1px solid #CAC8C8;}
+                                            .ant-form-item{ border:0px solid #CAC8C8;}
                                         }                        
                                     }
                                     .subtitlebox{
@@ -1788,12 +1840,13 @@ h5{font-family: $fntMonoMedium; font-size: 14px; color:$black;}
                                 .ant-form-item{
                                     .ant-form-item-control-input-content{
                                         padding:10px 15px 15px;
-                                        input{padding-left: 0px;}
+                                        input{padding-left: 10px;}
                                     }
                                 }
                                 .expsubboxtitle{
                                     display: flex; flex-direction: row; justify-content: space-between; align-items: center;
-                                    h3{margin-top: 0px;}
+                                    h3{margin-top: 0px; font-size: 15px; margin-bottom: 8px;
+                                        color: #807F7F !important;}
                                     a{font-size: 14px;}
                                 }
                                
@@ -3369,4 +3422,18 @@ p{font-family:$fntInter;
      }
  }
 
+ .postjobsmain{
+    margin-top:0px;
+    textarea{
+        &.ant-input{
+            height: 100px!important;
+        }
+    }
+    .ant-btn:active, .ant-btn:hover, .ant-btn:focus{
+        background: $black!important;
+    }
+ }
+ .martop50{margin-top: 30px;}
+ .martop70{margin-top: 70px;}
+ .padd30{padding:30px;}
  

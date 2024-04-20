@@ -411,6 +411,7 @@ function EditProfile() {
               <div className="userpersondetails">
                 <div className="leftcol">
                   <div className="personaldetails editprofile">
+                    <div className='profilepicboxmain'>
                     <div className="profilePicBox">
                       {ProfileData?.profileImg && <img src={ProfileData?.profileImg} alt="" />}
                       {!ProfileData?.profileImg && (
@@ -424,24 +425,29 @@ function EditProfile() {
                           />
                         </div>
                       )}
-                    </div>
-                    <div className="editprofileForm">
-                      <Form name="UpdateProfile" form={form} onFinish={handleSubmit} layout="vertical">
-                        <Col lg={24} sm={24}>
-                          <Form.Item label="Resume">
+                      </div>
+                      <div className='btnresumemain'>
+                        <Button className='btnuploadresume'>
+                          Upload Resume
+                          <Form.Item>
                             <Input
                               type="file"
                               id="Resume"
                               multiple={false}
                               onChange={(e) => handleBinaryChange(e, 'resume')}
                             /></Form.Item>
-                        </Col>
+                            </Button>
+                        </div>
+                    </div>
+                    <div className="editprofileForm">
+                      <Form name="UpdateProfile" form={form} onFinish={handleSubmit} layout="vertical">
+                       
                         <div className="tabspanel">
                           <Tabs defaultActiveKey="1" className="custom-active-tab" >
                             <TabPane tab="Basic Details" key="1" className="tabcntbox">
                               <h2>Basic Details</h2>
                               <Row gutter={25}>
-                                <Col lg={24} sm={24}>
+                                <Col lg={8} sm={8}>
                                   <Form.Item
                                     label="First Name"
                                     // name="firstName"
@@ -454,6 +460,8 @@ function EditProfile() {
                                       maxLength={100}
                                     />
                                   </Form.Item>
+                                  </Col>
+                                  <Col lg={8} sm={8}>
                                   <Form.Item
                                     label="Last Name"
                                     // name="lastName"
@@ -467,7 +475,7 @@ function EditProfile() {
                                     />
                                   </Form.Item>
                                 </Col>
-                                <Col lg={12} sm={12}>
+                                <Col lg={8} sm={8}>
                                   <Form.Item
                                     label="Date Of Birth"
                                     // name="dob"
@@ -482,7 +490,7 @@ function EditProfile() {
                                     />
                                   </Form.Item>
                                 </Col>
-                                <Col lg={12} sm={12}>
+                                <Col lg={8} sm={8}>
                                   <Form.Item
                                     label="Gender"
                                     // name="gender"
@@ -494,6 +502,53 @@ function EditProfile() {
                                       <Option value="female"> Female</Option>
                                     </Select>
                                   </Form.Item>
+                                </Col>
+                                <Col lg={8} sm={8}>
+                                  <Form.Item label="Phone Number">
+                                    <Input
+                                      type="number"
+                                      name="phoneNumber"
+                                      value={ProfileData?.phoneNumber}
+                                      onChange={handleChange}
+                                    />
+                                  </Form.Item>
+                                </Col>
+                                <Col lg={8} sm={8}>
+                                  <Form.Item
+                                    label="Email"
+                                    // name="email"
+                                    rules={[{ required: true, message: 'Email is mandatory field' }]}
+                                  >
+                                    <Input type="email" name="email" value={ProfileData?.email} onChange={handleChange} />
+                                  </Form.Item>
+                                </Col>
+                                <Col lg={12} sm={12}>
+                                  <Form.Item
+                                    label="Linkedin Link"
+                                    validateStatus={validationErrorMSG.linkedinError ? 'error' : ''}
+                                    help={validationErrorMSG.linkedinError}
+                                  >
+                                    <Input
+                                      name="linkedinLink"
+                                      value={ProfileData?.linkedinLink}
+                                      onBlur={() => handleValidation('LinkedIn', ProfileData?.linkedinLink)}
+                                      onChange={handleChange}
+                                    />
+                                  </Form.Item>
+                                </Col>
+                                <Col lg={12} sm={12}>
+                                  <Form.Item
+                                      label="Total Years of Experience"
+                                      rules={[{ required: true, message: 'Need to define' }]}
+                                    >
+                                      <Input
+                                        type="number"
+                                        name="totalExperience"
+                                        value={ProfileData?.totalExperience}
+                                        onChange={handleChange}
+                                        maxLength={100}
+                                      />
+                                    </Form.Item>
                                 </Col>
                               </Row>
                               {/* <Row gutter={25}>
@@ -518,7 +573,7 @@ function EditProfile() {
                             </Form.Item>
                           </Col>
                         </Row> */}
-                              <Row gutter={25}>
+                              {/* <Row gutter={25}> */}
                                 {/* <Col lg={24} sm={24}>
                             <Form.Item label="City">
                               <Input name="city" value={ProfileData?.city} onChange={handleChange} maxLength={1000} />
@@ -544,47 +599,16 @@ function EditProfile() {
                               />
                             </Form.Item>
                           </Col> */}
-                                <Col lg={24} sm={24}>
-                                  <Form.Item label="Phone Number">
-                                    <Input
-                                      type="number"
-                                      name="phoneNumber"
-                                      value={ProfileData?.phoneNumber}
-                                      onChange={handleChange}
-                                    />
-                                  </Form.Item>
-                                </Col>
-                                <Col lg={24} sm={24}>
-                                  <Form.Item
-                                    label="Email"
-                                    // name="email"
-                                    rules={[{ required: true, message: 'Email is mandatory field' }]}
-                                  >
-                                    <Input type="email" name="email" value={ProfileData?.email} onChange={handleChange} />
-                                  </Form.Item>
-                                </Col>
+                                
                                 {/* <Col lg={24} sm={24}>
                             <Form.Item label="Resume">
                               <Input type="file" name="resume" value={ProfileData?.resume} onChange={handleChange} />
                             </Form.Item>
                           </Col> */}
-                              </Row>
-                              <Row gutter={25}>
-                                <Col lg={24} sm={24}>
-                                  <Form.Item
-                                    label="Linkedin Link"
-                                    validateStatus={validationErrorMSG.linkedinError ? 'error' : ''}
-                                    help={validationErrorMSG.linkedinError}
-                                  >
-                                    <Input
-                                      name="linkedinLink"
-                                      value={ProfileData?.linkedinLink}
-                                      onBlur={() => handleValidation('LinkedIn', ProfileData?.linkedinLink)}
-                                      onChange={handleChange}
-                                    />
-                                  </Form.Item>
-                                </Col>
-                              </Row>
+                              {/* </Row> */}
+                              {/* <Row gutter={25}>
+                               
+                              </Row> */}
                               <Row gutter={25}>
                                 <Col lg={24} sm={24}>
                                   <Form.Item label="Search Skills And Techniques">
@@ -630,18 +654,7 @@ function EditProfile() {
                                       <Option value="NodeJS"> NodeJS</Option>
                                     </Select>
                                   </Form.Item>
-                                  <Form.Item
-                                    label="Total Years of Experience"
-                                    rules={[{ required: true, message: 'Need to define' }]}
-                                  >
-                                    <Input
-                                      type="number"
-                                      name="totalExperience"
-                                      value={ProfileData?.totalExperience}
-                                      onChange={handleChange}
-                                      maxLength={100}
-                                    />
-                                  </Form.Item>
+                                  
                                 </Col>
                               </Row>
                             </TabPane>
@@ -688,7 +701,7 @@ function EditProfile() {
                                 />
                               </Form.Item>
                               <Row gutter={25}>
-                                <Col lg={24} sm={24}>
+                                <Col lg={8} sm={8}>
                                   <Form.Item label="Highest Qualification">
                                     <Select
                                       // mode="tags
@@ -707,7 +720,7 @@ function EditProfile() {
                                     </Select>
                                   </Form.Item>
                                 </Col>
-                              </Row>
+                                <Col lg={8} sm={8}>
                               <Form.Item
                                 label="Course"
                                 // name="board"
@@ -720,6 +733,8 @@ function EditProfile() {
                                   maxLength={100}
                                 />
                               </Form.Item>
+                              </Col>
+                              <Col lg={8} sm={8}>
                               <Form.Item
                                 label="Specialization"
                                 // name="board"
@@ -732,6 +747,8 @@ function EditProfile() {
                                   maxLength={100}
                                 />
                               </Form.Item>
+                              </Col>
+                              <Col lg={8} sm={8}>
                               <Form.Item
                                 label="Starting Year"
                               >
@@ -742,6 +759,8 @@ function EditProfile() {
                                   format={dateFormat}
                                 />
                               </Form.Item>
+                              </Col>
+                              <Col lg={8} sm={8}>
                               <Form.Item
                                 label="Passing Year"
                               >
@@ -752,6 +771,8 @@ function EditProfile() {
                                   format={dateFormat}
                                 />
                               </Form.Item>
+                              </Col>
+                              <Col lg={8} sm={8}> 
                               <Form.Item
                                 label="Grades"
                                 // name="board"
@@ -764,6 +785,8 @@ function EditProfile() {
                                   maxLength={100}
                                 />
                               </Form.Item>
+                              </Col>
+                              </Row>
                             </TabPane>
                             <TabPane tab="Experience" key="2" className="tabcntbox">
                               <div className='experiencemainbox'>
@@ -781,6 +804,8 @@ function EditProfile() {
                                       )}</div>
                                     <Form.Item>
                                       
+                                    <Row gutter={25}>
+                                      <Col lg={8} sm={8}>
                                       <Form.Item label="Company Name">
                                         <Input
                                           type='text'
@@ -790,6 +815,8 @@ function EditProfile() {
                                           maxLength={100}
                                         />
                                       </Form.Item>
+                                      </Col>
+                                      <Col lg={8} sm={8}>
                                       <Form.Item label="Designation">
                                         <Input
                                           name="designation"
@@ -798,6 +825,8 @@ function EditProfile() {
                                           maxLength={100}
                                         />
                                       </Form.Item>
+                                      </Col>
+                                      <Col lg={8} sm={8}>
                                       <Form.Item label="Joining Date">
                                         <DatePicker
                                           onChange={(date, dateString) => handleDateExperience(date, dateString, index, 'joinedDate')}
@@ -806,6 +835,8 @@ function EditProfile() {
                                           format={dateFormat}
                                         />
                                       </Form.Item>
+                                      </Col>
+                                      <Col lg={8} sm={8}>
                                       <Form.Item label="Date of Leaving">
                                         <DatePicker
                                           onChange={(date, dateString) => handleDateExperience(date, dateString, index, 'endDate')}
@@ -814,6 +845,8 @@ function EditProfile() {
                                           format={dateFormat}
                                         />
                                       </Form.Item>
+                                      </Col>
+                                      <Col lg={8} sm={8}>
                                       <Form.Item label="Responsibility">
                                         <Input
                                           name="responsibility"
@@ -822,6 +855,8 @@ function EditProfile() {
                                           maxLength={1000}
                                         />
                                       </Form.Item>
+                                      </Col>
+                                      </Row>
                                     </Form.Item>
                                     </div>
                                   </>

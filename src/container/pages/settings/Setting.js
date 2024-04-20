@@ -43,7 +43,7 @@ function Setting() {
           <div className='userNamedetails headerBox msgheader'>
             <h2>Settings</h2>
           </div>
-          <SettingsBox>
+          <SettingsBox className='martop70'>
             <ul>
               <li>
                 <Button onClick={() => changeStep('account')}>

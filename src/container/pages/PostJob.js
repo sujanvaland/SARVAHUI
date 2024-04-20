@@ -42,14 +42,19 @@ function PostJob() {
   return (
     <>
       <div className="cntpagecomponent userprofilepage">
-        <div className="centersidebarcontent flexcolumn mt56">
-          <div className="userpersondetails">
+        <div className="centersidebarcontent flexcolumn postjobsmain">
+        <div className="userNamedetails">
+                <h2>
+                  Post New Job
+                </h2>
+               
+              </div>
+
+          <div className="userpersondetails martop50">
             <div className="leftcol">
               <div className="personaldetails editprofile widht100">
-                <div>
-                  <h2>Post New Job</h2>
-                </div>
-                <div className="editprofileForm widht100">
+              
+                <div className="editprofileForm widht100 padd30">
                   <Form name="updateJobPost" onFinish={handleJobInfoSubmit} layout="vertical">
                     <Row gutter={25}>
                       <Col lg={12} sm={12}>
@@ -67,30 +72,36 @@ function PostJob() {
                         </Form.Item>
                       </Col>
                     </Row>
-                    <Form.Item
-                      label="Company Info"
-                      name="companyInfo"
-                      rules={[{ required: true, message: 'Company Info required' }]}
-                    >
-                      <TextArea
-                        rows={4}
+                    <Row gutter={25}>
+                    <Col lg={12} sm={12}>
+                      <Form.Item
+                        label="Company Info"
                         name="companyInfo"
-                        value={JobDetails.companyInfo}
-                        onChange={handleJobDetailsChange}
-                      />
-                    </Form.Item>
-                    <Form.Item
-                      label="Job Description"
-                      name="jobDescription"
-                      rules={[{ required: true, message: 'Job Description required' }]}
-                    >
-                      <TextArea
-                        rows={4}
+                        rules={[{ required: true, message: 'Company Info required' }]}
+                      >
+                        <TextArea
+                          rows={4}
+                          name="companyInfo"
+                          value={JobDetails.companyInfo}
+                          onChange={handleJobDetailsChange}
+                        />
+                      </Form.Item>
+                    </Col>
+                    <Col lg={12} sm={12}> 
+                      <Form.Item
+                        label="Job Description"
                         name="jobDescription"
-                        value={JobDetails.jobDescription}
-                        onChange={handleJobDetailsChange}
-                      />
-                    </Form.Item>
+                        rules={[{ required: true, message: 'Job Description required' }]}
+                      >
+                        <TextArea
+                          rows={4}
+                          name="jobDescription"
+                          value={JobDetails.jobDescription}
+                          onChange={handleJobDetailsChange}
+                        />
+                      </Form.Item>
+                    </Col>
+                    <Col lg={12} sm={12}> 
                     <Form.Item
                       label="Required Qualification"
                       name="requiredQualification"
@@ -103,30 +114,8 @@ function PostJob() {
                         onChange={handleJobDetailsChange}
                       />
                     </Form.Item>
-                    <Form.Item
-                      label="Number Of Vacancies"
-                      name="numberOfVacancies"
-                      rules={[{ required: true, message: 'Number Of Vacancies required' }]}
-                    >
-                      <Input
-                        type="number"
-                        name="numberOfVacancies"
-                        value={JobDetails.numberOfVacancies}
-                        onChange={handleJobDetailsChange}
-                      />
-                    </Form.Item>
-                    <Form.Item
-                      label="Date Of Application Deadline"
-                      name="dateOfApplicationDeadline"
-                      rules={[{ required: true, message: 'Date Of Application Deadline is Required' }]}
-                    >
-                      <DatePicker
-                        style={{ width: '100%' }}
-                        name="dateOfApplicationDeadline"
-                        value={JobDetails.dateOfApplicationDeadline}
-                        onChange={(e) => handleJobDetailsChange(e, true)}
-                      />
-                    </Form.Item>
+                    </Col>
+                    <Col lg={12} sm={12}> 
                     <Form.Item
                       label="Skills Required"
                       name="skillsRequired"
@@ -139,6 +128,37 @@ function PostJob() {
                         onChange={handleJobDetailsChange}
                       />
                     </Form.Item>
+                    </Col>
+                    <Col lg={12} sm={12}> 
+                    <Form.Item
+                      label="Number Of Vacancies"
+                      name="numberOfVacancies"
+                      rules={[{ required: true, message: 'Number Of Vacancies required' }]}
+                    >
+                      <Input
+                        type="number"
+                        name="numberOfVacancies"
+                        value={JobDetails.numberOfVacancies}
+                        onChange={handleJobDetailsChange}
+                      />
+                    </Form.Item>
+                    </Col>
+                    <Col lg={12} sm={12}> 
+                    <Form.Item
+                      label="Date Of Application Deadline"
+                      name="dateOfApplicationDeadline"
+                      rules={[{ required: true, message: 'Date Of Application Deadline is Required' }]}
+                    >
+                      <DatePicker
+                        style={{ width: '100%' }}
+                        name="dateOfApplicationDeadline"
+                        value={JobDetails.dateOfApplicationDeadline}
+                        onChange={(e) => handleJobDetailsChange(e, true)}
+                      />
+                    </Form.Item>
+                    </Col>
+                    
+                    <Col lg={12} sm={12}> 
                     <Form.Item
                       label="Minimum Salary"
                       name="minSalary"
@@ -151,6 +171,8 @@ function PostJob() {
                         onChange={handleJobDetailsChange}
                       />
                     </Form.Item>
+                    </Col>
+                    <Col lg={12} sm={12}> 
                     <Form.Item
                       label="Maximum Salary"
                       name="maxSalary"
@@ -163,8 +185,10 @@ function PostJob() {
                         onChange={handleJobDetailsChange}
                       />
                     </Form.Item>
+                    </Col>
+                    </Row>
                     <Button
-                      className="btn-joinus"
+                      className="btnblack btnsaveprofile"
                       htmlType="submit"
                       type="primary"
                       size="large"

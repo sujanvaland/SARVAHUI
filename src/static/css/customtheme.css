@@ -1408,6 +1408,9 @@ p {
 .btnblack.btnsaveprofile {
   border-radius: 40px;
 }
+.btnblack:hover {
+  background: #000000 !important;
+}
 
 .btn {
   padding: 4px 10px;
@@ -4377,46 +4380,119 @@ h5 {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
+  -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+      -ms-flex-direction: row;
+          flex-direction: row;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
-  width: 800px;
+  width: 100%;
+}
+.mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .ant-tabs-nav-wrap {
+  padding: 0px;
+}
+.mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .ant-tabs-content-holder h2 {
+  font-family: "segoe_ui", sans-serif;
+  color: #000000;
+}
+.mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .ant-tabs-nav {
+  background: #ffffff !important;
+}
+.mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .ant-tabs-nav .ant-tabs-tab-btn {
+  font-size: 16px;
+  font-weight: 600;
+}
+.mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .ant-tabs-nav .ant-tabs-tab-active {
+  background: #F5F9FE;
+}
+.mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .ant-tabs-nav .ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: #0b53af;
+  font-size: 16px;
+}
+.mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .ant-tabs-nav .ant-tabs-nav-list {
+  -webkit-box-pack: start !important;
+      -ms-flex-pack: start !important;
+          justify-content: flex-start !important;
+}
+.mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .ant-tabs-nav .ant-tabs-nav-list .ant-tabs-tab {
+  margin-right: 20px;
+}
+.mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .profilepicboxmain {
+  min-width: 300px;
+}
+.mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .profilepicboxmain .profilePicBox {
+  margin-top: 0px !important;
+}
+.mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .profilepicboxmain .btnresumemain {
+  margin-right: 35px;
+  margin-top: 20px;
+}
+.mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .profilepicboxmain .btnresumemain .btnuploadresume {
+  position: relative;
+  width: 100%;
+  background: #518CDA;
+  border-color: #518CDA;
+  height: 45px;
+  color: #ffffff;
+  font-size: 17px;
+}
+.mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .profilepicboxmain .btnresumemain .btnuploadresume .ant-form-item {
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+.mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .profilepicboxmain .btnresumemain .btnuploadresume .ant-form-item input {
+  opacity: 0;
+  cursor: pointer;
 }
 .mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .editprofileForm {
   width: 100%;
-  margin-top: 40px !important;
+  margin-top: 0px !important;
+  background: #F5F9FE;
+  border: 1px solid #F5F9FE;
+}
+.mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .editprofileForm .ant-select-multiple .ant-select-selection-item {
+  background: #cce3ff;
+  border: 1px solid #cce3ff;
 }
 .mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .editprofileForm .btnboxmain {
   border: 0px !important;
+  padding-left: 20px;
 }
 .mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .editprofileForm .ant-form-item {
-  border: 1px solid #CAC8C8;
-  border-radius: 10px;
+  border: 0px solid #CAC8C8;
+  border-radius: 0px;
   overflow: hidden;
 }
 .mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .editprofileForm .ant-form-item .ant-form-item-label {
-  padding-left: 10px;
+  padding-left: 0px;
   padding-top: 5px;
   padding-bottom: 0px;
+  margin-bottom: 5px;
+  font-size: 13px !important;
+  color: #807F7F !important;
 }
 .mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .editprofileForm .ant-form-item .ant-form-item-label label {
   font-family: "segoe_ui", sans-serif;
   font-size: 18px;
   color: #000000;
 }
+.mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .editprofileForm .ant-form-item .ant-select-selector {
+  height: 45px !important;
+  border: 1px solid #CFDEF0 !important;
+}
 .mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .editprofileForm .ant-form-item .ant-input, .mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .editprofileForm .ant-form-item .ant-picker {
   border: 0px;
+  height: 45px;
+  border: 1px solid #CFDEF0;
   font-size: 18px;
   padding-left: 10px;
   padding-top: 0px;
-  padding-bottom: 0pxs;
+  padding-bottom: 0px;
 }
 .mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .editprofileForm .ant-form-item .ant-form-item-control-input {
   min-height: 35px !important;
@@ -4428,12 +4504,16 @@ h5 {
 }
 .mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .editprofileForm .ant-form-item .ant-picker-input > input, .mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .editprofileForm .ant-form-item input {
   font-size: 18px;
+  padding: 0px;
+  background: #ffffff;
 }
 .mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .editprofileForm .ant-form-item .ant-form-item-row label {
   font-size: 15px;
+  color: #807F7F !important;
 }
 .mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .editprofileForm .experiencemainbox .expsubboxmain {
-  border: 1px solid #CAC8C8;
+  border: 1px solid #e9eff7;
+  background: #e9eff7;
   border-radius: 10px;
   padding: 20px;
   margin-bottom: 20px;
@@ -4464,7 +4544,7 @@ h5 {
   border: 0px;
 }
 .mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .editprofileForm .experiencemainbox .expsubboxmain .ant-form-item .ant-form-item-control-input-content .ant-form-item {
-  border: 1px solid #CAC8C8;
+  border: 0px solid #CAC8C8;
 }
 .mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .editprofileForm .experiencemainbox .expsubboxmain .subtitlebox .ant-form-item-label label {
   font-size: 20px;
@@ -4479,7 +4559,7 @@ h5 {
   padding: 10px 15px 15px;
 }
 .mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .editprofileForm .certificateform .ant-form-item .ant-form-item-control-input-content input {
-  padding-left: 0px;
+  padding-left: 10px;
 }
 .mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .editprofileForm .certificateform .expsubboxtitle {
   display: -webkit-box;
@@ -4498,6 +4578,9 @@ h5 {
 }
 .mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .editprofileForm .certificateform .expsubboxtitle h3 {
   margin-top: 0px;
+  font-size: 15px;
+  margin-bottom: 8px;
+  color: #807F7F !important;
 }
 .mainLayout .rightmainbar .cntpagecomponent .userpersondetails .leftcol .personaldetails.editprofile .editprofileForm .certificateform .expsubboxtitle a {
   font-size: 14px;
@@ -8403,4 +8486,26 @@ p div {
 .rightmainbar .newmessageChat .chatMainbox p {
   font-size: 15px;
   font-family: "Inter", sans-serif;
+}
+
+.postjobsmain {
+  margin-top: 0px;
+}
+.postjobsmain textarea.ant-input {
+  height: 100px !important;
+}
+.postjobsmain .ant-btn:active, .postjobsmain .ant-btn:hover, .postjobsmain .ant-btn:focus {
+  background: #000000 !important;
+}
+
+.martop50 {
+  margin-top: 30px;
+}
+
+.martop70 {
+  margin-top: 70px;
+}
+
+.padd30 {
+  padding: 30px;
 }/*# sourceMappingURL=customtheme.css.map */

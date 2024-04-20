@@ -84,94 +84,99 @@ const PrivacyAndSafety = () => {
         setShowProtectModal(false);
         setProtectCheckboxChecked(true);
     }
-    return (
+    return (  
         <>
             {!showTagging && !showPhotoTagging && !showYourPost && !showLocationOnPost &&
                 !showBlock && !showDirectMsg && !showDiscoverability && !showManageContacts &&
                 <div className='settingBox'>
-                    <div>
+                     <div className='settingsheader'>
                         <h2>Privacy and safety</h2>
-                        <p>Manage what information you see and share on K4M2A.</p>
+                       
                     </div>
-                    <div className="dividerBox">
-                        <h2>Your K4M2A activity</h2>
-                    </div>
-                    <div>
-                        <ul>
-                            <li>
-                                <Link to="#" onClick={() => changeStep('tagging')}>Audience, media and tagging <svg viewBox="0 0 24 24" aria-hidden="true"><g><path d="M14.586 12L7.543 4.96l1.414-1.42L17.414 12l-8.457 8.46-1.414-1.42L14.586 12z" /> </g></svg></Link>
-                            </li>
-                            <li>
-                                <Link to="#" onClick={() => changeStep('yourpost')}>Your posts <svg viewBox="0 0 24 24" aria-hidden="true"><g><path d="M14.586 12L7.543 4.96l1.414-1.42L17.414 12l-8.457 8.46-1.414-1.42L14.586 12z" /></g></svg></Link>
-                            </li>
-                            <li>
-                                <Link to="#" onClick={() => changeStep('block')}>Blocked accounts <svg viewBox="0 0 24 24" aria-hidden="true"><g><path d="M14.586 12L7.543 4.96l1.414-1.42L17.414 12l-8.457 8.46-1.414-1.42L14.586 12z" /></g></svg></Link>
-                            </li>
-                            <li>
-                                <Link to="#" onClick={() => changeStep('dm')}>Direct Messages <svg viewBox="0 0 24 24" aria-hidden="true"><g><path d="M14.586 12L7.543 4.96l1.414-1.42L17.414 12l-8.457 8.46-1.414-1.42L14.586 12z" /></g></svg></Link>
-                            </li>
-                            <li>
-                                <Link to="#" onClick={() => changeStep('discover')}>Discoverability and contacts <svg viewBox="0 0 24 24" aria-hidden="true"><g><path d="M14.586 12L7.543 4.96l1.414-1.42L17.414 12l-8.457 8.46-1.414-1.42L14.586 12z" /></g></svg></Link>
-                            </li>
-                        </ul>
-                    </div>
-                    <div className="dividerBox">
-                        <h2>Learn more about privacy on K4M2A</h2>
-                        <ul>
-                            <li><Link to="#">Privacy center</Link></li>
-                            <li><Link to="#">Privacy policy</Link> </li>
-                            <li><Link to="#">Contact us</Link></li>
-                        </ul>
+                    <div className='settingcntbox'> 
+                        <div>
+                        <p>Manage what information you see and share on SARVAH.</p>
+                            <h2>Your K4M2A activity</h2>
+                        </div>
+                        <div>
+                            <ul>
+                                <li>
+                                    <Link to="#" onClick={() => changeStep('tagging')}>Audience, media and tagging <svg viewBox="0 0 24 24" aria-hidden="true"><g><path d="M14.586 12L7.543 4.96l1.414-1.42L17.414 12l-8.457 8.46-1.414-1.42L14.586 12z" /> </g></svg></Link>
+                                </li>
+                                <li>
+                                    <Link to="#" onClick={() => changeStep('yourpost')}>Your posts <svg viewBox="0 0 24 24" aria-hidden="true"><g><path d="M14.586 12L7.543 4.96l1.414-1.42L17.414 12l-8.457 8.46-1.414-1.42L14.586 12z" /></g></svg></Link>
+                                </li>
+                                <li>
+                                    <Link to="#" onClick={() => changeStep('block')}>Blocked accounts <svg viewBox="0 0 24 24" aria-hidden="true"><g><path d="M14.586 12L7.543 4.96l1.414-1.42L17.414 12l-8.457 8.46-1.414-1.42L14.586 12z" /></g></svg></Link>
+                                </li>
+                                <li>
+                                    <Link to="#" onClick={() => changeStep('dm')}>Direct Messages <svg viewBox="0 0 24 24" aria-hidden="true"><g><path d="M14.586 12L7.543 4.96l1.414-1.42L17.414 12l-8.457 8.46-1.414-1.42L14.586 12z" /></g></svg></Link>
+                                </li>
+                                <li>
+                                    <Link to="#" onClick={() => changeStep('discover')}>Discoverability and contacts <svg viewBox="0 0 24 24" aria-hidden="true"><g><path d="M14.586 12L7.543 4.96l1.414-1.42L17.414 12l-8.457 8.46-1.414-1.42L14.586 12z" /></g></svg></Link>
+                                </li>
+                            </ul>
+                        </div>
+                        <div className="dividerBox">
+                            <h2>Learn more about privacy on K4M2A</h2>
+                            <ul>
+                                <li><Link to="#">Privacy center</Link></li>
+                                <li><Link to="#">Privacy policy</Link> </li>
+                                <li><Link to="#">Contact us</Link></li>
+                            </ul>
 
-                    </div>
+                        </div>
+                </div>
                 </div>
             }
             {showTagging && !showPhotoTagging &&
                 <>
                     <div className="settingBox">
-                        <div className="header">
+                        <div className='settingsheader'>
                             <Link to="#" onClick={() => setShowTagging(false)}><ArrowLeftOutlined /> </Link>
                             <h2>Audience, media and tagging</h2>
                         </div>
-                        <div>
-                            <p>Manage what information you allow other people on K4M2A to see.</p>
-                        </div>
-                        <div>
-                            <h3 className="flexSpacebetween">Protect your posts <Checkbox checked={protectCheckboxChecked} onChange={handleProtectCheckboxChange} /> </h3>
-                            <p>When selected, your posts and other account information are only visible to people who follow you.
-                                <Link to="#">Learn more</Link></p>
-                        </div>
-                        <Modal
-                            type="primary"
-                            title="Are you sure?"
-                            visible={showProtectModal}
-                            footer={[
-                                <Button type="primary" onClick={handleProtectButtonClick}>Protect my account</Button>,
-                                <Button type="secondary" onClick={() => setShowProtectModal(false)}>Cancel</Button>
-                            ]}
-                            width={400}
-                            top={200}
-                            className="reportPost deletePostModal"
-                            onCancel={() => setShowProtectModal(false)}
-                        >
-                            <p>Communities are public, so protecting your account will hide your previous posts. 
-                                You also won’t be able to post in the Community until your account is public again. </p>
-                        </Modal>
+                        <div className='settingcntbox'> 
+                            <div>
+                                <p>Manage what information you allow other people on K4M2A to see.</p>
+                            </div>
+                            <div>
+                                <h3 className="flexSpacebetween">Protect your posts <Checkbox checked={protectCheckboxChecked} onChange={handleProtectCheckboxChange} /> </h3>
+                                <p>When selected, your posts and other account information are only visible to people who follow you.
+                                    <Link to="#">Learn more</Link></p>
+                            </div>
+                            <Modal
+                                type="primary"
+                                title="Are you sure?"
+                                visible={showProtectModal}
+                                footer={[
+                                    <Button type="primary" onClick={handleProtectButtonClick}>Protect my account</Button>,
+                                    <Button type="secondary" onClick={() => setShowProtectModal(false)}>Cancel</Button>
+                                ]}
+                                width={400}
+                                top={200}
+                                className="reportPost deletePostModal"
+                                onCancel={() => setShowProtectModal(false)}
+                            >
+                                <p>Communities are public, so protecting your account will hide your previous posts. 
+                                    You also won’t be able to post in the Community until your account is public again. </p>
+                            </Modal>
 
-                        <ul>
-                            <li><Link to="#" onClick={() => changeStep('phototagging')}>Photo tagging<RightOutlined /></Link></li>
-                        </ul>
+                            <ul>
+                                <li><Link to="#" onClick={() => changeStep('phototagging')}>Photo tagging<RightOutlined /></Link></li>
+                            </ul>
 
-                    </div>
+                    </div></div>
                 </>
             }
             {showPhotoTagging &&
                 <>
                     <div className="settingBox">
-                        <div className='header'>
+                        <div className='settingsheader'>
                             <Link to="#" onClick={() => changeStep('tagging')}><ArrowLeftOutlined /> </Link>
                             <h2>Photo tagging</h2>
                         </div>
+                        <div className='settingcntbox'> 
                         <div className="formMain">
                             <ul className="martop10">
                                 <li>
@@ -190,62 +195,67 @@ const PrivacyAndSafety = () => {
                                 </li>
                             </ul>
                         </div>
+                        </div>
                     </div>
                 </>
             }
             {showYourPost && !showLocationOnPost &&
                 <>
                     <div className="settingBox">
-                        <div className='header'>
+                        <div className='settingsheader'>
                             <Link to="#" onClick={() => setShowYourPost(false)}><ArrowLeftOutlined /> </Link>
                             <h2>Your posts</h2>
                         </div>
-                        <p>Manage the information associated with your posts.</p>
-                        <div>
-                            <h3 className="flexSpacebetween">Mark media you post as having material that may be sensitive <Checkbox /></h3>
-                            <p>When enabled, pictures and videos you post will be marked as sensitive for people who don’t want to see sensitive content.
-                                <Link to="#">Learn more</Link></p>
-                        </div>
+                        <div className='settingcntbox'> 
+                            <p>Manage the information associated with your posts.</p>
+                            <div>
+                                <h3 className="flexSpacebetween">Mark media you post as having material that may be sensitive <Checkbox /></h3>
+                                <p>When enabled, pictures and videos you post will be marked as sensitive for people who don’t want to see sensitive content.
+                                    <Link to="#">Learn more</Link></p>
+                            </div>
 
-                        <ul className="martop10">
-                            <li>
-                                <Link to="#" onClick={() => changeStep('locationonpost')}>Add location information to your posts<RightOutlined /></Link>
-                            </li>
-                        </ul>
-
+                            <ul className="martop10">
+                                <li>
+                                    <Link to="#" onClick={() => changeStep('locationonpost')}>Add location information to your posts<RightOutlined /></Link>
+                                </li>
+                            </ul>
+                            </div>
                     </div>
                 </>
             }
             {showLocationOnPost &&
                 <>
                     <div className="settingBox">
-                        <div className='header'>
+                        <div className='settingsheader'>
                             <Link to="#" onClick={() => changeStep('yourpost')}><ArrowLeftOutlined /> </Link>
                             <h2>Add location information to your posts</h2>
                         </div>
-
-                        <div>
-                            <p>If enabled, you will be able to attach location information to your posts.
-                                <Link to="#">Learn more</Link></p>
-                        </div>
-                        <div>
-                            <h3 className="flexSpacebetween">Add location information to your posts <Checkbox /></h3>
-                        </div>
-                        <div className="btnRedbox deactivatelink martop15">
-                            <Link to="#">Remove all location information attached to your post</Link>
-                        </div>
+                        <div className='settingcntbox'> 
+                            <div>
+                                <p>If enabled, you will be able to attach location information to your posts.
+                                    <Link to="#">Learn more</Link></p>
+                            </div>
+                            <div>
+                                <h3 className="flexSpacebetween">Add location information to your posts <Checkbox /></h3>
+                            </div>
+                            <div className="btnRedbox deactivatelink martop15">
+                                <Link to="#">Remove all location information attached to your post</Link>
+                            </div>
+                            </div>
                     </div>
                 </>
             }
             {showBlock &&
                 <>
                     <div className='settingBox'>
-                        <div className='header'>
+                        <div className='settingsheader'>
                             <Link to="#" onClick={() => setShowBlock(false)} ><ArrowLeftOutlined /> </Link>
                             <h2>Block accounts</h2>
                         </div>
+                        <div className='settingcntbox'> 
                         <div>
                             <p>Manage the accounts that you’ve blocked.</p>
+                        </div>
                         </div>
                     </div>
                 </>
@@ -253,10 +263,11 @@ const PrivacyAndSafety = () => {
             {showDirectMsg &&
                 <>
                     <div className='settingBox'>
-                        <div className='header'>
+                        <div className='settingsheader'>
                             <Link to="#" onClick={() => setShowDirectMsg(false)}><ArrowLeftOutlined /> </Link>
                             <h2>Direct Messages</h2>
                         </div>
+                        <div className='settingcntbox'> 
                         <div className="formMain">
                             <ul>
                                 <li>
@@ -295,56 +306,59 @@ const PrivacyAndSafety = () => {
                                 </li>
                             </ul>
                         </div>
+                        </div>
                     </div>
                 </>
             }
             {showDiscoverability && !showManageContacts &&
                 <>
                     <div className='settingBox'>
-                        <div className='header'>
+                        <div className='settingsheader'>
                             <Link to="#" onClick={() => setShowDiscoverability(false)}><ArrowLeftOutlined /> </Link>
                             <h2>Discoverability and contacts</h2>
                         </div>
-                        <div>
-                            <p>Control your discoverability settings and manage contacts you’ve imported.</p>
-                        </div>
-                        <div>
-                            <div className="formMain">
-                                <ul>
-                                    <li>
-                                        <div>
-                                            <h2>Discoverability</h2>
-                                            <p className="padtop">Decide whether people who have your email address or phone number can find and connect with you on K4M2A.</p>
-                                        </div>
-                                        <div>
-                                            <h3 className="flexSpacebetween">Let people who have your email address find you on K4M2A <Checkbox /></h3>
-                                            <p>Let people who have your email address find and connect with you on K4M2A.
-                                                <Link to="#">Learn more</Link>
-                                            </p>
-                                        </div>
-                                        <div>
-                                            <h3 className="flexSpacebetween">Let people who have your phone number find you on K4M2A <Checkbox /></h3>
-                                            <p>Let people who have your phone number find and connect with you on K4M2A.
-                                                <Link to="#">Learn more</Link>
-                                            </p>
-                                        </div>
-                                    </li>
-                                </ul>
-
+                        <div className='settingcntbox'> 
+                            <div>
+                                <p>Control your discoverability settings and manage contacts you’ve imported.</p>
                             </div>
                             <div>
-                                <h2 className="martop10">Contacts</h2>
-                                <p>Let people who have your phone number find and connect with you on K4M2A.
-                                    <Link to="#">Learn more</Link></p>
-                                <ul>
+                                <div className="formMain">
+                                    <ul>
+                                        <li>
+                                            <div>
+                                                <h2>Discoverability</h2>
+                                                <p className="padtop">Decide whether people who have your email address or phone number can find and connect with you on K4M2A.</p>
+                                            </div>
+                                            <div>
+                                                <h3 className="flexSpacebetween">Let people who have your email address find you on K4M2A <Checkbox /></h3>
+                                                <p>Let people who have your email address find and connect with you on K4M2A.
+                                                    <Link to="#">Learn more</Link>
+                                                </p>
+                                            </div>
+                                            <div>
+                                                <h3 className="flexSpacebetween">Let people who have your phone number find you on K4M2A <Checkbox /></h3>
+                                                <p>Let people who have your phone number find and connect with you on K4M2A.
+                                                    <Link to="#">Learn more</Link>
+                                                </p>
+                                            </div>
+                                        </li>
+                                    </ul>
 
-                                    <li>
-                                        <Link to="#" onClick={() => changeStep('contacts')}>Manage contacts<RightOutlined /></Link>
-                                    </li>
+                                </div>
+                                <div>
+                                    <h2 className="martop10">Contacts</h2>
+                                    <p>Let people who have your phone number find and connect with you on K4M2A.
+                                        <Link to="#">Learn more</Link></p>
+                                    <ul>
 
-                                </ul>
+                                        <li>
+                                            <Link to="#" onClick={() => changeStep('contacts')}>Manage contacts<RightOutlined /></Link>
+                                        </li>
+
+                                    </ul>
+                                </div>
+
                             </div>
-
                         </div>
                     </div>
                 </>
@@ -352,39 +366,41 @@ const PrivacyAndSafety = () => {
             {showManageContacts &&
                 <>
                     <div className='settingBox'>
-                        <div className='header'>
+                    <div className='settingsheader'>
                             <Link to="#" onClick={() => changeStep('discover')}><ArrowLeftOutlined /> </Link>
                             <h2>Manage Contacts</h2>
                         </div>
-                        <div>
-                            <div className="btnRedbox deactivatelink martop15">
-                                <Link to="#" on>Remove all contacts</Link>
-                            </div>
+                        <div className='settingcntbox'> 
+                                <div>
+                                    <div className="btnRedbox deactivatelink martop15">
+                                        <Link to="#" on>Remove all contacts</Link>
+                                    </div>
 
-                            <div>
-                                <p>These are the contacts that you have imported from your mobile devices.
-                                    This information is used to personalize your experience on K4M2A,
-                                    such as suggesting accounts to follow.
-                                    You can remove any contacts you’ve previously uploaded and turn off syncing with K4M2A on all devices.
-                                    Please be aware that this takes a little time.  <Link to="#">Learn more</Link></p>
+                                    <div>
+                                        <p>These are the contacts that you have imported from your mobile devices.
+                                            This information is used to personalize your experience on K4M2A,
+                                            such as suggesting accounts to follow.
+                                            You can remove any contacts you’ve previously uploaded and turn off syncing with K4M2A on all devices.
+                                            Please be aware that this takes a little time.  <Link to="#">Learn more</Link></p>
 
-                            </div>
-                        </div>
-                        <div className="dividerBox">
-                            <h2>Confirm your password</h2>
-                            <p>Please enter your password in order to get this.</p>
-                        </div>
-                        <div className="formMain ">
-                            <ul>
-                                <li>
-                                    <Input type="password" placeholder="Password" />
-                                    <Link to="#">Forgot password?</Link>
-                                </li>
-                                <li className='flexend'>
-                                    <Button className="btnBlack btnrounded">Confirm</Button>
-                                </li>
-                            </ul>
-                        </div>
+                                    </div>
+                                </div>
+                                <div className="dividerBox">
+                                    <h2>Confirm your password</h2>
+                                    <p>Please enter your password in order to get this.</p>
+                                </div>
+                                <div className="formMain ">
+                                    <ul>
+                                        <li>
+                                            <Input type="password" placeholder="Password" />
+                                            <Link to="#">Forgot password?</Link>
+                                        </li>
+                                        <li className='flexend'>
+                                            <Button className="btnBlack btnrounded">Confirm</Button>
+                                        </li>
+                                    </ul>
+                                </div>
+                                </div>
                     </div>
                 </>
             }
