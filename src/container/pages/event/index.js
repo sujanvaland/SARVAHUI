@@ -94,6 +94,8 @@ function EventTimeline() {
     setFilter({
       ...filter,
       [e.target.name]: e.target.value,
+      pageNo: 1,
+
     });
   };
 

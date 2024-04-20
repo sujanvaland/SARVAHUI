@@ -39,6 +39,8 @@ const AppliedJobs = lazy(() => import('../../container/pages/appliedJobs'));
 
 function Admin() {
   const { path } = useRouteMatch();
+  const User = JSON.parse(localStorage.getItem('profile'));
+
   return (
     <Switch>
       <Suspense>
@@ -56,10 +58,14 @@ function Admin() {
         <Route path={`${path}jobApplication/:jobId?`} component={JobApplication} />
 
         <Route path={`${path}candidate`} component={AdminCandidate} />
+
+        {User.loginType === "admin" &&
+        <>
         <Route path={`${path}recuiter`} component={AdminRecuiter} />
         <Route path={`${path}candidateApplied/:userId?/:userType?/:userName?`} component={CandidateAppliedJobs} />
         <Route path={`${path}recuiterJob/:userId?/:userType?/:userName?`} component={CandidateAppliedJobs} />
-
+        </>
+        }
 
         <Route path={`${path}people`} component={People} />
         <Route path={`${path}explore`} component={Explore} />

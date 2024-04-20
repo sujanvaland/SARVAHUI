@@ -1,8 +1,8 @@
 /* eslint-disable camelcase */
-import React, { useEffect } from 'react';
-import { PageHeader, Table } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Input, PageHeader, Table, Form, Select  } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom';
+import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom';
 import { Main } from './styled';
 import { Cards } from '../../../components/cards/frame/cards-frame';
 import { GetAllRecuiter } from '../../../redux/postJob/actionCreator';
@@ -14,14 +14,61 @@ function AdminRecuiter() {
 
   const dispatch = useDispatch();
   const history = useHistory();
+  const { Option } = Select;
 
   useEffect(() => {
     dispatch(GetAllRecuiter());
   }, []);
 
-  const { payments } = useSelector((state) => ({
-    payments: state.postJob?.getAllRecuiter,
+  const [payments, setPayments] = useState([]);
+ 
+  const { payment } = useSelector((state) => ({
+    payment: state.postJob?.getAllRecuiter,
   }));
+
+  useEffect(() => {
+    setPayments(payment);
+  }, [payment]);
+
+  const [filter, setFilter] = useState({
+    searchText: '',
+    skills: [],
+  });
+
+  useEffect(() => {
+    const filteredUsers = payment?.filter(user =>
+      (user?.firstName.toLowerCase().includes(filter?.searchText.toLowerCase())) ||
+      (user?.lastName.toLowerCase().includes(filter?.searchText.toLowerCase())) ||
+      (user?.userName.toLowerCase().includes(filter?.searchText.toLowerCase())) ||
+      (user?.specialization.toLowerCase().includes(filter?.searchText.toLowerCase()))
+  );
+  setPayments(filteredUsers);
+  }, [filter]);
+
+  const handleJobSearch = (e) => {
+    setFilter({
+      ...filter,
+      searchText: e.target.value,
+    });
+  };
+
+  const handleSelectedSkills = (selected) => {
+    setFilter({
+      ...filter,
+      skills: selected,
+      pageNo: 1,
+    });
+  };
+
+  const handleResetFilter = () => {
+    setPayments(payment);
+    setFilter({
+      searchText: '',
+      skills: [],
+    });
+  }
+
+  
 
   // const handleSearch = () => {};
 
@@ -166,7 +213,36 @@ function AdminRecuiter() {
 
   return (
     <>
+      
       <PageHeader ghost title=" Recuiter List" />
+      <div className="eventSearch">
+        <Input name="searchText" maxLength={100} value={filter.searchText} placeholder="Search Jobs" onChange={handleJobSearch} />
+        <ul>
+          <li>
+            <Form.Item >
+              <Select
+                mode="tags"
+                placeholder="Select Skills"
+                showSearch
+                filterOption={(input, option) =>
+                  option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                }
+                onChange={handleSelectedSkills}
+              >
+                <Option value="AutoCad"> AutoCad</Option>
+                <Option value="Maya">Maya </Option>
+                <Option value="Houdini"> Houdini</Option>
+              </Select>
+            </Form.Item>
+          </li>
+          
+          <li>
+            <Link to="" className="resetLink" onClick={() => handleResetFilter()}>
+              Reset Filter
+            </Link>
+          </li>
+        </ul>
+      </div>
       <Main>
         <Cards headless>
           <Table
