@@ -8,6 +8,7 @@
 body{
     font-family: $fntSegoe;
     font-size: 18px; color:$black;
+    overflow-x: hidden;
 } 
 /***************** common css **********/
 .ant-select-selection-placeholder {font-size: 13px;}
@@ -870,7 +871,7 @@ h5{font-family: $fntMonoMedium; font-size: 14px; color:$black;}
  }
     .rightmainbar{
         @include dispflex(flex,column,flex-start,flex-start);
-        width: 100%; flex:0 0 85.4%;
+        width: 100%; flex:0 0 84%; 
         @media screen and (min-width:1100px){
             margin-left: 245px;
            
@@ -1422,8 +1423,20 @@ h5{font-family: $fntMonoMedium; font-size: 14px; color:$black;}
             }
  
             &.messageChat{
-                flex: 0 0 50%;  width: 100%;  max-width: 57%;  position: absolute; background: #ffffff;  z-index: 9999;
-                border: 2px solid #ccc; border-radius: 15px; padding: 10px 20px; top: 80px;
+                flex: 0 0 40%;  width: 100%;  max-width: 40%;  position: absolute; background: #ffffff;  z-index: 9999;
+                border:0px solid #ccc; border-radius: 15px; padding:0px; top: 0px;right:0px;
+                .rightsidecntbox{padding:0px!important;
+                    & > div{margin-top: 0px!important;}
+                    .chatUsername{
+                        background: #1b4172; color:#ffffff; padding: 0px 20px; height:70px;
+                        h2{margin-bottom: 0px; color:#ffffff;}
+                        a{color:#ffffff; margin:0px 8px!important;}
+                        &.height63{height: 63px;}
+                    }
+                    .profileMain{
+                        .userpic{margin-bottom: 15px;}
+                    }
+                }
                 @include tab{
                     display: flex; flex:0 0 85%; width: 100%; max-width:85%;
                 }
@@ -3436,4 +3449,33 @@ p{font-family:$fntInter;
  .martop50{margin-top: 30px;}
  .martop70{margin-top: 70px;}
  .padd30{padding:30px;}
+
+ .recruiterpage{ width: 86%!important; max-width: 86%!important;
+    .ant-page-header{padding:0px!important;}
+    .eventSearch{
+        width:98%; margin-top:70px; padding: 0px 20px; margin-bottom: 15px;
+        ul{
+            display: flex; flex-direction: row; justify-content: flex-end; align-items: center;
+            li{ margin-left: 15px;
+                .ant-form-item{margin-bottom:0px; width: 300px;}
+                .ant-select:not(.ant-select-customize-input) .ant-select-selector, input{
+                    height:40px;
+                }
+                a{
+                    background: #000;
+                    color: #fff;
+                    font-size: 16px;
+                    padding: 10px 17px;
+                    border-radius: 4px;
+                }
+            }
+        }
+    }
+ }
+ .responsivetable{
+    width: 100%; overflow-x: auto; padding:0px 20px;
+ }
+ .loadmorebox{width: 100%; display: flex; flex-direction: row; justify-content: center; align-items: center;
+a{font-size: 16px;}
+}
  

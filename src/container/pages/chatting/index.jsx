@@ -350,11 +350,11 @@ const Chatting = () => {
                         <div className="rightsidecntbox scrollbox">
                             {showinfoBox && isgroupChat === false &&
                                 <ChatMainBox className="conversionInfoBox">
-                                    <div className="chatUsername">
-                                        <Link to="#" onClick={() => closeInfoBox()} className="btnbackBox"><ArrowLeftOutlined /></Link>
+                                    <div className="chatUsername height63">
+                                        <Link to="#" onClick={() => closeInfoBox()} className="btnbackBox"> <img src={require('../../../static/images/icon_prevarrow.png')} alt="" /></Link>
                                         <h2 className="headerText">Conversation info</h2>
                                     </div>
-                                    <div className="ChatUserNotification">
+                                    <div className="ChatUserNotification padd20">
                                         <h3>Notifications</h3>
                                         <div className="snoozBox">
                                             Snooze notifications from {chatUser?.name}
@@ -407,7 +407,9 @@ const Chatting = () => {
                                             <div className="chattingBox">
                                                 <ul>
                                                     {IsLoadMore && <li>
+                                                        <div className="loadmorebox">
                                                         <Link to="#" onClick={() => HandleLoadMore()}>Load More</Link>
+                                                        </div>
                                                     </li>}
 
                                                     {chatHistory && chatHistory?.length > 0 ? (
