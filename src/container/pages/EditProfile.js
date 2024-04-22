@@ -406,8 +406,6 @@ function EditProfile() {
               <br />
               <br />
               <br />
-              <br />
-              <br />
               <div className="userpersondetails">
                 <div className="leftcol">
                   <div className="personaldetails editprofile">
