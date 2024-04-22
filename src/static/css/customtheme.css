@@ -53,6 +53,7 @@ body {
   font-family: "segoe_ui", sans-serif;
   font-size: 18px;
   color: #000000;
+  overflow-x: hidden;
 }
 
 /***************** common css **********/
@@ -2114,8 +2115,8 @@ h5 {
           align-items: flex-start;
   width: 100%;
   -webkit-box-flex: 0;
-      -ms-flex: 0 0 85.4%;
-          flex: 0 0 85.4%;
+      -ms-flex: 0 0 84%;
+          flex: 0 0 84%;
 }
 @media screen and (min-width: 1100px) {
   .mainLayout .rightmainbar {
@@ -3485,17 +3486,44 @@ h5 {
 }
 .mainLayout .rightmainbar .cntpagecomponent .rightsidebarcntbox.messageChat {
   -webkit-box-flex: 0;
-      -ms-flex: 0 0 50%;
-          flex: 0 0 50%;
+      -ms-flex: 0 0 40%;
+          flex: 0 0 40%;
   width: 100%;
-  max-width: 57%;
+  max-width: 40%;
   position: absolute;
   background: #ffffff;
   z-index: 9999;
-  border: 2px solid #ccc;
+  border: 0px solid #ccc;
   border-radius: 15px;
-  padding: 10px 20px;
-  top: 80px;
+  padding: 0px;
+  top: 0px;
+  right: 0px;
+}
+.mainLayout .rightmainbar .cntpagecomponent .rightsidebarcntbox.messageChat .rightsidecntbox {
+  padding: 0px !important;
+}
+.mainLayout .rightmainbar .cntpagecomponent .rightsidebarcntbox.messageChat .rightsidecntbox > div {
+  margin-top: 0px !important;
+}
+.mainLayout .rightmainbar .cntpagecomponent .rightsidebarcntbox.messageChat .rightsidecntbox .chatUsername {
+  background: #1b4172;
+  color: #ffffff;
+  padding: 0px 20px;
+  height: 70px;
+}
+.mainLayout .rightmainbar .cntpagecomponent .rightsidebarcntbox.messageChat .rightsidecntbox .chatUsername h2 {
+  margin-bottom: 0px;
+  color: #ffffff;
+}
+.mainLayout .rightmainbar .cntpagecomponent .rightsidebarcntbox.messageChat .rightsidecntbox .chatUsername a {
+  color: #ffffff;
+  margin: 0px 8px !important;
+}
+.mainLayout .rightmainbar .cntpagecomponent .rightsidebarcntbox.messageChat .rightsidecntbox .chatUsername.height63 {
+  height: 63px;
+}
+.mainLayout .rightmainbar .cntpagecomponent .rightsidebarcntbox.messageChat .rightsidecntbox .profileMain .userpic {
+  margin-bottom: 15px;
 }
 @media (max-width: 991px) {
   .mainLayout .rightmainbar .cntpagecomponent .rightsidebarcntbox.messageChat {
@@ -8508,4 +8536,76 @@ p div {
 
 .padd30 {
   padding: 30px;
+}
+
+.recruiterpage {
+  width: 86% !important;
+  max-width: 86% !important;
+}
+.recruiterpage .ant-page-header {
+  padding: 0px !important;
+}
+.recruiterpage .eventSearch {
+  width: 98%;
+  margin-top: 70px;
+  padding: 0px 20px;
+  margin-bottom: 15px;
+}
+.recruiterpage .eventSearch ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.recruiterpage .eventSearch ul li {
+  margin-left: 15px;
+}
+.recruiterpage .eventSearch ul li .ant-form-item {
+  margin-bottom: 0px;
+  width: 300px;
+}
+.recruiterpage .eventSearch ul li .ant-select:not(.ant-select-customize-input) .ant-select-selector, .recruiterpage .eventSearch ul li input {
+  height: 40px;
+}
+.recruiterpage .eventSearch ul li a {
+  background: #000;
+  color: #fff;
+  font-size: 16px;
+  padding: 10px 17px;
+  border-radius: 4px;
+}
+
+.responsivetable {
+  width: 100%;
+  overflow-x: auto;
+  padding: 0px 20px;
+}
+
+.loadmorebox {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.loadmorebox a {
+  font-size: 16px;
 }/*# sourceMappingURL=customtheme.css.map */

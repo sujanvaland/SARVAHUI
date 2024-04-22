@@ -2853,7 +2853,7 @@ const ChatMainBox = Styled.div`{
     }
   }
   .ChatUserNotification{
-    display:flex; flex-direction:column; padding:10px 0px; width:100%;
+    display:flex; flex-direction:column; padding:10px 20px; width:100%;
     h3{font-size:18px; font-weight:bold; color:#333333; margin-bottom:0px;}
     .snoozBox{
       font-size:16px; width:100%; display:flex; flex-direction:row; justify-content:space-between;

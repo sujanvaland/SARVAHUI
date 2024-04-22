@@ -213,50 +213,57 @@ function AdminRecuiter() {
 
   return (
     <>
+          <div className="cntpagecomponent userprofilepage recruiterpage">
+            <div className="centersidebarcontent flexcolumn mt56">
+              <div className='userNamedetails headerBox msgheader'>
+                <h2> Recuiter List</h2>                 
+              </div> 
+                <div className="eventSearch">                
+                  <ul>
+                    <li><Input name="searchText" maxLength={100} value={filter.searchText} placeholder="Search Jobs" onChange={handleJobSearch} /></li>
+                    <li>
+                      <Form.Item >
+                        <Select
+                          mode="tags"
+                          placeholder="Select Skills"
+                          showSearch
+                          filterOption={(input, option) =>
+                            option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                          }
+                          onChange={handleSelectedSkills}
+                        >
+                          <Option value="AutoCad"> AutoCad</Option>
+                          <Option value="Maya">Maya </Option>
+                          <Option value="Houdini"> Houdini</Option>
+                        </Select>
+                      </Form.Item>
+                    </li>
+                    
+                    <li>
+                      <Link to="" className="resetLink" onClick={() => handleResetFilter()}>
+                        Reset Filter
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+
+                      <div className='responsivetable'>
+                  <Table
+                    className="table-responsive"
+                    dataSource={DepositTableData}
+                    columns={DepositTableColumns}
+                    pagination={{
+                      defaultPageSize: 5,
+                      total: DepositTableData.length,
+                      showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} items`,
+                    }}
+                  />
+                </div>        
+            </div>
+          </div>
+
       
-      <PageHeader ghost title=" Recuiter List" />
-      <div className="eventSearch">
-        <Input name="searchText" maxLength={100} value={filter.searchText} placeholder="Search Jobs" onChange={handleJobSearch} />
-        <ul>
-          <li>
-            <Form.Item >
-              <Select
-                mode="tags"
-                placeholder="Select Skills"
-                showSearch
-                filterOption={(input, option) =>
-                  option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                }
-                onChange={handleSelectedSkills}
-              >
-                <Option value="AutoCad"> AutoCad</Option>
-                <Option value="Maya">Maya </Option>
-                <Option value="Houdini"> Houdini</Option>
-              </Select>
-            </Form.Item>
-          </li>
-          
-          <li>
-            <Link to="" className="resetLink" onClick={() => handleResetFilter()}>
-              Reset Filter
-            </Link>
-          </li>
-        </ul>
-      </div>
-      <Main>
-        <Cards headless>
-          <Table
-            className="table-responsive"
-            dataSource={DepositTableData}
-            columns={DepositTableColumns}
-            pagination={{
-              defaultPageSize: 5,
-              total: DepositTableData.length,
-              showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} items`,
-            }}
-          />
-        </Cards>
-      </Main>
+      
     </>
   );
 }
