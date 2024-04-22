@@ -410,19 +410,19 @@ function EditProfile() {
                 <div className="leftcol">
                   <div className="personaldetails editprofile">
                     <div className='profilepicboxmain'>
-                    <div className="profilePicBox">
-                      {ProfileData?.profileImg && <img src={ProfileData?.profileImg} alt="" />}
-                      {!ProfileData?.profileImg && (
-                        <div className="uploadProfilePic">
-                          <img src={require('../../static/images/icon_addphoto.png')} alt="" />
-                          <Input
-                            type="file"
-                            id="fileInputProfile"
-                            multiple={false}
-                            onChange={(e) => handleBinaryChange(e, 'profile')}
-                          />
-                        </div>
-                      )}
+                      <div className="profilePicBox">
+                        {ProfileData?.profileImg && <img src={ProfileData?.profileImg} alt="" />}
+                        {!ProfileData?.profileImg && (
+                          <div className="uploadProfilePic">
+                            <img src={require('../../static/images/icon_addphoto.png')} alt="" />
+                            <Input
+                              type="file"
+                              id="fileInputProfile"
+                              multiple={false}
+                              onChange={(e) => handleBinaryChange(e, 'profile')}
+                            />
+                          </div>
+                        )}
                       </div>
                       <div className='btnresumemain'>
                         <Button className='btnuploadresume'>
@@ -434,16 +434,16 @@ function EditProfile() {
                               multiple={false}
                               onChange={(e) => handleBinaryChange(e, 'resume')}
                             /></Form.Item>
-                            </Button>
-                        </div>
+                        </Button>
+                      </div>
                     </div>
                     <div className="editprofileForm">
                       <Form name="UpdateProfile" form={form} onFinish={handleSubmit} layout="vertical">
-                       
+
                         <div className="tabspanel">
                           <Tabs defaultActiveKey="1" className="custom-active-tab" >
-                            <TabPane tab="Basic Details" key="1" className="tabcntbox">
-                              <h2>Basic Details</h2>
+                            <TabPane tab={data?.loginType === "recruiter" ? "Company Details" : "Basic Details"} key="1" className="tabcntbox">
+                              <h2>{data?.loginType === "recruiter" ? "Company Details" : "Basic Details"}</h2>
                               <Row gutter={25}>
                                 <Col lg={8} sm={8}>
                                   <Form.Item
@@ -458,8 +458,8 @@ function EditProfile() {
                                       maxLength={100}
                                     />
                                   </Form.Item>
-                                  </Col>
-                                  <Col lg={8} sm={8}>
+                                </Col>
+                                <Col lg={8} sm={8}>
                                   <Form.Item
                                     label="Last Name"
                                     // name="lastName"
@@ -473,34 +473,36 @@ function EditProfile() {
                                     />
                                   </Form.Item>
                                 </Col>
-                                <Col lg={8} sm={8}>
-                                  <Form.Item
-                                    label="Date Of Birth"
-                                    // name="dob"
-                                    rules={[{ required: true, message: 'Date Of Birth is mandatory field' }]}
-                                  >
-                                    <DatePicker
-                                      onChange={handleDate}
-                                      style={{ width: '100%' }}
-                                      defaultValue={ProfileData?.dob ? moment(`${ProfileData?.dob}`, dateFormat) : null}
-                                      format={dateFormat}
-                                      disabledDate={disabledDate}
-                                    />
-                                  </Form.Item>
-                                </Col>
-                                <Col lg={8} sm={8}>
-                                  <Form.Item
-                                    label="Gender"
-                                    // name="gender"
-                                    rules={[{ required: true, message: 'Gender is mandatory field' }]}
-                                  >
-                                    <Select onChange={handleSelectedGender} value={ProfileData?.gender}>
-                                      <Option value=""> Select Gender</Option>
-                                      <Option value="male">Male </Option>
-                                      <Option value="female"> Female</Option>
-                                    </Select>
-                                  </Form.Item>
-                                </Col>
+                                {data?.loginType === "jobSeeker" &&
+                                  <>
+                                    <Col lg={8} sm={8}>
+                                      <Form.Item
+                                        label="Date Of Birth"
+                                        // name="dob"
+                                        rules={[{ required: true, message: 'Date Of Birth is mandatory field' }]}
+                                      >
+                                        <DatePicker
+                                          onChange={handleDate}
+                                          style={{ width: '100%' }}
+                                          defaultValue={ProfileData?.dob ? moment(`${ProfileData?.dob}`, dateFormat) : null}
+                                          format={dateFormat}
+                                          disabledDate={disabledDate}
+                                        />
+                                      </Form.Item>
+                                    </Col>
+                                    <Col lg={8} sm={8}>
+                                      <Form.Item
+                                        label="Gender"
+                                        // name="gender"
+                                        rules={[{ required: true, message: 'Gender is mandatory field' }]}
+                                      >
+                                        <Select onChange={handleSelectedGender} value={ProfileData?.gender}>
+                                          <Option value=""> Select Gender</Option>
+                                          <Option value="male">Male </Option>
+                                          <Option value="female"> Female</Option>
+                                        </Select>
+                                      </Form.Item>
+                                    </Col></>}
                                 <Col lg={8} sm={8}>
                                   <Form.Item label="Phone Number">
                                     <Input
@@ -520,33 +522,83 @@ function EditProfile() {
                                     <Input type="email" name="email" value={ProfileData?.email} onChange={handleChange} />
                                   </Form.Item>
                                 </Col>
-                                <Col lg={12} sm={12}>
-                                  <Form.Item
-                                    label="Linkedin Link"
-                                    validateStatus={validationErrorMSG.linkedinError ? 'error' : ''}
-                                    help={validationErrorMSG.linkedinError}
-                                  >
-                                    <Input
-                                      name="linkedinLink"
-                                      value={ProfileData?.linkedinLink}
-                                      onBlur={() => handleValidation('LinkedIn', ProfileData?.linkedinLink)}
-                                      onChange={handleChange}
-                                    />
-                                  </Form.Item>
-                                </Col>
-                                <Col lg={12} sm={12}>
-                                  <Form.Item
-                                      label="Total Years of Experience"
-                                      rules={[{ required: true, message: 'Need to define' }]}
+
+                                {data?.loginType === "jobSeeker" && <>
+                                  <Col lg={12} sm={12}>
+                                    <Form.Item
+                                      label="Linkedin Link"
+                                      validateStatus={validationErrorMSG.linkedinError ? 'error' : ''}
+                                      help={validationErrorMSG.linkedinError}
                                     >
                                       <Input
-                                        type="number"
-                                        name="totalExperience"
-                                        value={ProfileData?.totalExperience}
+                                        name="linkedinLink"
+                                        value={ProfileData?.linkedinLink}
+                                        onBlur={() => handleValidation('LinkedIn', ProfileData?.linkedinLink)}
                                         onChange={handleChange}
-                                        maxLength={100}
                                       />
                                     </Form.Item>
+                                  </Col>
+                                  <Row gutter={25}>
+                                    <Col lg={24} sm={24}>
+                                      <Form.Item label="Search Skills And Techniques">
+                                        <Select
+                                          mode="tags"
+                                          showSearch
+                                          filterOption={(input, option) =>
+                                            option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                                          }
+                                          onChange={handleSelectedSkills}
+                                          value={ProfileData.skills}
+                                        >
+                                          <Option value="Entrepreneur"> Entrepreneur</Option>
+                                          <Option value="Founder">Founder </Option>
+                                          <Option value="Blogger"> Blogger</Option>
+                                          <Option value="Writer">Writer </Option>
+                                          <Option value="Designer"> Designer</Option>
+                                        </Select>
+                                      </Form.Item>
+                                    </Col>
+                                  </Row>
+                                  <Row gutter={25}>
+                                    <Col lg={24} sm={24}>
+                                      <Form.Item label="Tags ">
+                                        <Select
+                                          mode="tags"
+                                          showSearch
+                                          filterOption={(input, option) =>
+                                            option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                                          }
+                                          onChange={handleSelectedTags}
+                                          value={ProfileData?.tags}
+                                        >
+                                          <Option value="Product Management"> Product Management</Option>
+                                          <Option value="JavaScript">JavaScript </Option>
+                                          <Option value="Figma"> Figma</Option>
+                                          <Option value="Marketing">Marketing </Option>
+                                          <Option value="Python"> Python</Option>
+                                          <Option value="ReactJS"> ReactJS</Option>
+                                          <Option value="Startups"> Startups</Option>
+                                          <Option value="Software Engineer"> Software Engineer</Option>
+                                          <Option value="Growth Strategy"> Growth Strategy</Option>
+                                          <Option value="NodeJS"> NodeJS</Option>
+                                        </Select>
+                                      </Form.Item>
+
+                                    </Col>
+                                  </Row></>}
+                                <Col lg={12} sm={12}>
+                                  <Form.Item
+                                    label={data?.loginType === "recruiter" ? "No Of Employees" : "Total Years of Experience"}
+                                    rules={[{ required: true, message: 'Need to define' }]}
+                                  >
+                                    <Input
+                                      type="number"
+                                      name="totalExperience"
+                                      value={ProfileData?.totalExperience}
+                                      onChange={handleChange}
+                                      maxLength={100}
+                                    />
+                                  </Form.Item>
                                 </Col>
                               </Row>
                               {/* <Row gutter={25}>
@@ -572,7 +624,7 @@ function EditProfile() {
                           </Col>
                         </Row> */}
                               {/* <Row gutter={25}> */}
-                                {/* <Col lg={24} sm={24}>
+                              {/* <Col lg={24} sm={24}>
                             <Form.Item label="City">
                               <Input name="city" value={ProfileData?.city} onChange={handleChange} maxLength={1000} />
                             </Form.Item>
@@ -597,8 +649,8 @@ function EditProfile() {
                               />
                             </Form.Item>
                           </Col> */}
-                                
-                                {/* <Col lg={24} sm={24}>
+
+                              {/* <Col lg={24} sm={24}>
                             <Form.Item label="Resume">
                               <Input type="file" name="resume" value={ProfileData?.resume} onChange={handleChange} />
                             </Form.Item>
@@ -607,58 +659,12 @@ function EditProfile() {
                               {/* <Row gutter={25}>
                                
                               </Row> */}
-                              <Row gutter={25}>
-                                <Col lg={24} sm={24}>
-                                  <Form.Item label="Search Skills And Techniques">
-                                    <Select
-                                      mode="tags"
-                                      showSearch
-                                      filterOption={(input, option) =>
-                                        option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                                      }
-                                      onChange={handleSelectedSkills}
-                                      value={ProfileData.skills}
-                                    >
-                                      <Option value="Entrepreneur"> Entrepreneur</Option>
-                                      <Option value="Founder">Founder </Option>
-                                      <Option value="Blogger"> Blogger</Option>
-                                      <Option value="Writer">Writer </Option>
-                                      <Option value="Designer"> Designer</Option>
-                                    </Select>
-                                  </Form.Item>
-                                </Col>
-                              </Row>
-                              <Row gutter={25}>
-                                <Col lg={24} sm={24}>
-                                  <Form.Item label="Tags ">
-                                    <Select
-                                      mode="tags"
-                                      showSearch
-                                      filterOption={(input, option) =>
-                                        option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                                      }
-                                      onChange={handleSelectedTags}
-                                      value={ProfileData?.tags}
-                                    >
-                                      <Option value="Product Management"> Product Management</Option>
-                                      <Option value="JavaScript">JavaScript </Option>
-                                      <Option value="Figma"> Figma</Option>
-                                      <Option value="Marketing">Marketing </Option>
-                                      <Option value="Python"> Python</Option>
-                                      <Option value="ReactJS"> ReactJS</Option>
-                                      <Option value="Startups"> Startups</Option>
-                                      <Option value="Software Engineer"> Software Engineer</Option>
-                                      <Option value="Growth Strategy"> Growth Strategy</Option>
-                                      <Option value="NodeJS"> NodeJS</Option>
-                                    </Select>
-                                  </Form.Item>
-                                  
-                                </Col>
-                              </Row>
+
                             </TabPane>
-                            <TabPane tab="Education" key="8" className="tabcntbox">
-                              <h2>Education</h2>
-                              {/* <Form.Item
+                            {data?.loginType === "jobSeeker" && <>
+                              <TabPane tab="Education" key="8" className="tabcntbox">
+                                <h2>Education</h2>
+                                {/* <Form.Item
                           label="School Name"
                           // name="schoolName"
                           rules={[{ required: true, message: 'School Name is mandatory field' }]}
@@ -690,220 +696,220 @@ function EditProfile() {
                             maxLength={100}
                           />
                         </Form.Item> */}
-                              <Form.Item label="University Name/Collage Name">
-                                <Input
-                                  name="university"
-                                  value={ProfileData?.university}
-                                  onChange={handleChange}
-                                  maxLength={100}
-                                />
-                              </Form.Item>
-                              <Row gutter={25}>
-                                <Col lg={8} sm={8}>
-                                  <Form.Item label="Highest Qualification">
-                                    <Select
-                                      // mode="tags
-                                      // showSearch
-                                      filterOption={(input, option) =>
-                                        option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                                      }
-                                      value={ProfileData?.highestQualification}
-                                      onChange={handleQualification}
+                                <Form.Item label="University Name/Collage Name">
+                                  <Input
+                                    name="university"
+                                    value={ProfileData?.university}
+                                    onChange={handleChange}
+                                    maxLength={100}
+                                  />
+                                </Form.Item>
+                                <Row gutter={25}>
+                                  <Col lg={8} sm={8}>
+                                    <Form.Item label="Highest Qualification">
+                                      <Select
+                                        // mode="tags
+                                        // showSearch
+                                        filterOption={(input, option) =>
+                                          option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                                        }
+                                        value={ProfileData?.highestQualification}
+                                        onChange={handleQualification}
+                                      >
+                                        <Option value="Phd">Doctorate/Phd </Option>
+                                        <Option value="Masters">Masters/Post-Graduation </Option>
+                                        <Option value="Graduation">Graduation/Diploma</Option>
+                                        <Option value="12">12th </Option>
+                                        <Option value="10">10th</Option>
+                                      </Select>
+                                    </Form.Item>
+                                  </Col>
+                                  <Col lg={8} sm={8}>
+                                    <Form.Item
+                                      label="Course"
+                                      // name="board"
+                                      rules={[{ required: true, message: 'Course is mandatory field' }]}
                                     >
-                                      <Option value="Phd">Doctorate/Phd </Option>
-                                      <Option value="Masters">Masters/Post-Graduation </Option>
-                                      <Option value="Graduation">Graduation/Diploma</Option>
-                                      <Option value="12">12th </Option>
-                                      <Option value="10">10th</Option>
-                                    </Select>
-                                  </Form.Item>
-                                </Col>
-                                <Col lg={8} sm={8}>
-                              <Form.Item
-                                label="Course"
-                                // name="board"
-                                rules={[{ required: true, message: 'Course is mandatory field' }]}
-                              >
-                                <Input
-                                  name="course"
-                                  value={ProfileData?.course}
-                                  onChange={handleChange}
-                                  maxLength={100}
-                                />
-                              </Form.Item>
-                              </Col>
-                              <Col lg={8} sm={8}>
-                              <Form.Item
-                                label="Specialization"
-                                // name="board"
-                                rules={[{ required: true, message: 'Specialization is mandatory field' }]}
-                              >
-                                <Input
-                                  name="specialization"
-                                  value={ProfileData?.specialization}
-                                  onChange={handleChange}
-                                  maxLength={100}
-                                />
-                              </Form.Item>
-                              </Col>
-                              <Col lg={8} sm={8}>
-                              <Form.Item
-                                label="Starting Year"
-                              >
-                                <DatePicker
-                                  onChange={handleStartingYear}
-                                  style={{ width: '100%' }}
-                                  defaultValue={ProfileData?.startingYear ? moment(`${ProfileData?.startingYear}`, dateFormat) : null}
-                                  format={dateFormat}
-                                />
-                              </Form.Item>
-                              </Col>
-                              <Col lg={8} sm={8}>
-                              <Form.Item
-                                label="Passing Year"
-                              >
-                                <DatePicker
-                                  onChange={handlePassingYear}
-                                  style={{ width: '100%' }}
-                                  defaultValue={ProfileData?.passingYear ? moment(`${ProfileData?.passingYear}`, dateFormat) : null}
-                                  format={dateFormat}
-                                />
-                              </Form.Item>
-                              </Col>
-                              <Col lg={8} sm={8}> 
-                              <Form.Item
-                                label="Grades"
-                                // name="board"
-                                rules={[{ required: true, message: 'Grades is mandatory field' }]}
-                              >
-                                <Input
-                                  name="grades"
-                                  value={ProfileData?.grades}
-                                  onChange={handleChange}
-                                  maxLength={100}
-                                />
-                              </Form.Item>
-                              </Col>
-                              </Row>
-                            </TabPane>
-                            <TabPane tab="Experience" key="2" className="tabcntbox">
-                              <div className='experiencemainbox'>
-                              <h2>Experience</h2>
-                              {ProfileData.experience?.map((experience, index) => {
-                                return (
-                                  <>
-                                  <div className='expsubboxmain'> 
-                                    <div className='expsubboxtitle'> 
-                                    <h3>{`Experience ${index + 1}`}</h3>
-                                    {ProfileData?.experience?.length > 1 && (
-                                        <Link to="#" type="button" size="large" onClick={() => handleRemoveExp(index)}>
-                                          Remove Experience
-                                        </Link>
-                                      )}</div>
-                                    <Form.Item>
-                                      
-                                    <Row gutter={25}>
-                                      <Col lg={8} sm={8}>
-                                      <Form.Item label="Company Name">
-                                        <Input
-                                          type='text'
-                                          name="company"
-                                          value={experience.company}
-                                          onChange={(e) => handleChangeExperience(index, e)}
-                                          maxLength={100}
-                                        />
-                                      </Form.Item>
-                                      </Col>
-                                      <Col lg={8} sm={8}>
-                                      <Form.Item label="Designation">
-                                        <Input
-                                          name="designation"
-                                          value={experience.designation}
-                                          onChange={(e) => handleChangeExperience(index, e)}
-                                          maxLength={100}
-                                        />
-                                      </Form.Item>
-                                      </Col>
-                                      <Col lg={8} sm={8}>
-                                      <Form.Item label="Joining Date">
-                                        <DatePicker
-                                          onChange={(date, dateString) => handleDateExperience(date, dateString, index, 'joinedDate')}
-                                          style={{ width: '100%' }}
-                                          defaultValue={experience.joinedDate ? moment(`${experience.joinedDate}`, dateFormat) : null}
-                                          format={dateFormat}
-                                        />
-                                      </Form.Item>
-                                      </Col>
-                                      <Col lg={8} sm={8}>
-                                      <Form.Item label="Date of Leaving">
-                                        <DatePicker
-                                          onChange={(date, dateString) => handleDateExperience(date, dateString, index, 'endDate')}
-                                          style={{ width: '100%' }}
-                                          defaultValue={experience.endDate ? moment(`${experience.endDate}`, dateFormat) : null}
-                                          format={dateFormat}
-                                        />
-                                      </Form.Item>
-                                      </Col>
-                                      <Col lg={8} sm={8}>
-                                      <Form.Item label="Responsibility">
-                                        <Input
-                                          name="responsibility"
-                                          value={experience.responsibility}
-                                          onChange={(e) => handleChangeExperience(index, e)}
-                                          maxLength={1000}
-                                        />
-                                      </Form.Item>
-                                      </Col>
-                                      </Row>
+                                      <Input
+                                        name="course"
+                                        value={ProfileData?.course}
+                                        onChange={handleChange}
+                                        maxLength={100}
+                                      />
                                     </Form.Item>
-                                    </div>
-                                  </>
-                                );
-                                
-                              })}
-                              </div>
-                              <div className='addexpbtnbox'>
-                              <Link to="#" type="button" size="large" onClick={handleAddExp}>
-                                Add Experience
-                              </Link></div>{' '}
-
-                            </TabPane>
-                            <TabPane tab="Certification" key="3" className="tabcntbox">
-                              <h2>Certification</h2>
-                              <div className='expsubboxmain'> 
-                                <div> 
-                                {ProfileData.certificate?.map((certi, index) => {
-                                return (
-                                  <div key={index}> 
-                                    <Form.Item className='certificateform'>                                     
-                                      <Form.Item >
-                                        <div className='expsubboxtitle'> 
-                                        <h3>{`Certificate ${index + 1}`}</h3> 
-                                        {ProfileData?.certificate?.length > 1 && (
-                                            <Link to="#" type="button" size="large" onClick={() => handleRemoveCerti(index)}>
-                                              Remove Certificate {/* Change button text here */}
-                                            </Link>
-                                          )}</div>
-                                        <Input
-                                          name="certificateName"
-                                          value={certi?.certificateName}
-                                          onChange={(e) => handleChangeCertificate(index, e)}
-                                          maxLength={100}
-                                        />
-                                      </Form.Item>
-
-
+                                  </Col>
+                                  <Col lg={8} sm={8}>
+                                    <Form.Item
+                                      label="Specialization"
+                                      // name="board"
+                                      rules={[{ required: true, message: 'Specialization is mandatory field' }]}
+                                    >
+                                      <Input
+                                        name="specialization"
+                                        value={ProfileData?.specialization}
+                                        onChange={handleChange}
+                                        maxLength={100}
+                                      />
                                     </Form.Item>
+                                  </Col>
+                                  <Col lg={8} sm={8}>
+                                    <Form.Item
+                                      label="Starting Year"
+                                    >
+                                      <DatePicker
+                                        onChange={handleStartingYear}
+                                        style={{ width: '100%' }}
+                                        defaultValue={ProfileData?.startingYear ? moment(`${ProfileData?.startingYear}`, dateFormat) : null}
+                                        format={dateFormat}
+                                      />
+                                    </Form.Item>
+                                  </Col>
+                                  <Col lg={8} sm={8}>
+                                    <Form.Item
+                                      label="Passing Year"
+                                    >
+                                      <DatePicker
+                                        onChange={handlePassingYear}
+                                        style={{ width: '100%' }}
+                                        defaultValue={ProfileData?.passingYear ? moment(`${ProfileData?.passingYear}`, dateFormat) : null}
+                                        format={dateFormat}
+                                      />
+                                    </Form.Item>
+                                  </Col>
+                                  <Col lg={8} sm={8}>
+                                    <Form.Item
+                                      label="Grades"
+                                      // name="board"
+                                      rules={[{ required: true, message: 'Grades is mandatory field' }]}
+                                    >
+                                      <Input
+                                        name="grades"
+                                        value={ProfileData?.grades}
+                                        onChange={handleChange}
+                                        maxLength={100}
+                                      />
+                                    </Form.Item>
+                                  </Col>
+                                </Row>
+                              </TabPane>
+                              <TabPane tab="Experience" key="2" className="tabcntbox">
+                                <div className='experiencemainbox'>
+                                  <h2>Experience</h2>
+                                  {ProfileData.experience?.map((experience, index) => {
+                                    return (
+                                      <>
+                                        <div className='expsubboxmain'>
+                                          <div className='expsubboxtitle'>
+                                            <h3>{`Experience ${index + 1}`}</h3>
+                                            {ProfileData?.experience?.length > 1 && (
+                                              <Link to="#" type="button" size="large" onClick={() => handleRemoveExp(index)}>
+                                                Remove Experience
+                                              </Link>
+                                            )}</div>
+                                          <Form.Item>
+
+                                            <Row gutter={25}>
+                                              <Col lg={8} sm={8}>
+                                                <Form.Item label="Company Name">
+                                                  <Input
+                                                    type='text'
+                                                    name="company"
+                                                    value={experience.company}
+                                                    onChange={(e) => handleChangeExperience(index, e)}
+                                                    maxLength={100}
+                                                  />
+                                                </Form.Item>
+                                              </Col>
+                                              <Col lg={8} sm={8}>
+                                                <Form.Item label="Designation">
+                                                  <Input
+                                                    name="designation"
+                                                    value={experience.designation}
+                                                    onChange={(e) => handleChangeExperience(index, e)}
+                                                    maxLength={100}
+                                                  />
+                                                </Form.Item>
+                                              </Col>
+                                              <Col lg={8} sm={8}>
+                                                <Form.Item label="Joining Date">
+                                                  <DatePicker
+                                                    onChange={(date, dateString) => handleDateExperience(date, dateString, index, 'joinedDate')}
+                                                    style={{ width: '100%' }}
+                                                    defaultValue={experience.joinedDate ? moment(`${experience.joinedDate}`, dateFormat) : null}
+                                                    format={dateFormat}
+                                                  />
+                                                </Form.Item>
+                                              </Col>
+                                              <Col lg={8} sm={8}>
+                                                <Form.Item label="Date of Leaving">
+                                                  <DatePicker
+                                                    onChange={(date, dateString) => handleDateExperience(date, dateString, index, 'endDate')}
+                                                    style={{ width: '100%' }}
+                                                    defaultValue={experience.endDate ? moment(`${experience.endDate}`, dateFormat) : null}
+                                                    format={dateFormat}
+                                                  />
+                                                </Form.Item>
+                                              </Col>
+                                              <Col lg={8} sm={8}>
+                                                <Form.Item label="Responsibility">
+                                                  <Input
+                                                    name="responsibility"
+                                                    value={experience.responsibility}
+                                                    onChange={(e) => handleChangeExperience(index, e)}
+                                                    maxLength={1000}
+                                                  />
+                                                </Form.Item>
+                                              </Col>
+                                            </Row>
+                                          </Form.Item>
+                                        </div>
+                                      </>
+                                    );
+
+                                  })}
+                                </div>
+                                <div className='addexpbtnbox'>
+                                  <Link to="#" type="button" size="large" onClick={handleAddExp}>
+                                    Add Experience
+                                  </Link></div>{' '}
+
+                              </TabPane>
+                              <TabPane tab="Certification" key="3" className="tabcntbox">
+                                <h2>Certification</h2>
+                                <div className='expsubboxmain'>
+                                  <div>
+                                    {ProfileData.certificate?.map((certi, index) => {
+                                      return (
+                                        <div key={index}>
+                                          <Form.Item className='certificateform'>
+                                            <Form.Item >
+                                              <div className='expsubboxtitle'>
+                                                <h3>{`Certificate ${index + 1}`}</h3>
+                                                {ProfileData?.certificate?.length > 1 && (
+                                                  <Link to="#" type="button" size="large" onClick={() => handleRemoveCerti(index)}>
+                                                    Remove Certificate {/* Change button text here */}
+                                                  </Link>
+                                                )}</div>
+                                              <Input
+                                                name="certificateName"
+                                                value={certi?.certificateName}
+                                                onChange={(e) => handleChangeCertificate(index, e)}
+                                                maxLength={100}
+                                              />
+                                            </Form.Item>
+
+
+                                          </Form.Item>
+                                        </div>
+                                      );
+                                    })}
                                   </div>
-                                );
-                              })}
-                              </div>
-                              </div>
-                              <div className='addexpbtnbox'>
-                              <Link to="#" type="button" size="large" onClick={handleAddCerti}>
-                                Add Certificate {/* Change button text here */}
-                              </Link></div>{' '}
-                            </TabPane>
+                                </div>
+                                <div className='addexpbtnbox'>
+                                  <Link to="#" type="button" size="large" onClick={handleAddCerti}>
+                                    Add Certificate {/* Change button text here */}
+                                  </Link></div>{' '}
+                              </TabPane> </>}
                           </Tabs>
                         </div>
 

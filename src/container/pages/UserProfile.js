@@ -24,18 +24,12 @@ function UserProfile() {
     };
   });
 
-
   useEffect(() => {
     const user = userName !== undefined ? userName : loginuser;
     if (user !== undefined) {
       dispatch(getUserProfile(user));
     }
   }, [loginuser, userName]);
-
-
-  const { timeline } = useSelector((state) => ({
-    timeline: state?.Post?.userprofiletimelinedetails,
-  }));
 
   const [currentTab, setCurrentTab] = useState('1');
   const onTabChange = (key) => {
@@ -65,9 +59,6 @@ function UserProfile() {
                 {data?.isPremium && (
                   <img src={require('../../static/images/blue_tick.png')} className="blueTick" alt="" />
                 )}
-                <span>
-                  @{data?.userName} {timeline?.length} posts
-                </span>
               </h2>
               {userName === undefined && (
                 <Link to="/editProfile" className="btn btn-default mr-3">
@@ -135,42 +126,51 @@ function UserProfile() {
             </div>
             <div className="tabspanel">
               <Tabs defaultActiveKey="1" activeKey={currentTab} className="custom-active-tab" onChange={onTabChange}>
-                <TabPane tab="Basic Details" key="1" className="tabcntbox">
+                <TabPane tab={data?.loginType === "recruiter" ? "Company Details" : "Basic Details"} key="1" className="tabcntbox">
                   <div className="projectlist">
                     {/* <Scroll isProfile profileUserId={data?.id} /> */}
                     <div className="tabhead profilecnt">
                       <ul>
                         <li>
                           <div>
-                            <div className='form-group'> Full Name:</div>
-                             <p>{data?.firstName} {data?.lastName}</p>
-                           
+                            <div className='form-group'>{data?.loginType === "recruiter" ? "Company" : "Full"} Name:</div>
+                            <p>{data?.firstName} {data?.lastName}</p>
+
                           </div>
                         </li>
                         <li>
                           <div>
                             <div className='form-group'> Phone Number:</div>
-                             <p>{data?.phoneNumber}</p>
+                            <p>{data?.phoneNumber}</p>
                           </div>
                         </li>
                         <li>
                           <div>
                             <div className='form-group'>Email:</div>
-                             <p>{data?.email}</p> 
+                            <p>{data?.email}</p>
                           </div>
                         </li>
-                        <li>
-                          <div> 
-                            <div className='form-group'>Date of Birth:</div>
-                             <p>{data?.dob}</p> 
-                          </div>
-                        </li>
-                        <li>
-                          <div>                             
-                            <div className='form-group'>Gender:</div>
-                             <p>{data?.gender}</p> 
-                          </div>
-                        </li>
+                        {data?.loginType === "jobSeeker" ?
+                          <>
+                            <li>
+                              <div>
+                                <div className='form-group'>Date of Birth:</div>
+                                <p>{data?.dob}</p>
+                              </div>
+                            </li>
+                            <li>
+                              <div>
+                                <div className='form-group'>Gender:</div>
+                                <p>{data?.gender}</p>
+                              </div>
+                            </li>
+                          </> :
+                          <li>
+                            <div>
+                              <div className='form-group'>No Of Employees:</div>
+                              <p>{data?.totalExperience}</p>
+                            </div>
+                          </li>}
                         {/* <li>
                           <div> 
                             <div className='form-group'>Address:</div>
@@ -181,190 +181,193 @@ function UserProfile() {
                     </div>
                   </div>
                 </TabPane>
-                <TabPane tab="Education" key="8" className="tabcntbox">
-                  {userName === undefined && (
-                     <div className="projectlist">
-                    <div className="tabhead profilecnt">
-                      <ul>
-                        <li>
-                          <div>
-                            <div className='form-group'>University Name/Collage Name:</div>
-                              <p> {data?.university}</p> 
-                            </div>
-                        </li>
-                        <li>
-                          <div>
-                              <div className='form-group'>Highest Qualification:</div>
-                              <p> {data?.highestQualification} </p>  
+                {data?.loginType === "jobSeeker" &&
+                  <>
+                    <TabPane tab="Education" key="8" className="tabcntbox">
+                      {userName === undefined && (
+                        <div className="projectlist">
+                          <div className="tabhead profilecnt">
+                            <ul>
+                              <li>
+                                <div>
+                                  <div className='form-group'>University Name/Collage Name:</div>
+                                  <p> {data?.university}</p>
+                                </div>
+                              </li>
+                              <li>
+                                <div>
+                                  <div className='form-group'>Highest Qualification:</div>
+                                  <p> {data?.highestQualification} </p>
+                                </div>
+                              </li>
+                              <li>
+                                <div>
+                                  <div className='form-group'>Course</div>
+                                  <p> {data?.course}  </p>
+                                </div>
+                              </li>
+                              <li>
+                                <div>
+                                  <div className='form-group'>Specialization</div>
+                                  <p> {data?.specialization}  </p>
+                                </div>
+                              </li>
+                              <li>
+                                <div>
+                                  <div className='form-group'>Starting Year:</div>
+                                  <p> {convertToMonthYear(data?.startingYear)} </p>
+                                </div>
+                              </li>
+                              <li>
+                                <div>
+                                  <div className='form-group'>Passing Year: </div>
+                                  <p> {convertToMonthYear(data?.passingYear)}</p>
+                                </div>
+                              </li>
+                              <li>
+                                <div>
+                                  <div className='form-group'>Grades</div>
+                                  <p>{data?.grades}</p>
+                                </div>
+                              </li>
+                            </ul>
                           </div>
-                        </li>
-                        <li>
-                          <div>
-                              <div className='form-group'>Course</div>
-                              <p> {data?.course}  </p>   
-                          </div>
-                        </li>
-                        <li>
-                          <div>
-                              <div className='form-group'>Specialization</div>
-                              <p> {data?.specialization}  </p>  
-                          </div>
-                        </li>
-                        <li>
-                          <div>
-                            <div className='form-group'>Starting Year:</div>
-                              <p> {convertToMonthYear(data?.startingYear)} </p>   
-                          </div>
-                        </li>
-                        <li>
-                          <div>
-                            <div className='form-group'>Passing Year: </div>
-                              <p> {convertToMonthYear(data?.passingYear)}</p>    
-                          </div>
-                        </li>
-                        <li>
-                          <div>
-                              <div className='form-group'>Grades</div>
-                              <p>{data?.grades}</p>     
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                    </div>
-                  )}
-                </TabPane>
-                <TabPane tab="Experience" key="2" className="tabcntbox">
-                  {data.experience.length > 0 ?
-                    (data?.experience.map((exper, index) => (
-                      <div className="projectlist">
-                      <div className="tabhead profilecnt">
-                        <ul>
-                          <li>
-                            <div>
-                              <div className='form-group'>Experience</div>
-                              <p>{index + 1} </p>    
-                            </div>
-                          </li>
-                          <li>
-                            <div>
-                            <div className='form-group'>Company Name</div>
-                              <p>{exper.company} </p>    
-                             
-                            </div>
-                          </li>
-                          <li>
-                            <div>
-                            <div className='form-group'>Designation</div>
-                              <p>{exper.designation} </p>    
-                            </div>
-                          </li>
-                          <li>
-                            <div>
-                            <div className='form-group'>Joining Date</div>
-                              <p>{convertToMonthYear(exper.joinedDate)}</p>   
-                            </div>
-                          </li>
-                          <li>
-                            <div>
-                            <div className='form-group'>Date of Leaving</div>
-                              <p> {convertToMonthYear(exper.endDate)}</p>  
-                            </div>
-                          </li>
-                          <li>
-                            <div>
-                            <div className='form-group'>Responsibilities</div>
-                              <p>{exper.responsibility}</p>  
-                            </div>
-                          </li>
-                        </ul>
-                      </div>
-                      </div>
-                    ))) :
-                    <li>
-                      <div>
-                        <h3>No Experience</h3>
-                      </div>
-                    </li>}
+                        </div>
+                      )}
+                    </TabPane>
+                    <TabPane tab="Experience" key="2" className="tabcntbox">
+                      {data.experience.length > 0 ?
+                        (data?.experience.map((exper, index) => (
+                          <div className="projectlist">
+                            <div className="tabhead profilecnt">
+                              <ul>
+                                <li>
+                                  <div>
+                                    <div className='form-group'>Experience</div>
+                                    <p>{index + 1} </p>
+                                  </div>
+                                </li>
+                                <li>
+                                  <div>
+                                    <div className='form-group'>Company Name</div>
+                                    <p>{exper.company} </p>
 
-                </TabPane>
-                <TabPane tab="Certification" key="3" className="tabcntbox">
-                <div className="projectlist">
-                      <div className="tabhead profilecnt"> 
-                      <ul>
-                  {data.certificate.length > 0 ?
-                    (data?.certificate.map((certi, index) => (
-                      
-                          <li>
-                            <div>
-                            <div className='form-group'>Certificates</div>
-                              <p> {index + 1} : {certi?.certificateName}</p>  
+                                  </div>
+                                </li>
+                                <li>
+                                  <div>
+                                    <div className='form-group'>Designation</div>
+                                    <p>{exper.designation} </p>
+                                  </div>
+                                </li>
+                                <li>
+                                  <div>
+                                    <div className='form-group'>Joining Date</div>
+                                    <p>{convertToMonthYear(exper.joinedDate)}</p>
+                                  </div>
+                                </li>
+                                <li>
+                                  <div>
+                                    <div className='form-group'>Date of Leaving</div>
+                                    <p> {convertToMonthYear(exper.endDate)}</p>
+                                  </div>
+                                </li>
+                                <li>
+                                  <div>
+                                    <div className='form-group'>Responsibilities</div>
+                                    <p>{exper.responsibility}</p>
+                                  </div>
+                                </li>
+                              </ul>
                             </div>
-                          </li>
-                       
-                    )))  :
-                    <li>
-                      <div>
-                        <h3>No Experience</h3>
-                      </div>
-                      </li>
-                    }
-                     </ul>
+                          </div>
+                        ))) :
+                        <li>
+                          <div>
+                            <h3>No Experience</h3>
+                          </div>
+                        </li>}
+
+                    </TabPane>
+                    <TabPane tab="Certification" key="3" className="tabcntbox">
+                      <div className="projectlist">
+                        <div className="tabhead profilecnt">
+                          <ul>
+                            {data.certificate.length > 0 ?
+                              (data?.certificate.map((certi, index) => (
+
+                                <li>
+                                  <div>
+                                    <div className='form-group'>Certificates</div>
+                                    <p> {index + 1} : {certi?.certificateName}</p>
+                                  </div>
+                                </li>
+
+                              ))) :
+                              <li>
+                                <div>
+                                  <h3>No Experience</h3>
+                                </div>
+                              </li>
+                            }
+                          </ul>
                         </div>
                       </div>
 
-                </TabPane>
-                <TabPane tab="Social Media" key="4" className="tabcntbox">
-                  <>
-                  <div className="projectlist">
-                    <div className="tabhead profilecnt socialmedialinks">
-                      <h3>Social Links</h3>
-                   
-                    <div className="analyticsBox">
-                      <ul className="listItemsbox ">
-                        {data?.facebookLink?.length > 5 && (
-                          <li>
-                            <div className="headbpx">
-                              <div className="imgmaindiv">
-                                <div className="imgDesc">
-                                  <div className="imgdiv">
-                                    <img src={require('../../static/images/facebook_logo.png')} alt="" />
-                                  </div>
-                                  <div className="namedetails">
-                                    <h6 className="profilename">
-                                      Facebook <br />
-                                      <Link to={data?.facebookLink}>{data?.facebookLink}</Link>
-                                    </h6>
-                                  </div>
-                                </div>
-                              </div>
+                    </TabPane>
+                    <TabPane tab="Social Media" key="4" className="tabcntbox">
+                      <>
+                        <div className="projectlist">
+                          <div className="tabhead profilecnt socialmedialinks">
+                            <h3>Social Links</h3>
+
+                            <div className="analyticsBox">
+                              <ul className="listItemsbox ">
+                                {data?.facebookLink?.length > 5 && (
+                                  <li>
+                                    <div className="headbpx">
+                                      <div className="imgmaindiv">
+                                        <div className="imgDesc">
+                                          <div className="imgdiv">
+                                            <img src={require('../../static/images/facebook_logo.png')} alt="" />
+                                          </div>
+                                          <div className="namedetails">
+                                            <h6 className="profilename">
+                                              Facebook <br />
+                                              <Link to={data?.facebookLink}>{data?.facebookLink}</Link>
+                                            </h6>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </li>
+                                )}
+                                {data?.linkedinLink?.length > 5 && (
+                                  <li>
+                                    <div className="headbpx">
+                                      <div className="imgmaindiv">
+                                        <div className="imgDesc">
+                                          <div className="imgdiv">
+                                            <img src={require('../../static/images/linkedin_logo.png')} alt="" />
+                                          </div>
+                                          <div className="namedetails">
+                                            <h6 className="profilename">
+                                              Linkedin <br />
+                                              <Link to={data?.linkedinLink}>{data?.linkedinLink}</Link>
+                                            </h6>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </li>
+                                )}
+                              </ul>
                             </div>
-                          </li>
-                        )}
-                        {data?.linkedinLink?.length > 5 && (
-                          <li>
-                            <div className="headbpx">
-                              <div className="imgmaindiv">
-                                <div className="imgDesc">
-                                  <div className="imgdiv">
-                                    <img src={require('../../static/images/linkedin_logo.png')} alt="" />
-                                  </div>
-                                  <div className="namedetails">
-                                    <h6 className="profilename">
-                                      Linkedin <br />
-                                      <Link to={data?.linkedinLink}>{data?.linkedinLink}</Link>
-                                    </h6>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-                        )}
-                      </ul>
-                    </div>
-                    </div>
-                    </div>
-                  </>
-                </TabPane>
+                          </div>
+                        </div>
+                      </>
+                    </TabPane>
+                  </>}
               </Tabs>
             </div>
           </div>

@@ -1,10 +1,10 @@
 /* eslint-disable camelcase */
 import React, { useEffect, useState } from 'react';
-import { Input, PageHeader, Table, Form, Select  } from 'antd';
+import { Input, Table, Form, Select  } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom';
-import { Main } from './styled';
-import { Cards } from '../../../components/cards/frame/cards-frame';
+// import { Main } from './styled';
+// import { Cards } from '../../../components/cards/frame/cards-frame';
 import { GetAllCandidate } from '../../../redux/postJob/actionCreator';
 import { Button } from '../../../components/buttons/buttons';
 import { SetDMUser } from '../../../redux/chatting/actionCreator';
@@ -37,10 +37,11 @@ function AdminCandidate() {
 
   useEffect(() => {
     const filteredUsers = payment?.filter(user =>
-      (user?.firstName.toLowerCase().includes(filter?.searchText.toLowerCase())) ||
-      (user?.lastName.toLowerCase().includes(filter?.searchText.toLowerCase())) ||
-      (user?.userName.toLowerCase().includes(filter?.searchText.toLowerCase())) ||
-      (user?.specialization.toLowerCase().includes(filter?.searchText.toLowerCase()))
+      (user?.firstName?.toLowerCase().includes(filter?.searchText?.toLowerCase())) ||
+      (user?.lastName?.toLowerCase().includes(filter?.searchText?.toLowerCase())) ||
+      (user?.userName?.toLowerCase().includes(filter?.searchText?.toLowerCase())) ||
+      (user?.specialization?.toLowerCase().includes(filter?.searchText?.toLowerCase())) ||
+      (user?.phoneNumber?.toLowerCase().includes(filter?.searchText?.toLowerCase()))
   );
   setPayments(filteredUsers);
   }, [filter]);
@@ -93,6 +94,7 @@ function AdminCandidate() {
       srno,
       firstName,
       lastName,
+      name:<>{firstName}  {lastName}</>,
       email,
       userName,
       skills,
@@ -138,54 +140,56 @@ function AdminCandidate() {
 
   const DepositTableColumns = [
     {
-      title: 'Sr No',
-      dataIndex: 'srno',
-      key: 'srno',
+      title: 'Id',
+      dataIndex: 'id',
+      key: 'id',
     },
     {
-      title: 'firstName',
-      dataIndex: 'firstName',
-      key: 'firstName',
+      title: 'Candidate Name',
+      dataIndex: 'name',
+      key: 'name',
     },
+    // {
+    //   title: 'lastName',
+    //   dataIndex: 'lastName',
+    //   key: 'lastName',
+    // },
     {
-      title: 'lastName',
-      dataIndex: 'lastName',
-      key: 'lastName',
-    },
-    {
-      title: 'email',
+      title: 'Email',
       dataIndex: 'email',
       key: 'email',
-    }, {
-      title: 'userName',
-      dataIndex: 'userName',
-      key: 'userName',
-    }, {
-      title: 'skills',
-      dataIndex: 'skills',
-      key: 'skills',
-    }, {
-      title: 'totalExperience',
-      dataIndex: 'totalExperience',
-      key: 'totalExperience',
     },
+    //  {
+    //   title: 'userName',
+    //   dataIndex: 'userName',
+    //   key: 'userName',
+    // },
+    //  {
+    //   title: 'skills',
+    //   dataIndex: 'skills',
+    //   key: 'skills',
+    // }, {
+    //   title: 'totalExperience',
+    //   dataIndex: 'totalExperience',
+    //   key: 'totalExperience',
+    // },
+    // {
+    //   title: 'specialization',
+    //   dataIndex: 'specialization',
+    //   key: 'specialization',
+    // },
+    // {
+    //   title: 'tags',
+    //   dataIndex: 'tags',
+    //   key: 'tags',
+    // },
     {
-      title: 'specialization',
-      dataIndex: 'specialization',
-      key: 'specialization',
-    },
-    {
-      title: 'tags',
-      dataIndex: 'tags',
-      key: 'tags',
-    },
-    {
-      title: 'phoneNumber',
+      title: 'Phone Number',
       dataIndex: 'phoneNumber',
       key: 'phoneNumber',
     },
     {
-      title: 'totalJobsApplied',
+      title: 'Jobs Applied',
       dataIndex: 'totalJobsApplied',
       key: 'totalJobsApplied',
     },

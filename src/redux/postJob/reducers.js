@@ -16,11 +16,13 @@ const {
   GET_BOOKMARK_JOB_BEGIN, GET_BOOKMARK_JOB_SUCCESS, GET_BOOKMARK_JOB_ERR,
   APPLY_JOB_BEGIN, APPLY_JOB_SUCCESS, APPLY_JOB_ERR,
   GET_ALL_CANDIDATE_REQUEST, GET_ALL_CANDIDATE_SUCCESS, GET_ALL_CANDIDATE_ERR,
-  GET_ALL_RECUITER_REQUEST, GET_ALL_RECUITER_SUCCESS, GET_ALL_RECUITER_ERR
+  GET_ALL_RECUITER_REQUEST, GET_ALL_RECUITER_SUCCESS, GET_ALL_RECUITER_ERR,
+  GET_ALLSTATS_REQUEST, GET_ALLSTATS_SUCCESS, GET_ALLSTATS_ERR
+
 } = actions;
 
 const JobPostReducer = (state = initialState, action) => {
-  const { type, jobDetails, job, err, bookmarkjobs, toggleBookmark, jobApplication, jobResume,
+  const { type, jobDetails, job, err, bookmarkjobs, toggleBookmark, jobApplication, jobResume, getStats,
     applyJob, totalCount, totalSize, jobpostdetails, getAllCandidate, getAllRecuiter } = action;
   switch (type) {
     case GET_ALL_RECUITER_REQUEST:
@@ -40,7 +42,23 @@ const JobPostReducer = (state = initialState, action) => {
         error: err,
         loading: false,
       };
-
+      case GET_ALLSTATS_REQUEST:
+        return {
+          ...state,
+          loading: true,
+        };
+      case GET_ALLSTATS_SUCCESS:
+        return {
+          ...state,
+          getStats,
+          loading: false,
+        };
+      case GET_ALLSTATS_ERR:
+        return {
+          ...state,
+          error: err,
+          loading: false,
+        };
     case GET_ALL_CANDIDATE_REQUEST:
       return {
         ...state,

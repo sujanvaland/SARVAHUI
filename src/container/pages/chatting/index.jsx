@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Button, Dropdown, Image, Menu, Input, Switch, message } from 'antd';
 import {
-    EllipsisOutlined, CloseOutlined, ArrowLeftOutlined,
+    EllipsisOutlined, CloseOutlined,
     SendOutlined, SearchOutlined, InfoCircleOutlined, HeartOutlined,
     DeleteOutlined, ArrowDownOutlined
 } from '@ant-design/icons';

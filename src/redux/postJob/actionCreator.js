@@ -10,8 +10,25 @@ const { jobPostDataBegin, jobPostDataSuccess, jobPostDataErr, getAllJobsBegin, g
   getJobApplicationBegin, getJobApplicationSuccess, getJobApplicationErr,
   getUserResumeBegin, getUserResumeSuccess, getUserResumeErr,
   getAllCandidateRequest, getAllCandidateSuccess, getAllCandidateError,
-  getAllRecuiterRequest, getAllRecuiterSuccess, getAllRecuiterError } =
+  getAllRecuiterRequest, getAllRecuiterSuccess, getAllRecuiterError,
+  getAllStatsRequest, getAllStatsSuccess, getAllStatsError } =
   actions;
+
+const GetAllStats = () => {
+  return async (dispatch) => {
+    try {
+      dispatch(getAllStatsRequest());
+      const response = await DataService.get("Admin/GetAllStats");
+      if (response.data.success) {
+        dispatch(getAllStatsSuccess(response.data.result[0]));
+      } else {
+        dispatch(getAllStatsError(response.data.success));
+      }
+    } catch (err) {
+      dispatch(getAllStatsError(err));
+    }
+  };
+};
 
 const GetAllRecuiter = () => {
   return async (dispatch) => {
@@ -92,7 +109,7 @@ const getAllJobs = (data) => {
       let response = "";
       if (User.loginType === "admin") {
         response = await DataService.post('admin/GetJob', data);
-      }else{
+      } else {
         response = await DataService.post('Job/GetAllJobs', data);
       }
 
@@ -234,6 +251,6 @@ const ApplyJobs = (data) => {
 };
 
 export {
-  submitPost, getAllJobs, toggleBookmark, getJobDetails, getAllBookmarkJobs,
+  submitPost, getAllJobs, toggleBookmark, getJobDetails, getAllBookmarkJobs, GetAllStats,
   ApplyJobs, GetUserResume, GetJobApplication, GetAllRecuiter, GetAllCandidate
 };

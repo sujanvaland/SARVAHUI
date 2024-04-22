@@ -12,4 +12,11 @@ function formatDate(inputDateTime) {
     return localMoment.format("MMM D, YYYY, hh:mm A");
   }
 
-export { convertToMonthYear, formatDate };
+function formatDateOnly(inputDateTime) {
+  const utcDateString = inputDateTime;
+  const utcMoment = moment.utc(utcDateString);
+  const localMoment = utcMoment.local();
+  return localMoment.format("MMM D, YYYY");
+}
+
+export { convertToMonthYear, formatDate , formatDateOnly};

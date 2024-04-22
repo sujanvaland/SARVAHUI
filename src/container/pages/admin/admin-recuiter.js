@@ -1,13 +1,14 @@
 /* eslint-disable camelcase */
 import React, { useEffect, useState } from 'react';
-import { Input, PageHeader, Table, Form, Select  } from 'antd';
+import { Input, Table, Form, Select  } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom';
-import { Main } from './styled';
-import { Cards } from '../../../components/cards/frame/cards-frame';
+// import { Main } from './styled';
+// import { Cards } from '../../../components/cards/frame/cards-frame';
 import { GetAllRecuiter } from '../../../redux/postJob/actionCreator';
 import { Button } from '../../../components/buttons/buttons';
 import { SetDMUser } from '../../../redux/chatting/actionCreator';
+import { formatDateOnly } from '../../../utility/ConvertToMonthYear';
 // import { SelectWrapperStyle } from '../../ui-elements/ui-elements-styled';
 
 function AdminRecuiter() {
@@ -37,10 +38,11 @@ function AdminRecuiter() {
 
   useEffect(() => {
     const filteredUsers = payment?.filter(user =>
-      (user?.firstName.toLowerCase().includes(filter?.searchText.toLowerCase())) ||
-      (user?.lastName.toLowerCase().includes(filter?.searchText.toLowerCase())) ||
-      (user?.userName.toLowerCase().includes(filter?.searchText.toLowerCase())) ||
-      (user?.specialization.toLowerCase().includes(filter?.searchText.toLowerCase()))
+      (user?.firstName?.toLowerCase().includes(filter?.searchText?.toLowerCase())) ||
+      (user?.lastName?.toLowerCase().includes(filter?.searchText?.toLowerCase())) ||
+      (user?.userName?.toLowerCase().includes(filter?.searchText?.toLowerCase())) ||
+      (user?.specialization?.toLowerCase().includes(filter?.searchText?.toLowerCase())) || 
+      (user?.phoneNumber?.toLowerCase().includes(filter?.searchText?.toLowerCase()))
   );
   setPayments(filteredUsers);
   }, [filter]);
@@ -89,7 +91,7 @@ function AdminRecuiter() {
 
   payments?.map((l, srno) => {
     const { id, firstName, lastName, email, userName, skills, profileImg, totalExperience, specialization,
-      tags, phoneNumber, totalJobsPost } = l;
+      tags, phoneNumber, totalJobsPost, createdDate } = l;
 
     srno += 1;
     return DepositTableData?.push({
@@ -97,6 +99,7 @@ function AdminRecuiter() {
       srno,
       firstName,
       lastName,
+      name:<>{firstName}  {lastName}</>,
       email,
       userName,
       skills,
@@ -106,6 +109,7 @@ function AdminRecuiter() {
       tags,
       phoneNumber,
       totalJobsPost,
+      Date: formatDateOnly(createdDate),
       action: (
         <div className="table-actions">
           <>
@@ -142,57 +146,54 @@ function AdminRecuiter() {
 
   const DepositTableColumns = [
     {
-      title: 'Sr No',
-      dataIndex: 'srno',
-      key: 'srno',
+      title: 'Id',
+      dataIndex: 'id',
+      key: 'id',
     },
     {
-      title: 'FirstName',
-      dataIndex: 'firstName',
-      key: 'firstName',
+      title: 'Company Name',
+      dataIndex: 'name',
+      key: 'name',
     },
     {
-      title: 'LastName',
-      dataIndex: 'lastName',
-      key: 'lastName',
+      title: 'No Jobs Posted',
+      dataIndex: 'totalJobsPost',
+      key: 'totalJobsPost',
     },
     {
       title: 'Email',
       dataIndex: 'email',
       key: 'email',
-    }, {
-      title: 'UserName',
-      dataIndex: 'userName',
-      key: 'userName',
-    }, {
-      title: 'Skills',
-      dataIndex: 'skills',
-      key: 'skills',
-    }, {
-      title: 'Total Experience',
-      dataIndex: 'totalExperience',
-      key: 'totalExperience',
-    },
+    }, 
     {
-      title: 'Specialization',
-      dataIndex: 'specialization',
-      key: 'specialization',
-    },
-    {
-      title: 'Tags',
-      dataIndex: 'tags',
-      key: 'tags',
-    },
-    {
-      title: 'Phone Number',
-      dataIndex: 'phoneNumber',
-      key: 'phoneNumber',
-    },
-    {
-      title: 'Total Job',
-      dataIndex: 'totalJobsPost',
-      key: 'totalJobsPost',
-    },
+      title: 'Registered Date',
+      dataIndex: 'Date',
+      key: 'Date',
+    }, 
+    // {
+    //   title: 'Skills',
+    //   dataIndex: 'skills',
+    //   key: 'skills',
+    // }, {
+    //   title: 'Total Experience',
+    //   dataIndex: 'totalExperience',
+    //   key: 'totalExperience',
+    // },
+    // {
+    //   title: 'Specialization',
+    //   dataIndex: 'specialization',
+    //   key: 'specialization',
+    // },
+    // {
+    //   title: 'Tags',
+    //   dataIndex: 'tags',
+    //   key: 'tags',
+    // },
+    // {
+    //   title: 'Phone Number',
+    //   dataIndex: 'phoneNumber',
+    //   key: 'phoneNumber',
+    // },
     // {
     //   title: 'Deposit Date',
     //   dataIndex: 'transactionDate',
@@ -240,7 +241,7 @@ function AdminRecuiter() {
                     </li>
                     
                     <li>
-                      <Link to="" className="resetLink" onClick={() => handleResetFilter()}>
+                      <Link to="#" className="resetLink" onClick={() => handleResetFilter()}>
                         Reset Filter
                       </Link>
                     </li>

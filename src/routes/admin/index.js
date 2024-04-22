@@ -22,6 +22,7 @@ import JobApplication from '../../container/pages/ViewApplication';
 import AdminCandidate from '../../container/pages/admin/admin-candidate';
 import AdminRecuiter from '../../container/pages/admin/admin-recuiter';
 import CandidateAppliedJobs from '../../container/pages/admin/admin-candidateapplied';
+import AdminDashBoard from '../../container/pages/admin/admin-dashboard';
 
 const MyComponent = lazy(() => import('../../container/pages/post/Message'));
 const Network = lazy(() => import('../../container/pages/Network'));
@@ -44,7 +45,8 @@ function Admin() {
   return (
     <Switch>
       <Suspense>
-        <Route exact path={path} component={Event} />
+        {User.loginType !== "admin" &&
+        <Route exact path={path} component={Event} />}
         <Route exact path="/linkedin" component={LinkedInCallback} />
         <Route path={`${path}postdetails/:postId`} component={PostDetails} />
         <Route path={`${path}message`} component={Chatting} />
@@ -58,10 +60,11 @@ function Admin() {
         <Route path={`${path}jobApplication/:jobId?`} component={JobApplication} />
 
         <Route path={`${path}candidate`} component={AdminCandidate} />
-
         {User.loginType === "admin" &&
         <>
         <Route path={`${path}recuiter`} component={AdminRecuiter} />
+        <Route  exact path={path} component={AdminDashBoard} />
+        <Route path={`${path}jobs`} component={Event} />
         <Route path={`${path}candidateApplied/:userId?/:userType?/:userName?`} component={CandidateAppliedJobs} />
         <Route path={`${path}recuiterJob/:userId?/:userType?/:userName?`} component={CandidateAppliedJobs} />
         </>

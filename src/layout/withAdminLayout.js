@@ -239,8 +239,8 @@ const ThemeLayout = (WrappedComponent) => {
                       </Link>
                     </li>
                     <li>
-                    <Link to="/" className={path === '/' ? 'active' : ''} onClick={() => this.setState({ path: '/' })}>
-                      {path === '/' ? (
+                    <Link to="/jobs" className={path === '/' ? 'active' : ''} onClick={() => this.setState({ path: '/jobs' })}>
+                      {path === '/jobs' ? (
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           id="Layer_1"

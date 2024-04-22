@@ -41,6 +41,30 @@ const actions = {
   GET_ALL_RECUITER_SUCCESS: "GET_ALL_RECUITER_SUCCESS",
   GET_ALL_RECUITER_ERR: "GET_ALL_RECUITER_ERR",
 
+  GET_ALLSTATS_REQUEST:"GET_ALLSTATS_REQUEST", 
+  GET_ALLSTATS_SUCCESS:"GET_ALLSTATS_SUCCESS", 
+  GET_ALLSTATS_ERR:"GET_ALLSTATS_ERR",
+
+  getAllStatsRequest: () => {
+    return {
+      type:actions.GET_ALLSTATS_REQUEST,
+    }
+  },
+
+  getAllStatsSuccess: (getStats) => {
+    return {
+      type:actions.GET_ALLSTATS_SUCCESS,
+      getStats
+    }
+  },
+
+  getAllStatsError: (err) => {
+    return {
+      type:actions.GET_ALLSTATS_ERR,
+      err
+    }
+  },
+
   getAllRecuiterRequest: () => {
     return {
       type:actions.GET_ALL_RECUITER_REQUEST,
