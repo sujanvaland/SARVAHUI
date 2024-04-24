@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { EnvironmentOutlined, CalendarOutlined } from '@ant-design/icons';
 import { Tabs } from 'antd';
 import { Link, useParams, useHistory } from 'react-router-dom';
+import EventTimeline from './event';
 // import RightSideBarComponent from './rightsidebar';
 // import Scroll from './Scroll';
 import { getUserProfile } from '../../redux/UserProfile/actionCreator';
@@ -14,11 +15,14 @@ function UserProfile() {
   const history = useHistory();
   const UserProfile = JSON.parse(localStorage.getItem('profile'));
   const { userName } = useParams();
-  const { data, loginuser } = useSelector((state) => {
+
+  const { data, loginuser ,isPloading} = useSelector((state) => {
     return {
       // data: userName?.length > 4 ? state.getUser.getSearchUserProfile : state.userProfile.getProfile,
       data: state.userProfile.getProfile,
       isLoader: state.userProfile.loading,
+      isPloading: state.userProfile.isPloading,
+
       loginuser: state.auth.userprofile?.userName,
       loginuserId: state.auth.userprofile?.id,
     };
@@ -368,6 +372,13 @@ function UserProfile() {
                       </>
                     </TabPane>
                   </>}
+                  {data?.loginType === "recruiter" &&
+                     <TabPane tab="Job" key="2" className="tabcntbox">
+                      <br/>
+                      <br/>
+                      {!isPloading &&
+                     <EventTimeline  userId={data?.id}/>}
+                    </TabPane>}
               </Tabs>
             </div>
           </div>

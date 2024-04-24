@@ -1,117 +1,68 @@
-import React, { useState } from 'react';
-import { Checkbox, Radio } from 'antd';
-import { RightOutlined, ArrowLeftOutlined } from "@ant-design/icons";
+import React from 'react';
+import { Checkbox } from 'antd';
+// import { RightOutlined, ArrowLeftOutlined } from "@ant-design/icons";
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 const Notifications = () => {
 
-  const [showFilters, setShowFilters] = useState(false);
-  const [showMutedNotifications, setShowMutedNotifications] = useState(false);
-  const [showPreference, setShowPreference] = useState(false);
-  const [showPushPreference, setShowPushPreference] = useState(false);
-  const [showEmailPreference, setShowEmailPreference] = useState(false);
-  const [enableEmailNotification, setEnableEmailNotification] = useState(false);
-
-
-  const changeStep = (step) => {
-    setShowFilters(false);
-    setShowMutedNotifications(false);
-    setShowPreference(false);
-    setShowPushPreference(false);
-    setShowEmailPreference(false);
-    switch (step) {
-      case 'filters':
-        setShowFilters(true);
-        break;
-      case 'mutednotify':
-        setShowMutedNotifications(true);
-        break;
-      case 'preference':
-        setShowPreference(true);
-        break;
-      case 'pushpreference':
-        setShowPushPreference(true);
-        break;
-      case 'emailpreference':
-        setShowEmailPreference(true);
-        break;
-      default:
-        break;
-    }
-  }
+  // const [showFilters, setShowFilters] = useState(false);
+  // const [showMutedNotifications, setShowMutedNotifications] = useState(false);
+  // const [showPreference, setShowPreference] = useState(false);
+  // const [showPushPreference, setShowPushPreference] = useState(false);
+  // const [showEmailPreference, setShowEmailPreference] = useState(false);
+  // const [enableEmailNotification, setEnableEmailNotification] = useState(false);
+  // const changeStep = (step) => {
+  //   setShowFilters(false);
+  //   setShowMutedNotifications(false);
+  //   setShowPreference(false);
+  //   setShowPushPreference(false);
+  //   setShowEmailPreference(false);
+  //   switch (step) {
+  //     case 'filters':
+  //       setShowFilters(true);
+  //       break;
+  //     case 'mutednotify':
+  //       setShowMutedNotifications(true);
+  //       break;
+  //     case 'preference':
+  //       setShowPreference(true);
+  //       break;
+  //     case 'pushpreference':
+  //       setShowPushPreference(true);
+  //       break;
+  //     case 'emailpreference':
+  //       setShowEmailPreference(true);
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  // }
 
 
   return (
     <>
-      {!showFilters && !showMutedNotifications && !showPreference &&
-        !showPushPreference && !showEmailPreference &&
-        <div className='settingBox'>
-            <div className='settingsheader'>       
-                <h2>Notifications</h2>
-              </div>
 
-            <div className='settingcntbox'> 
-              <p>Select the kinds of notifications you get about your activities, interests, and recommendations.</p>
-          
-              <div>
-                <ul>
-                  <li>
-                    <Link to="#" onClick={() => changeStep('filters')}>Filters <RightOutlined /></Link>
-                  </li>
-                  <li>
-                    <Link to="#" onClick={() => changeStep('preference')}>Preferences <RightOutlined /></Link>
-                  </li>
-                </ul>
-              </div>
-              
-              </div>
-        </div>
-      }
-      {showFilters && !showMutedNotifications &&
-        <>
-         <div className='settingBox'>
-         <div className='settingsheader'>  
-            <Link to="#" onClick={() => setShowFilters(false)}><ArrowLeftOutlined /> </Link>
-              <h2>Filters</h2>             
-            </div>
-            <div className='settingcntbox'> 
-                <p>Choose the notifications you’d like to see — and those you don’t.</p>
-                <div>
-                  <h3 className='flexSpacebetween'>Quality filter <Checkbox /> </h3> 
-                  <p>Choose to filter out content such as duplicate or automated posts.
-                    This doesn’t apply to notifications from accounts you follow or have interacted with recently.
-                    <Link to="#">Learn more</Link>
-                  </p>
-                </div>
-                <ul>
-                  <li> <Link to="#" onClick={() => changeStep('mutednotify')}>Muted notifications <RightOutlined /></Link></li>
-                </ul>
-          </div>
-          </div>
-        </>
-      }
-      {showMutedNotifications &&
         <>
            <div className='settingBox'>
            <div className='settingsheader'>     
-            <Link to="#" onClick={() => changeStep('filters')}><ArrowLeftOutlined /> </Link>
+            {/* <Link to="#" onClick={() => changeStep('filters')}><ArrowLeftOutlined /> </Link> */}
               <h2>Muted notifications</h2>             
             </div>
             <div className='settingcntbox'> 
             <div className='martop10'>
-              <h2>Mute notifications from people:</h2>
+              <h2>Mute notifications </h2>
               <div className='formMain notificationbox'>
                 <ul>
                   <li>
-                    <h3 className='flexSpacebetween'>You don’t follow <Checkbox /></h3>
+                    <h3 className='flexSpacebetween'>Job Alerts <Checkbox /></h3>
                   </li>
                   <li>
-                    <h3 className='flexSpacebetween'>Who don’t follow you<Checkbox /></h3>
+                    <h3 className='flexSpacebetween'>New Message<Checkbox /></h3>
                   </li>
                   <li>
-                    <h3 className='flexSpacebetween'>With a new account <Checkbox /></h3>
+                    <h3 className='flexSpacebetween'>Application View <Checkbox /></h3>
                   </li>
-                  <li>
+                  {/* <li>
                     <h3 className='flexSpacebetween'>Who have a default profile photo <Checkbox /></h3>
                   </li>
                   <li>
@@ -119,7 +70,7 @@ const Notifications = () => {
                   </li>
                   <li>
                     <h3 className='flexSpacebetween'>Who haven’t confirmed their phone number<Checkbox /></h3>
-                  </li>
+                  </li> */}
                    
                 </ul>
               </div>
@@ -132,8 +83,8 @@ const Notifications = () => {
             </div>
           </div>
         </>
-      }
-      {showPreference && !showPushPreference && !showEmailPreference &&
+      
+      {/* {showPreference && !showPushPreference && !showEmailPreference &&
         <>
           <div className='settingBox'>
           <div className='settingsheader'>        
@@ -181,10 +132,7 @@ const Notifications = () => {
                   <h2>Email notifications</h2>             
                 </div>
           
-              {/* <div className='header'>
-                <Link to="#" onClick={() => changeStep('preference')}><ArrowLeftOutlined /> </Link>
-                <h2>Email notifications</h2>
-              </div> */}
+             
                <div className='settingcntbox'> 
                   <div>
                     <p>Email notifications <Checkbox onChange={(e) => setEnableEmailNotification(e.target.checked)} /></p>
@@ -227,7 +175,7 @@ const Notifications = () => {
                   </div>
               </div>
         </>
-      }
+      } */}
     </>
   )
 };

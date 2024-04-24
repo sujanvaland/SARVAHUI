@@ -20,7 +20,7 @@ import SpotlightYourCommunity from '../../container/pages/communities/admintools
 import SupportAndResources from '../../container/pages/communities/admintools/supportAndResources';
 import JobApplication from '../../container/pages/ViewApplication';
 import AdminCandidate from '../../container/pages/admin/admin-candidate';
-import AdminRecuiter from '../../container/pages/admin/admin-recuiter';
+import AdminRecuiter from '../../container/pages/admin/admin-recruiter';
 import CandidateAppliedJobs from '../../container/pages/admin/admin-candidateapplied';
 import AdminDashBoard from '../../container/pages/admin/admin-dashboard';
 

@@ -8,6 +8,7 @@ const { UPDATE_PROFILE_REQUEST, UPDATE_PROFILE_SUCCESS, UPDATE_PROFILE_ERR,
 
 const initState = {
   loading: false,
+  isPloading:false,
   error: null,
 };
 
@@ -39,20 +40,20 @@ const UserProfileReducer = (state = initState, action) => {
     case GET_PROFILE_REQUEST:
       return {
         ...state,
-        loading: true
+        isPloading: true
       };
 
     case GET_PROFILE_SUCCESS:
       return {
         ...state,
         getProfile,
-        loading: false,
+        isPloading: false,
       };
 
     case GET_PROFILE_ERR:
       return {
         ...state,
-        loading: false,
+        isPloading: false,
         error: err
       };  
     

@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 import React, { useEffect, useState } from 'react';
-import { Input, Table, Form, Select  } from 'antd';
+import { Input, Table  } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom';
 // import { Main } from './styled';
@@ -15,7 +15,7 @@ function AdminRecuiter() {
 
   const dispatch = useDispatch();
   const history = useHistory();
-  const { Option } = Select;
+  // const { Option } = Select;
 
   useEffect(() => {
     dispatch(GetAllRecuiter());
@@ -54,13 +54,13 @@ function AdminRecuiter() {
     });
   };
 
-  const handleSelectedSkills = (selected) => {
-    setFilter({
-      ...filter,
-      skills: selected,
-      pageNo: 1,
-    });
-  };
+  // const handleSelectedSkills = (selected) => {
+  //   setFilter({
+  //     ...filter,
+  //     skills: selected,
+  //     pageNo: 1,
+  //   });
+  // };
 
   const handleResetFilter = () => {
     setPayments(payment);
@@ -69,8 +69,6 @@ function AdminRecuiter() {
       skills: [],
     });
   }
-
-  
 
   // const handleSearch = () => {};
 
@@ -217,12 +215,12 @@ function AdminRecuiter() {
           <div className="cntpagecomponent userprofilepage recruiterpage">
             <div className="centersidebarcontent flexcolumn mt56">
               <div className='userNamedetails headerBox msgheader'>
-                <h2> Recuiter List</h2>                 
+                <h2> recruiter List</h2>                 
               </div> 
                 <div className="eventSearch">                
                   <ul>
                     <li><Input name="searchText" maxLength={100} value={filter.searchText} placeholder="Search Jobs" onChange={handleJobSearch} /></li>
-                    <li>
+                    {/* <li>
                       <Form.Item >
                         <Select
                           mode="tags"
@@ -238,7 +236,7 @@ function AdminRecuiter() {
                           <Option value="Houdini"> Houdini</Option>
                         </Select>
                       </Form.Item>
-                    </li>
+                    </li> */}
                     
                     <li>
                       <Link to="#" className="resetLink" onClick={() => handleResetFilter()}>

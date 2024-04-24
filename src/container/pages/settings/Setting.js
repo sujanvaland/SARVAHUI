@@ -60,51 +60,21 @@ function Setting() {
                   </MessageMainBoxInner>
                 </MessageMainBox> */}
               </li>
-              <li>
+              {/* <li>
               <Button onClick={() => changeStep('account')}>
                   Premium <svg viewBox="0 0 24 24" aria-hidden="true" ><g><path d="M14.586 12L7.543 4.96l1.414-1.42L17.414 12l-8.457 8.46-1.414-1.42L14.586 12z"/> </g></svg>
                 </Button>
-                {/* <MessageMainBox className="msgUser" >
-                  <MessageMainBoxInner  >
-                    <div className="nameMsgBox">
-                      <span className="uname"></span>
-                    </div>
-                    <div className="rightbtnsbox">
-                      <RightOutlined />
-                    </div>
-                  </MessageMainBoxInner>
-                </MessageMainBox> */}
               </li>
               <li>
                   <Button onClick={() => changeStep('privacy')}>
                   Privacy and safety <svg viewBox="0 0 24 24" aria-hidden="true" ><g><path d="M14.586 12L7.543 4.96l1.414-1.42L17.414 12l-8.457 8.46-1.414-1.42L14.586 12z"/> </g></svg>
                 </Button>
-                {/* <MessageMainBox className="msgUser" onClick={() => changeStep('privacy')}>
-                  <MessageMainBoxInner  >
-                    <div className="nameMsgBox">
-                      <span className="uname">Privacy and safety</span>
-                    </div>
-                    <div className="rightbtnsbox">
-                      <RightOutlined />
-                    </div>
-                  </MessageMainBoxInner>
-                </MessageMainBox> */}
-              </li>
+              
+              </li> */}
               <li>
               <Button onClick={() => changeStep('notify')}>
               Notifications  <svg viewBox="0 0 24 24" aria-hidden="true" ><g><path d="M14.586 12L7.543 4.96l1.414-1.42L17.414 12l-8.457 8.46-1.414-1.42L14.586 12z"/> </g></svg>
                 </Button>
-
-                {/* <MessageMainBox className="msgUser" onClick={() => changeStep('notify')}>
-                  <MessageMainBoxInner >
-                    <div className="nameMsgBox">
-                      <span className="uname">Notifications</span>
-                    </div>
-                    <div className="rightbtnsbox">
-                      <RightOutlined />
-                    </div>
-                  </MessageMainBoxInner>
-                </MessageMainBox> */}
               </li>
               <li>
               <Button  >

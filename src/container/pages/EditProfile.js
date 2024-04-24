@@ -12,6 +12,8 @@ function EditProfile() {
   const dispatch = useDispatch();
   const { TabPane } = Tabs;
   const { Option } = Select;
+  const { TextArea } = Input;
+
   const dateFormat = 'YYYY/MM/DD';
   const { username, data, profileUrl, backgroundUrl, isLoader, resumeUrl, jobResume } = useSelector((state) => {
     return {
@@ -46,6 +48,7 @@ function EditProfile() {
   const [ProfileData, setProfileData] = useState({
     firstName: data?.firstName || '',
     lastName: data?.lastName || '',
+    about: data?.about || '',
     dob: data?.dob,
     gender: data?.gender || '',
     address: data?.address || '',
@@ -117,6 +120,7 @@ function EditProfile() {
       ...ProfileData,
       firstName: data?.firstName || '',
       lastName: data?.lastName || '',
+      about: data?.about || '',
       dob: data?.dob,
       gender: data?.gender || '',
       address: data?.address || '',
@@ -513,6 +517,17 @@ function EditProfile() {
                                     />
                                   </Form.Item>
                                 </Col>
+                                {data?.loginType === "recruiter" &&
+                                <Col lg={16} sm={16}>
+                                  <Form.Item label="About">
+                                    <TextArea
+                                      rows={4}
+                                      name="about"
+                                      value={ProfileData?.about}
+                                      onChange={handleChange}
+                                    />
+                                  </Form.Item>
+                                </Col>}
                                 <Col lg={8} sm={8}>
                                   <Form.Item
                                     label="Email"

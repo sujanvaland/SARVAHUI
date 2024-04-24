@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 import React, { useEffect, useState } from 'react';
-import { Input, Table, Form, Select  } from 'antd';
+import { Input, Table, Form, Select } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom';
 // import { Main } from './styled';
@@ -15,6 +15,7 @@ function AdminCandidate() {
   const dispatch = useDispatch();
   const history = useHistory();
   const { Option } = Select;
+  const User = JSON.parse(localStorage.getItem('profile'));
 
   useEffect(() => {
     dispatch(GetAllCandidate());
@@ -36,14 +37,21 @@ function AdminCandidate() {
   });
 
   useEffect(() => {
-    const filteredUsers = payment?.filter(user =>
-      (user?.firstName?.toLowerCase().includes(filter?.searchText?.toLowerCase())) ||
-      (user?.lastName?.toLowerCase().includes(filter?.searchText?.toLowerCase())) ||
-      (user?.userName?.toLowerCase().includes(filter?.searchText?.toLowerCase())) ||
-      (user?.specialization?.toLowerCase().includes(filter?.searchText?.toLowerCase())) ||
-      (user?.phoneNumber?.toLowerCase().includes(filter?.searchText?.toLowerCase()))
-  );
-  setPayments(filteredUsers);
+    const filteredUsers = payment?.filter(user => {
+      const userSkills = user.skills.split(',').map(skill => skill.trim().toLowerCase());
+      const searchText = filter?.searchText.toLowerCase();
+      const skillMatch = filter?.skills?.length === 0 || filter?.skills.some(selectedSkill => userSkills.includes(selectedSkill.toLowerCase()));
+      return (
+      ((user?.firstName?.toLowerCase().includes(searchText)) ||
+        (user?.lastName?.toLowerCase().includes(searchText)) ||
+        (user?.userName?.toLowerCase().includes(searchText)) ||
+        (user?.specialization?.toLowerCase().includes(searchText)) ||
+        (user?.email?.toLowerCase().includes(searchText)) ||
+        (user?.phoneNumber?.toLowerCase().includes(searchText))) &&
+        skillMatch
+      );
+    });
+    setPayments(filteredUsers);
   }, [filter]);
 
   const handleJobSearch = (e) => {
@@ -94,7 +102,7 @@ function AdminCandidate() {
       srno,
       firstName,
       lastName,
-      name:<>{firstName}  {lastName}</>,
+      name: <>{firstName}  {lastName}</>,
       email,
       userName,
       skills,
@@ -116,7 +124,7 @@ function AdminCandidate() {
             >
               View Profile
             </Button>{' '}
-            {totalJobsApplied > 0 && <Button
+            {(totalJobsApplied > 0 && User?.loginType === "admin") && <Button
               className="btn-icon complete"
               type="primary"
               shape="circle"
@@ -206,61 +214,62 @@ function AdminCandidate() {
     {
       title: 'Actions',
       dataIndex: 'action',
-      key: 'action', 
+      key: 'action',
       width: '70px',
     },
   ];
 
   return (
     <>
-       <div className="cntpagecomponent userprofilepage recruiterpage">
-            <div className="centersidebarcontent flexcolumn mt56">
-              <div className='userNamedetails headerBox msgheader'>
-                <h2> Candidate List</h2>                 
-              </div>      
-                <div className="eventSearch">
-                  
-                  <ul>
-                    <li><Input name="searchText" maxLength={100} value={filter.searchText} placeholder="Search Jobs" onChange={handleJobSearch} /></li>
-                    <li>
-                      <Form.Item >
-                        <Select
-                          mode="tags"
-                          placeholder="Select Skills"
-                          showSearch
-                          filterOption={(input, option) =>
-                            option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                          }
-                          onChange={handleSelectedSkills}
-                        >
-                          <Option value="AutoCad"> AutoCad</Option>
-                          <Option value="Maya">Maya </Option>
-                          <Option value="Houdini"> Houdini</Option>
-                        </Select>
-                      </Form.Item>
-                    </li>
-                    
-                    <li>
-                      <Link to="#" className="resetLink" onClick={() => handleResetFilter()}>
-                        Reset Filter
-                      </Link>
-                    </li>
-                  </ul>
-                </div>
-                <div className='responsivetable'>
-                  <Table
-                    className="table-responsive"
-                    dataSource={DepositTableData}
-                    columns={DepositTableColumns}
-                    pagination={{
-                      defaultPageSize: 5,
-                      total: DepositTableData.length,
-                      showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} items`,
-                    }}
-                  />
-                </div>
-            </div>
+      <div className="cntpagecomponent userprofilepage recruiterpage">
+        <div className="centersidebarcontent flexcolumn mt56">
+          <div className='userNamedetails headerBox msgheader'>
+            <h2> Candidate List</h2>
           </div>
+          <div className="eventSearch">
+
+            <ul>
+              <li><Input name="searchText" maxLength={100} value={filter.searchText} placeholder="Search Jobs" onChange={handleJobSearch} /></li>
+              <li>
+                <Form.Item >
+                  <Select
+                    mode="tags"
+                    placeholder="Select Skills"
+                    showSearch
+                    filterOption={(input, option) =>
+                      option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                    }
+                    onChange={handleSelectedSkills}
+                    value={filter?.skills}
+                  >
+                    <Option value="AutoCad"> AutoCad</Option>
+                    <Option value="Maya">Maya </Option>
+                    <Option value="Houdini"> Houdini</Option>
+                  </Select>
+                </Form.Item>
+              </li>
+
+              <li>
+                <Link to="#" className="resetLink" onClick={() => handleResetFilter()}>
+                  Reset Filter
+                </Link>
+              </li>
+            </ul>
+          </div>
+          <div className='responsivetable'>
+            <Table
+              className="table-responsive"
+              dataSource={DepositTableData}
+              columns={DepositTableColumns}
+              pagination={{
+                defaultPageSize: 5,
+                total: DepositTableData.length,
+                showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} items`,
+              }}
+            />
+          </div>
+        </div>
+      </div>
     </>
   );
 }

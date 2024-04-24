@@ -14,9 +14,11 @@ import EventDetailsComponent from './eventDetails';
 import { DiscoverCommunities, LinkDiv } from '../style';
 import { getAllJobs, toggleBookmark, getJobDetails } from '../../../redux/postJob/actionCreator';
 
-function EventTimeline() {
+function EventTimeline(props) {
   const dispatch = useDispatch();
-
+  // eslint-disable-next-line react/prop-types
+  const { userId } = props;
+  console.log(userId);
   const { Option } = Select;
   const [isFilter, setIsFilter] = useState(false);
   const [isMore, setIsMore] = useState(true);
@@ -55,9 +57,16 @@ function EventTimeline() {
   };
 
   useEffect(() => {
-    dispatch(getAllJobs(filter));
+    if( userId > 0 ){
+      dispatch(getAllJobs({...filter,userId}));
+    }else if(User?.loginType === "admin"){
+      dispatch(getAllJobs({...filter,userId:User.id}));
+    }else{
+      dispatch(getAllJobs(filter));
+    }
   }, [filter]);
 
+  
   const handleSalaryFilter = (e) => {
     setPageNo(1);
     // Accessing e.item.props.type, but e.item.props may be undefined
@@ -179,11 +188,12 @@ function EventTimeline() {
 
   const dropdownClassName = 'reportdropdown';
 
-  console.log(filter);
   return (
     <>
       <div className="cntpagecomponent">
         <div className="centersidebarcontent flexcolumn mt56">
+          {!userId > 0 &&
+
           <div className='userNamedetails headerBox msgheader'>
             <h2>{User.loginType === "jobSeeker" ? <> All Jobs </> : <> My Jobs </>}</h2>
             <div className="hdRight">
@@ -192,6 +202,7 @@ function EventTimeline() {
               </Button>
             </div>
           </div>
+          }
 
           {/* <div className="tabbox">
             <Button className="btntab active"></Button>
@@ -259,10 +270,10 @@ function EventTimeline() {
                         <div className="countMembers"><p>{item.jobDescription}</p>  </div>
                       </div>
                       <div className="eventBottom">
-                        {User.loginType === "jobSeeker" ? <>
+                        {(User.loginType !== "admin" && User.id !== item.postedById) ? <>
                           <div className="countMembers badgebox">{item.applicationReceived} Application Received</div>
                         </> : <>
-                          <Link to={`jobApplication/${item?.id}`} >
+                          <Link to={`/jobApplication/${item?.id}`} >
                             <div className="countMembers badgebox"> View Application ({item.applicationReceived})
                             </div>
                           </Link>
@@ -304,7 +315,7 @@ function EventTimeline() {
             </DiscoverCommunities>
           </div>
         </div>
-        {jobData && <EventDetailsComponent />}
+        {(jobData && !userId) && <EventDetailsComponent />}
       </div>
     </>
   );

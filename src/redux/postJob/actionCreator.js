@@ -107,7 +107,7 @@ const getAllJobs = (data) => {
       const User = JSON.parse(localStorage.getItem('profile'));
 
       let response = "";
-      if (User.loginType === "admin") {
+      if (User.loginType === "admin" || data?.userId > 0) {
         response = await DataService.post('admin/GetJob', data);
       } else {
         response = await DataService.post('Job/GetAllJobs', data);

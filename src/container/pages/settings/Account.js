@@ -185,8 +185,8 @@ const Account = () => {
                     </li>
                     <li>
                       <p>
-                        Changing your password will log you out of all your active K4M2A sessions except the one you’re using at this time.
-                        The <Link to="#">3 applications</Link> with access to your account won’t be affected.<Link to="#"> Learn more</Link>
+                        Changing your password will log you out of all your active SARVAH sessions except the one you’re using at this time.
+                        The <Link to="#">applications</Link> with access to your account won’t be affected.<Link to="#"> Learn more</Link>
                       </p>
                     </li>
                     <li className='flexend'>
@@ -236,13 +236,13 @@ const Account = () => {
                 <ul>
                   <li>
                     <h2>This will deactivate your account</h2>
-                    <p>You’re about to start the process of deactivating your K4M2A account.
-                      Your display name, @username, and public profile will no longer be viewable on K4M2A.com,
-                      K4M2A for iOS, or K4M2A for Android.</p>
+                    <p>You’re about to start the process of deactivating your SARVAH account.
+                      Your display name, @username, and public profile will no longer be viewable on sarvah.com.
+                      </p>
                   </li>
                   <li>
                     <h2>What else you should know</h2>
-                    <p>You can restore your K4M2A account if it was accidentally or wrongfully deactivated for up to 30 days after deactivation.</p>
+                    <p>You can restore your SARVAH account if it was accidentally or wrongfully deactivated for up to 30 days after deactivation.</p>
                   </li>
                   <li>
                     <h4>Reactivation period</h4>
@@ -260,11 +260,11 @@ const Account = () => {
                       <Link to="#">settings</Link>.</p>
                   </li>
                   <li>
-                    <p>To use your current @username or email address with a different K4M2A account,
+                    <p>To use your current @username or email address with a different SARVAH account,
                       <Link to="#">change them</Link> before you deactivate this account.</p>
                   </li>
                   <li>
-                    <p>If you want to download <Link to="#">your K4M2A data</Link>,
+                    <p>If you want to download <Link to="#">your SARVAH data</Link>,
                       you’ll need to complete both the request and download process before deactivating your account.
                       Links to download your data cannot be sent to deactivated accounts.</p>
                   </li>

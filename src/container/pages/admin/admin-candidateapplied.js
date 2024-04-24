@@ -67,40 +67,6 @@ function CandidateAppliedJobs() {
         dispatch(getAllJobs({ ...obj, pageNo: PageNo + 1 }));
     }
 
-    // const copyJobLink = (id) => {
-    //     const tempInput = document.createElement('input');
-    //     tempInput.value = `${process.env.REACT_APP_BASE_URL}/events/${id}`;
-    //     document.body.appendChild(tempInput);
-    //     tempInput.select();
-    //     document.execCommand('copy');
-    //     document.body.removeChild(tempInput);
-
-    //     message.success('Copied to clipboard');
-    // };
-
-    // const [shareModalVisible, setShareModalVisible] = useState(false);
-
-    // const showShareModal = () => {
-    //     setShareModalVisible(true);
-    // }
-    // const hideShareModal = () => {
-    //     setShareModalVisible(false);
-    // };
-
-    // const shareJobLink = `${process.env.REACT_APP_BASE_URL}/events/${id}`;
-
-    // const [directMessage, setDirectMessage] = useState(false);
-    // const [ForwardLink, setForwardLink] = useState(null);
-
-    // const handleDirectMessage = (id) => {
-    //     const jobLink = `${process.env.REACT_APP_BASE_URL}/event/${id}`;
-    //     setForwardLink(jobLink);
-    //     setDirectMessage(true);
-    // }
-    // const handleCloseDirectMessage = () => {
-    //     setDirectMessage(false);
-    // }
-
     const shareMenu = (
         <Menu>
             <Menu.Item><LinkOutlined /> Copy Link</Menu.Item>
