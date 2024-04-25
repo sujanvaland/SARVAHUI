@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { EnvironmentOutlined, CalendarOutlined } from '@ant-design/icons';
-import { Tabs } from 'antd';
+import { Button, Tabs } from 'antd';
 import { Link, useParams, useHistory } from 'react-router-dom';
 import EventTimeline from './event';
 // import RightSideBarComponent from './rightsidebar';
 // import Scroll from './Scroll';
 import { getUserProfile } from '../../redux/UserProfile/actionCreator';
 import { convertToMonthYear } from '../../utility/ConvertToMonthYear';
+import { ActionDelete } from '../../redux/postJob/actionCreator';
 
 
 function UserProfile() {
@@ -44,6 +45,14 @@ function UserProfile() {
     onTabChange('7');
   };
 
+  const handleDelete = async (data) =>{
+   await dispatch(ActionDelete(data));
+   const user = userName !== undefined ? userName : loginuser;
+   if (user !== undefined) {
+     dispatch(getUserProfile(user));
+   }
+  };
+
   const { TabPane } = Tabs;
   const firstName = data?.firstName ? data.firstName.charAt(0).toUpperCase() + data.firstName.slice(1) : '';
   const lastName = data?.lastName ? data.lastName.charAt(0).toUpperCase() + data.lastName.slice(1) : '';
@@ -64,7 +73,7 @@ function UserProfile() {
                   <img src={require('../../static/images/blue_tick.png')} className="blueTick" alt="" />
                 )}
               </h2>
-              {userName === undefined && (
+              {data?.id === UserProfile?.id && (
                 <Link to="/editProfile" className="btn btn-default mr-3">
                   Edit Profile
                 </Link>
@@ -188,7 +197,9 @@ function UserProfile() {
                 {data?.loginType === "jobSeeker" &&
                   <>
                     <TabPane tab="Education" key="8" className="tabcntbox">
-                      {userName === undefined && (
+                      {userName === undefined && 
+                      (data?.university && data?.highestQualification && data?.course &&
+                        data?.specialization && data?.startingYear && data?.passingYear && data?.grades) && (
                         <div className="projectlist">
                           <div className="tabhead profilecnt">
                             <ul>
@@ -249,6 +260,8 @@ function UserProfile() {
                                   <div>
                                     <div className='form-group'>Experience</div>
                                     <p>{index + 1} </p>
+                                    {data?.id === UserProfile?.id &&
+                                    <Button onClick={()=>handleDelete({id:exper.id,type:"experience"})}>Delete Experience</Button>}
                                   </div>
                                 </li>
                                 <li>
@@ -304,13 +317,15 @@ function UserProfile() {
                                   <div>
                                     <div className='form-group'>Certificates</div>
                                     <p> {index + 1} : {certi?.certificateName}</p>
+                                    {data?.id === UserProfile?.id &&
+                                    <Button onClick={()=>handleDelete({id:certi.id,type:"certification"})}>Delete Experience</Button>}
                                   </div>
                                 </li>
 
                               ))) :
                               <li>
                                 <div>
-                                  <h3>No Experience</h3>
+                                  <h3>No Certificate</h3>
                                 </div>
                               </li>
                             }

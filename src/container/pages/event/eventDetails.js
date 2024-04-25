@@ -2,15 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Button } from 'antd';
 import { FieldTimeOutlined, VideoCameraOutlined } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import { ApplyJobs } from '../../../redux/postJob/actionCreator';
 // import { getJobDetails } from '../../../redux/postJob/actionCreator';
 // import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 function EventDetailsComponent() {
-  // eslint-disable-next-line react/prop-types
-  // const { jobDetails } = props;
+  
   const [JobPostDetails, setjob] = useState(null);
-  //   console.log(jobDetails, 'values');
   const dispatch = useDispatch();
   const User = JSON.parse(localStorage.getItem('profile'));
 
@@ -31,7 +30,7 @@ function EventDetailsComponent() {
       <div className="rightsidecntbox scrollbox eventDetailsbox">
         <div className="header">
           <h2>
-            <span>Posted by</span> {JobPostDetails?.postedBy}
+            <span>Posted by</span> <Link to={`/profile/${JobPostDetails?.userName}`}> {JobPostDetails?.postedBy}</Link>
             <img src={require('../../../static/images/blue_tick.png')} alt="" />
           </h2>
           {User.loginType === "jobSeeker" &&

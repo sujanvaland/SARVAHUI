@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 // import { WhatsappShareButton, WhatsappIcon, FacebookShareButton, FacebookIcon,
 //     TwitterShareButton, TwitterIcon } from 'react-share';
 import { Dropdown, Menu, } from 'antd';
-import { ShareAltOutlined, LinkOutlined, UploadOutlined, MailOutlined } from '@ant-design/icons';
+import { ShareAltOutlined, LinkOutlined, UploadOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import EventDetailsComponent from './event/eventDetails';
 import { DiscoverCommunities, LinkDiv } from './style';
@@ -99,7 +99,7 @@ function appliedJobs() {
         <Menu>
             <Menu.Item><LinkOutlined /> Copy Link</Menu.Item>
             <Menu.Item><UploadOutlined /> Share post via...</Menu.Item>
-            <Menu.Item><MailOutlined /> Send via Direct Message</Menu.Item>
+            {/* <Menu.Item><MailOutlined /> Send via Direct Message</Menu.Item> */}
         </Menu>
     );
 

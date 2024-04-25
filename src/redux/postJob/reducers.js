@@ -3,7 +3,8 @@ import actions from './actions';
 const initialState = {
   loading: false,
   error: null,
-  jobDetails: []
+  jobDetails: [],
+  isnotifyloading:false,
 };
 
 const {
@@ -17,14 +18,88 @@ const {
   APPLY_JOB_BEGIN, APPLY_JOB_SUCCESS, APPLY_JOB_ERR,
   GET_ALL_CANDIDATE_REQUEST, GET_ALL_CANDIDATE_SUCCESS, GET_ALL_CANDIDATE_ERR,
   GET_ALL_RECUITER_REQUEST, GET_ALL_RECUITER_SUCCESS, GET_ALL_RECUITER_ERR,
-  GET_ALLSTATS_REQUEST, GET_ALLSTATS_SUCCESS, GET_ALLSTATS_ERR
-
+  GET_ALLSTATS_REQUEST, GET_ALLSTATS_SUCCESS, GET_ALLSTATS_ERR,
+  ACTION_SETTING_REQUEST, ACTION_SETTING_SUCCESS, ACTION_SETTING_ERR,
+  GET_SETTING_REQUEST, GET_SETTING_SUCCESS, GET_SETTING_ERR,
+  APPLICATION_VIEWED_REQUEST, APPLICATION_VIEWED_SUCCESS, APPLICATION_VIEWED_ERR,
+  ACTION_DELETE_REQUEST, ACTION_DELETE_SUCCESS, ACTION_DELETE_ERR
 } = actions;
 
 const JobPostReducer = (state = initialState, action) => {
-  const { type, jobDetails, job, err, bookmarkjobs, toggleBookmark, jobApplication, jobResume, getStats,
+  const { type, jobDetails, job, err, bookmarkjobs, toggleBookmark, jobApplication, 
+    jobResume, getStats, getSetting, actionSetting, applicationView, deleteEC,
     applyJob, totalCount, totalSize, jobpostdetails, getAllCandidate, getAllRecuiter } = action;
   switch (type) {
+
+    case ACTION_DELETE_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case ACTION_DELETE_SUCCESS:
+      return {
+        ...state,
+        deleteEC,
+        loading: false,
+      };
+    case ACTION_DELETE_ERR:
+      return {
+        ...state,
+        error: err,
+        loading: false,
+      };
+    case APPLICATION_VIEWED_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case APPLICATION_VIEWED_SUCCESS:
+      return {
+        ...state,
+        applicationView,
+        loading: false,
+      };
+    case APPLICATION_VIEWED_ERR:
+      return {
+        ...state,
+        error: err,
+        loading: false,
+      };
+    case GET_SETTING_REQUEST:
+      return {
+        ...state,
+        isnotifyloading: true,
+      };
+    case GET_SETTING_SUCCESS:
+      return {
+        ...state,
+        getSetting,
+        isnotifyloading: false,
+      };
+    case GET_SETTING_ERR:
+      return {
+        ...state,
+        error: err,
+        isnotifyloading: false,
+      };
+
+    case ACTION_SETTING_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case ACTION_SETTING_SUCCESS:
+      return {
+        ...state,
+        actionSetting,
+        loading: false,
+      };
+    case ACTION_SETTING_ERR:
+      return {
+        ...state,
+        error: err,
+        loading: false,
+      };
     case GET_ALL_RECUITER_REQUEST:
       return {
         ...state,

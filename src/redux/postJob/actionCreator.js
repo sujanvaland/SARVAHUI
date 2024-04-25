@@ -11,8 +11,76 @@ const { jobPostDataBegin, jobPostDataSuccess, jobPostDataErr, getAllJobsBegin, g
   getUserResumeBegin, getUserResumeSuccess, getUserResumeErr,
   getAllCandidateRequest, getAllCandidateSuccess, getAllCandidateError,
   getAllRecuiterRequest, getAllRecuiterSuccess, getAllRecuiterError,
-  getAllStatsRequest, getAllStatsSuccess, getAllStatsError } =
+  getAllStatsRequest, getAllStatsSuccess, getAllStatsError,
+  changeSettingRequest, changeSettingSuccess, changeSettingError,
+  getSettingRequest, getSettingSuccess, getSettingError,
+  applicationViewRequest, applicationViewSuccess, applicationViewError,
+  actionDeleteRequest, actionDeleteSuccess, actionDeleteError } =
   actions;
+
+const ActionDelete = (data) => {
+  return async (dispatch) => {
+    try {
+      dispatch(actionDeleteRequest());
+      const response = await DataService.post("Job/DeleteExperienceCertification", data);
+      if (response.data.success) {
+        dispatch(actionDeleteSuccess(response.data.result));
+      } else {
+        dispatch(actionDeleteError(response.data.success));
+      }
+    } catch (err) {
+      dispatch(actionDeleteError(err));
+    }
+  };
+};
+
+const ChangeSetting = (data) => {
+  return async (dispatch) => {
+    try {
+      dispatch(changeSettingRequest());
+      const response = await DataService.post("User/UpdateUserAttribute", data);
+      if (response.data.success) {
+        dispatch(changeSettingSuccess(response.data.result));
+      } else {
+        dispatch(changeSettingError(response.data.success));
+      }
+    } catch (err) {
+      dispatch(changeSettingError(err));
+    }
+  };
+};
+
+const ApplicationView = (data) => {
+  return async (dispatch) => {
+    try {
+      dispatch(applicationViewRequest());
+      const response = await DataService.post("Job/ApplicationViewed", data);
+      if (response.data.success) {
+        dispatch(applicationViewSuccess(response.data.result));
+      } else {
+        dispatch(applicationViewError(response.data.success));
+      }
+    } catch (err) {
+      dispatch(applicationViewError(err));
+    }
+  };
+};
+
+const GetSetting = () => {
+  return async (dispatch) => {
+    try {
+      dispatch(getSettingRequest());
+      const response = await DataService.get("User/GetUserAttribute");
+      if (response.data.success) {
+        dispatch(getSettingSuccess(response.data.result));
+      } else {
+        dispatch(getSettingError(response.data.success));
+      }
+    } catch (err) {
+      dispatch(getSettingError(err));
+    }
+  };
+};
 
 const GetAllStats = () => {
   return async (dispatch) => {
@@ -251,6 +319,6 @@ const ApplyJobs = (data) => {
 };
 
 export {
-  submitPost, getAllJobs, toggleBookmark, getJobDetails, getAllBookmarkJobs, GetAllStats,
-  ApplyJobs, GetUserResume, GetJobApplication, GetAllRecuiter, GetAllCandidate
+  submitPost, getAllJobs, toggleBookmark, getJobDetails, getAllBookmarkJobs, GetAllStats, ApplicationView,
+  ApplyJobs, GetUserResume, GetJobApplication, GetAllRecuiter, GetAllCandidate, ChangeSetting, GetSetting, ActionDelete
 };

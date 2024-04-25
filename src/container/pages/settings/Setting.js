@@ -1,19 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import '../../../static/css/settingstyle.scss'; 
 import { Button } from 'antd';
 import Account from './Account';
 import PrivacyAndSafety from './privacy';
 import Notifications from './Notifications';
 import { ChatMainBox,SettingsBox } from '../style';
+import { GetSetting } from '../../../redux/postJob/actionCreator';
 
 
 
 function Setting() {
+
+  const dispatch = useDispatch();
   const [showAccountSetting, setShowAccountSetting] = useState(true);
   const [showPrivacySetting, setShowPrivacySetting] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
 
-
+  useEffect(() => {
+    dispatch(GetSetting());
+  }, [])
 
   const changeStep = (step) => {
     setShowAccountSetting(false);

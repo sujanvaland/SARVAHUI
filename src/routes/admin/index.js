@@ -23,6 +23,7 @@ import AdminCandidate from '../../container/pages/admin/admin-candidate';
 import AdminRecuiter from '../../container/pages/admin/admin-recruiter';
 import CandidateAppliedJobs from '../../container/pages/admin/admin-candidateapplied';
 import AdminDashBoard from '../../container/pages/admin/admin-dashboard';
+import ViewJobComponent from '../../container/pages/event/viewJob';
 
 const MyComponent = lazy(() => import('../../container/pages/post/Message'));
 const Network = lazy(() => import('../../container/pages/Network'));
@@ -58,6 +59,8 @@ function Admin() {
         <Route path={`${path}setting`} component={Setting} />
         <Route path={`${path}postjob`} component={PostJob} />
         <Route path={`${path}jobApplication/:jobId?`} component={JobApplication} />
+        <Route path={`${path}jobDetails/:jobId?`} component={ViewJobComponent} />
+
 
         <Route path={`${path}candidate`} component={AdminCandidate} />
         {User.loginType === "admin" &&

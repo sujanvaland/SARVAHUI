@@ -1,68 +1,119 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Checkbox } from 'antd';
 // import { RightOutlined, ArrowLeftOutlined } from "@ant-design/icons";
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import { useDispatch, useSelector } from 'react-redux';
+import { ChangeSetting, GetSetting } from '../../../redux/postJob/actionCreator';
 
 const Notifications = () => {
 
-  // const [showFilters, setShowFilters] = useState(false);
-  // const [showMutedNotifications, setShowMutedNotifications] = useState(false);
-  // const [showPreference, setShowPreference] = useState(false);
-  // const [showPushPreference, setShowPushPreference] = useState(false);
-  // const [showEmailPreference, setShowEmailPreference] = useState(false);
-  // const [enableEmailNotification, setEnableEmailNotification] = useState(false);
-  // const changeStep = (step) => {
-  //   setShowFilters(false);
-  //   setShowMutedNotifications(false);
-  //   setShowPreference(false);
-  //   setShowPushPreference(false);
-  //   setShowEmailPreference(false);
-  //   switch (step) {
-  //     case 'filters':
-  //       setShowFilters(true);
-  //       break;
-  //     case 'mutednotify':
-  //       setShowMutedNotifications(true);
-  //       break;
-  //     case 'preference':
-  //       setShowPreference(true);
-  //       break;
-  //     case 'pushpreference':
-  //       setShowPushPreference(true);
-  //       break;
-  //     case 'emailpreference':
-  //       setShowEmailPreference(true);
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  // }
+  const dispatch = useDispatch();
+  const [jobAlert, setjobAlert] = useState(false);
+  const [newMessage, setNewMessage] = useState(false);
+  const [applicationView, setApplicationView] = useState(false);
+  const [newApplication, setNewApplication] = useState(false);
 
+  const { loginUser, userattribute, notifyLoading } = useSelector((state) => {
+    return {
+      loginUser: state.auth.login,
+      userattribute: state.postJob?.getSetting,
+      notifyLoading: state.postJob?.isnotifyloading,
+    };
+  });
+
+  useEffect(() => {
+    dispatch(GetSetting());
+  }, [])
+
+  useEffect(() => {
+    const mutejobAlert = userattribute?.filter(x => x.keyName === "jobalert");
+    if (mutejobAlert) {
+      const stringValue = mutejobAlert[0]?.value;
+      const boolValue = stringValue === "true";
+      console.log("data", mutejobAlert, stringValue, boolValue);
+      setjobAlert(boolValue);
+    };
+
+    const mutenewMessage = userattribute?.filter(x => x.keyName === "newmessage");
+    if (mutenewMessage) {
+      const stringValue = mutenewMessage[0]?.value;
+      const boolValue = stringValue === "true";
+      console.log("data", mutejobAlert, stringValue, boolValue);
+
+      setNewMessage(boolValue);
+    };
+
+    const muteapplicationView = userattribute?.filter(x => x.keyName === "applicationview");
+    if (muteapplicationView) {
+      const stringValue = muteapplicationView[0]?.value;
+      const boolValue = stringValue === "true";
+      console.log("data", muteapplicationView, stringValue, boolValue);
+      setApplicationView(boolValue);
+
+    };
+
+    const mutenewApplication = userattribute?.filter(x => x.keyName === "newapplication");
+    if (mutenewApplication) {
+      const stringValue = mutenewApplication[0]?.value;
+      const boolValue = stringValue === "true";
+      setNewApplication(boolValue);
+    };
+
+  }, [userattribute])
+
+  const handleNotifications = (e, value) => {
+    const req = {
+      userId: loginUser.id,
+      keyName: value,
+      value: e.target.checked.toString(),
+    };
+    dispatch(ChangeSetting(req));
+
+    if (value === "jobalert") {
+      setjobAlert(e.target.checked);
+    }
+    if (value === "newmessage") {
+      setNewMessage(e.target.checked);
+    }
+    if (value === "applicationview") {
+      setApplicationView(e.target.checked);
+    }
+    if (value === "newapplication") {
+      setNewApplication(e.target.checked);
+    }
+  }
 
   return (
     <>
-
-        <>
-           <div className='settingBox'>
-           <div className='settingsheader'>     
-            {/* <Link to="#" onClick={() => changeStep('filters')}><ArrowLeftOutlined /> </Link> */}
-              <h2>Muted notifications</h2>             
-            </div>
-            <div className='settingcntbox'> 
-            <div className='martop10'>
-              <h2>Mute notifications </h2>
-              <div className='formMain notificationbox'>
-                <ul>
-                  <li>
-                    <h3 className='flexSpacebetween'>Job Alerts <Checkbox /></h3>
-                  </li>
-                  <li>
-                    <h3 className='flexSpacebetween'>New Message<Checkbox /></h3>
-                  </li>
-                  <li>
-                    <h3 className='flexSpacebetween'>Application View <Checkbox /></h3>
-                  </li>
-                  {/* <li>
+      <div className='settingBox'>
+        <div className='settingsheader'>
+          {/* <Link to="#" onClick={() => changeStep('filters')}><ArrowLeftOutlined /> </Link> */}
+          <h2>Muted notifications</h2>
+        </div>
+        <div className='settingcntbox'>
+          <div className='martop10'>
+            <h2>Mute notifications </h2>
+            <div className='formMain notificationbox'>
+              {!notifyLoading &&
+                <>
+                  <ul>
+                    <li>
+                      <h3 className='flexSpacebetween'>Job Alerts
+                        <Checkbox onChange={(e) => handleNotifications(e, "jobalert")} checked={jobAlert} /></h3>
+                    </li>
+                    <li>
+                      <h3 className='flexSpacebetween'>New Message
+                        <Checkbox onChange={(e) => handleNotifications(e, "newmessage")} checked={newMessage} /></h3>
+                    </li>
+                    <li>
+                      <h3 className='flexSpacebetween'>Application View
+                        <Checkbox onChange={(e) => handleNotifications(e, "applicationview")} checked={applicationView} /></h3>
+                    </li>
+                    <li>
+                      <h3 className='flexSpacebetween'>New Application Received
+                        <Checkbox onChange={(e) => handleNotifications(e, "newapplication")} checked={newApplication} /></h3>
+                    </li>
+                    {/* <li>
                     <h3 className='flexSpacebetween'>Who have a default profile photo <Checkbox /></h3>
                   </li>
                   <li>
@@ -71,19 +122,20 @@ const Notifications = () => {
                   <li>
                     <h3 className='flexSpacebetween'>Who haven’t confirmed their phone number<Checkbox /></h3>
                   </li> */}
-                   
-                </ul>
-              </div>
-      
-              <p>Choose to filter out content such as duplicate or automated posts.
-                This doesn’t apply to notifications from accounts you follow or have interacted with recently.
-                <Link to="#">Learn more</Link>
-              </p>
+
+                  </ul>
+                </>
+              }
             </div>
-            </div>
+
+            <p>Choose to filter out content such as duplicate or automated posts.
+              This doesn’t apply to notifications from accounts you follow or have interacted with recently.
+              <Link to="#">Learn more</Link>
+            </p>
           </div>
-        </>
-      
+        </div>
+      </div>
+
       {/* {showPreference && !showPushPreference && !showEmailPreference &&
         <>
           <div className='settingBox'>

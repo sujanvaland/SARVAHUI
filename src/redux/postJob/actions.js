@@ -45,6 +45,103 @@ const actions = {
   GET_ALLSTATS_SUCCESS:"GET_ALLSTATS_SUCCESS", 
   GET_ALLSTATS_ERR:"GET_ALLSTATS_ERR",
 
+  ACTION_SETTING_REQUEST: 'ACTION_SETTING_REQUEST',
+  ACTION_SETTING_SUCCESS: 'ACTION_SETTING_SUCCESS',
+  ACTION_SETTING_ERR: 'ACTION_SETTING_ERR',
+
+  GET_SETTING_REQUEST: "GET_SETTING_REQUEST",
+  GET_SETTING_SUCCESS: "GET_SETTING_SUCCESS",
+  GET_SETTING_ERR: "GET_SETTING_ERR",
+
+  APPLICATION_VIEWED_REQUEST: "APPLICATION_VIEWED_REQUEST",
+  APPLICATION_VIEWED_SUCCESS: "APPLICATION_VIEWED_SUCCESS",
+  APPLICATION_VIEWED_ERR: "APPLICATION_VIEWED_ERR",
+
+  ACTION_DELETE_REQUEST: "ACTION_DELETE_REQUEST",
+  ACTION_DELETE_SUCCESS: "ACTION_DELETE_SUCCESS",
+  ACTION_DELETE_ERR: "ACTION_DELETE_ERR",
+
+  actionDeleteRequest: () => {
+    return {
+      type:actions.ACTION_DELETE_REQUEST,
+    }
+  },
+
+  actionDeleteSuccess: (deleteEC) => {
+    return {
+      type:actions.ACTION_DELETE_SUCCESS,
+      deleteEC
+    }
+  },
+
+  actionDeleteError: (err) => {
+    return {
+      type:actions.ACTION_DELETE_ERR,
+      err
+    }
+  },
+
+  applicationViewRequest: () => {
+    return {
+      type:actions.APPLICATION_VIEWED_REQUEST,
+    }
+  },
+
+  applicationViewSuccess: (applicationView) => {
+    return {
+      type:actions.APPLICATION_VIEWED_SUCCESS,
+      applicationView
+    }
+  },
+
+  applicationViewError: (err) => {
+    return {
+      type:actions.APPLICATION_VIEWED_ERR,
+      err
+    }
+  },
+
+  
+  getSettingRequest: () => {
+    return {
+      type:actions.GET_SETTING_REQUEST,
+    }
+  },
+
+  getSettingSuccess: (getSetting) => {
+    return {
+      type:actions.GET_SETTING_SUCCESS,
+      getSetting
+    }
+  },
+
+  getSettingError: (err) => {
+    return {
+      type:actions.GET_SETTING_ERR,
+      err
+    }
+  },
+
+  changeSettingRequest: () => {
+    return {
+      type:actions.ACTION_SETTING_REQUEST,
+    }
+  },
+
+  changeSettingSuccess: (actionSetting) => {
+    return {
+      type:actions.ACTION_SETTING_SUCCESS,
+      actionSetting
+    }
+  },
+
+  changeSettingError: (err) => {
+    return {
+      type:actions.ACTION_SETTING_ERR,
+      err
+    }
+  },
+
   getAllStatsRequest: () => {
     return {
       type:actions.GET_ALLSTATS_REQUEST,

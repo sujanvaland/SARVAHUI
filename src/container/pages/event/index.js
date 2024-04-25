@@ -9,7 +9,7 @@ import {
   UploadOutlined,
   MailOutlined,
 } from '@ant-design/icons';
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import EventDetailsComponent from './eventDetails';
 import { DiscoverCommunities, LinkDiv } from '../style';
 import { getAllJobs, toggleBookmark, getJobDetails } from '../../../redux/postJob/actionCreator';
@@ -18,7 +18,7 @@ function EventTimeline(props) {
   const dispatch = useDispatch();
   // eslint-disable-next-line react/prop-types
   const { userId } = props;
-  console.log(userId);
+  const history = useHistory();
   const { Option } = Select;
   const [isFilter, setIsFilter] = useState(false);
   const [isMore, setIsMore] = useState(true);
@@ -57,16 +57,16 @@ function EventTimeline(props) {
   };
 
   useEffect(() => {
-    if( userId > 0 ){
-      dispatch(getAllJobs({...filter,userId}));
-    }else if(User?.loginType === "admin"){
-      dispatch(getAllJobs({...filter,userId:User.id}));
-    }else{
+    if (userId > 0) {
+      dispatch(getAllJobs({ ...filter, userId }));
+    } else if (User?.loginType === "admin") {
+      dispatch(getAllJobs({ ...filter, userId: User.id }));
+    } else {
       dispatch(getAllJobs(filter));
     }
   }, [filter]);
 
-  
+
   const handleSalaryFilter = (e) => {
     setPageNo(1);
     // Accessing e.item.props.type, but e.item.props may be undefined
@@ -130,6 +130,8 @@ function EventTimeline(props) {
       maxSalary: 0,
       timePeriod: 0,
       pageNo: 1,
+      userType: "job",
+
     });
 
   }
@@ -164,14 +166,19 @@ function EventTimeline(props) {
   const [jobData, SetJobData] = useState(false);
 
   const handleJobDetails = (data) => {
-    SetJobData(true);
-    dispatch(getJobDetails(data));
+    if (userId > 0) {
+      history.push(`/jobDetails/${data?.jobId}`)
+    } else {
+      SetJobData(true);
+      dispatch(getJobDetails(data));
+    }
   };
 
   const handlePageNo = () => {
     setPageNo(PageNo + 1);
     dispatch(getAllJobs({ ...filter, pageNo: PageNo + 1 }));
   }
+
   const shareMenu = (
     <Menu>
       <Menu.Item>
@@ -194,14 +201,14 @@ function EventTimeline(props) {
         <div className="centersidebarcontent flexcolumn mt56">
           {!userId > 0 &&
 
-          <div className='userNamedetails headerBox msgheader'>
-            <h2>{User.loginType === "jobSeeker" ? <> All Jobs </> : <> My Jobs </>}</h2>
-            <div className="hdRight">
-              <Button className="btntabsetting" onClick={() => handleFilter()}>
-                <FilterOutlined />
-              </Button>
+            <div className='userNamedetails headerBox msgheader'>
+              <h2>{User.loginType === "jobSeeker" ? <> All Jobs </> : <> My Jobs </>}</h2>
+              <div className="hdRight">
+                <Button className="btntabsetting" onClick={() => handleFilter()}>
+                  <FilterOutlined />
+                </Button>
+              </div>
             </div>
-          </div>
           }
 
           {/* <div className="tabbox">

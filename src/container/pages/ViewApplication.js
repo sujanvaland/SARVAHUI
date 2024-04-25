@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { DiscoverCommunities, LinkDiv } from "./style";
-import { GetJobApplication } from "../../redux/postJob/actionCreator";
+import { ApplicationView, GetJobApplication } from "../../redux/postJob/actionCreator";
 import { EmptyDMUser, SetDMUser } from "../../redux/chatting/actionCreator";
 
 const JobApplication = () => {
@@ -11,7 +11,8 @@ const JobApplication = () => {
     const scrollRef = useRef(null);
     const { jobId } = useParams();
     const history = useHistory();
-    
+    const User = JSON.parse(localStorage.getItem('profile'));
+
     useEffect(() => {
         dispatch(GetJobApplication({ jobId }));
         dispatch(EmptyDMUser());
@@ -21,14 +22,17 @@ const JobApplication = () => {
         jobApplication: state?.postJob?.jobApplication,
     }));
 
-    const handleResume = (e, item) => {
+    const handleResume = (e, item, id, isview) => {
+        console.log("data",isview,id)
+        if (!isview && User.loginType === "recruiter") {
+            dispatch(ApplicationView({ id }));
+        }
         e.preventDefault();
         window.open(item, '_blank');
     };
 
-    const handleDMuser = (id) =>
-    {
-        dispatch(SetDMUser({id}))
+    const handleDMuser = (id) => {
+        dispatch(SetDMUser({ id }))
         history.push('/message');
     }
 
@@ -50,8 +54,8 @@ const JobApplication = () => {
                                         <div className="rightBox">
                                             <div className="CommunitiesDetails">
 
-                                                <h4>{`${item.firstName}  ${item.lastName}`}</h4>
-                                                <Link to="#" className="btn btn-default mr-3" onClick={(e) => handleResume(e, item.resumeUrl)}>
+                                                <h4><Link to={`/profile/${item?.userName}`}> {`${item.firstName}  ${item.lastName}`}</Link></h4>
+                                                <Link to="#" className="btn btn-default mr-3" onClick={(e) => handleResume(e, item.resumeUrl, item.id, item.isViewed)}>
                                                     View Resume
                                                 </Link>
                                                 <Link to="#" className="btn btn-default mr-3" onClick={() => handleDMuser(item.userId)}>
