@@ -380,6 +380,22 @@ function UserProfile() {
                                     </div>
                                   </li>
                                 )}
+                                {data?.facebookLink?.length < 1 && data?.linkedinLink?.length < 1 && (
+                                  <li>
+                                    <div className="headbpx">
+                                      <div className="imgmaindiv">
+                                        <div className="imgDesc">
+                                         
+                                          <div className="namedetails">
+                                            <h6 className="profilename">
+                                              No Social Link 
+                                            </h6>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </li>
+                                )}
                               </ul>
                             </div>
                           </div>
